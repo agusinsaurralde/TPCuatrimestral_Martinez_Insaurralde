@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBClinica", "DBClinica\DBClinica.csproj", "{7955A829-FCE1-457A-B168-ED344949BDAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicaDesktop", "ClinicaDesktop\ClinicaDesktop.csproj", "{2CE908F9-86E1-4009-8F93-6540D170A157}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7955A829-FCE1-457A-B168-ED344949BDAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7955A829-FCE1-457A-B168-ED344949BDAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7955A829-FCE1-457A-B168-ED344949BDAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE908F9-86E1-4009-8F93-6540D170A157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE908F9-86E1-4009-8F93-6540D170A157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE908F9-86E1-4009-8F93-6540D170A157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE908F9-86E1-4009-8F93-6540D170A157}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
