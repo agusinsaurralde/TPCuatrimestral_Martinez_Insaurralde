@@ -14,7 +14,7 @@ namespace ClinicaDesktop
 {
     public partial class Form1 : Form
     {
-
+        /*
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +29,6 @@ namespace ClinicaDesktop
         {
             EspecialidadDB EDB = new EspecialidadDB();
             Grilla.DataSource = EDB.lista();
-        }
+        }*/
     }
 }
