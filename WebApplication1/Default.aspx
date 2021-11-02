@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <asp:GridView ID="Grilla" runat="server"></asp:GridView>
+     <div class="">   
+         <asp:GridView ID="Grilla" runat="server"></asp:GridView>
+     </div>
 
 </asp:Content>
