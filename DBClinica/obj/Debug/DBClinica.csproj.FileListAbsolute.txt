@@ -7,3 +7,12 @@ E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPC
 E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.CopyComplete
 E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.dll
 E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.pdb
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\DBClinica.dll
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\DBClinica.pdb
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\Dominio.dll
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\Dominio.pdb
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.dll
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.pdb

@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using Dominio;
 
 namespace DBClinica
-{
+{/*
     public class EspecialidadDB
     {
         public List<Especialidades> lista()
@@ -41,5 +41,5 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-    }
+    }*/
 }
