@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AsignarTurno.aspx.cs" Inherits="WebApplication1.Formulario_web11" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <body>
+       <h3>Asignar Turno</h3>
+        <hr />
         <div>
              <asp:TextBox runat="server" placeholder="Nombre" />
         </div>

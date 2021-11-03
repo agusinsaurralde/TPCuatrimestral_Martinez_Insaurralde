@@ -18,6 +18,10 @@ namespace WebApplication1
         {
             Response.Redirect("AsignarTurno.aspx", false);
         }
+        protected void Click_VerTurnos(object sender, EventArgs e)
+        {
+            Response.Redirect("VerTurno.aspx", false);
+        }
 
         protected void SpecialtysView_Click(object sender, EventArgs e)
         {

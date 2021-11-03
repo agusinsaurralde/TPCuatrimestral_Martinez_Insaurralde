@@ -106,6 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AsignarTurno.aspx" />
+    <Content Include="ModificarTurno.aspx" />
+    <Content Include="VerTurno.aspx" />
     <Content Include="Pacientes.aspx" />
     <Content Include="Medicos.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -172,6 +174,20 @@
     </Compile>
     <Compile Include="AsignarTurno.aspx.designer.cs">
       <DependentUpon>AsignarTurno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarTurno.aspx.cs">
+      <DependentUpon>ModificarTurno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarTurno.aspx.designer.cs">
+      <DependentUpon>ModificarTurno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerTurno.aspx.cs">
+      <DependentUpon>VerTurno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerTurno.aspx.designer.cs">
+      <DependentUpon>VerTurno.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pacientes.aspx.cs">
       <DependentUpon>Pacientes.aspx</DependentUpon>

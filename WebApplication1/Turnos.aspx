@@ -2,7 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <body>
-        <br />
+        <h3>Turnos</h3>
+        <hr />
         <div style = "float: left">   
             <div  style="padding: 40px 10px">
                 <asp:Button Text="Asignar turno" runat="server" OnClick="Redirect_Click" />
@@ -11,13 +12,7 @@
 
         <div style = "float: left" >  
             <div style="padding: 40px 10px">
-                <asp:Button Text="Ver turnos" runat="server" />
-            </div>
-        </div>
-
-        <div style = "float: left">
-            <div style="padding: 40px 10px">
-                <asp:Button Text="Modificar turno" runat="server" />
+                <asp:Button Text="Ver turnos"  OnClick="Click_VerTurnos" runat="server" />
             </div>
         </div>
 

@@ -4,3 +4,9 @@ E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPC
 E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\Dominio\obj\Debug\Dominio.dll
 E:\tercerCuatrimestre\ReCurzadaPorPette\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\Dominio\obj\Debug\Dominio.pdb
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\Dominio\bin\Debug\Dominio.dll
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\Dominio\bin\Debug\Dominio.pdb
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\Dominio\obj\Debug\Dominio.dll
+C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\Dominio\obj\Debug\Dominio.pdb

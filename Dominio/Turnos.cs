@@ -18,6 +18,6 @@ namespace Dominio
         public string Observaciones { get; set; }
         public int Numero { get; set; }
         public Recepcionista AdministrativoResponsable { get; set; }
-        public bool Estado { get; set; }
+        public EstadosTurno Estado { get; set; }
     }
 }
