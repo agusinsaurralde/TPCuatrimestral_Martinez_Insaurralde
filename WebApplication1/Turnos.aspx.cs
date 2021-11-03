@@ -13,5 +13,15 @@ namespace WebApplication1
         {
 
         }
+
+        protected void Redirect_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AsignarTurno.aspx", false);
+        }
+
+        protected void SpecialtysView_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SpecialtysViews.aspx", false);
+        }
     }
 }

@@ -7,7 +7,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Clinica Demar</title>
-    <link href="Estilos.css" rel="stylesheet" />
+    <link href="Estilos.css" rel="stylesheet" /> 
 </head>
 
 <header>
@@ -40,4 +40,5 @@
         </div>
     </form>
 </body>
+
 </html>

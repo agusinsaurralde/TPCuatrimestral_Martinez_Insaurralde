@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using Dominio;
 
 namespace DBClinica
-{/*
+{
     public class EspecialidadDB
     {
         public List<Especialidades> lista()
@@ -17,7 +17,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearQuery("Select Codigo, Nombre from Especialidad");
+                datos.setearQuery("SELECT Codigo, Nombre from Especialidad ORDER BY Codigo ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -41,5 +41,5 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-    }*/
+    }
 }
