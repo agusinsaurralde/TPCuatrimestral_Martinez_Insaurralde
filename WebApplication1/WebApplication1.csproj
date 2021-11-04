@@ -106,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AsignarTurno.aspx" />
+    <Content Include="configAdminAdmin.aspx" />
+    <Content Include="configMedicosAdmin.aspx" />
+    <Content Include="configRecepcionistasAdmin.aspx" />
+    <Content Include="InicioAdmin.aspx" />
     <Content Include="ModificarTurno.aspx" />
     <Content Include="VerTurno.aspx" />
     <Content Include="Pacientes.aspx" />
@@ -174,6 +178,34 @@
     </Compile>
     <Compile Include="AsignarTurno.aspx.designer.cs">
       <DependentUpon>AsignarTurno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="configAdminAdmin.aspx.cs">
+      <DependentUpon>configAdminAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="configAdminAdmin.aspx.designer.cs">
+      <DependentUpon>configAdminAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="configMedicosAdmin.aspx.cs">
+      <DependentUpon>configMedicosAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="configMedicosAdmin.aspx.designer.cs">
+      <DependentUpon>configMedicosAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="configRecepcionistasAdmin.aspx.cs">
+      <DependentUpon>configRecepcionistasAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="configRecepcionistasAdmin.aspx.designer.cs">
+      <DependentUpon>configRecepcionistasAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InicioAdmin.aspx.cs">
+      <DependentUpon>InicioAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioAdmin.aspx.designer.cs">
+      <DependentUpon>InicioAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarTurno.aspx.cs">
       <DependentUpon>ModificarTurno.aspx</DependentUpon>
