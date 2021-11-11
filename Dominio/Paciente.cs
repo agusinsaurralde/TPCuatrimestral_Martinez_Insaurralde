@@ -8,7 +8,7 @@ namespace Dominio
 {
     class Paciente : Persona
     {
-        public Coberturas Cobertura { get; set; }
+        public Cobertura Cobertura { get; set; }
         public string Descripcion { get; set; }
     }
 }

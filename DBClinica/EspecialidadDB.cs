@@ -10,9 +10,9 @@ namespace DBClinica
 {
     public class EspecialidadDB
     {
-        public List<Especialidades> lista()
+        public List<Especialidad> lista()
         {
-            List<Especialidades> lista = new List<Especialidades>();
+            List<Especialidad> lista = new List<Especialidad>();
             ConexionDB datos = new ConexionDB();
 
             try
@@ -22,7 +22,7 @@ namespace DBClinica
 
                 while (datos.Lector.Read())
                 {
-                    Especialidades aux = new Especialidades();
+                    Especialidad aux = new Especialidad();
                     aux.Id = (int)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
 

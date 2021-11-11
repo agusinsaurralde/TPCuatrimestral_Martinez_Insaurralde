@@ -9,7 +9,7 @@ namespace Dominio
     class Medico : Usuario
     {
         public string Matricula { get; set; }
-        public Especialidades Especialidad { get; set; }
+        public Especialidad Especialidad { get; set; }
         public string Turno { get; set; }
         public DateTime HorarioEntrada { get; set; }
         public DateTime HorarioESalida { get; set; }
