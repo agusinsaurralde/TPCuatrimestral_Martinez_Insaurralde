@@ -8,5 +8,6 @@ namespace Dominio
 {
     class Recepcionista : Usuario
     {
+
     }
 }

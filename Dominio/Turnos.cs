@@ -10,7 +10,7 @@ namespace Dominio
     {
         public string NombrePaciente { get; set; }
         public string ApellidoPaciente { get; set; }
-        public Especialidades Especialidad { get; set; }
+        public Especialidades Especialidad { get; set; } //no
         public DateTime HorarioInicio { get; set; }
         public DateTime HorarioFin { get; set; }
         public Medico NombreMedico { get; set; } 
