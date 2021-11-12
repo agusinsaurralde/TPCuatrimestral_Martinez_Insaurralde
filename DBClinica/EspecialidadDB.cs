@@ -17,7 +17,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearQuery("SELECT Codigo, Nombre from Especialidad ORDER BY Codigo ASC");
+                datos.setearConsulta("SELECT Codigo, Nombre from Especialidad ORDER BY Codigo ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -33,7 +33,6 @@ namespace DBClinica
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally 

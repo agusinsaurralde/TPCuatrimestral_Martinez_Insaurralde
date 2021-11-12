@@ -22,16 +22,30 @@ namespace DBClinica
             conexion = new SqlConnection("server =.\\SQLEXPRESS; database = Clinica; integrated security = true");
             comando = new SqlCommand();
         }
-        public void setearQuery(string consulta)
+        public void setearConsulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
+        public void setearParametro(string nombre, object valor)
+        {
+            comando.Parameters.AddWithValue(nombre, valor);
+        }
+
         public void ejecutarLectura()
         {
             comando.Connection = conexion;
-            conexion.Open();
-            lector = comando.ExecuteReader();
+            try
+            {
+                conexion.Open();
+                lector = comando.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
         public void cerrarConexion()
         {
