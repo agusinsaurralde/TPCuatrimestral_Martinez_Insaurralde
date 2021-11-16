@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Paciente : Persona
     {
+        public int ID { get; set; }
         public Cobertura Cobertura { get; set; }
         public string Descripcion { get; set; }
     }

@@ -9,7 +9,7 @@ namespace Dominio
     public class Turno
     {
         public Paciente Paciente { get; set; } 
-        public string Especialidad { get; set; } 
+        public Especialidad Especialidad { get; set; } 
         public Medico Medico { get; set; }
         public DateTime HorarioInicio { get; set; }
         public DateTime HorarioFin { get; set; }
