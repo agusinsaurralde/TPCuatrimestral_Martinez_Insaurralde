@@ -72,6 +72,9 @@ create table Paciente(
 	CONSTRAINT CHK_DireccionPaciente CHECK (Direccion LIKE '[A-Z]%[0-9]'),
 	CONSTRAINT CHK_FechaNacimientoPaciente CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
+
+Alter table Paciente
+add Estado bit;
 GO
 create table HistoriaClinica(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -261,6 +264,8 @@ insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimien
 go
 insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura)VALUES(123450, 'Carla', 'Quevedo', 753955, 'quevedoC@hotmail.com', 'Rosset 99', '23-04-1988',3)
 go
+UPDATE Paciente SET Estado = 1 WHERE DNI = 123450
+select * from Paciente
 ---------------------insert Estado----------------------------
 INSERT EstadoTurno(Descripcion)VALUES('Programado')
 INSERT EstadoTurno(Descripcion)VALUES('Cerrado')

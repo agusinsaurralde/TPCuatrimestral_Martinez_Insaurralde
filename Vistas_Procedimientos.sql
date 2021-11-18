@@ -19,19 +19,19 @@ BEGIN
 	VALUES(@IDPaciente, @IDEspXMed, @Dia, @Observaciones, @IDRecepcionista, @IDEstado, @HoraInicio, @HoraFin)
 END
 
-CREATE PROCEDURE SP_MODIFICARTURNO(
-	@IDPaciente bigint, @IDEspecialidad bigint, @IDMedico bigint, @Dia date, @HoraInicio datetime, @HoraFin datetime, @Observaciones varchar(500), @IDRecepcionista bigint, @IDEstado bigint)
+ALTER PROCEDURE SP_MODIFICARTURNO(
+	@IDPaciente bigint, @IDEspecialidad bigint, @IDMedico bigint, @Dia date, @HoraInicio datetime, @HoraFin datetime, @Observaciones varchar(500), @IDRecepcionista bigint, @IDEstado bigint, @Numero BIGINT)
 AS 
 BEGIN
 	DECLARE @IDEspXMed bigint
 	Select @IDEspXMed = ID from EspecialidadXMedico where IDMedico = @IDMedico and IDEspecialidad = @IDEspecialidad
-	UPDATE Turno SET IDPaciente = @IDPaciente, IDEspXMedico = @IDEspXMed, Dia = @Dia, Observaciones = @Observaciones, IDRecepcionista =  @IDRecepcionista, IDEstado = @IDEstado, HoraInicio = @HoraInicio, HoraFin = @HoraFin
+	UPDATE Turno SET IDPaciente = @IDPaciente, IDEspXMedico = @IDEspXMed, Dia = @Dia, Observaciones = @Observaciones, IDRecepcionista =  @IDRecepcionista, IDEstado = @IDEstado, HoraInicio = @HoraInicio, HoraFin = @HoraFin WHERE Numero = @Numero
 END
 
 SELECT * FROM Especialidad
 SELECT * FROM Medico
 SELECT * FROM EspecialidadXMedico
-SELECT * FROM Paciente
+SELECT * FROM Turno
 
 --EXEC SP_ASIGNARTURNO 1, 23, 1, '2021/11/17', '7:00', '8:00', 'Dolor de estómago', 1, 1
 

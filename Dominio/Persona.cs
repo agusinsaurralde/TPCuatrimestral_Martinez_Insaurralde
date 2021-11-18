@@ -16,5 +16,6 @@ namespace Dominio
         public string Telefono { get; set; }
         public string Dirección { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        public bool Estado { get; set; }
     }
 }

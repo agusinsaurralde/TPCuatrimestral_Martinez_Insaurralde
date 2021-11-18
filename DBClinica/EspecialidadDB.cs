@@ -17,15 +17,15 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT Codigo, Nombre from Especialidad ORDER BY Codigo ASC");
+                datos.setearConsulta("SELECT ID, Nombre from Especialidad ORDER BY ID ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Especialidad aux = new Especialidad();
-                    aux.Id = (int)datos.Lector["Codigo"];
+                    aux.Id = (int)datos.Lector["ID"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-
+                  
                     lista.Add(aux);
                 }
 

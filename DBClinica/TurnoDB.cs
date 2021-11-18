@@ -25,14 +25,14 @@ namespace DBClinica
                     Turno aux = new Turno();
                     aux.Numero = (int)datos.Lector["Número"];
                     aux.Paciente = new Paciente();
-                    aux.Paciente.ID = (int)datos.Lector["DNI Paciente"];
+                    aux.Paciente.ID = (int)datos.Lector["ID Paciente"];
                     aux.Paciente.Apellido = (string)datos.Lector["Apellido"];
                     aux.Paciente.Nombre = (string)datos.Lector["Nombre"];
                     aux.Especialidad = new Especialidad();
                     aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
                     aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
                     aux.Medico = new Medico();
-                    aux.Medico.ID = (int)datos.Lector["DNI Médico"];
+                    aux.Medico.ID = (int)datos.Lector["ID Médico"];
                     aux.Medico.Apellido = (string)datos.Lector["Apellido Médico"];
                     aux.Medico.Nombre = (string)datos.Lector["Nombre Médico"];
                     aux.HorarioInicio = (DateTime)datos.Lector["Horario Inicial"];
@@ -40,7 +40,7 @@ namespace DBClinica
                     aux.Dia = (DateTime)datos.Lector["Día"];
                     aux.Observaciones = (string)datos.Lector["Observaciones"];
                     aux.AdministrativoResponsable = new Empleado();
-                    aux.AdministrativoResponsable.ID = (int)datos.Lector["DNI Recepcionista"];
+                    aux.AdministrativoResponsable.ID = (int)datos.Lector["ID Recepcionista"];
                     aux.AdministrativoResponsable.Apellido = (string)datos.Lector["Apellido Recepcionista"];
                     aux.AdministrativoResponsable.Nombre = (string)datos.Lector["Nombre Recepcionista"];
                     aux.Estado = new EstadoTurno();
@@ -95,7 +95,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @HoraFin, @Observaciones, @IDRecepcionista, @Estado");
+                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @HoraFin, @Observaciones, @IDRecepcionista, @Estado, @Numero");
                 datos.setearParametro("@IDPaciente", turnoNuevo.Paciente.ID);
                 datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad);
                 datos.setearParametro("@IDMedico", turnoNuevo.Medico.ID);
