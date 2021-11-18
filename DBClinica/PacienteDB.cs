@@ -57,12 +57,13 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Paciente(DNI, Nombre, Apellido, FechaNacimiento, Cobertura, Telefono, Email, Direccion, Estado)VALUES(@DNI, @Nombre, @Apellido, @FechaNacimiento, @IDCobertura, @Telefono, @Email, @Direccion, @Estado)");
+                datos.setearConsulta("INSERT Paciente(DNI, Apellido, Nombre, FechaNacimiento, Cobertura, Telefono, Email, Direccion, Estado)VALUES(@DNI, @Nombre, @Apellido, @FechaNacimiento, @IDCobertura, @Telefono, @Email, @Direccion, @Estado)");
                 datos.setearParametro("@DNI", PacienteNuevo.DNI);
-                datos.setearParametro("@Nombre", PacienteNuevo.Nombre);
                 datos.setearParametro("@Apellido", PacienteNuevo.Apellido);
+                datos.setearParametro("@Nombre", PacienteNuevo.Nombre);
                 datos.setearParametro("@FechaNacimiento", PacienteNuevo.FechaNacimiento);
-                datos.setearParametro("@IDCobertura", PacienteNuevo.Telefono);
+                datos.setearParametro("@IDCobertura", PacienteNuevo.Cobertura);
+                datos.setearParametro("@Telefono", PacienteNuevo.Dirección);
                 datos.setearParametro("@Email", PacienteNuevo.Email);
                 datos.setearParametro("@Direccion", PacienteNuevo.Dirección);
                 datos.setearParametro("@Estado", PacienteNuevo.Estado);
@@ -84,12 +85,13 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE Paciente SET DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, FechaNacimiento = @FechaNacimiento, Cobertura = @IDCobertura, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, Estado = @Estado WHERE ID =" + ModPaciente.ID + "");
+                datos.setearConsulta("UPDATE Paciente SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre,FechaNacimiento = @FechaNacimiento, Cobertura = @IDCobertura, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, Estado = @Estado WHERE ID =" + ModPaciente.ID + "");
                 datos.setearParametro("@DNI", ModPaciente.DNI);
-                datos.setearParametro("@Nombre", ModPaciente.Nombre);
                 datos.setearParametro("@Apellido", ModPaciente.Apellido);
+                datos.setearParametro("@Nombre", ModPaciente.Nombre);
                 datos.setearParametro("@FechaNacimiento", ModPaciente.FechaNacimiento);
-                datos.setearParametro("@IDCobertura", ModPaciente.Telefono);
+                datos.setearParametro("@IDCobertura", ModPaciente.Cobertura);
+                datos.setearParametro("@Telefono", ModPaciente.Telefono);
                 datos.setearParametro("@Email", ModPaciente.Email);
                 datos.setearParametro("@Direccion", ModPaciente.Dirección);
                 datos.ejecutarAccion();
@@ -111,7 +113,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("Update Pacientes SET Estado = 0 where ID = " + ElimPaciente.ID + "");
+                datos.setearConsulta("Update Paciente SET Estado = 0 where ID = " + ElimPaciente.ID + "");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

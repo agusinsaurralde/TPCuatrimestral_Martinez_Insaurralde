@@ -31,7 +31,7 @@ namespace DBClinica
                     aux.Especialidad = new Especialidad();
                     aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
                     aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
-                    aux.Medico = new Medico();
+                    aux.Medico = new MedicoDB();
                     aux.Medico.ID = (int)datos.Lector["ID Médico"];
                     aux.Medico.Apellido = (string)datos.Lector["Apellido Médico"];
                     aux.Medico.Nombre = (string)datos.Lector["Nombre Médico"];

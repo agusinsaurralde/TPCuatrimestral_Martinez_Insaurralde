@@ -32,6 +32,8 @@ create table Medico(
 	CONSTRAINT CHK_DireccionMedico CHECK (Direccion LIKE '[A-Z]%[0-9]'),
 	CONSTRAINT CHK_FechaNacimiento CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
+Alter table Medico
+add Estado bit
 
 go
 create table Especialidad(
@@ -245,6 +247,8 @@ insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento
 go
 insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124579, 'Agusto', 'Britez', 784519, 'britezA@hotmail.com','Chile 2311','18-03-1993','98637', 3, '23:00', '07:00')
 
+UPDATE Medico SET Estado = 1 WHERE DNI = 124575
+select * from Medico
 -----------------------------INSERT PACIENTES--------------------------------------------
 insert Cobertura(Nombre)VALUES('Royalcanin')
 go

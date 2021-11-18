@@ -11,8 +11,8 @@ namespace Dominio
         public int ID { get; set; }
         public string Matricula { get; set; }
         public Especialidad Especialidad { get; set; }
-        public string Turno { get; set; }
+        public TurnoTrabajo Turno { get; set; }
         public DateTime HorarioEntrada { get; set; }
-        public DateTime HorarioESalida { get; set; }
+        public DateTime HorarioSalida { get; set; }
     }
 }
