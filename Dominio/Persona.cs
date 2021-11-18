@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Persona
     {
+
         public string DNI { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -15,5 +16,6 @@ namespace Dominio
         public string Telefono { get; set; }
         public string Dirección { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        public bool Estado { get; set; }
     }
 }

@@ -106,10 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AsignarTurno.aspx" />
-    <Content Include="configAdminAdmin.aspx" />
-    <Content Include="configMedicosAdmin.aspx" />
-    <Content Include="configRecepcionistasAdmin.aspx" />
-    <Content Include="InicioAdmin.aspx" />
+    <Content Include="AgregarObservacionMedico.aspx" />
+    <Content Include="EditarHistoriaClinicaMedico.aspx" />
+    <Content Include="HistoriaClinicaDetalleMedico.aspx" />
+    <Content Include="HistoriaClinicaMedico.aspx" />
+    <Content Include="TurnosMedico.aspx" />
     <Content Include="ModificarTurno.aspx" />
     <Content Include="VerTurno.aspx" />
     <Content Include="Pacientes.aspx" />
@@ -164,7 +165,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Site.Master" />
+    <None Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -179,33 +180,40 @@
     <Compile Include="AsignarTurno.aspx.designer.cs">
       <DependentUpon>AsignarTurno.aspx</DependentUpon>
     </Compile>
-    <Compile Include="configAdminAdmin.aspx.cs">
-      <DependentUpon>configAdminAdmin.aspx</DependentUpon>
+    <Compile Include="AgregarObservacionMedico.aspx.cs">
+      <DependentUpon>AgregarObservacionMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="configAdminAdmin.aspx.designer.cs">
-      <DependentUpon>configAdminAdmin.aspx</DependentUpon>
+    <Compile Include="AgregarObservacionMedico.aspx.designer.cs">
+      <DependentUpon>AgregarObservacionMedico.aspx</DependentUpon>
     </Compile>
-    <Compile Include="configMedicosAdmin.aspx.cs">
-      <DependentUpon>configMedicosAdmin.aspx</DependentUpon>
+    <Compile Include="EditarHistoriaClinicaMedico.aspx.cs">
+      <DependentUpon>EditarHistoriaClinicaMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="configMedicosAdmin.aspx.designer.cs">
-      <DependentUpon>configMedicosAdmin.aspx</DependentUpon>
+    <Compile Include="EditarHistoriaClinicaMedico.aspx.designer.cs">
+      <DependentUpon>EditarHistoriaClinicaMedico.aspx</DependentUpon>
     </Compile>
-    <Compile Include="configRecepcionistasAdmin.aspx.cs">
-      <DependentUpon>configRecepcionistasAdmin.aspx</DependentUpon>
+    <Compile Include="HistoriaClinicaDetalleMedico.aspx.cs">
+      <DependentUpon>HistoriaClinicaDetalleMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="configRecepcionistasAdmin.aspx.designer.cs">
-      <DependentUpon>configRecepcionistasAdmin.aspx</DependentUpon>
+    <Compile Include="HistoriaClinicaDetalleMedico.aspx.designer.cs">
+      <DependentUpon>HistoriaClinicaDetalleMedico.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InicioAdmin.aspx.cs">
-      <DependentUpon>InicioAdmin.aspx</DependentUpon>
+    <Compile Include="HistoriaClinicaMedico.aspx.cs">
+      <DependentUpon>HistoriaClinicaMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InicioAdmin.aspx.designer.cs">
-      <DependentUpon>InicioAdmin.aspx</DependentUpon>
+    <Compile Include="HistoriaClinicaMedico.aspx.designer.cs">
+      <DependentUpon>HistoriaClinicaMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TurnosMedico.aspx.cs">
+      <DependentUpon>TurnosMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TurnosMedico.aspx.designer.cs">
+      <DependentUpon>TurnosMedico.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarTurno.aspx.cs">
       <DependentUpon>ModificarTurno.aspx</DependentUpon>
