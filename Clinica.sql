@@ -216,6 +216,8 @@ insert Especialidad(Nombre) values('Radio-Oncólogía')
 ---------------------INSERT MEDICOS--------------------------------------
 --set dateformat 'dmy'
 
+SELECT * FROM Medico
+
 INSERT TurnoTrabajo(Turno)VALUES('Mañana')
 go
 INSERT TurnoTrabajo(Turno)VALUES('Tarde')
@@ -241,6 +243,8 @@ go
 insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124577, 'Ariel', 'Staltari', 784518, 'staltariA@hotmail.com','Barrilete 6767','15-08-1979','87592', 3, '23:00', '07:00')
 go
 insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124579, 'Agusto', 'Britez', 784519, 'britezA@hotmail.com','Chile 2311','18-03-1993','98637', 3, '23:00', '07:00')
+
+select * from Medico
 
 -----------------------------INSERT PACIENTES--------------------------------------------
 insert Cobertura(Nombre)VALUES('Royalcanin')
@@ -290,14 +294,14 @@ INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(23,1)
 GO
 INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(2,2)
 GO
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(1,9)
+INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(1,14)
 GO
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(20,7)
+INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(20,17)
 GO
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(6,8)
+INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(6,16)
 GO
 INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio,HoraFin)VALUES(5,2,'01-01-2022','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00', '10:00')
-select * from EstadoTurno
+select * from EspecialidadXMedico
 
 --CONSULTA TURNO
 CREATE VIEW VW_TURNO AS
