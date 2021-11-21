@@ -9,6 +9,6 @@ namespace Dominio
     public class Empleado : Usuario
     {
         public int ID { get; set; }
-        public string Tipo { get; set; }
+        public string TipoEmpleado { get; set; }
     }
 }

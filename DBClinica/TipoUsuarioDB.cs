@@ -8,24 +8,24 @@ using Dominio;
 
 namespace DBClinica
 {
-    public class EspecialidadDB
+    class TipoUsuarioDB
     {
-        public List<Especialidad> lista()
+        public List<TipoUsuario> lista()
         {
-            List<Especialidad> lista = new List<Especialidad>();
+            List<TipoUsuario> lista = new List<TipoUsuario>();
             ConexionDB datos = new ConexionDB();
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre from Especialidad ORDER BY ID ASC");
+                datos.setearConsulta("SELECT ID, Nombre from TipoUsuario ORDER BY ID ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    Especialidad aux = new Especialidad();
+                    TipoUsuario aux = new TipoUsuario();
                     aux.Id = (int)datos.Lector["ID"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-                  
+
                     lista.Add(aux);
                 }
 
@@ -35,7 +35,7 @@ namespace DBClinica
             {
                 throw ex;
             }
-            finally 
+            finally
             {
                 datos.cerrarConexion();
             }
@@ -46,9 +46,10 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Especialidad(ID, Nombre, Estado) VALUES(@IDE ,@NombreE)");
+                datos.setearConsulta("INSERT TipoUsuario(ID, Nombre) VALUES(@IDE ,@Nombre, @Estado)");
                 datos.setearParametro("@IDE", EspecialidadNueva.Id);
                 datos.setearParametro("@NombreE", EspecialidadNueva.Nombre);
+                datos.setearParametro("@Estado", EspecialidadNueva.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -61,15 +62,14 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-
-        public void ModificarEspecialidad( Especialidad EspecialidadMod ) 
+        public void ModificarTipoUsuario(TipoUsuario TipoUsuarioMod)
         {
             ConexionDB dato = new ConexionDB();
             try
             {
-                dato.setearConsulta("UPDATE Especialidad set ID=@ID,Nombre=@Nombre where ID="+ EspecialidadMod.Id +"");
-                dato.setearParametro("@ID", EspecialidadMod.Id);
-                dato.setearParametro("@Nombre", EspecialidadMod.Nombre);
+                dato.setearConsulta("UPDATE TipoUsuario set ID=@ID,Nombre=@Nombre where ID=" + TipoUsuarioMod.Id + "");
+                dato.setearParametro("@ID", TipoUsuarioMod.Id);
+                dato.setearParametro("@Nombre", TipoUsuarioMod.Nombre);
                 dato.ejecutarAccion();
             }
             catch (Exception ex)
@@ -82,15 +82,13 @@ namespace DBClinica
                 dato.cerrarConexion();
             }
         }
-        
-
-        public void EliminarEspecialidad(Especialidad EspecialidadDelete)
+        public void EliminarTipoUsuario(TipoUsuario tipoUsuarioDelete)
         {
             ConexionDB datos = new ConexionDB();
 
             try
             {
-                datos.setearConsulta("UPDATE Especialidad SET Estado = 0 WHERE ID = " + EspecialidadDelete.Id + "");
+                datos.setearConsulta("UPDATE TipoUsuario SET Estado = 0 WHERE ID = " + tipoUsuarioDelete.Id + "");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -102,7 +100,5 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-
     }
-
 }

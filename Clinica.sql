@@ -41,6 +41,11 @@ create table Especialidad(
     Nombre VARCHAR(50) UNIQUE not NULL,
 )
 GO
+Alter table Especialidad
+add Estado bit;
+
+update Especialidad SET Estado = 1
+
 create table EspecialidadXMedico(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
     IDEspecialidad int not null,
@@ -55,6 +60,12 @@ create table Cobertura(
     Nombre VARCHAR(30) not null
 )
 go
+
+Alter table Cobertura
+add Estado bit;
+
+update Usuario SET Estado = 1
+
 create table Paciente(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
     DNI VARCHAR(8) UNIQUE not null,
@@ -77,6 +88,9 @@ create table Paciente(
 
 Alter table Paciente
 add Estado bit;
+
+update Paciente SET Estado = 1
+
 GO
 create table HistoriaClinica(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -87,11 +101,23 @@ create table HistoriaClinica(
 	CONSTRAINT FK_IDPacienteHC FOREIGN KEY (IDPaciente) REFERENCES Paciente(ID)
 )
 GO
+
+Alter table HistoriaClinica
+add Estado bit;
+
+update HistoriaClinica SET Estado = 1
+
 create table TipoEmpleado(
     ID int PRIMARY key IDENTITY(1,1) not null,
     Tipo VARCHAR(14) not null,
 )
 GO
+
+Alter table TipoEmpleado
+add Estado bit;
+
+update TipoEmpleado SET Estado = 1
+
 create table Empleado(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
     DNI VARCHAR(8) UNIQUE NOT NULL,
@@ -111,11 +137,23 @@ create table Empleado(
 	CONSTRAINT CHK_FechaNacimientoEmpleado CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
 GO
+
+Alter table Empleado
+add Estado bit;
+
+update Empleado SET Estado = 1
+
 Create table EstadoTurno(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
     Descripcion VARCHAR(20)
 )
 go
+
+Alter table EstadoTurno
+add Estado bit;
+
+update EstadoTurno SET Estado = 1
+
 create table Turno(
     Numero int PRIMARY KEY IDENTITY(1,1) NOT NULL,
     IDPaciente int not null,
@@ -140,6 +178,12 @@ create table TipoUsuario(
     Nombre VARCHAR (8) not null
 )
 GO
+
+Alter table TipoUsuario
+add Estado bit;
+
+update TipoUsuario SET Estado = 1
+
 create table Usuario(
     ID int PRIMARY KEY not null,
     NombreUsuario VARCHAR(15) UNIQUE,
@@ -149,6 +193,11 @@ create table Usuario(
 	CONSTRAINT FK_IDTipoUsuario FOREIGN KEY (IDTipo) REFERENCES TipoUsuario(ID),
 	CONSTRAINT CHK_NombreUsuario CHECK(Contraseña NOT LIKE '%[|!"#$%&/()=?¡¿´¨*[]{}]%')
 )
+
+Alter table Usuario
+add Estado bit;
+
+update Usuario SET Estado = 1
 
 -----------Insert especialidades-------------------------
 go
@@ -329,4 +378,6 @@ CREATE VIEW VW_TURNO AS
 
 SELECT * FROM VW_TURNO
 
+use Clinica
 
+select * from Especialidad

@@ -34,7 +34,7 @@ namespace DBClinica
                     aux.Telefono = (string)datos.Lector["Teléfono"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Dirección = (string)datos.Lector["Dirección"];
-                    aux.Estado = (bool)datos.Lector["Estado"];
+                    aux.Estado = (bool)datos.Lector["P.Estado"];
 
                     lista.Add(aux);
                 }

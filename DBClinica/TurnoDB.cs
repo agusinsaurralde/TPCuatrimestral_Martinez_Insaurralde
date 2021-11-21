@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
 
+
 namespace DBClinica
 {
     public class TurnoDB
@@ -31,7 +32,7 @@ namespace DBClinica
                     aux.Especialidad = new Especialidad();
                     aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
                     aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
-                    aux.Medico = new MedicoDB();
+                    aux.Medico = new Medico();
                     aux.Medico.ID = (int)datos.Lector["ID Médico"];
                     aux.Medico.Apellido = (string)datos.Lector["Apellido Médico"];
                     aux.Medico.Nombre = (string)datos.Lector["Nombre Médico"];

@@ -9,5 +9,6 @@ namespace DBClinica
 {
     public class UsuarioDB
     {
+    }
        
 }
