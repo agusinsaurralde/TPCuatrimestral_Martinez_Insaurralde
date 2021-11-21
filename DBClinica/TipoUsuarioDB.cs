@@ -41,15 +41,15 @@ namespace DBClinica
             }
         }
 
-        public void AgregarEspecialidad(Especialidad EspecialidadNueva)
+        public void AgregarTipoUsuario(TipoUsuario tipoUsuarioNuevo)
         {
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT TipoUsuario(ID, Nombre) VALUES(@IDE ,@Nombre, @Estado)");
-                datos.setearParametro("@IDE", EspecialidadNueva.Id);
-                datos.setearParametro("@NombreE", EspecialidadNueva.Nombre);
-                datos.setearParametro("@Estado", EspecialidadNueva.Estado);
+                datos.setearConsulta("INSERT TipoUsuario(ID, Nombre) VALUES(@IDE ,@Nombre,@Estado)");
+                datos.setearParametro("@IDE", tipoUsuarioNuevo.Id);
+                datos.setearParametro("@NombreE", tipoUsuarioNuevo.Nombre);
+                datos.setearParametro("@Estado",tipoUsuarioNuevo.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
