@@ -46,9 +46,9 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Cobertura(ID, Nombre, Estado) VALUES(@IDE ,@NombreE)");
-                datos.setearParametro("@IDE", CoberturaNueva.Id);
-                datos.setearParametro("@NombreE", CoberturaNueva.Nombre);
+                datos.setearConsulta("INSERT Cobertura(Nombre, Estado) VALUES(@Nombre, @Estado)");
+                datos.setearParametro("@Nombre", CoberturaNueva.Nombre);
+                datos.setearParametro("@Estado", CoberturaNueva.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -64,13 +64,13 @@ namespace DBClinica
 
         public void ModificarCobertura(Cobertura CoberturaMod)
         {
-            ConexionDB dato = new ConexionDB();
+            ConexionDB datos = new ConexionDB();
             try
             {
-                dato.setearConsulta("UPDATE Cobertura set ID=@ID,Nombre=@Nombre where ID=" + CoberturaMod.Id + "");
-                dato.setearParametro("@ID", CoberturaMod.Id);
-                dato.setearParametro("@Nombre", CoberturaMod.Nombre);
-                dato.ejecutarAccion();
+                datos.setearConsulta("UPDATE Cobertura SET Nombre=@Nombre, Estado = @Estado where ID=" + CoberturaMod.Id + "");
+                datos.setearParametro("@Nombre", CoberturaMod.Nombre);
+                datos.setearParametro("@Estado", CoberturaMod.Estado);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -79,7 +79,7 @@ namespace DBClinica
             }
             finally
             {
-                dato.cerrarConexion();
+                datos.cerrarConexion();
             }
         }
         public void EliminarCobertura(Cobertura coberturaDelete)

@@ -60,11 +60,13 @@ create table Cobertura(
     Nombre VARCHAR(30) not null
 )
 go
-
+select * from Cobertura
 Alter table Cobertura
 add Estado bit;
+update Cobertura SET Estado = 1
 
-update Usuario SET Estado = 1
+select * from Usuario
+Alter table Usuario add Estado bit
 
 create table Paciente(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -85,7 +87,6 @@ create table Paciente(
 	CONSTRAINT CHK_DireccionPaciente CHECK (Direccion LIKE '[A-Z]%[0-9]'),
 	CONSTRAINT CHK_FechaNacimientoPaciente CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
-
 Alter table Paciente
 add Estado bit;
 

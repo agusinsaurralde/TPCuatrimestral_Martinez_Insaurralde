@@ -46,9 +46,8 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT TipoUsuario(ID, Nombre) VALUES(@IDE ,@Nombre,@Estado)");
-                datos.setearParametro("@IDE", tipoUsuarioNuevo.Id);
-                datos.setearParametro("@NombreE", tipoUsuarioNuevo.Nombre);
+                datos.setearConsulta("INSERT TipoUsuario(Nombre, Estado) VALUES(@Nombre, @Estado)");
+                datos.setearParametro("@Nombre", tipoUsuarioNuevo.Nombre);
                 datos.setearParametro("@Estado",tipoUsuarioNuevo.Estado);
                 datos.ejecutarAccion();
             }
@@ -64,13 +63,13 @@ namespace DBClinica
         }
         public void ModificarTipoUsuario(TipoUsuario TipoUsuarioMod)
         {
-            ConexionDB dato = new ConexionDB();
+            ConexionDB datos = new ConexionDB();
             try
             {
-                dato.setearConsulta("UPDATE TipoUsuario set ID=@ID,Nombre=@Nombre where ID=" + TipoUsuarioMod.Id + "");
-                dato.setearParametro("@ID", TipoUsuarioMod.Id);
-                dato.setearParametro("@Nombre", TipoUsuarioMod.Nombre);
-                dato.ejecutarAccion();
+                datos.setearConsulta("UPDATE TipoUsuario Nombre=@Nombre, Estado = @Estado where ID=" + TipoUsuarioMod.Id + "");
+                datos.setearParametro("@Nombre", TipoUsuarioMod.Nombre);
+                datos.setearParametro("@Estado", TipoUsuarioMod.Estado);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -79,7 +78,7 @@ namespace DBClinica
             }
             finally
             {
-                dato.cerrarConexion();
+                datos.cerrarConexion();
             }
         }
         public void EliminarTipoUsuario(TipoUsuario tipoUsuarioDelete)
