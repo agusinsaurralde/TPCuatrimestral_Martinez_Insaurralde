@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="CoberturaDB.cs" />
     <Compile Include="ConexionDB.cs" />
+    <Compile Include="EmpleadoDB.cs" />
     <Compile Include="EspecialidadDB.cs" />
+    <Compile Include="HistoriaClinicaDB.cs" />
     <Compile Include="MedicoDB.cs" />
     <Compile Include="PacienteDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

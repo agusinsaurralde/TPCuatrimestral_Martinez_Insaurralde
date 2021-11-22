@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="HistoriaClinicaDetalleMedico.aspx.cs" Inherits="WebApplication1.Formulario_web16" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="HistoriaClinicaDetalle.aspx.cs" Inherits="WebApplication1.Formulario_web16" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Historia Clínica</h3>
     <hr />

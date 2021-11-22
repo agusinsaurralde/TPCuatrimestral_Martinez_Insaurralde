@@ -44,8 +44,10 @@
     <Compile Include="Cobertura.cs" />
     <Compile Include="Especialidad.cs" />
     <Compile Include="EstadoTurno.cs" />
+    <Compile Include="HistoriaClinica.cs" />
     <Compile Include="Medico.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="TipoEmpleado.cs" />
     <Compile Include="TipoUsuario.cs" />
     <Compile Include="TurnoTrabajo.cs" />
     <Compile Include="Usuario.cs" />

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="HistoriaClinicaMedico.aspx.cs" Inherits="WebApplication1.Formulario_web15" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="HistoriaClinica.aspx.cs" Inherits="WebApplication1.Formulario_web15" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
       <h3>Historia Clínica</h3>
     <hr />
@@ -12,6 +12,7 @@
         <asp:TextBox runat="server" />
         <asp:Button Text="Buscar" runat="server" />
         <asp:Button Text="Ver" onclick="Click_Ver" runat="server" />
+        <asp:Button Text="Eliminar" onclick="Click_Eliminar" runat="server" />
         </div>
         <div>
         <table class="table">

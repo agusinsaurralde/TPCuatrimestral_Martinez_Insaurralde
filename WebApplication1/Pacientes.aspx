@@ -12,6 +12,9 @@
          </asp:DropDownList>
         <asp:TextBox runat="server" />
         <asp:Button Text="Buscar" runat="server" />
+        <asp:Button Text="Agregar" OnClick ="Click_Agregar" runat="server" />
+        <asp:Button Text="Modificar" OnClick ="Click_Modificar" runat="server" />
+        <asp:Button Text="Eliminar" OnClick ="Click_Eliminar" runat="server" />
     </div>
         <div>
         <table class="table">

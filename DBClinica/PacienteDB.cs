@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, P.FechaNacimiento, P.Cobertura, C.Nombre, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura");
+                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,14 +27,14 @@ namespace DBClinica
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
-                    aux.FechaNacimiento = (DateTime)datos.Lector["Fecha de Nacimiento"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
                     aux.Cobertura = new Cobertura();
-                    aux.Cobertura.Id = (int)datos.Lector["ID Cobertura"];
+                    aux.Cobertura.Id = (int)datos.Lector["IDCobertura"];
                     aux.Cobertura.Nombre = (string)datos.Lector["Cobertura"];
-                    aux.Telefono = (string)datos.Lector["Teléfono"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
-                    aux.Dirección = (string)datos.Lector["Dirección"];
-                    aux.Estado = (bool)datos.Lector["P.Estado"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
 
                     lista.Add(aux);
                 }
