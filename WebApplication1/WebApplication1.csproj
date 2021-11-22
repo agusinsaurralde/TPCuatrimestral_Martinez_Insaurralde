@@ -106,10 +106,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AsignarTurno.aspx" />
-    <Content Include="AgregarObservacionMedico.aspx" />
+    <Content Include="AgregarObservacion.aspx" />
     <Content Include="EditarHistoriaClinicaMedico.aspx" />
-    <Content Include="HistoriaClinicaDetalleMedico.aspx" />
-    <Content Include="HistoriaClinicaMedico.aspx" />
+    <Content Include="ErrorIngreso.aspx" />
+    <Content Include="EliminarEspecialidad.aspx" />
+    <Content Include="AgregarPaciente.aspx" />
+    <Content Include="AgregarMedico.aspx" />
+    <Content Include="EliminarHistoriaClinica.aspx" />
+    <Content Include="Coberturas.aspx" />
+    <Content Include="AgregarCobertura.aspx" />
+    <Content Include="AgregarUsuario.aspx" />
+    <Content Include="ModificarUsuario.aspx" />
+    <Content Include="EliminarUsuario.aspx" />
+    <Content Include="Usuarios.aspx" />
+    <Content Include="ModificarCobertura.aspx" />
+    <Content Include="EliminarCobertura.aspx" />
+    <Content Include="ModificarMedico.aspx" />
+    <Content Include="EliminarMedico.aspx" />
+    <Content Include="ModificarPaciente.aspx" />
+    <Content Include="EliminarPaciente.aspx" />
+    <Content Include="ModificarEspecialidad.aspx" />
+    <Content Include="HistoriaClinicaDetalle.aspx" />
+    <Content Include="HistoriaClinica.aspx" />
     <Content Include="TurnosMedico.aspx" />
     <Content Include="ModificarTurno.aspx" />
     <Content Include="VerTurno.aspx" />
@@ -180,12 +198,12 @@
     <Compile Include="AsignarTurno.aspx.designer.cs">
       <DependentUpon>AsignarTurno.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AgregarObservacionMedico.aspx.cs">
-      <DependentUpon>AgregarObservacionMedico.aspx</DependentUpon>
+    <Compile Include="AgregarObservacion.aspx.cs">
+      <DependentUpon>AgregarObservacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AgregarObservacionMedico.aspx.designer.cs">
-      <DependentUpon>AgregarObservacionMedico.aspx</DependentUpon>
+    <Compile Include="AgregarObservacion.aspx.designer.cs">
+      <DependentUpon>AgregarObservacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditarHistoriaClinicaMedico.aspx.cs">
       <DependentUpon>EditarHistoriaClinicaMedico.aspx</DependentUpon>
@@ -194,19 +212,145 @@
     <Compile Include="EditarHistoriaClinicaMedico.aspx.designer.cs">
       <DependentUpon>EditarHistoriaClinicaMedico.aspx</DependentUpon>
     </Compile>
-    <Compile Include="HistoriaClinicaDetalleMedico.aspx.cs">
-      <DependentUpon>HistoriaClinicaDetalleMedico.aspx</DependentUpon>
+    <Compile Include="ErrorIngreso.aspx.cs">
+      <DependentUpon>ErrorIngreso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="HistoriaClinicaDetalleMedico.aspx.designer.cs">
-      <DependentUpon>HistoriaClinicaDetalleMedico.aspx</DependentUpon>
+    <Compile Include="ErrorIngreso.aspx.designer.cs">
+      <DependentUpon>ErrorIngreso.aspx</DependentUpon>
     </Compile>
-    <Compile Include="HistoriaClinicaMedico.aspx.cs">
-      <DependentUpon>HistoriaClinicaMedico.aspx</DependentUpon>
+    <Compile Include="EliminarEspecialidad.aspx.cs">
+      <DependentUpon>EliminarEspecialidad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="HistoriaClinicaMedico.aspx.designer.cs">
-      <DependentUpon>HistoriaClinicaMedico.aspx</DependentUpon>
+    <Compile Include="EliminarEspecialidad.aspx.designer.cs">
+      <DependentUpon>EliminarEspecialidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarPaciente.aspx.cs">
+      <DependentUpon>AgregarPaciente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarPaciente.aspx.designer.cs">
+      <DependentUpon>AgregarPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarMedico.aspx.cs">
+      <DependentUpon>AgregarMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarMedico.aspx.designer.cs">
+      <DependentUpon>AgregarMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarHistoriaClinica.aspx.cs">
+      <DependentUpon>EliminarHistoriaClinica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarHistoriaClinica.aspx.designer.cs">
+      <DependentUpon>EliminarHistoriaClinica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Coberturas.aspx.cs">
+      <DependentUpon>Coberturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Coberturas.aspx.designer.cs">
+      <DependentUpon>Coberturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarCobertura.aspx.cs">
+      <DependentUpon>AgregarCobertura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarCobertura.aspx.designer.cs">
+      <DependentUpon>AgregarCobertura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarUsuario.aspx.cs">
+      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarUsuario.aspx.designer.cs">
+      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarUsuario.aspx.cs">
+      <DependentUpon>ModificarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarUsuario.aspx.designer.cs">
+      <DependentUpon>ModificarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarUsuario.aspx.cs">
+      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarUsuario.aspx.designer.cs">
+      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarCobertura.aspx.cs">
+      <DependentUpon>ModificarCobertura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarCobertura.aspx.designer.cs">
+      <DependentUpon>ModificarCobertura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarCobertura.aspx.cs">
+      <DependentUpon>EliminarCobertura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarCobertura.aspx.designer.cs">
+      <DependentUpon>EliminarCobertura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarMedico.aspx.cs">
+      <DependentUpon>ModificarMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarMedico.aspx.designer.cs">
+      <DependentUpon>ModificarMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarMedico.aspx.cs">
+      <DependentUpon>EliminarMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarMedico.aspx.designer.cs">
+      <DependentUpon>EliminarMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarPaciente.aspx.cs">
+      <DependentUpon>ModificarPaciente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarPaciente.aspx.designer.cs">
+      <DependentUpon>ModificarPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarPaciente.aspx.cs">
+      <DependentUpon>EliminarPaciente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarPaciente.aspx.designer.cs">
+      <DependentUpon>EliminarPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarEspecialidad.aspx.cs">
+      <DependentUpon>ModificarEspecialidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarEspecialidad.aspx.designer.cs">
+      <DependentUpon>ModificarEspecialidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HistoriaClinicaDetalle.aspx.cs">
+      <DependentUpon>HistoriaClinicaDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HistoriaClinicaDetalle.aspx.designer.cs">
+      <DependentUpon>HistoriaClinicaDetalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HistoriaClinica.aspx.cs">
+      <DependentUpon>HistoriaClinica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HistoriaClinica.aspx.designer.cs">
+      <DependentUpon>HistoriaClinica.aspx</DependentUpon>
     </Compile>
     <Compile Include="TurnosMedico.aspx.cs">
       <DependentUpon>TurnosMedico.aspx</DependentUpon>

@@ -178,6 +178,13 @@ create table TipoUsuario(
     ID int PRIMARY key IDENTITY(1,1) not null,
     Nombre VARCHAR (8) not null
 )
+select * from tipousuario
+alter table tipousuario
+alter column nombre varchar(13)
+insert into tipousuario(nombre) values('Recepcionista')
+update tipousuario set nombre = 'Administrador' where id = 2
+
+
 GO
 
 Alter table TipoUsuario
@@ -198,7 +205,18 @@ create table Usuario(
 Alter table Usuario
 add Estado bit;
 
+
 update Usuario SET Estado = 1
+
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(124578, 'dmastopierro', '123medico', 1, 1)
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(9999, 'mster', '123admin', 2, 1)
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(1010, 'cmedina', '123recep', 4, 1)
+
+select * from Usuario
+select * from tipoempleado
+select * from empleado
+select * from medico
+select * from TipoUsuario
 
 -----------Insert especialidades-------------------------
 go

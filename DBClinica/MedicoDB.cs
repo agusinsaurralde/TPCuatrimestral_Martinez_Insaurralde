@@ -25,18 +25,18 @@ namespace DBClinica
 
                     aux.ID = (int)datos.Lector["ID"];
                     aux.DNI = (string)datos.Lector["DNI"];
-                    aux.Matricula = (string)datos.Lector["Matrícula"];
+                    aux.Matricula = (string)datos.Lector["Matricula"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Telefono = (string)datos.Lector["Teléfono"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
-                    aux.Dirección = (string)datos.Lector["Dirección"];
-                    aux.FechaNacimiento = (DateTime)datos.Lector["Fecha de Nacimiento"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
                     aux.Turno = new TurnoTrabajo();
                     aux.Turno.ID = (int)datos.Lector["IDTurnoTrabajo"];
                     aux.Turno.NombreTurno = (string)datos.Lector["Turno"];
-                    aux.HorarioEntrada = (DateTime)datos.Lector["Horario de Entrada"];
-                    aux.HorarioSalida = (DateTime)datos.Lector["Horario de Salida"];
+                    aux.HorarioEntrada = (DateTime)datos.Lector["HoraEntrada"];
+                    aux.HorarioSalida = (DateTime)datos.Lector["HoraSalida"];
                     aux.Estado = (bool)datos.Lector["Estado"];
 
                     lista.Add(aux);

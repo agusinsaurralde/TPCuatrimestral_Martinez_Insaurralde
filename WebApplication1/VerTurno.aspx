@@ -12,12 +12,14 @@
          </asp:DropDownList>
         <asp:TextBox runat="server" />
         <asp:Button Text="Buscar" runat="server" />
-         <asp:Button Text="Modificar turno" OnClick="Click_ModificarTurno" runat="server" />
+        <asp:Button Text="Modificar turno" OnClick="Click_ModificarTurno" runat="server" />
+        
+        <asp:Button Text="Agregar Observación" onclick ="Click_AgregarObservacion" runat="server" />
     </div>
     <div>
          <table class="table table-hover">
             <tr>
-                <td>Número</td> <td>Nombre y Apellido</td> <td>Especialidad</td> <td>Médico</td> <td>Horario</td><td>Observaciones</td><td>Estado</td>
+                <td>Número</td> <td>Nombre y Apellido</td> <td>Especialidad</td> <td>Médico</td> <td>Horario</td><td>Motivo de consulta</td><td>Estado</td><td>Observaciones</td>
             </tr>
              <tr>
                 <td>1</td> <td>Martina Gutierrez</td> <td>Dermatología</td><td>Mónica Torres</td><td>10 hs</td><td>Chequeo</td><td>Reprogramado</td>

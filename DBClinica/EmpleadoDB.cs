@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo");
+                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,13 +27,13 @@ namespace DBClinica
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Telefono = (string)datos.Lector["Teléfono"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
-                    aux.Dirección = (string)datos.Lector["Dirección"];
-                    aux.FechaNacimiento = (DateTime)datos.Lector["Fecha de Nacimiento"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
                     aux.TipoEmp = new TipoEmpleado();
-                    aux.TipoEmp.ID = (int)datos.Lector["ID Tipo de Empleado"];
-                    aux.TipoEmp.Nombre = (string)datos.Lector["Tipo de Empleado"];
+                    aux.TipoEmp.ID = (int)datos.Lector["IDTipo"];
+                    aux.TipoEmp.Nombre = (string)datos.Lector["Tipo"];
                     aux.Estado = (bool)datos.Lector["Estado"];
 
                     lista.Add(aux);

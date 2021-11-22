@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarObservacionMedico.aspx.cs" Inherits="WebApplication1.Formulario_web17" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarObservacion.aspx.cs" Inherits="WebApplication1.Formulario_web17" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <hr />
     <h4>Ricardo López</h4>

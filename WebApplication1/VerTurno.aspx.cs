@@ -17,6 +17,11 @@ namespace WebApplication1
         {
             Response.Redirect("ModificarTurno.aspx", false);
         }
-       
+        protected void Click_AgregarObservacion(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarObservacion.aspx", false);
+        }
     }
+
+
 }

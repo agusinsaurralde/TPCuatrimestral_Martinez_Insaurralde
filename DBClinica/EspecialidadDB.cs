@@ -46,9 +46,9 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Especialidad(ID, Nombre, Estado) VALUES(@IDE ,@NombreE)");
-                datos.setearParametro("@IDE", EspecialidadNueva.Id);
+                datos.setearConsulta("INSERT Especialidad(Nombre, Estado) VALUES(@NombreE, @Estado)");
                 datos.setearParametro("@NombreE", EspecialidadNueva.Nombre);
+                datos.setearParametro("@Estado", EspecialidadNueva.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -67,8 +67,7 @@ namespace DBClinica
             ConexionDB dato = new ConexionDB();
             try
             {
-                dato.setearConsulta("UPDATE Especialidad set ID=@ID,Nombre=@Nombre where ID="+ EspecialidadMod.Id +"");
-                dato.setearParametro("@ID", EspecialidadMod.Id);
+                dato.setearConsulta("UPDATE Especialidad SET Nombre=@Nombre where ID="+ EspecialidadMod.Id +"");
                 dato.setearParametro("@Nombre", EspecialidadMod.Nombre);
                 dato.ejecutarAccion();
             }

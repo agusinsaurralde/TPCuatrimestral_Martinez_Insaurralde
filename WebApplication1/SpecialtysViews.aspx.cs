@@ -17,5 +17,14 @@ namespace WebApplication1
             Grilla.DataSource = ClinicaDB.lista();
             Grilla.DataBind();
         }
+
+        protected void Click_Modificar(object sender, EventArgs e)
+        {
+            Response.Redirect("ModificarEspecialidad.aspx");
+        }
+        protected void Click_Eliminar(object sender, EventArgs e)
+        {
+            Response.Redirect("EliminarEspecialidad.aspx");
+        }
     }
 }

@@ -20,11 +20,10 @@
         <div class="textbox">   
             <asp:TextBox id="txtbxUsuario" runat="server" placeholder="Usuario"/>
         </div>
-
         <div class="textbox">  
              <asp:TextBox id="txtbxContraseña" type="password" runat="server" placeholder="Contraseña"/>
         </div>
-
+        
         <div class="lista">  
             <asp:DropDownList ID="ddlListaIngreso" runat="server">
                 <asp:ListItem Text="Médico" />
@@ -34,7 +33,7 @@
         </div>
 
         <div class="boton">  
-            <asp:Button id="btnIngresar" Text="Ingresar" runat="server" />
+            <asp:Button id="btnIngresar" Text="Ingresar" OnClick="Click_Ingresar" runat="server" />
         </div>
 
         </div>

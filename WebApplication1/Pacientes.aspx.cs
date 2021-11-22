@@ -13,5 +13,20 @@ namespace WebApplication1
         {
 
         }
+        protected void Click_Modificar(object sender, EventArgs e)
+        {
+            Response.Redirect("ModificarPaciente.aspx");
+        }
+        protected void Click_Eliminar(object sender, EventArgs e)
+        {
+            Response.Redirect("EliminarPaciente.aspx");
+        }
+
+        protected void Click_Agregar(object sender, EventArgs e)
+        {
+            Response.Redirect("AgregarPaciente.aspx");
+        }
+
+
     }
 }

@@ -28,7 +28,7 @@ namespace DBClinica
                     aux.Paciente.Apellido = (string)datos.Lector["Apellido"];
                     aux.Paciente.Nombre = (string)datos.Lector["Nombre"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
-                    aux.Descripcion = (string)datos.Lector["Descripción"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
 
                     lista.Add(aux);
                 }
