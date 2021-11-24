@@ -182,8 +182,11 @@ select * from tipousuario
 alter table tipousuario
 alter column nombre varchar(13)
 insert into tipousuario(nombre) values('Recepcionista')
+insert into tipousuario(nombre) values('Administrador')
+insert into tipousuario(nombre) values('Medico')
 update tipousuario set nombre = 'Administrador' where id = 2
 
+update tipousuario set ID = 2 where Nombre = 'Administrador'
 
 GO
 
@@ -205,19 +208,27 @@ create table Usuario(
 Alter table Usuario
 add Estado bit;
 
+select * from Usuario
 
 update Usuario SET Estado = 1
 
 Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(124578, 'dmastopierro', '123medico', 1, 1)
 Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(9999, 'mster', '123admin', 2, 1)
-Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(1010, 'cmedina', '123recep', 4, 1)
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(1010, 'cmedina', '123recep', 3, 1)
+
 
 select * from Usuario
 select * from tipoempleado
 select * from empleado
 select * from medico
 select * from TipoUsuario
+select * from Cobertura
+select * from Especialidad
+select * from HistoriaClinica
+select * from Paciente
 
+update TipoUsuario SET Nombre = 'Recepcionista'
+where ID=3
 -----------Insert especialidades-------------------------
 go
 insert Especialidad(Nombre) values('Anestesiología')
