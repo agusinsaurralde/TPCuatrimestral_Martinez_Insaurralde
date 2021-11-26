@@ -208,8 +208,6 @@ create table Usuario(
 Alter table Usuario
 add Estado bit;
 
-select * from Usuario
-
 update Usuario SET Estado = 1
 
 Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(124578, 'dmastopierro', '123medico', 1, 1)

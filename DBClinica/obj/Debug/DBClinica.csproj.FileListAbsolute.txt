@@ -16,12 +16,12 @@ C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\ob
 C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.CopyComplete
 C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.dll
 C:\Users\User\Documents\GitHub\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.pdb
-E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.AssemblyReference.cache
-E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.CoreCompileInputs.cache
-E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.dll
-E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.pdb
 E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\DBClinica.dll
 E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\DBClinica.pdb
 E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\Dominio.dll
 E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\bin\Debug\Dominio.pdb
+E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.AssemblyReference.cache
+E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.CoreCompileInputs.cache
 E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.csproj.CopyComplete
+E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.dll
+E:\tercerCuatrimestre\ReCurzada\PropuestaClienicaTP\PropuestaClinica\TPCuatrimestral_Martinez_Insaurralde\DBClinica\obj\Debug\DBClinica.pdb

@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoUsuarioDB.cs" />
     <Compile Include="TurnoDB.cs" />
+    <Compile Include="TurnoTrabajoDB.cs" />
     <Compile Include="UsuarioDB.cs" />
   </ItemGroup>
   <ItemGroup>
