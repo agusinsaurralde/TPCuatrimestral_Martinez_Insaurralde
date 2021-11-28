@@ -51,20 +51,20 @@ namespace WebApplication1
 
             try
             { 
-                NuevoMedico.DNI = txtDNI.Text.ToString();
-                NuevoMedico.Matricula = txtMatricula.Text.ToString();
-                NuevoMedico.Apellido = txtApellido.Text.ToString();
-                NuevoMedico.Nombre = txtNombre.Text.ToString();
+                NuevoMedico.DNI = txtDNI.Text;
+                NuevoMedico.Matricula = txtMatricula.Text;
+                NuevoMedico.Apellido = txtApellido.Text;
+                NuevoMedico.Nombre = txtNombre.Text;
                 NuevoMedico.Especialidad = new Especialidad();
                 NuevoMedico.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-                NuevoMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text.ToString());
-                NuevoMedico.Telefono = txtTelefono.Text.ToString();
-                NuevoMedico.Email = txtEmail.Text.ToString();
-                NuevoMedico.Dirección = txtDireccion.Text.ToString();
+                NuevoMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                NuevoMedico.Telefono = txtTelefono.Text;
+                NuevoMedico.Email = txtEmail.Text;
+                NuevoMedico.Dirección = txtDireccion.Text;
                 NuevoMedico.Turno = new TurnoTrabajo();
                 NuevoMedico.Turno.ID = int.Parse(ddlistTurno.SelectedItem.Value);
-                NuevoMedico.HorarioEntrada = DateTime.Parse(txtEntrada.Text.ToString());
-                NuevoMedico.HorarioSalida = DateTime.Parse(txtSalida.Text.ToString());
+                NuevoMedico.HorarioEntrada = DateTime.Parse(txtEntrada.Text);
+                NuevoMedico.HorarioSalida = DateTime.Parse(txtSalida.Text);
                 NuevoMedico.Estado = true;
                 cargar.agregar(NuevoMedico);
 

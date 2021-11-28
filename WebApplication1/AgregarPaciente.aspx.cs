@@ -42,15 +42,15 @@ namespace WebApplication1
 
             try
             {
-                NuevoPaciente.DNI = txtDNI.Text.ToString();
-                NuevoPaciente.Apellido = txtApellido.Text.ToString();
-                NuevoPaciente.Nombre = txtNombre.Text.ToString();
+                NuevoPaciente.DNI = txtDNI.Text;
+                NuevoPaciente.Apellido = txtApellido.Text;
+                NuevoPaciente.Nombre = txtNombre.Text;
                 NuevoPaciente.Cobertura = new Cobertura();
                 NuevoPaciente.Cobertura.Id = int.Parse(ddlistCobertura.SelectedItem.Value);
-                NuevoPaciente.FechaNacimiento = DateTime.Parse(txtFechaNac.Text.ToString());
-                NuevoPaciente.Telefono = txtTelefono.Text.ToString();
-                NuevoPaciente.Email = txtEmail.Text.ToString();
-                NuevoPaciente.Dirección = txtDireccion.Text.ToString();
+                NuevoPaciente.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                NuevoPaciente.Telefono = txtTelefono.Text;
+                NuevoPaciente.Email = txtEmail.Text;
+                NuevoPaciente.Dirección = txtDireccion.Text;
                 NuevoPaciente.Estado = true;
                 cargar.agregar(NuevoPaciente);
 

@@ -66,20 +66,20 @@ namespace WebApplication1
 
             try
             {
-                modMedico.DNI = txtDNI.Text.ToString();
-                modMedico.Matricula = txtMatricula.Text.ToString();
-                modMedico.Apellido = txtApellido.Text.ToString();
-                modMedico.Nombre = txtNombre.Text.ToString();
+                modMedico.DNI = txtDNI.Text;
+                modMedico.Matricula = txtMatricula.Text;
+                modMedico.Apellido = txtApellido.Text;
+                modMedico.Nombre = txtNombre.Text;
                 modMedico.Especialidad = new Especialidad();
                 modMedico.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-                modMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text.ToString());
-                modMedico.Telefono = txtTelefono.Text.ToString();
-                modMedico.Email = txtEmail.Text.ToString();
-                modMedico.Dirección = txtDireccion.Text.ToString();
+                modMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                modMedico.Telefono = txtTelefono.Text;
+                modMedico.Email = txtEmail.Text;
+                modMedico.Dirección = txtDireccion.Text;
                 modMedico.Turno = new TurnoTrabajo();
                 modMedico.Turno.ID = int.Parse(ddlistTurno.SelectedItem.Value);
-                modMedico.HorarioEntrada = DateTime.Parse(txtEntrada.Text.ToString());
-                modMedico.HorarioSalida = DateTime.Parse(txtSalida.Text.ToString());
+                modMedico.HorarioEntrada = DateTime.Parse(txtEntrada.Text);
+                modMedico.HorarioSalida = DateTime.Parse(txtSalida.Text);
 
                 cargar.modificar(modMedico);
 

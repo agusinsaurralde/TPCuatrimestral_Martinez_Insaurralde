@@ -25,7 +25,7 @@ namespace WebApplication1
 
             try
             {
-                NuevaCobertura.Nombre = txtCobertura.Text.ToString();
+                NuevaCobertura.Nombre = txtCobertura.Text;
                 NuevaCobertura.Estado = true;
                 cargar.AgregarCobertura(NuevaCobertura);
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);

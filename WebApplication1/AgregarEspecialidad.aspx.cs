@@ -25,7 +25,7 @@ namespace WebApplication1
 
             try
             {
-                NuevaEspecialidad.Nombre = txtEspecialidad.Text.ToString();
+                NuevaEspecialidad.Nombre = txtEspecialidad.Text;
                 NuevaEspecialidad.Estado = true;
                 cargar.AgregarEspecialidad(NuevaEspecialidad);
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);

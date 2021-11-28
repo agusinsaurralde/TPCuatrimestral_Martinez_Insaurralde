@@ -25,15 +25,15 @@ namespace WebApplication1
 
             try
             {
-                ModPaciente.DNI = txtDNI.Text.ToString();
-                ModPaciente.Apellido = txtApellido.Text.ToString();
-                ModPaciente.Nombre = txtNombre.Text.ToString();
+                ModPaciente.DNI = txtDNI.Text;
+                ModPaciente.Apellido = txtApellido.Text;
+                ModPaciente.Nombre = txtNombre.Text;
                 ModPaciente.Cobertura = new Cobertura();
                 ModPaciente.Cobertura.Id = int.Parse(ddlistCobertura.SelectedItem.Value);
-                ModPaciente.FechaNacimiento = DateTime.Parse(txtFechaNac.Text.ToString());
-                ModPaciente.Telefono = txtTelefono.Text.ToString();
-                ModPaciente.Email = txtEmail.Text.ToString();
-                ModPaciente.Dirección = txtDireccion.Text.ToString();
+                ModPaciente.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                ModPaciente.Telefono = txtTelefono.Text;
+                ModPaciente.Email = txtEmail.Text;
+                ModPaciente.Dirección = txtDireccion.Text;
                 ModPaciente.Estado = true;
                 cargar.modificar(ModPaciente);
 
