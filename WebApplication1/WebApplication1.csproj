@@ -120,6 +120,7 @@
     <Content Include="AgregarCorrecto.aspx" />
     <Content Include="Empleados.aspx" />
     <Content Include="ErrorAgregar.aspx" />
+    <Content Include="ErrorModificar.aspx" />
     <Content Include="Ingreso.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="EliminarUsuario.aspx" />
@@ -158,6 +159,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ModificarCorrecto.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -299,6 +301,13 @@
     </Compile>
     <Compile Include="ErrorAgregar.aspx.designer.cs">
       <DependentUpon>ErrorAgregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorModificar.aspx.cs">
+      <DependentUpon>ErrorModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorModificar.aspx.designer.cs">
+      <DependentUpon>ErrorModificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ingreso.aspx.cs">
       <DependentUpon>Ingreso.aspx</DependentUpon>
@@ -472,6 +481,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarCorrecto.aspx.cs">
+      <DependentUpon>ModificarCorrecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarCorrecto.aspx.designer.cs">
+      <DependentUpon>ModificarCorrecto.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

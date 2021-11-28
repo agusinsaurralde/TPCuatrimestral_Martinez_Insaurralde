@@ -11,9 +11,9 @@ namespace WebApplication1
 {
     public partial class Contact : Page
     {
+        MedicoDB medico = new MedicoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            MedicoDB medico = new MedicoDB();
             Grilla.DataSource = medico.listarMedico();
             Grilla.DataBind();
         }
@@ -29,5 +29,31 @@ namespace WebApplication1
         {
             Response.Redirect("EliminarMedico.aspx");
         }
+
+        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
+        {
+            Medico med = new Medico();
+            med.ID = (int)Grilla.DataKeys[e.RowIndex].Values[0];
+            medico.eliminar(med);
+            Grilla.EditIndex = -1;
+            Grilla.DataSource = medico.listarMedico();
+            Grilla.DataBind();
+        }
+
+        protected void Grilla_editar(object sender, GridViewEditEventArgs e)
+        {
+            Medico med = new Medico();
+            med.ID = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
+
+            Session.Add("modificar", medico.buscarporID(med)); 
+            Response.Redirect("ModificarMedico.aspx");
+        }
+
+        
     }
 }

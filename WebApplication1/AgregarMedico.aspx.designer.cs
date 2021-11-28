@@ -60,13 +60,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList ddlistEspecialidad;
 
         /// <summary>
-        /// Control txtFechaNacimiento.
+        /// Control txtFechaNac.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaNacimiento;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaNac;
 
         /// <summary>
         /// Control txtTelefono.
@@ -96,39 +96,30 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtDireccion;
 
         /// <summary>
-        /// Control ddlist.
+        /// Control ddlistTurno.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlist;
+        protected global::System.Web.UI.WebControls.DropDownList ddlistTurno;
 
         /// <summary>
-        /// Control txtHorarioEntrada.
+        /// Control txtEntrada.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHorarioEntrada;
+        protected global::System.Web.UI.WebControls.TextBox txtEntrada;
 
         /// <summary>
-        /// Control txtHorarioSalida.
+        /// Control txtSalida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHorarioSalida;
-
-        /// <summary>
-        /// Control btnAceptar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        protected global::System.Web.UI.WebControls.TextBox txtSalida;
     }
 }
