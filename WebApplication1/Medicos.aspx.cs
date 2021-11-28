@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
+using DBClinica;
 
 namespace WebApplication1
 {
@@ -11,7 +13,9 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            MedicoDB medico = new MedicoDB();
+            Grilla.DataSource = medico.listarMedico();
+            Grilla.DataBind();
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {

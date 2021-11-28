@@ -1,12 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarCobertura.aspx.cs" Inherits="WebApplication1.Formulario_web116" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Agregar Cobertura</h1>
-    <body>
-        <div>
-            <asp:Label Text="ID: 1" runat="server" />
-            <asp:TextBox runat="server"/>
-        </div>
-        <div>
-            <asp:Button Text="Aceptar" runat="server" /></div>
-    </body>
+    <hr />
+    <div class="row g-3">
+    <div class="col-md-4">
+        <label for="txtCobertura" class="form-label">Cobertura</label>
+        <asp:TextBox class="form-control" ID="txtCobertura"  runat="server" />
+    </div>
+    <div>
+        <asp:Button class="btn btn-primary" Text="Aceptar" OnClick="Click_Aceptar" runat="server" />
+    </div>
+    </div>
 </asp:Content>

@@ -14,7 +14,7 @@
         </div>
 
         <div>   
-             <asp:GridView ID="Grilla" runat="server"></asp:GridView>
+             <asp:GridView  class="table table-hover" ID="Grilla" runat="server"></asp:GridView>
          </div>
     </body>
 </asp:Content>

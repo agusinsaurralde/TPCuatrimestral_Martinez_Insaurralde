@@ -33,6 +33,14 @@ namespace WebApplication1
             {
                 Response.Redirect("Usuarios.aspx", false);
             }
+            else if (agregado == "Cobertura")
+            {
+                Response.Redirect("Coberturas.aspx", false);
+            }
+            else if (agregado == "Especialidad")
+            {
+                Response.Redirect("SpecialitysViews.aspx", false);
+            }
         }
     }
 }

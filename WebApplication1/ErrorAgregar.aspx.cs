@@ -33,6 +33,14 @@ namespace WebApplication1
             {
                 Response.Redirect("AgregarUsuario.aspx", false);
             }
+            else if (error == "cobertura")
+            {
+                Response.Redirect("AgregarCobertura.aspx", false);
+            }
+            else if (error == "especialidad")
+            {
+                Response.Redirect("AgregarEspecialidad.aspx", false);
+            }
         }
     }
 }

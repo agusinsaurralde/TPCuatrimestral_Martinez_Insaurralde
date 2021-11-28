@@ -10,7 +10,7 @@ using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Formulario_web116 : System.Web.UI.Page
+    public partial class AgregarEspecialidad : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,16 +18,16 @@ namespace WebApplication1
         }
         protected void Click_Aceptar(object sender, EventArgs e)
         {
-            Cobertura NuevaCobertura = new Cobertura();
-            CoberturaDB cargar = new CoberturaDB();
-            string agregado = "Cobertura";
-            string error = "cobertura";
+            Especialidad NuevaEspecialidad = new Especialidad();
+            EspecialidadDB cargar = new EspecialidadDB();
+            string agregado = "Especialidad";
+            string error = "especialidad";
 
             try
             {
-                NuevaCobertura.Nombre = txtCobertura.Text.ToString();
-                NuevaCobertura.Estado = true;
-                cargar.AgregarCobertura(NuevaCobertura);
+                NuevaEspecialidad.Nombre = txtEspecialidad.Text.ToString();
+                NuevaEspecialidad.Estado = true;
+                cargar.AgregarEspecialidad(NuevaEspecialidad);
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
             catch (Exception)
