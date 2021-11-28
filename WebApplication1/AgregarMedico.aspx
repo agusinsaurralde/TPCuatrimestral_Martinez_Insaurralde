@@ -27,6 +27,11 @@
                     <asp:TextBox ID="txtNombre" runat="server" />
                 </div>
                 <div class="col">
+                    <asp:Label Text="Especialidad" runat="server" />
+                    <asp:DropDownList ID="ddlistEspecialidad" class="btn btn-secondary btn-sm dropdown-toggle" runat="server">
+                    </asp:DropDownList>
+                </div>
+                <div class="col">
                     <asp:Label Text="Fecha de Nacimiento" runat="server" />
                     <asp:TextBox ID="txtFechaNacimiento" runat="server" />
                 </div>
@@ -39,7 +44,7 @@
                     <asp:TextBox ID="txtTelefono" runat="server" />
                 </div>
                 <div class="col">
-                    <asp:Label Text="Email" runat="server" />
+                    <asp:Label Text="Email" type="email" runat="server" />
                     <asp:TextBox ID="txtEmail" runat="server" />
                 </div>
                 <div class="col">
@@ -51,11 +56,8 @@
         <div class="Container">
             <div class="row">
                 <div class="col">
-                    <asp:Label Text="Turno de Trabajo" runat="server" />
+                    <asp:Label Text="Turno" runat="server" />
                     <asp:DropDownList ID="ddlist" class="btn btn-secondary btn-sm dropdown-toggle" runat="server">
-                        <%--<asp:ListItem Text="Mañana" />
-                        <asp:ListItem Text="Tarde" />
-                        <asp:ListItem Text="Noche" />--%>
                     </asp:DropDownList>
                 </div>
                 <div class="col">

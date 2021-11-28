@@ -1,43 +1,21 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Ingreso.aspx.cs" Inherits="WebApplication1.Ingreso" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Clinica Demar</title>
-    <link href="Estilos.css" rel="stylesheet" /> 
-</head>
-
-<header>
-    <h1>Clínica Demar</h1>
-</header>
-
-<body>
-    <form class="formIngreso" runat="server">
-        <div class="contenedor">   
-        <div class="textbox">   
-            <asp:TextBox id="txtbxUsuario" runat="server" placeholder="Usuario"/>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Ingreso.aspx.cs" Inherits="WebApplication1.Formulario_web119" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+ 
+    <div class="row">
+        <div class="col-2"> </div>
+        <div class="col">
+            <div class="mb-3">
+                <asp:Label Text="Usuario" CssClass="form-label" runat="server" />
+                <asp:TextBox ID="txtbxUsuario" CssClass="form-control" runat="server" />
+            </div>
+              <div class="mb-3">
+                <asp:Label Text="Contraseña" CssClass="form-label" runat="server" />
+                <asp:TextBox type="password" ID="txtbxContraseña" CssClass="form-control" runat="server" />              
+              </div>
+            <asp:Button Text="Ingresar" CssClass="btn btn-primary" ID ="btnAceptar" OnClick="Click_Ingresar" runat="server" />
         </div>
-        <div class="textbox">  
-             <asp:TextBox id="txtbxContraseña" type="password" runat="server" placeholder="Contraseña"/>
-        </div>
-        
-        <div class="lista">  
-            <asp:DropDownList ID="ddlListaIngreso" runat="server">
-                <asp:ListItem Text="Médico" />
-                <asp:ListItem Text="Administrador" />
-                <asp:ListItem Text="Recepcionista" />
-            </asp:DropDownList>
-        </div>
+         <div class="col-2"> </div>
+    </div>
 
-        <div class="boton">  
-            <asp:Button id="btnIngresar" Text="Ingresar" OnClick="Click_Ingresar" runat="server" />
-        </div>
-
-        </div>
-    </form>
-</body>
-
-</html>
+  
+</asp:Content>

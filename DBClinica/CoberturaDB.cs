@@ -8,7 +8,7 @@ using Dominio;
 
 namespace DBClinica
 {
-    class CoberturaDB
+    public class CoberturaDB
     {
         public List<Cobertura> lista()
         {

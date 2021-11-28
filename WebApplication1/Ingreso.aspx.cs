@@ -9,12 +9,13 @@ using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Ingreso : System.Web.UI.Page
+    public partial class Formulario_web119 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
         protected void Click_Ingresar(object sender, EventArgs e)
         {
             Usuario Usuario;
@@ -26,7 +27,7 @@ namespace WebApplication1
                 Usuario = new Usuario(txtbxUsuario.Text, txtbxContraseña.Text, tipoUsuario);
                 if (UsuarioDB.Ingresar(Usuario))
                 {
-                   Session.Add("Usuario", Usuario);
+                    Session.Add("Usuario", Usuario);
                     Response.Redirect("Turnos.aspx", false);
                 }
                 else
@@ -40,32 +41,6 @@ namespace WebApplication1
                 Session.Add("Error", ex.ToString());
                 Response.Redirect("ErrorIngreso.aspx");
             }
-        }
-
-        public bool UsuarioAdmin()
-        {
-            if (Session["Usuario"] != null && ((Dominio.Usuario)Session["Usuario"]).TipoUsuario.Nombre == "Administrador")
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public bool UsuarioMedico()
-        {
-            if (Session["Usuario"] != null && ((Dominio.Usuario)Session["Usuario"]).TipoUsuario.Nombre == "Médico")
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool UsuarioRecepcionista()
-        {
-            if (Session["Usuario"] != null && ((Dominio.Usuario)Session["Usuario"]).TipoUsuario.Nombre == "Recepcionista")
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

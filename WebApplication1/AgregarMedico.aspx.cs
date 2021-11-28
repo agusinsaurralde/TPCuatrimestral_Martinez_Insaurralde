@@ -16,21 +16,28 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             TurnoTrabajoDB ttdb = new TurnoTrabajoDB();
+            EspecialidadDB espDB = new EspecialidadDB();
             try
             {
                 if (!IsPostBack)
-                {
+                { 
                     List<TurnoTrabajo> turnot = ttdb.listar();
                     ddlist.DataSource = turnot;
                     ddlist.DataTextField = "NombreTurno";
                     ddlist.DataValueField = "ID";
                     ddlist.DataBind();
+
+                    List<Especialidad> esp = espDB.lista();
+                    ddlistEspecialidad.DataSource = esp;
+                    ddlistEspecialidad.DataTextField = "Nombre";
+                    ddlistEspecialidad.DataValueField = "ID";
+                    ddlistEspecialidad.DataBind();
                 }
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("Error", ex);
+                //throw ex;
             }
           
         }
@@ -39,33 +46,35 @@ namespace WebApplication1
         {
             Medico NuevoMedico = new Medico();
             MedicoDB cargar = new MedicoDB();
+            string agregado = "Médico";
+            string error = "médico";
+
             try
-            {
+            { 
                 NuevoMedico.DNI = txtDNI.Text.ToString();
                 NuevoMedico.Matricula = txtMatricula.Text.ToString();
                 NuevoMedico.Apellido = txtApellido.Text.ToString();
                 NuevoMedico.Nombre = txtNombre.Text.ToString();
+                NuevoMedico.Especialidad = new Especialidad();
+                NuevoMedico.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
                 NuevoMedico.FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text.ToString());
                 NuevoMedico.Telefono = txtTelefono.Text.ToString();
                 NuevoMedico.Email = txtEmail.Text.ToString();
                 NuevoMedico.Dirección = txtDireccion.Text.ToString();
-
                 NuevoMedico.Turno = new TurnoTrabajo();
                 NuevoMedico.Turno.ID = int.Parse(ddlist.SelectedItem.Value);
-                NuevoMedico.Turno.NombreTurno = ddlist.SelectedItem.Text;
-                
                 NuevoMedico.HorarioEntrada = DateTime.Parse(txtHorarioEntrada.Text.ToString());
                 NuevoMedico.HorarioSalida = DateTime.Parse(txtHorarioSalida.Text.ToString());
                 NuevoMedico.Estado = true;
                 cargar.agregar(NuevoMedico);
-            }
-            catch (Exception ex)
-            {
 
-                throw ex;
+                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
+            }
+            catch (Exception )
+            {
+                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
             
-
         }
     }
 }

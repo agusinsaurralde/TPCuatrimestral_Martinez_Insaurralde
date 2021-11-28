@@ -35,6 +35,8 @@ create table Medico(
 Alter table Medico
 add Estado bit
 
+select * from medico
+select * from EspecialidadXMedico
 go
 create table Especialidad(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -54,6 +56,10 @@ create table EspecialidadXMedico(
 	CONSTRAINT FK_IDMedico FOREIGN KEY (IDMedico) REFERENCES Medico(ID),
 	CONSTRAINT FK_IDEspecialidad FOREIGN KEY (IDEspecialidad) REFERENCES Especialidad(ID)
 )
+Alter table EspecialidadXMedico
+add Estado bit;
+update especialidadXMedico set estado = 1
+
 GO
 create table Cobertura(
     ID int PRIMARY KEY IDENTITY(1,1) not null,

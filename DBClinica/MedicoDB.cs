@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo");
+                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -28,6 +28,9 @@ namespace DBClinica
                     aux.Matricula = (string)datos.Lector["Matricula"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Especialidad = new Especialidad();
+                    aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
+                    aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
                     aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Dirección = (string)datos.Lector["Direccion"];
@@ -60,16 +63,17 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Medico(DNI, Matricula, Apellido, Nombre, Telefono, Email, Direccion, FechaNacimiento, IDTurnoTrabajo, HoraEntrada, HoraSalida, Estado) VALUES(@DNI, @Matricula, @Apellido, @Nombre, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida, @Estado)");
+                datos.setearConsulta("EXEC SP_AGREGARMEDICO @DNI, @Matricula, @Apellido, @Nombre, @IDEspecialidad, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida, @Estado");
                 datos.setearParametro("@DNI", MedicoNuevo.DNI);
                 datos.setearParametro("@Matricula", MedicoNuevo.Matricula);
                 datos.setearParametro("@Apellido", MedicoNuevo.Apellido);
                 datos.setearParametro("@Nombre", MedicoNuevo.Nombre);
+                datos.setearParametro("@IDEspecialidad", MedicoNuevo.Especialidad.Id);
                 datos.setearParametro("@Telefono", MedicoNuevo.Telefono);
                 datos.setearParametro("@Email", MedicoNuevo.Email);
                 datos.setearParametro("@Direccion", MedicoNuevo.Dirección);
                 datos.setearParametro("@FechaNacimiento", MedicoNuevo.FechaNacimiento);
-                datos.setearParametro("@IDTurnoTrabajo", MedicoNuevo.Turno);
+                datos.setearParametro("@IDTurnoTrabajo", MedicoNuevo.Turno.ID);
                 datos.setearParametro("@HoraEntrada", MedicoNuevo.HorarioEntrada);
                 datos.setearParametro("@HoraSalida", MedicoNuevo.HorarioSalida);
                 datos.setearParametro("@Estado", MedicoNuevo.Estado);
@@ -91,7 +95,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE MEDICO SET DNI = @DNI, Matricula = @Matricula, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, IDTurnoTrabajo = @IDTurnoTrabajo,  HoraEntrada =  @HoraEntrada, HoraSalida = @HoraSalida, Estado = @Estado WHERE ID =" + ModMedico.ID +"");
+                datos.setearConsulta("EXEC SP_MODIFICARMEDICO" + ModMedico.ID + ", @DNI, @Matricula, @Apellido, @Nombre, @IDEspecialidad, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida, @Estado");
                 datos.setearParametro("@DNI", ModMedico.DNI);
                 datos.setearParametro("@Matricula", ModMedico.Matricula);
                 datos.setearParametro("@Apellido", ModMedico.Apellido);
@@ -123,7 +127,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("Update Medico SET Estado = 0 where ID = " + ElimMedico.ID + "");
+                datos.setearConsulta("EXEC SP_ELIMINARMEDICO " + ElimMedico.ID + "");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
