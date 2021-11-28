@@ -95,7 +95,8 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("EXEC SP_MODIFICARMEDICO" + ModMedico.ID + ", @DNI, @Matricula, @Apellido, @Nombre, @IDEspecialidad, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida");
+                datos.setearConsulta("EXEC SP_MODIFICARMEDICO @ID, @DNI, @Matricula, @Apellido, @Nombre, @IDEspecialidad, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida");
+                datos.setearParametro("@ID", ModMedico.ID);
                 datos.setearParametro("@DNI", ModMedico.DNI);
                 datos.setearParametro("@Matricula", ModMedico.Matricula);
                 datos.setearParametro("@Apellido", ModMedico.Apellido);

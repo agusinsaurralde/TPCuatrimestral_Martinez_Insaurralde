@@ -48,18 +48,25 @@ END
 EXEC SP_AGREGARMEDICO @DNI, @Matricula, @Apellido, @Nombre, @IDEspecialidad, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida, @Estado
 
 
-CREATE PROCEDURE SP_MODIFICARMEDICO(
-	@ID bigint, @DNI bigint, @Matricula bigint, @Apellido varchar(50), @Nombre varchar(50), @IDEspecialidad bigint, @Telefono varchar(15), @Email varchar(320), @Direccion varchar(320), @FechaNacimiento date, 
-	@IDTurnoTrabajo bigint, @HoraEntrada datetime, @HoraSalida datetime, @Estado bit)
+ALTER PROCEDURE SP_MODIFICARMEDICO(
+	@ID bigint, @DNI varchar(8), @Matricula varchar(10), @Apellido varchar(50), @Nombre varchar(50), @IDEspecialidad bigint, @Telefono varchar(15), @Email varchar(320), @Direccion varchar(320), @FechaNacimiento date, 
+	@IDTurnoTrabajo bigint, @HoraEntrada datetime, @HoraSalida datetime)
 AS 
 BEGIN
+	
 	UPDATE Medico SET DNI = @DNI, Matricula = @Matricula, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, 
-	IDTurnoTrabajo = @IDTurnoTrabajo, HoraEntrada = @HoraEntrada, HoraSalida = @HoraSalida, Estado = @Estado WHERE ID = @ID
+	IDTurnoTrabajo = @IDTurnoTrabajo, HoraEntrada = @HoraEntrada, HoraSalida = @HoraSalida WHERE ID = @ID
 
 	UPDATE EspecialidadXMedico SET IDEspecialidad = @IDEspecialidad WHERE IDMedico = @ID
 END
 
-EXEC SP_MODIFICARMEDICO @ID, @DNI, @Matricula, @Apellido, @Nombre, @IDEspecialidad, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida, @Estado
+select * from medico
+select * from EspecialidadXMedico
+
+--prueba
+EXEC SP_MODIFICARMEDICO 1, 124578, 11325, 'Mastopierro', 'Dante', 23, '784512', 'mastopierroD@hotmail.com', 'Av.Córdoba 642', '1981-10-10', 1, '1900-01-01 07:00:00.000', '1900-01-01 15:00:00.000'
+
+EXEC SP_MODIFICARMEDICO @ID, @DNI, @Matricula, @Apellido, @Nombre, @IDEspecialidad, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTurnoTrabajo, @HoraEntrada, @HoraSalida
 
 CREATE PROCEDURE SP_ELIMINARMEDICO(
 	@ID bigint

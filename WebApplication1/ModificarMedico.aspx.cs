@@ -66,6 +66,7 @@ namespace WebApplication1
 
             try
             {
+                modMedico.ID = ((Medico)Session["modificar"]).ID;
                 modMedico.DNI = txtDNI.Text;
                 modMedico.Matricula = txtMatricula.Text;
                 modMedico.Apellido = txtApellido.Text;
