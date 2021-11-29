@@ -15,7 +15,6 @@
         <asp:TextBox runat="server" />
         <asp:Button Text="Buscar" runat="server" />
         <asp:Button Text="Agregar" OnClick ="Click_Agregar" runat="server" />
-        <asp:Button Text="Eliminar" OnClick ="Click_Eliminar" runat="server" />
     </div>
     <div>
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" >
@@ -32,6 +31,7 @@
                 <asp:BoundField datafield = "Turno.NombreTurno" HeaderText ="Turno" />
                 <asp:BoundField datafield = "HorarioEntrada" HeaderText ="Horario de Entrada" />
                 <asp:BoundField datafield = "HorarioSalida" HeaderText ="Horario de Salida" />
+                <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
                 <asp:CommandField ButtonType="Button" ShowEditButton="true" />   
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />  
             </Columns>

@@ -121,6 +121,8 @@
     <Content Include="Empleados.aspx" />
     <Content Include="ErrorAgregar.aspx" />
     <Content Include="ErrorModificar.aspx" />
+    <Content Include="EliminarCorrecto.aspx" />
+    <Content Include="ErrorEliminar.aspx" />
     <Content Include="Ingreso.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="EliminarUsuario.aspx" />
@@ -308,6 +310,20 @@
     </Compile>
     <Compile Include="ErrorModificar.aspx.designer.cs">
       <DependentUpon>ErrorModificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarCorrecto.aspx.cs">
+      <DependentUpon>EliminarCorrecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarCorrecto.aspx.designer.cs">
+      <DependentUpon>EliminarCorrecto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorEliminar.aspx.cs">
+      <DependentUpon>ErrorEliminar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorEliminar.aspx.designer.cs">
+      <DependentUpon>ErrorEliminar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ingreso.aspx.cs">
       <DependentUpon>Ingreso.aspx</DependentUpon>
