@@ -105,7 +105,7 @@ namespace DBClinica
                 datos.setearParametro("@Email", ModMedico.Email);
                 datos.setearParametro("@Direccion", ModMedico.Dirección);
                 datos.setearParametro("@FechaNacimiento", ModMedico.FechaNacimiento);
-                datos.setearParametro("@IDTurnoTrabajo", ModMedico.Turno);
+                datos.setearParametro("@IDTurnoTrabajo", ModMedico.Turno.ID);
                 datos.setearParametro("@HoraEntrada", ModMedico.HorarioEntrada);
                 datos.setearParametro("@HoraSalida", ModMedico.HorarioSalida);
                 datos.ejecutarAccion();
