@@ -11,20 +11,32 @@ namespace WebApplication1
 {
     public partial class SpecialtysViews : System.Web.UI.Page
     {
+        EspecialidadDB ClinicaDB = new EspecialidadDB();
         protected void Page_Load(object sender, EventArgs e)
-        {
-            EspecialidadDB ClinicaDB = new EspecialidadDB();
+        { 
             Grilla.DataSource = ClinicaDB.lista();
             Grilla.DataBind();
         }
-
-        protected void Click_Modificar(object sender, EventArgs e)
+        protected void Click_Agregar(object sender, EventArgs e)
         {
-            Response.Redirect("ModificarEspecialidad.aspx");
+            Response.Redirect("AgregarEspecialidad.aspx");
         }
-        protected void Click_Eliminar(object sender, EventArgs e)
+
+        protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
+            Especialidad esp = new Especialidad();
+            esp.Id = (int)Grilla.DataKeys[e.RowIndex].Values[0];
+            Session.Add("eliminar", ClinicaDB.buscarporID(esp));
             Response.Redirect("EliminarEspecialidad.aspx");
         }
+
+        protected void Grilla_editar(object sender, GridViewEditEventArgs e)
+        {
+            Especialidad esp = new Especialidad();
+            esp.Id = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
+            Session.Add("modificar", ClinicaDB.buscarporID(esp));
+            Response.Redirect("ModificarEspecialidad.aspx");
+        }
+
     }
 }

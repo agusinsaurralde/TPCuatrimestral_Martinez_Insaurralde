@@ -39,7 +39,7 @@ namespace WebApplication1
             }
             else if (eliminado == "Especialidad")
             {
-                Response.Redirect("SpecialitysViews.aspx", false);
+                Response.Redirect("SpecialtysViews.aspx", false);
             }
         }
     }

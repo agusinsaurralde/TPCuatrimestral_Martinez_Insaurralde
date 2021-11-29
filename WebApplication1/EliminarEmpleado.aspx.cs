@@ -9,26 +9,26 @@ using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Formulario_web32 : System.Web.UI.Page
+    public partial class EliminarEmpleado : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                txtNombre.Text = ((Cobertura)Session["eliminar"]).Nombre;
+                txtNombre.Text = ((Empleado)Session["eliminar"]).Nombre + " " + ((Empleado)Session["eliminar"]).Apellido;
             }
         }
 
         protected void Click_Aceptar(object sender, EventArgs e)
         {
-            string eliminado = "Cobertura";
-            string error = "cobertura";
+            string eliminado = "Empleado";
+            string error = "empleado";
             try
             {
-                Cobertura cobertura = new Cobertura();
-                CoberturaDB db = new CoberturaDB();
-                cobertura = (Cobertura)Session["eliminar"];
-                db.EliminarCobertura(cobertura);
+                Empleado empleado = new Empleado();
+                EmpleadoDB db = new EmpleadoDB();
+                empleado = (Empleado)Session["eliminar"];
+                db.eliminar(empleado);
 
                 Response.Redirect("EliminarCorrecto.aspx?eliminado=" + eliminado, false);
             }
@@ -36,10 +36,11 @@ namespace WebApplication1
             {
                 Response.Redirect("ErrorEliminar.aspx?error=" + error, false);
             }
+
         }
         protected void Click_Cancelar(object sender, EventArgs e)
         {
-            Response.Redirect("Coberturas.aspx", false);
+            Response.Redirect("Empleados.aspx", false);
         }
     }
 }

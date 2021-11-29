@@ -49,6 +49,7 @@
     <Compile Include="MedicoDB.cs" />
     <Compile Include="PacienteDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoEmpleadoDB.cs" />
     <Compile Include="TipoUsuarioDB.cs" />
     <Compile Include="TurnoDB.cs" />
     <Compile Include="TurnoTrabajoDB.cs" />

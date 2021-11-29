@@ -17,7 +17,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre from Especialidad ORDER BY ID ASC");
+                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad ORDER BY ID ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -25,7 +25,7 @@ namespace DBClinica
                     Especialidad aux = new Especialidad();
                     aux.Id = (int)datos.Lector["ID"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-                  
+                    aux.Estado = (bool)datos.Lector["Estado"];
                     lista.Add(aux);
                 }
 
@@ -102,6 +102,31 @@ namespace DBClinica
             }
         }
 
+        public Especialidad buscarporID(Especialidad IDBuscado)
+        {
+            ConexionDB datos = new ConexionDB();
+            try
+            {
+
+                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Especialidad WHERE ID = " + IDBuscado.Id + "");
+                datos.ejecutarLectura();
+                datos.Lector.Read();
+                Especialidad aux = new Especialidad();
+                aux.Id = (int)datos.Lector["ID"];
+                aux.Nombre = (string)datos.Lector["Nombre"];
+                aux.Estado = (bool)datos.Lector["Estado"];
+
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 
 }

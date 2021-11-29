@@ -105,10 +105,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AgregarEmpleado.aspx" />
     <Content Include="AgregarEspecialidad.aspx" />
     <Content Include="AsignarTurno.aspx" />
     <Content Include="AgregarObservacion.aspx" />
     <Content Include="EditarHistoriaClinicaMedico.aspx" />
+    <Content Include="EliminarEmpleado.aspx" />
+    <Content Include="Empleados.aspx" />
     <Content Include="ErrorIngreso.aspx" />
     <Content Include="EliminarEspecialidad.aspx" />
     <Content Include="AgregarPaciente.aspx" />
@@ -118,12 +121,12 @@
     <Content Include="AgregarCobertura.aspx" />
     <Content Include="AgregarUsuario.aspx" />
     <Content Include="AgregarCorrecto.aspx" />
-    <Content Include="Empleados.aspx" />
     <Content Include="ErrorAgregar.aspx" />
     <Content Include="ErrorModificar.aspx" />
     <Content Include="EliminarCorrecto.aspx" />
     <Content Include="ErrorEliminar.aspx" />
     <Content Include="Ingreso.aspx" />
+    <Content Include="ModificarEmpleado.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="EliminarUsuario.aspx" />
     <Content Include="Usuarios.aspx" />
@@ -198,6 +201,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarEmpleado.aspx.cs">
+      <DependentUpon>AgregarEmpleado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarEmpleado.aspx.designer.cs">
+      <DependentUpon>AgregarEmpleado.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AgregarEspecialidad.aspx.cs">
       <DependentUpon>AgregarEspecialidad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,6 +236,20 @@
     </Compile>
     <Compile Include="EditarHistoriaClinicaMedico.aspx.designer.cs">
       <DependentUpon>EditarHistoriaClinicaMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarEmpleado.aspx.cs">
+      <DependentUpon>EliminarEmpleado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarEmpleado.aspx.designer.cs">
+      <DependentUpon>EliminarEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleados.aspx.cs">
+      <DependentUpon>Empleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleados.aspx.designer.cs">
+      <DependentUpon>Empleados.aspx</DependentUpon>
     </Compile>
     <Compile Include="ErrorIngreso.aspx.cs">
       <DependentUpon>ErrorIngreso.aspx</DependentUpon>
@@ -290,13 +314,6 @@
     <Compile Include="AgregarCorrecto.aspx.designer.cs">
       <DependentUpon>AgregarCorrecto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Empleados.aspx.cs">
-      <DependentUpon>Empleados.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Empleados.aspx.designer.cs">
-      <DependentUpon>Empleados.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ErrorAgregar.aspx.cs">
       <DependentUpon>ErrorAgregar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -331,6 +348,13 @@
     </Compile>
     <Compile Include="Ingreso.aspx.designer.cs">
       <DependentUpon>Ingreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarEmpleado.aspx.cs">
+      <DependentUpon>ModificarEmpleado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarEmpleado.aspx.designer.cs">
+      <DependentUpon>ModificarEmpleado.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarUsuario.aspx.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
