@@ -7,39 +7,39 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Formulario_web125 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string modificado = Request.QueryString["modificado"].ToString();
-            lblModificado.Text = modificado + " modificado exitosamente.";
+            string error = Request.QueryString["error"].ToString();
+            lblEliminado.Text = "Hubo un problema al agregar el " + error + ".";
         }
         protected void Click_Volver(object sender, EventArgs e)
         {
-            string modificado = Request.QueryString["modificado"].ToString();
-            if (modificado == "Médico")
+            string error = Request.QueryString["error"].ToString();
+            if (error == "médico")
             {
                 Response.Redirect("Medicos.aspx", false);
             }
-            else if (modificado == "Paciente")
+            else if (error == "paciente")
             {
                 Response.Redirect("Pacientes.aspx", false);
             }
-            else if (modificado == "Empleado")
+            else if (error == "empleado")
             {
                 Response.Redirect("Empleados.aspx", false);
             }
-            else if (modificado == "Usuario")
+            else if (error == "usuario")
             {
                 Response.Redirect("Usuarios.aspx", false);
             }
-            else if (modificado == "Cobertura")
+            else if (error == "cobertura")
             {
                 Response.Redirect("Coberturas.aspx", false);
             }
-            else if (modificado == "Especialidad")
+            else if (error == "especialidad")
             {
-                Response.Redirect("SpecialtysViews.aspx", false);
+                Response.Redirect("SpecialityViews.aspx", false);
             }
         }
     }

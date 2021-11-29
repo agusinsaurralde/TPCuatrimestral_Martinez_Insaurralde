@@ -101,6 +101,7 @@ namespace DBClinica
                 datos.setearParametro("@Matricula", ModMedico.Matricula);
                 datos.setearParametro("@Apellido", ModMedico.Apellido);
                 datos.setearParametro("@Nombre", ModMedico.Nombre);
+                datos.setearParametro("@IDEspecialidad", ModMedico.Especialidad.Id);
                 datos.setearParametro("@Telefono", ModMedico.Telefono);
                 datos.setearParametro("@Email", ModMedico.Email);
                 datos.setearParametro("@Direccion", ModMedico.Dirección);
@@ -127,7 +128,8 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("EXEC SP_ELIMINARMEDICO " + ElimMedico.ID + "");
+                datos.setearConsulta("EXEC SP_ELIMINARMEDICO @IDMedico");
+                datos.setearParametro("@IDMedico", ElimMedico.ID);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -183,7 +185,6 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-
 
         public List<Medico> buscar(string criterio, Medico valorBuscado)
         {

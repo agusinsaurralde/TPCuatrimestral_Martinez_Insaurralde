@@ -10,7 +10,7 @@ namespace DBClinica
 {
     class TipoUsuarioDB
     {
-        public List<TipoUsuario> lista()
+        public List<TipoUsuario> listar()
         {
             List<TipoUsuario> lista = new List<TipoUsuario>();
             ConexionDB datos = new ConexionDB();

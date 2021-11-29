@@ -1,20 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SpecialtysViews.aspx.cs" Inherits="WebApplication1.SpecialtysViews" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
-   <%-- VER LAS ESPECIALIDADES DE LA DB DE UNA FORMA BONITA POR AHORA SOLO MUESTRA DE MANERA FEA.--%>
-    <body>
      <h1>Especialidades</h1>
     <hr />
+    <br />
         <div>
             <asp:TextBox runat="server" />
             <asp:Button Text="Buscar" runat="server" />
-            <asp:Button Text="Modificar" OnClick ="Click_Modificar" runat="server" />
-            <asp:Button Text="Eliminar" OnClick ="Click_Eliminar" runat="server" />
+            <asp:Button Text="Agregar" OnClick ="Click_Agregar" runat="server" />
         </div>
 
-        <div>   
-             <asp:GridView  class="table table-hover" ID="Grilla" runat="server"></asp:GridView>
-         </div>
-    </body>
+         <div>
+        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" >
+            <Columns>
+                <asp:BoundField datafield = "Id" HeaderText ="ID" />
+                <asp:BoundField datafield = "Nombre" HeaderText ="Especialidad" />            
+                <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
+                <asp:CommandField ButtonType="Button" ShowEditButton="true" />   
+                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />  
+            </Columns>
+        </asp:gridview>
+    </div>
+
 </asp:Content>

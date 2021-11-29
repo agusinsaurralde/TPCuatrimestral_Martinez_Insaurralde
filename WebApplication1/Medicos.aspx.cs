@@ -21,35 +21,19 @@ namespace WebApplication1
         {
             Response.Redirect("AgregarMedico.aspx");
         }
-        protected void Click_Modificar(object sender, EventArgs e)
-        {
-            Response.Redirect("ModificarMedico.aspx");
-        }
-        protected void Click_Eliminar(object sender, EventArgs e)
-        {
-            Response.Redirect("EliminarMedico.aspx");
-        }
-
-        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
             Medico med = new Medico();
             med.ID = (int)Grilla.DataKeys[e.RowIndex].Values[0];
-            medico.eliminar(med);
-            Grilla.EditIndex = -1;
-            Grilla.DataSource = medico.listarMedico();
-            Grilla.DataBind();
+            Session.Add("eliminar", medico.buscarporID(med));
+            Response.Redirect("EliminarMedico.aspx");
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             Medico med = new Medico();
             med.ID = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
-
             Session.Add("modificar", medico.buscarporID(med)); 
             Response.Redirect("ModificarMedico.aspx");
         }

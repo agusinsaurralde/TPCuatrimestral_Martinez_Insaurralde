@@ -45,7 +45,7 @@ create table Especialidad(
 GO
 Alter table Especialidad
 add Estado bit;
-
+Select * from Especialidad
 update Especialidad SET Estado = 1
 
 create table EspecialidadXMedico(
