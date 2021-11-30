@@ -17,13 +17,10 @@ namespace WebApplication1
             Grilla.DataSource = turno.listarTurno();
             Grilla.DataBind();
         }
-        protected void Click_ModificarTurno(object sender, EventArgs e)
+
+        protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-            Response.Redirect("ModificarTurno.aspx", false);
-        }
-        protected void Click_AgregarObservacion(object sender, EventArgs e)
-        {
-            Response.Redirect("AgregarObservacion.aspx", false);
+           
         }
     }
 
