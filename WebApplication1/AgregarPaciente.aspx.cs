@@ -56,7 +56,7 @@ namespace WebApplication1
 
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
