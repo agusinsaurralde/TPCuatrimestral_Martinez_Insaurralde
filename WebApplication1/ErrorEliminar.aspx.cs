@@ -12,7 +12,7 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             string error = Request.QueryString["error"].ToString();
-            lblEliminado.Text = "Hubo un problema al agregar el " + error + ".";
+            lblEliminado.Text = "Hubo un problema al eliminar el " + error + ".";
         }
         protected void Click_Volver(object sender, EventArgs e)
         {

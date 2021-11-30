@@ -85,7 +85,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE Empelado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, IDTipo = @IDTipo, Estado = @Estado WHERE ID =" + ModEmpleado.ID + "");
+                datos.setearConsulta("UPDATE Empleado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, IDTipo = @IDTipo, Estado = @Estado WHERE ID =" + ModEmpleado.ID + "");
                 datos.setearParametro("@DNI", ModEmpleado.DNI);
                 datos.setearParametro("@Apellido", ModEmpleado.Apellido);
                 datos.setearParametro("@Nombre", ModEmpleado.Nombre);
@@ -93,7 +93,7 @@ namespace DBClinica
                 datos.setearParametro("@Email", ModEmpleado.Email);
                 datos.setearParametro("@Direccion", ModEmpleado.Dirección);
                 datos.setearParametro("@FechaNacimiento", ModEmpleado.FechaNacimiento);
-                datos.setearParametro("@IDTipo", ModEmpleado.TipoEmp);
+                datos.setearParametro("@IDTipo", ModEmpleado.TipoEmp.ID);
                 datos.setearParametro("@Estado", ModEmpleado.Estado);
                 datos.ejecutarAccion();
             }
@@ -114,7 +114,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("Update Empelado SET Estado = 0 where ID = " + ElimEmpleado.ID + "");
+                datos.setearConsulta("Update Empleado SET Estado = 0 where ID = " + ElimEmpleado.ID + "");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace DBClinica
             try
             {
 
-                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo");
+                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE E.ID = " + IDBuscado.ID + "");
                 datos.ejecutarLectura();
                 datos.Lector.Read();
                 Empleado aux = new Empleado();
