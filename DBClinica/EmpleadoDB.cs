@@ -57,15 +57,15 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Empelado(DNI, Apellido, Nombre, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado)VALUES(@DNI, @Apellido, @Nombre, @Telefono, @Email, @Direccion, @FechaNacimiento, @IDTipo, @Estado)");
+                datos.setearConsulta("insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(@DNI, @IDTipo, @Nombre, @Apellido, @Telefono, @Email, @Direccion, @FechaNacimiento, @Estado)");
                 datos.setearParametro("@DNI", EmpleadoNuevo.DNI);
-                datos.setearParametro("@Apellido", EmpleadoNuevo.Apellido);
+                datos.setearParametro("@IDTipo", EmpleadoNuevo.TipoEmp.ID);
                 datos.setearParametro("@Nombre", EmpleadoNuevo.Nombre);
+                datos.setearParametro("@Apellido", EmpleadoNuevo.Apellido);
                 datos.setearParametro("@Telefono", EmpleadoNuevo.Telefono);
                 datos.setearParametro("@Email", EmpleadoNuevo.Email);
                 datos.setearParametro("@Direccion", EmpleadoNuevo.Dirección);
                 datos.setearParametro("@FechaNacimiento", EmpleadoNuevo.FechaNacimiento);
-                datos.setearParametro("@IDTipo", EmpleadoNuevo.TipoEmp.ID);
                 datos.setearParametro("@Estado", EmpleadoNuevo.Estado);
                 datos.ejecutarAccion();
             }
@@ -85,7 +85,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE Paciente SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, IDTipo = @IDTipo, Estado = @Estado WHERE ID =" + ModEmpleado.ID + "");
+                datos.setearConsulta("UPDATE Empelado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, IDTipo = @IDTipo, Estado = @Estado WHERE ID =" + ModEmpleado.ID + "");
                 datos.setearParametro("@DNI", ModEmpleado.DNI);
                 datos.setearParametro("@Apellido", ModEmpleado.Apellido);
                 datos.setearParametro("@Nombre", ModEmpleado.Nombre);
