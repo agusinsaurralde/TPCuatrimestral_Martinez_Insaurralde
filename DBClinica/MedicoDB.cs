@@ -16,18 +16,17 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad");
+                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, CONCAT(M.Nombre, ' ', M.Apellido) AS NombreCompleto, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Medico aux = new Medico();
-
+                    //CONCAT(M.Nombre, ' ', M.Apellido) AS NombreCompleto
                     aux.ID = (int)datos.Lector["ID"];
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Matricula = (string)datos.Lector["Matricula"];
-                    aux.Apellido = (string)datos.Lector["Apellido"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Especialidad = new Especialidad();
                     aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
                     aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];

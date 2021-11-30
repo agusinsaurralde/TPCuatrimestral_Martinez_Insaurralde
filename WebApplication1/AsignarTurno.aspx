@@ -1,41 +1,38 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AsignarTurno.aspx.cs" Inherits="WebApplication1.Formulario_web11" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <body>
-       <h3>Asignar Turno</h3>
+       <h1>Asignar Turno</h1>
         <hr />
-        <div>
-             <asp:TextBox runat="server" placeholder="Nombre" />
+    <div class="col-md-4">
+             <label for="txtDNI" class="form-label">DNI</label>
+             <asp:TextBox  class="form-control" ID="txtDNI"  runat="server" />
         </div>
-       <div>
-             <asp:TextBox runat="server" placeholder="Apellido" />
+        <div class="col-md-4">
+         <asp:Button class="btn btn-primary" Text="Buscar" OnClick="Click_Buscar" runat="server" />
+         </div>
+        <div class="col-md-4">
+             <label for="txtApellido" class="form-label">Apellido</label>
+             <asp:TextBox  class="form-control" ID="txtApellido"  runat="server" />
         </div>
-        <div>
-            <asp:DropDownList runat="server" placeholder="Especialidad">
-                <asp:ListItem Text="Seleccionar especialidad" />
-                <asp:ListItem Text="Odontología" />
-                <asp:ListItem Text="Pediatría" />
-            </asp:DropDownList>
+
+          <div class="col-md-4">
+            <label for="txtNombre" class="form-label">Nombre</label>
+            <asp:TextBox  class="form-control" ID="txtNombre"  runat="server" />
+          </div>
+
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <div class="col-md-6">
+            <label for="ddlistEspecialidad" class="form-label">Especialidad</label>
+            <asp:DropDownList ID="ddlistEspecialidad" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+          </div>
+
+        <div class="col-md-3">
+            <label for="ddlistMedico" class="form-label">Médico</label>
+            <asp:DropDownList ID="ddlistMedico" class="form-select" runat="server" Enabled="False" EnableViewState="True"></asp:DropDownList>
         </div>
-        <div>
-            <table class="table table-hover">
-            <tr>
-                <td>Victoria Espinoza</td>
-                <td>14 hs</td><td>14:30 hs</td><td>15 hs</td>
-            </tr>
-             <tr>
-                <td>Mónica Torres</td>
-                <td>10 hs</td><td>10:30 hs</td><td>11 hs</td>
-            </tr>
-            <tr>
-                <td>Hector Ramirez</td>
-                <td>17 hs</td><td>17:30 hs</td><td>18 hs</td>
-            </tr>
-            </table>
-            <div>
-                <asp:TextBox runat="server" placeholder="Observaciones" />
-            </div>
-            <div>
-                <asp:Button Text="Aceptar" runat="server" /></div>
-        </div>
-    </body>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+          
+            
+       
 </asp:Content>
