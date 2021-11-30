@@ -12,9 +12,36 @@ namespace WebApplication1
     public partial class Formulario_web2 : System.Web.UI.Page
     {
 
-        protected void Page_Load(Paciente modPaciente)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            
+            CoberturaDB db = new CoberturaDB();
+            try
+            {
+                if (!IsPostBack)
+                {
+                    List<Cobertura> cob = db.lista();
+                    ddlistCobertura.DataSource = cob;
+                    ddlistCobertura.DataTextField = "Nombre";
+                    ddlistCobertura.DataValueField = "Id";
+                    ddlistCobertura.DataBind();
+
+                    Paciente paciente = new Paciente();
+                    paciente = (Paciente)Session["modificar"];
+                    txtDNI.Text = paciente.DNI;
+                    txtApellido.Text = paciente.Apellido;
+                    txtNombre.Text = paciente.Nombre;
+                    ddlistCobertura.SelectedValue = paciente.Cobertura.Id.ToString();
+                    txtFechaNac.Text = paciente.FechaNacimiento.ToString();
+                    txtTelefono.Text = paciente.Telefono;
+                    txtEmail.Text = paciente.Email;
+                    txtDireccion.Text = paciente.Dirección;
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                //throw ex;
+            }
         }
         protected void Click_Aceptar(object sender, EventArgs e)
         {
@@ -25,6 +52,7 @@ namespace WebApplication1
 
             try
             {
+                ModPaciente.ID = ((Paciente)Session["modificar"]).ID;
                 ModPaciente.DNI = txtDNI.Text;
                 ModPaciente.Apellido = txtApellido.Text;
                 ModPaciente.Nombre = txtNombre.Text;
@@ -34,14 +62,13 @@ namespace WebApplication1
                 ModPaciente.Telefono = txtTelefono.Text;
                 ModPaciente.Email = txtEmail.Text;
                 ModPaciente.Dirección = txtDireccion.Text;
-                ModPaciente.Estado = true;
                 cargar.modificar(ModPaciente);
 
-                Response.Redirect("AgregarCorrecto.aspx?modificado=" + modificado, false);
+                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
             catch (Exception)
             {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                 Response.Redirect("ErrorModificar.aspx?error=" + error, false);
             }
 
         }
