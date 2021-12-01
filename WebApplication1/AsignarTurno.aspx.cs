@@ -45,11 +45,17 @@ namespace WebApplication1
             ddlistMedico.DataSource = ((List<Medico>)Session["listaMedico"]).FindAll(x => x.Especialidad.Id == ID);
             ddlistMedico.DataBind();
             ddlistMedico.Enabled = true;
-        }
 
+        }
+        protected void ddlistaDia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+       
         protected void Click_Buscar(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

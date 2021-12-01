@@ -30,6 +30,14 @@
             <label for="ddlistMedico" class="form-label">Médico</label>
             <asp:DropDownList ID="ddlistMedico" class="form-select" runat="server" Enabled="False" EnableViewState="True"></asp:DropDownList>
         </div>
+        <div class="col-md-3">
+            <label for="txtFecha" class="form-label">Día</label>
+            <asp:TextBox type="date" ID="txtFecha" runat="server" />
+        </div>
+        <div class="col-md-3">
+            <label for="ddlistHora" class="form-label">Médico</label>
+            <asp:DropDownList ID="ddlistHora" class="form-select" SelectedIndexChanged="ddlistaDia_SelectedIndexChanged" AutoPostBack="true" runat="server" Enabled="True" EnableViewState="True"></asp:DropDownList>
+        </div>
         </ContentTemplate>
     </asp:UpdatePanel>
           
