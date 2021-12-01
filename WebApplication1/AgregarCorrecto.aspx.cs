@@ -17,13 +17,17 @@ namespace WebApplication1
         protected void Click_Volver(object sender, EventArgs e)
         {
             string agregado = Request.QueryString["agregado"].ToString();
-            if (agregado == "Médico")
+            if (agregado == "Turno")
             {
-                Response.Redirect("Medicos.aspx", false);
+                Response.Redirect("VerTurno.aspx", false);
             }
             else if(agregado == "Paciente")
             {
                 Response.Redirect("Pacientes.aspx", false);
+            }
+            else if (agregado == "Médico")
+            {
+                Response.Redirect("Medicos.aspx", false);
             }
             else if (agregado == "Empleado")
             {

@@ -45,6 +45,7 @@
     <Compile Include="ConexionDB.cs" />
     <Compile Include="EmpleadoDB.cs" />
     <Compile Include="EspecialidadDB.cs" />
+    <Compile Include="EstadoTurnoDB.cs" />
     <Compile Include="HistoriaClinicaDB.cs" />
     <Compile Include="MedicoDB.cs" />
     <Compile Include="PacienteDB.cs" />

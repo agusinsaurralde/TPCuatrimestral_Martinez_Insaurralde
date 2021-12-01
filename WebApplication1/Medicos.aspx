@@ -28,8 +28,8 @@
                 <asp:BoundField datafield = "Dirección" HeaderText ="Dirección" />
                 <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="Fecha de Nacimiento" />
                 <asp:BoundField datafield = "Turno.NombreTurno" HeaderText ="Turno" />
-                <asp:BoundField datafield = "HorarioEntrada" HeaderText ="Entrada" />
-                <asp:BoundField datafield = "HorarioSalida" HeaderText ="Salida" />
+                <asp:BoundField datafield = "HorarioEntrada" DataFormatString="{0:HH:mm tt}"  HeaderText ="Entrada" />
+                <asp:BoundField datafield = "HorarioSalida" DataFormatString="{0:HH:mm tt}" HeaderText ="Salida" />
                 <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
                 <asp:CommandField ButtonType="Button" ShowEditButton="true" />   
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />  

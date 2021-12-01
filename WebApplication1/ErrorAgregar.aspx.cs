@@ -17,7 +17,12 @@ namespace WebApplication1
         protected void Click_Volver(object sender, EventArgs e)
         {
             string error = Request.QueryString["error"].ToString();
-            if (error == "médico")
+
+            if (error == "turno")
+            {
+                Response.Redirect("AsignarTurnos.aspx", false);
+            }
+            else if (error == "médico")
             {
                 Response.Redirect("AgregarMedico.aspx", false);
             }
