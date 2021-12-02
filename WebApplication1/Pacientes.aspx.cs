@@ -28,14 +28,14 @@ namespace WebApplication1
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
             pac.ID = (int)Grilla.DataKeys[e.RowIndex].Values[0];
-            Session.Add("eliminar", db.buscarporID(pac));
+            Session.Add("eliminar", db.buscarObjeto("ID", pac));
             Response.Redirect("EliminarPaciente.aspx");
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             pac.ID = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
-            Session.Add("modificar", db.buscarporID(pac));
+            Session.Add("modificar", db.buscarObjeto("ID", pac));
             Response.Redirect("ModificarPaciente.aspx");
         }
     }

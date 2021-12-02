@@ -23,7 +23,7 @@
                 <asp:BoundField datafield = "Telefono" HeaderText ="Teléfono" />
                 <asp:BoundField datafield = "Email" HeaderText ="Email" />
                 <asp:BoundField datafield = "Dirección" HeaderText ="Dirección" />
-                <asp:BoundField datafield = "FechaNacimiento" HeaderText ="Fecha de Nacimiento" />
+                <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="Fecha de Nacimiento" />
                 <asp:BoundField datafield = "TipoEmp.Nombre" HeaderText ="Tipo de Empleado"/>
                 <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
                 <asp:CommandField ButtonType="Button" ShowEditButton="true" />   

@@ -24,16 +24,14 @@ namespace WebApplication1
 
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
-            Medico med = new Medico();
-            med.ID = (int)Grilla.DataKeys[e.RowIndex].Values[0];
+            int med = (int)Grilla.DataKeys[e.RowIndex].Values[0];
             Session.Add("eliminar", medico.buscarporID(med));
             Response.Redirect("EliminarMedico.aspx");
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-            Medico med = new Medico();
-            med.ID = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
+            int med = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
             Session.Add("modificar", medico.buscarporID(med)); 
             Response.Redirect("ModificarMedico.aspx");
         }

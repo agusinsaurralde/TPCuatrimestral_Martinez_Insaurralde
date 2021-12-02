@@ -21,7 +21,7 @@
                 <asp:BoundField datafield = "DNI" HeaderText ="DNI" />
                 <asp:BoundField datafield = "Apellido" HeaderText ="Apellido" />
                 <asp:BoundField datafield = "Nombre" HeaderText ="Nombre" />
-                <asp:BoundField datafield = "FechaNacimiento" HeaderText ="Fecha de Nacimiento" />    
+                <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}" HeaderText ="Fecha de Nacimiento" />    
                 <asp:BoundField datafield = "Cobertura.Nombre" HeaderText ="Cobertura" />
                 <asp:BoundField datafield = "Telefono" HeaderText ="Teléfono" />
                 <asp:BoundField datafield = "Email" HeaderText ="Email" />

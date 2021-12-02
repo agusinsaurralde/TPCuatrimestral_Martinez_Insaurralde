@@ -39,13 +39,13 @@ namespace WebApplication1
                     txtApellido.Text = medico.Apellido;
                     txtNombre.Text = medico.Nombre;
                     ddlistEspecialidad.SelectedValue = medico.Especialidad.Id.ToString();
-                    txtFechaNac.Text = medico.FechaNacimiento.ToString();
+                    txtFechaNac.Text = medico.FechaNacimiento.ToString("dd-mm-yyyy");
                     txtTelefono.Text = medico.Telefono;
                     txtEmail.Text = medico.Email;
                     txtDireccion.Text = medico.Dirección;
                     ddlistTurno.SelectedValue = medico.Turno.ID.ToString();
-                    txtEntrada.Text = medico.HorarioEntrada.ToString();
-                    txtSalida.Text = medico.HorarioSalida.ToString();
+                    txtEntrada.Text = medico.HorarioEntrada.ToString("HH:mm");
+                    txtSalida.Text = medico.HorarioSalida.ToString("HH:mm");
                 }
             }
             catch (Exception ex)
