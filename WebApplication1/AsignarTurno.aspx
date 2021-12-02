@@ -6,9 +6,11 @@
              <label for="txtDNI" class="form-label">DNI</label>
              <asp:TextBox  class="form-control" ID="txtDNI"  runat="server" />
         </div>
+   
         <div class="col-md-4">
          <asp:Button class="btn btn-primary" Text="Buscar" OnClick="Click_Buscar" runat="server" />
          </div>
+ 
         <div class="col-md-4">
              <label for="txtApellido" class="form-label">Apellido</label>
              <asp:TextBox  class="form-control" ID="txtApellido"  runat="server" />
@@ -30,9 +32,7 @@
             <label for="ddlistMedico" class="form-label">Médico</label>
             <asp:DropDownList ID="ddlistMedico" class="form-select" runat="server" Enabled="False" EnableViewState="True"></asp:DropDownList>
         </div>
+
         </ContentTemplate>
-    </asp:UpdatePanel>
-          
-            
-       
+    </asp:UpdatePanel>   
 </asp:Content>

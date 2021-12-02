@@ -36,6 +36,7 @@ namespace WebApplication1
                 ddlistMedico.DataBind();
                 ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));
 
+
             }
 
         }
@@ -48,8 +49,9 @@ namespace WebApplication1
         }
 
         protected void Click_Buscar(object sender, EventArgs e)
-        {
-
+        { 
+            
         }
+
     }
 }
