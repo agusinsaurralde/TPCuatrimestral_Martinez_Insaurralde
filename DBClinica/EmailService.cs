@@ -33,16 +33,14 @@ namespace DBClinica
             email.To.Add(paciente.Email);
             email.Subject = "Confirmación de turno - Clínica Demar";
             email.IsBodyHtml = true;
-            string esp = turnoAgregado.Especialidad.Nombre;
-            string medico = turnoAgregado.Medico.Nombre;
             email.Body = "<h3>COMPROBANTE DE RESERVA DE TURNO</h3> <br>" +
-                "Nro de Turno: " + turnoAgregado.Numero + "<br>" +
-                "Paciente: " + turnoAgregado.Paciente.Nombre + " " + turnoAgregado.Paciente.Apellido + "<br>" +
-                "Especialidad: " + turnoAgregado.Especialidad.Nombre + "<br>" +
-                "Profesional: " + turnoAgregado.Medico.NombreCompleto + "<br>" +
-                "Fecha: " + turnoAgregado.Dia.ToString("dd/mm/yyyy") + "<br>" +
-                "Horario: " + turnoAgregado.HorarioInicio.ToString("HH:mm") + "<br>" +
-                "Observaciones: " + turnoAgregado.Observaciones + "<br><br> En caso de cancelar, avisar con anticipación al teléfono 4856-5673.";
+            "Nro de Turno: " + turnoAgregado.Numero + "<br>" +
+            "Paciente: " + turnoAgregado.Paciente.Nombre + " " + turnoAgregado.Paciente.Apellido + "<br>" +
+            "Especialidad: " + turnoAgregado.Especialidad.Nombre + "<br>" +
+            "Profesional: " + turnoAgregado.Medico.NombreCompleto + "<br>" +
+            "Fecha: " + turnoAgregado.Dia.ToString("dd/mm/yyyy") + "<br>" +
+            "Horario: " + turnoAgregado.HorarioInicio.ToString("HH:mm") + "<br>" +
+            "Observaciones: " + turnoAgregado.Observaciones + "<br><br> En caso de cancelar, avisar con anticipación al teléfono 4856-5673.";
         }
 
         public void enviarEmail()

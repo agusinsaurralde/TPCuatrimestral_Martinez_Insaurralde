@@ -5,13 +5,8 @@
     <hr />
 
    <div>
-        <asp:DropDownList runat="server">
-            <asp:ListItem Text="Seleccionar criterio" />
-            <asp:ListItem Text="Nombre" />
-            <asp:ListItem Text="DNI" />
-         </asp:DropDownList>
-        <asp:TextBox runat="server" />
-        <asp:Button Text="Buscar" runat="server" />
+        <asp:TextBox ID="txtBusqueda" runat="server" />
+        <asp:Button Text="Buscar" OnClick ="Click_Buscar" runat="server" />
         <asp:Button Text="Agregar" OnClick ="Click_Agregar" runat="server" />
     </div>
    <div>

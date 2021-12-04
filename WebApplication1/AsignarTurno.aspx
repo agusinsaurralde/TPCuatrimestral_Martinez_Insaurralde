@@ -21,7 +21,7 @@
             <asp:Label Text="" ID="txtCobertura" runat="server" />
       </div>
 
-    <asp:UpdatePanel runat="server">
+    <asp:UpdatePanel/ runat="server">
         <ContentTemplate>
             <div class="col-md-3">
             <label for="ddlistEspecialidad" class="form-label">Especialidad</label>
@@ -45,7 +45,6 @@
 
     </asp:UpdatePanel>   
 
-    </asp:UpdatePanel>
           
      <div class="col-md-4">
             <label for="txtObservaciones" class="form-label">Observaciones</label>

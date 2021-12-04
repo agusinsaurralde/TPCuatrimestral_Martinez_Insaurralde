@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura");
+                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,6 +27,7 @@ namespace DBClinica
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
                     aux.Cobertura = new Cobertura();
                     aux.Cobertura.Id = (int)datos.Lector["IDCobertura"];
@@ -126,62 +127,14 @@ namespace DBClinica
             }
         }
 
-        public Paciente buscarObjeto(string criterio, Paciente valor)
-        {
-            ConexionDB datos = new ConexionDB();
-            try
-            {   
-                if(criterio == "DNI")
-                {
-                    datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura WHERE P.DNI = " + valor.DNI + "");
-                }
-                if(criterio == "ID")
-                {
-                    datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura WHERE P.ID = " + valor.ID + "");
-                }
-
-                datos.ejecutarLectura();
-                datos.Lector.Read();
-
-                valor.ID = (int)datos.Lector["ID"];
-                valor.DNI = (string)datos.Lector["DNI"];
-                valor.Nombre = (string)datos.Lector["Nombre"];
-                valor.Apellido = (string)datos.Lector["Apellido"];
-                valor.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                valor.Cobertura = new Cobertura();
-                valor.Cobertura.Id = (int)datos.Lector["IDCobertura"];
-                valor.Cobertura.Nombre = (string)datos.Lector["Cobertura"];
-                valor.Telefono = (string)datos.Lector["Telefono"];
-                valor.Email = (string)datos.Lector["Email"];
-                valor.Dirección = (string)datos.Lector["Direccion"];
-                valor.Estado = (bool)datos.Lector["Estado"];
-
-                return valor;
-            }
-            catch (Exception)
-            {
-                datos.cerrarConexion();
-                return valor = null;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        public List<Paciente> buscar(string criterio, Paciente valorBuscado)
+        public List<Paciente> buscar(string valorBuscado)
         {
             List<Paciente> lista = new List<Paciente>();
             ConexionDB datos = new ConexionDB();
             try
             {
 
-                if (criterio == "DNI")
-                {
-                    datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura WHERE P.DNI = " + valorBuscado.DNI +"");
-                }
-
-
+                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura WHERE P.Nombre LIKE '%" + valorBuscado + "%' OR P.Apellido LIKE '" + valorBuscado + "%'OR P.DNI LIKE '" + valorBuscado + "%'");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -192,6 +145,7 @@ namespace DBClinica
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
                     aux.Cobertura = new Cobertura();
                     aux.Cobertura.Id = (int)datos.Lector["IDCobertura"];
