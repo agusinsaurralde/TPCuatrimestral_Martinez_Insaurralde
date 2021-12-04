@@ -215,9 +215,15 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-        
 
-   }
+        public Paciente buscarporID(int ID)
+        {
+            PacienteDB pacienteDB = new PacienteDB();
+            List<Paciente> listapacientes = pacienteDB.listarPaciente();
+            Paciente paciente = listapacientes.Find(x => x.ID == ID);
+            return paciente;
+        }
+    }
 }
 
 
