@@ -59,7 +59,6 @@ create table EspecialidadXMedico(
 Alter table EspecialidadXMedico
 add Estado bit;
 update especialidadXMedico set estado = 1
-
 GO
 create table Cobertura(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -415,3 +414,35 @@ SELECT * FROM VW_TURNO
 use Clinica
 
 select * from Especialidad
+
+select * from Empleado
+
+SELECT * FROM Turno
+
+Select * FROM Paciente
+
+SELECT * From EspecialidadXMedico
+
+select
+T.Numero as NumTurno,
+P.Apellido as Apellido,
+P.Nombre as Nombre,
+Es.Nombre as Especialidad,
+M.Nombre as NombMedico,
+M.Apellido as ApeMedico,
+T.Dia as Dia,
+T.HoraInicio as HoraIni,
+T.HoraFin as HoraFin,
+T.Observaciones as Observaciones,
+Em.Nombre as Recepcionista,
+Est.Descripcion as Estado
+from Turno as T
+INNER JOIN Paciente as P on P.ID = T.IDPaciente
+INNER JOIN EspecialidadXMedico as E on E.ID = T.IDEspXMedico
+INNER JOIN Especialidad as Es on Es.ID=E.IDEspecialidad
+INNER JOIN Medico as M on M.ID=E.IDMedico
+INNER JOIN Empleado as Em on Em.ID=T.IDRecepcionista
+INNER JOIN EstadoTurno as Est on Est.ID=T.IDEstado
+WHERE T.Numero = 1
+
+select T.Numero as NumeroTurno, P.ID as IDPaciente, P.Apellido as ApellidoP, P.Nombre as NombreP, Es.ID as IDEsp, Es.Nombre as NombreEs, M.ID as IDmedico, M.Nombre as NombreM, M.Apellido as ApellidoM, T.Dia as Dia, T.HoraInicio as HI, T.HoraFin as HF, T.Observaciones as Obs, Em.ID as EmpleadoID, Em.Nombre as NombreEm, Em.Apellido as ApellidoEm, Est.ID as EstadoID, Est.Descripcion as EstadoD FROM Turno as T INNER JOIN Paciente as P on P.ID = T.IDPaciente INNER JOIN EspecialidadXMedico as E on E.ID = T.IDEspXMedico INNER JOIN Especialidad as Es on Es.ID = E.IDEspecialidad INNER JOIN Medico as M on M.ID = E.IDMedico INNER JOIN Empleado as Em on Em.ID = T.IDRecepcionista INNER JOIN EstadoTurno as Est on Est.ID = T.IDEstado WHERE T.Numero = 1

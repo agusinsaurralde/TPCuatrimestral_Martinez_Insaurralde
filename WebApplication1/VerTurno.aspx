@@ -16,7 +16,7 @@
      <div>
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowEditing="Grilla_editar" DataKeyNames="Numero"  >
             <Columns>   
-                <asp:BoundField datafield = "Numero" HeaderText ="ID" />
+               <asp:BoundField datafield = "Numero" HeaderText ="ID" />
                 <asp:BoundField datafield = "Paciente.Apellido" HeaderText ="ApellidoPaciente" />
                 <asp:BoundField datafield = "Paciente.Nombre" HeaderText ="NombrePaciente" />
                 <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="Especialidad" />
@@ -29,7 +29,7 @@
                 <asp:BoundField datafield = "AdministrativoResponsable.Apellido" HeaderText ="ApellidoRecepcionista" />
                 <asp:BoundField datafield = "AdministrativoResponsable.Nombre" HeaderText ="NombreRecepcionista" />
                 <asp:BoundField datafield = "Estado.Estado" HeaderText ="Estado" />
-                <asp:CommandField ButtonType="Button" ShowEditButton="true" />   
+                <asp:CommandField ButtonType="Button" ShowEditButton="true" />
             </Columns>
         </asp:gridview>
     </div>

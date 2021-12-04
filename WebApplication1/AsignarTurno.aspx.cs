@@ -128,13 +128,7 @@ namespace WebApplication1
         }
 
         protected void Click_Buscar(object sender, EventArgs e)
-<<<<<<< HEAD
         { 
-            
-        }
-
-=======
-        {
            PacienteDB pacienteDB = new PacienteDB();
            Paciente dniPaciente = new Paciente();
            dniPaciente.DNI = txtDNI.Text;
@@ -188,8 +182,5 @@ namespace WebApplication1
                 Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
         }
-
-     
->>>>>>> 142aedae74d15fc146cce02bedf40965a0301b36
     }
 }

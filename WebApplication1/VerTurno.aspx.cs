@@ -11,16 +11,20 @@ namespace WebApplication1
 {
     public partial class Formulario_web12 : System.Web.UI.Page
     {
+        TurnoDB turnoBD = new TurnoDB();
+        Turno turnito = new Turno();
         protected void Page_Load(object sender, EventArgs e)
         {
-            TurnoDB turno = new TurnoDB();
-            Grilla.DataSource = turno.listarTurno();
+            
+            Grilla.DataSource = turnoBD.listarTurno();
             Grilla.DataBind();
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-           
+            turnito.Numero = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
+            Session.Add("editar", turnoBD.buscarTurno(turnito.Numero));
+            Response.Redirect("ModificarTurno.aspx");
         }
     }
 

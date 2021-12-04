@@ -8,19 +8,9 @@
              <asp:Label Text="" ID="txtPaciente" runat="server" />
 
         </div>
-<<<<<<< HEAD
-   
-=======
-
->>>>>>> 142aedae74d15fc146cce02bedf40965a0301b36
         <div class="col-md-4">
              <asp:Button class="btn btn-primary" Text="Buscar" OnClick="Click_Buscar" runat="server" />
          </div>
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> 142aedae74d15fc146cce02bedf40965a0301b36
         <div class="col-md-4">
             <asp:Label Text="" ID="txtApellido" runat="server" />             
         </div>
@@ -49,9 +39,9 @@
         </div>
 
         </ContentTemplate>
-<<<<<<< HEAD
+
     </asp:UpdatePanel>   
-=======
+
     </asp:UpdatePanel>
           
      <div class="col-md-4">
@@ -72,6 +62,4 @@
              <asp:Button class="btn btn-primary" Text="Aceptar" OnClick="Click_Aceptar" runat="server" />
      </div>
             
-       
->>>>>>> 142aedae74d15fc146cce02bedf40965a0301b36
 </asp:Content>
