@@ -246,5 +246,53 @@ namespace DBClinica
             }
         }
 
+        public List<Medico> listarMedicoXEspecialidad(int IDEspecialidad)
+        {
+            List<Medico> lista = new List<Medico>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad WHERE EXM.IDMedico=M.ID AND EXM.IDEspecialidad =" + IDEspecialidad + "");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Medico aux = new Medico();
+                    aux.ID = (int)datos.Lector["ID"];
+                    aux.DNI = (string)datos.Lector["DNI"];
+                    aux.Matricula = (string)datos.Lector["Matricula"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Especialidad = new Especialidad();
+                    aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
+                    aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    aux.Turno = new TurnoTrabajo();
+                    aux.Turno.ID = (int)datos.Lector["IDTurnoTrabajo"];
+                    aux.Turno.NombreTurno = (string)datos.Lector["Turno"];
+                    aux.HorarioEntrada = (DateTime)datos.Lector["HoraEntrada"];
+                    aux.HorarioSalida = (DateTime)datos.Lector["HoraSalida"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

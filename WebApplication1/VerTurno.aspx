@@ -13,7 +13,7 @@
         <asp:TextBox runat="server" />
         <asp:Button Text="Buscar" runat="server" />
     </div>
-     <div>
+     <div class="container">
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowEditing="Grilla_editar" DataKeyNames="Numero"  >
             <Columns>   
                <asp:BoundField datafield = "Numero" HeaderText ="ID" />

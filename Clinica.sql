@@ -422,6 +422,8 @@ SELECT * FROM Turno
 Select * FROM Paciente
 
 SELECT * From EspecialidadXMedico
+SELECT * FROM Medico
+SELECT * FROM Especialidad
 
 select
 T.Numero as NumTurno,

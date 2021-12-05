@@ -96,16 +96,17 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @HoraFin, @Observaciones, @IDRecepcionista, @Estado, @Numero");
+                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @HoraFin, @Observaciones, @IDRecepcionista, @IDEstado, @Numero");
+                datos.setearParametro("@Numero", turnoNuevo.Numero);
                 datos.setearParametro("@IDPaciente", turnoNuevo.Paciente.ID);
-                datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad);
+                datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad.Id);
                 datos.setearParametro("@IDMedico", turnoNuevo.Medico.ID);
-                datos.setearParametro("@Dia", turnoNuevo.Dia);
-                datos.setearParametro("@HoraInicio", turnoNuevo.HorarioInicio);
-                datos.setearParametro("@HoraFin", turnoNuevo.HorarioInicio);
+                datos.setearParametro("@Dia", DateTime.Parse(turnoNuevo.Dia.ToString()));
+                datos.setearParametro("@HoraInicio", DateTime.Parse(turnoNuevo.HorarioInicio.ToString())); ;
+                datos.setearParametro("@HoraFin", DateTime.Parse(turnoNuevo.HorarioInicio.ToString()));
                 datos.setearParametro("@Observaciones", turnoNuevo.Observaciones);
                 datos.setearParametro("@IDRecepcionista", turnoNuevo.AdministrativoResponsable.ID);
-                datos.setearParametro("@IDEstado", turnoNuevo.Estado);
+                datos.setearParametro("@IDEstado", turnoNuevo.Estado.ID);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

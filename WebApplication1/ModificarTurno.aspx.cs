@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using DBClinica;
-// La idea es de donde se muestran los turnos, trasladar el N° de turno hasta la pagina para editar el turno.
+
 namespace WebApplication1
 {
     public partial class Formulario_web13 : System.Web.UI.Page
@@ -15,6 +15,7 @@ namespace WebApplication1
         {
             EstadoTurnoDB estadoDB = new EstadoTurnoDB();
             EspecialidadDB especialidadBD = new EspecialidadDB();
+            MedicoDB medicoBD = new MedicoDB();
 
             if (!IsPostBack)
             {
@@ -30,10 +31,19 @@ namespace WebApplication1
                 ddlistEspecialidad.DataValueField = "ID";
                 ddlistEspecialidad.DataBind();
 
+                List<Medico> listMedico = medicoBD.listarMedico();
+                ddlistMedicoNombre.DataSource = listMedico;
+                ddlistMedicoApellido.DataSource = listMedico;
+                ddlistMedicoNombre.DataTextField = "Nombre";
+                ddlistMedicoApellido.DataTextField = "Apellido";
+                ddlistMedicoNombre.DataValueField = "ID";
+                ddlistMedicoApellido.DataValueField = "ID";
+                ddlistMedicoNombre.DataBind();
+                ddlistMedicoApellido.DataBind();
 
-                if (Session["editar"] != null) {
+                if (Session["editarTurno"] != null) {
                     Turno turnoSesion = new Turno();
-                    turnoSesion = (Turno)Session["editar"];
+                    turnoSesion = (Turno)Session["editarTurno"];
                     lblNumeroTurno.Text = "N° Turno" + turnoSesion.Numero.ToString();
                     lblPacienteNombre.Text = "Nombre de Paciente:";
                     txtPacienteNombre.Text = turnoSesion.Paciente.Nombre;
@@ -46,9 +56,9 @@ namespace WebApplication1
                     ddlistEspecialidad.DataValueField = turnoSesion.Especialidad.Id.ToString();
                     
                     lblMedicoNombre.Text = "Medico Nombre:";
-                    ddlistMedicoNombre.Text = turnoSesion.Medico.Nombre;
+                    ddlistMedicoNombre.SelectedItem.Text = turnoSesion.Medico.Nombre; // tira error, supongo que cuando se cargue la grilla de especialidades y tire la orden esta se cargara sola
                     lblMedicoApellido.Text = "Medico Apellido";
-                    ddlistMedicoApellido.Text = turnoSesion.Medico.Apellido;
+                    ddlistMedicoApellido.SelectedItem.Text = turnoSesion.Medico.Apellido;
 
                     lblHoraInicio.Text = "Hora de inicio del turno:";
                     txtHoraInicio.Text = turnoSesion.HorarioInicio.ToString("HH:mm");
@@ -72,20 +82,30 @@ namespace WebApplication1
                 }
                 
             }
-            else // sin este else se pisa el drown down list del estado del turno
-            {
-                List<EstadoTurno> estado = estadoDB.listar();
-                ddlistEstado.DataSource = estado;
-                ddlistEstado.DataTextField = "Estado";
-                ddlistEstado.DataValueField = "ID";
-                ddlistEstado.DataBind();
+            //else // sin este else se pisa el drown down list del estado del turno
+            //{
+            //    List<EstadoTurno> estado = estadoDB.listar();
+            //    ddlistEstado.DataSource = estado;
+            //    ddlistEstado.DataTextField = "Estado";
+            //    ddlistEstado.DataValueField = "ID";
+            //    ddlistEstado.DataBind();
 
-                List<Especialidad> listEspecialidad = especialidadBD.lista();
-                ddlistEspecialidad.DataSource = listEspecialidad;
-                ddlistEspecialidad.DataTextField = "Nombre";
-                ddlistEspecialidad.DataValueField = "ID";
-                ddlistEspecialidad.DataBind();
-            }
+            //    List<Especialidad> listEspecialidad = especialidadBD.lista();
+            //    ddlistEspecialidad.DataSource = listEspecialidad;
+            //    ddlistEspecialidad.DataTextField = "Nombre";
+            //    ddlistEspecialidad.DataValueField = "ID";
+            //    ddlistEspecialidad.DataBind();
+
+            //    List<Medico> listMedico = medicoBD.listarMedico();
+            //    ddlistMedicoNombre.DataSource = listMedico;
+            //    ddlistMedicoApellido.DataSource = listMedico;
+            //    ddlistMedicoNombre.DataTextField = "Nombre";
+            //    ddlistMedicoApellido.DataTextField = "Apellido";
+            //    ddlistMedicoNombre.DataValueField = "ID";
+            //    ddlistMedicoApellido.DataValueField = "ID";
+            //    ddlistMedicoNombre.DataBind();
+            //    ddlistMedicoApellido.DataBind();
+            //}
         }
         //protected void Click_Aceptar(object sender, EventArgs e)
         //{
@@ -129,22 +149,34 @@ namespace WebApplication1
         {
             Turno turnoModificado = new Turno();
             TurnoDB cargar = new TurnoDB();
-            turnoModificado.Numero = int.Parse(lblNumeroTurno.Text);
-            turnoModificado.Paciente.Nombre = txtPacienteNombre.Text;
-            turnoModificado.Paciente.Apellido = txtPacienteApellido.Text;
-            turnoModificado.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value.ToString());// 
-            turnoModificado.Especialidad.Nombre = ddlistEspecialidad.Text;
+            //turnoModificado.Numero = int.Parse(lblNumeroTurno.Text);
 
-            turnoModificado.Medico.Nombre = ddlistMedicoNombre.Text; //de aca tiene q salir un ddlist en el que muestre los medicos dependiendo de la especialidad seleccionada.
-            turnoModificado.Medico.Apellido = ddlistMedicoApellido.Text;
+            turnoModificado.Paciente = new Paciente();
+            turnoModificado.Paciente.Nombre = txtPacienteNombre.Text.ToString();
+            turnoModificado.Paciente.Apellido = txtPacienteApellido.Text;
+
+            turnoModificado.Especialidad = new Especialidad();
+            turnoModificado.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value.ToString());// 
+            turnoModificado.Especialidad.Nombre = ddlistEspecialidad.SelectedItem.Text;
+
+            turnoModificado.Medico = new Medico();
+            turnoModificado.Medico.Nombre = ddlistMedicoNombre.SelectedItem.Text;
+            turnoModificado.Medico.Apellido = ddlistMedicoApellido.SelectedItem.Text;
+
             turnoModificado.HorarioInicio = DateTime.Parse(txtHoraInicio.Text);
             turnoModificado.HorarioFin = DateTime.Parse(txtHoraFin.Text);
             turnoModificado.Dia = DateTime.Parse(txtFecha.Text);
+
             turnoModificado.Observaciones = txtObservaciones.Text;
+
+            turnoModificado.AdministrativoResponsable = new Empleado();
             turnoModificado.AdministrativoResponsable.Nombre = txtEmpleadoNombre.Text;
             turnoModificado.AdministrativoResponsable.Apellido = txtEmpleadoApellido.Text;
+
+            turnoModificado.Estado = new EstadoTurno();
             turnoModificado.Estado.ID = int.Parse(ddlistEstado.SelectedValue.ToString());
             turnoModificado.Estado.Estado = ddlistEstado.SelectedItem.Text;
+
             cargar.modificar(turnoModificado);
         }
 
@@ -186,10 +218,19 @@ namespace WebApplication1
 
         protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<int> idListaMedicosxEspecialidad = new List<int>();
-            List<Medico> medicoList = new List<Medico>();
-            MedicoDB listaMedicoDB = new MedicoDB();
-            //medicoList = listaMedicoDB.listarMedico().FindAll(x=> x.Especialidad.Id == )
+            // los medicos no tienen ID especialidad en la DB.
+            // si o si tenes que compárar contra la tabla que tiene EspecialidadXmedico
+            int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
+            MedicoDB dato = new MedicoDB();
+            List<Medico> listMedico = dato.listarMedicoXEspecialidad(ID);
+            ddlistMedicoNombre.DataSource = listMedico;
+            ddlistMedicoNombre.DataTextField = "Nombre";
+            ddlistMedicoNombre.DataValueField = "Id";
+            ddlistMedicoNombre.DataBind();
+            ddlistMedicoApellido.DataSource = listMedico;
+            ddlistMedicoApellido.DataTextField = "Apellido";
+            ddlistMedicoApellido.DataValueField = "Id";
+            ddlistMedicoApellido.DataBind();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace WebApplication1
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             turnito.Numero = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
-            Session.Add("editar", turnoBD.buscarTurno(turnito.Numero));
+            Session.Add("editarTurno", turnoBD.buscarTurno(turnito.Numero));
             Response.Redirect("ModificarTurno.aspx");
         }
     }
