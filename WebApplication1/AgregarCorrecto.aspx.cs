@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DBClinica;
 
 namespace WebApplication1
 {
@@ -13,6 +14,22 @@ namespace WebApplication1
         {
             string agregado = Request.QueryString["agregado"].ToString();
             lblAgregado.Text = agregado + " agregado exitosamente.";
+            if (agregado == "Turno")
+            {
+                EmailService emailService = new EmailService();
+                emailService.armarCorreo((Dominio.Turno)Session["NuevoTurno"]);
+                try
+                {
+                    emailService.enviarEmail();
+                    lblTurno.Text = "Se envió un mail de confimarción.";
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                    //Session.Add("error", ex);
+                }
+            }
+                
         }
         protected void Click_Volver(object sender, EventArgs e)
         {

@@ -4,18 +4,13 @@
     <h1>Médicos</h1>
     <hr />
 
-        <div>
-        <asp:DropDownList runat="server">
-            <asp:ListItem Text="Seleccionar criterio" />
-            <asp:ListItem Text="Nombre" />
-            <asp:ListItem Text="DNI" />
-            <asp:ListItem Text="Especialidad" />
-            <asp:ListItem Text="Turno" />
-         </asp:DropDownList>
-        <asp:TextBox runat="server" />
-        <asp:Button Text="Buscar" runat="server" />
+    <div>
+        <asp:TextBox ID="txtBusqueda" runat="server" />
+        <asp:Button Text="Buscar" OnClick="Click_Buscar" runat="server" />
         <asp:Button Text="Agregar" OnClick ="Click_Agregar" runat="server" />
     </div>
+    <div>
+        <asp:Label ID="lblBusquedaIncorrecta" Text="" runat="server" /></div>
     <div>
         <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>

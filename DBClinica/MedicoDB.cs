@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, CONCAT(M.Nombre, ' ', M.Apellido) AS NombreCompleto, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad");
+                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Nombre, M.Apellido, CONCAT(M.Nombre, ' ', M.Apellido) AS NombreCompleto, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,6 +27,8 @@ namespace DBClinica
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Matricula = (string)datos.Lector["Matricula"];
                     aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Especialidad = new Especialidad();
                     aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
                     aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
@@ -141,71 +143,23 @@ namespace DBClinica
             }
         }
 
-        public Medico buscarporID(int IDBuscado)
+        public Medico buscarporID(int ID)
         {
-            ConexionDB datos = new ConexionDB();
-            try
-            {
-
-                    datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad WHERE M.ID = " + IDBuscado + "");
-
-                    datos.ejecutarLectura();
-                    datos.Lector.Read();
-                    Medico aux = new Medico();
-                    aux.ID = (int)datos.Lector["ID"];
-                    int id = aux.ID;
-                    aux.DNI = (string)datos.Lector["DNI"];
-                    aux.Matricula = (string)datos.Lector["Matricula"];
-                    aux.Apellido = (string)datos.Lector["Apellido"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Especialidad = new Especialidad();
-                    aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
-                    aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
-                    aux.Telefono = (string)datos.Lector["Telefono"];
-                    aux.Email = (string)datos.Lector["Email"];
-                    aux.Dirección = (string)datos.Lector["Direccion"];
-                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                    aux.Turno = new TurnoTrabajo();
-                    aux.Turno.ID = (int)datos.Lector["IDTurnoTrabajo"];
-                    aux.Turno.NombreTurno = (string)datos.Lector["Turno"];
-                    aux.HorarioEntrada = (DateTime)datos.Lector["HoraEntrada"];
-                    aux.HorarioSalida = (DateTime)datos.Lector["HoraSalida"];
-                    aux.Estado = (bool)datos.Lector["Estado"];
-
-               
-                    return aux;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> listamedicos = medicoDB.listarMedico();
+            Medico medico = listamedicos.Find(x => x.ID == ID);
+            return medico;
         }
 
-        public List<Medico> buscar(string criterio, Medico valorBuscado)
+        public List<Medico> buscar(string valorBuscado)
         {
             List<Medico> lista = new List<Medico>();
             ConexionDB datos = new ConexionDB();
             try
             {
 
-                try
-                {
-                    if (criterio == "DNI")
-                    {
-                        datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad WHERE M.ID = " + valorBuscado.DNI + "");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-
-                    throw ex;
-                }
-
+                
+                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, CONCAT(M.Nombre, ' ', M.Apellido) AS NombreCompleto, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad WHERE M.Apellido LIKE '" + valorBuscado + "%' OR M.Nombre LIKE '" + valorBuscado + "%' OR M.Apellido LIKE '" + valorBuscado + "%' OR M.Matricula LIKE '" + valorBuscado + "%'"); 
                 datos.ejecutarLectura();      
 
                 while (datos.Lector.Read())
@@ -217,6 +171,7 @@ namespace DBClinica
                     aux.Matricula = (string)datos.Lector["Matricula"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Especialidad = new Especialidad();
                     aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
                     aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];

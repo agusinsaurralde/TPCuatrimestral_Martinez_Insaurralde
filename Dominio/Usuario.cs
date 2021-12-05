@@ -25,5 +25,32 @@ namespace Dominio
         {
 
         }
+
+        public bool UsuarioAdmin(Usuario usuarioIngresado)
+        {
+            if (usuarioIngresado != null && usuarioIngresado.TipoUsuario.Nombre == "Administrador")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UsuarioMedico(Usuario usuarioIngresado)
+        {
+            if (usuarioIngresado != null && usuarioIngresado.TipoUsuario.Nombre == "Médico")
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool UsuarioRecepcionista(Usuario usuarioIngresado)
+        {
+            if (usuarioIngresado != null && usuarioIngresado.TipoUsuario.Nombre == "Recepcionista")
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
+

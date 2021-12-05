@@ -11,10 +11,10 @@ namespace WebApplication1
 {
     public partial class Contact : Page
     {
-        MedicoDB medico = new MedicoDB();
+        MedicoDB medicoDB = new MedicoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Grilla.DataSource = medico.listarMedico();
+            Grilla.DataSource = medicoDB.listarMedico();
             Grilla.DataBind();
         }
         protected void Click_Agregar(object sender, EventArgs e)
@@ -25,17 +25,31 @@ namespace WebApplication1
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
             int med = (int)Grilla.DataKeys[e.RowIndex].Values[0];
-            Session.Add("eliminar", medico.buscarporID(med));
+            Session.Add("eliminar", medicoDB.buscarporID(med));
             Response.Redirect("EliminarMedico.aspx");
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             int med = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
-            Session.Add("modificar", medico.buscarporID(med)); 
+            Session.Add("modificar", medicoDB.buscarporID(med)); 
             Response.Redirect("ModificarMedico.aspx");
         }
+        protected void Click_Buscar(object sender, EventArgs e)
+        {
+            List<Medico> medicosBusqueda = medicoDB.buscar(txtBusqueda.Text);
+            if (medicosBusqueda != null)
+            {
+                Grilla.DataSource = medicosBusqueda;
+                Grilla.DataBind();
+            }
+            else
+            {
+                lblBusquedaIncorrecta.Text = "No se encontraron resultados.";
+            }
 
-        
+        }
+
+
     }
 }

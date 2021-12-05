@@ -44,13 +44,12 @@ namespace WebApplication1
 
                 List<Medico> medico = medicoDB.listarMedico();
                 Session["listaMedico"] = medico;
-               
+
                 ddlistMedico.DataSource = medico;
                 ddlistMedico.DataTextField = "NombreCompleto";
                 ddlistMedico.DataValueField = "ID";
                 ddlistMedico.DataBind();
                 ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));
-
 
             }
 
@@ -65,7 +64,7 @@ namespace WebApplication1
         }
         protected void txtFecha_textChanged(object sender, EventArgs e)
         {
-           ddlistHora.Enabled = true;            
+            ddlistHora.Enabled = true;
             int idMedico = int.Parse(ddlistMedico.SelectedItem.Value);
             Medico medSeleccionado = medicoDB.buscarporID(idMedico);
             DateTime hora = medSeleccionado.HorarioEntrada;
@@ -87,17 +86,17 @@ namespace WebApplication1
                 {
                     foreach (Turno turno in listaTurno)
                     {
-                        if(turno.Medico.ID == medSeleccionado.ID)
+                        if (turno.Medico.ID == medSeleccionado.ID)
                         {
                             contTotal++; //CUENTA SI EXISTEN TURNOS DEL MÉDICO
 
-                            if(turno.Dia != DateTime.Parse(txtFecha.Text)) //NO EXISTEN TURNOS EN EL DIA SELECCIONADO
+                            if (turno.Dia != DateTime.Parse(txtFecha.Text)) //NO EXISTEN TURNOS EN EL DIA SELECCIONADO
                             {
-                                bandera = true; 
+                                bandera = true;
                             }
-                            else if(turno.Dia == DateTime.Parse(txtFecha.Text)) //COMPARA CADA HORARIO POSIBLE CON LOS DE LOS TURNOS EXISTENTES
+                            else if (turno.Dia == DateTime.Parse(txtFecha.Text)) //COMPARA CADA HORARIO POSIBLE CON LOS DE LOS TURNOS EXISTENTES
                             {
-                                if(banderaAux == false && turno.Estado.Estado == "Programado" && hora.ToString("HH.mm") != turno.HorarioInicio.ToString("HH.mm"))
+                                if (banderaAux == false && turno.Estado.Estado == "Programado" && hora.ToString("HH.mm") != turno.HorarioInicio.ToString("HH.mm"))
                                 {
                                     ddlistHora.Items.Add(new ListItem(hora.ToString("HH:mm")));
                                     banderaAux = true;
@@ -113,13 +112,13 @@ namespace WebApplication1
                         if (contTotal == 0)
                             bandera = true; //NO REPITE FOREACH
                     }
-                    if(bandera == true)
+                    if (bandera == true)
                         ddlistHora.Items.Add(new ListItem(hora.ToString("HH:mm")));
 
                     hora += horaSumar;
                     banderaAux = false;
                 }
-                if (bandera == true && x>0)
+                if (bandera == true && x > 0)
                 {
                     ddlistHora.Items.Add(new ListItem(hora.ToString("HH:mm")));
                     hora += horaSumar;
@@ -128,23 +127,24 @@ namespace WebApplication1
         }
 
         protected void Click_Buscar(object sender, EventArgs e)
-        { 
-           PacienteDB pacienteDB = new PacienteDB();
-           Paciente dniPaciente = new Paciente();
-           dniPaciente.DNI = txtDNI.Text;
-           Paciente datosPaciente = pacienteDB.buscarObjeto("DNI", dniPaciente);
+        {
+            PacienteDB pacienteDB = new PacienteDB();
+            List<Paciente> listapacientes = pacienteDB.listarPaciente();
+            Paciente datosPaciente = listapacientes.Find(x => x.DNI == txtDNI.Text);
 
-           if(datosPaciente == null)
-           {
+
+            if (datosPaciente == null)
+            {
                 txtPaciente.Text = "Paciente inexistente";
                 txtApellido.Text = "";
                 txtNombre.Text = "";
             }
-           else
-           {
+            else
+            {
                 txtPaciente.Text = "Paciente existente";
-                txtApellido.Text = "Apellido: "+ datosPaciente.Apellido;
+                txtApellido.Text = "Apellido: " + datosPaciente.Apellido;
                 txtNombre.Text = "Nombre: " + datosPaciente.Nombre;
+                txtCobertura.Text = "Cobertura: " + datosPaciente.Cobertura.Nombre;
             }
         }
 
@@ -157,24 +157,35 @@ namespace WebApplication1
             string error = "turno";
 
             PacienteDB pacienteDB = new PacienteDB();
-            Paciente dniPaciente = new Paciente();
+            List<Paciente> pacientes = pacienteDB.listarPaciente();
 
             System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
 
             try
             {
-                int id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-                NuevoTurno.Paciente = pacienteDB.buscarObjeto("DNI", dniPaciente);
-                NuevoTurno.Especialidad.Id = id;
+                NuevoTurno.Paciente = pacientes.Find(x => x.DNI == txtDNI.Text);
+                NuevoTurno.Especialidad = new Especialidad();
+                NuevoTurno.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
+                NuevoTurno.Especialidad.Nombre = ddlistEspecialidad.SelectedItem.Text;
+                NuevoTurno.Medico = new Medico();
                 NuevoTurno.Medico.ID = int.Parse(ddlistMedico.SelectedItem.Value);
+                NuevoTurno.Medico.NombreCompleto = ddlistMedico.SelectedItem.Text;
                 NuevoTurno.Dia = DateTime.Parse(txtFecha.Text);
                 NuevoTurno.HorarioInicio = DateTime.Parse(ddlistHora.SelectedItem.Value);
-                NuevoTurno.HorarioFin = DateTime.Parse(ddlistHora.SelectedItem.Value) + horaSumar;
+                DateTime horaFInal = DateTime.Parse(ddlistHora.SelectedItem.Value) + horaSumar;
+                NuevoTurno.HorarioFin = horaFInal;
                 NuevoTurno.Observaciones = txtObservaciones.Text;
+                NuevoTurno.AdministrativoResponsable = new Empleado();
                 NuevoTurno.AdministrativoResponsable.ID = int.Parse(ddlistRecepcionista.SelectedItem.Value);
-                NuevoTurno.Estado.ID = int.Parse(ddlistMedico.SelectedItem.Value);
+                NuevoTurno.Estado = new EstadoTurno();
+                NuevoTurno.Estado.ID = int.Parse(ddlistEstado.SelectedItem.Value);
 
                 cargar.agregar(NuevoTurno);
+                List<Turno> listaturnos = cargar.listarTurno();
+
+                NuevoTurno.Numero = listaturnos.Count;
+                Session.Add("NuevoTurno", NuevoTurno);
+
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
             catch (Exception)
@@ -182,5 +193,7 @@ namespace WebApplication1
                 Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
         }
+
+
     }
 }

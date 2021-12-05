@@ -70,14 +70,14 @@ namespace DBClinica
             {
                 datos.setearConsulta("EXEC SP_ASIGNARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @HoraFin, @Observaciones, @IDRecepcionista, @Estado");
                 datos.setearParametro("@IDPaciente", turnoNuevo.Paciente.ID);
-                datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad);
+                datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad.Id);
                 datos.setearParametro("@IDMedico", turnoNuevo.Medico.ID);
                 datos.setearParametro("@Dia", turnoNuevo.Dia);
                 datos.setearParametro("@HoraInicio", turnoNuevo.HorarioInicio);
                 datos.setearParametro("@HoraFin", turnoNuevo.HorarioInicio);
                 datos.setearParametro("@Observaciones", turnoNuevo.Observaciones);
                 datos.setearParametro("@IDRecepcionista", turnoNuevo.AdministrativoResponsable.ID);
-                datos.setearParametro("@IDEstado", turnoNuevo.Estado);
+                datos.setearParametro("@Estado", turnoNuevo.Estado.ID);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
