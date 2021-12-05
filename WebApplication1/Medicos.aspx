@@ -12,22 +12,19 @@
     <div>
         <asp:Label ID="lblBusquedaIncorrecta" Text="" runat="server" /></div>
     <div>
-        <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+        <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged"  OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>
                 <asp:BoundField datafield = "ID" HeaderText ="#" />
                 <asp:BoundField datafield = "Matricula" HeaderText ="Matrícula" />
-                <asp:BoundField datafield = "NombreCompleto" HeaderText ="Nombre y apellido" />
-                <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="Especialidad" />
+                <asp:BoundField datafield = "NombreCompleto" HeaderText ="Nombre y apellido" />              
                 <asp:BoundField datafield = "Telefono" HeaderText ="Teléfono" />
                 <asp:BoundField datafield = "Email" HeaderText ="Email" />
                 <asp:BoundField datafield = "Dirección" HeaderText ="Dirección" />
                 <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="Fecha de Nacimiento" />
-                <asp:BoundField datafield = "Turno.NombreTurno" HeaderText ="Turno" />
-                <asp:BoundField datafield = "HorarioEntrada" DataFormatString="{0:HH:mm tt}"  HeaderText ="Entrada" />
-                <asp:BoundField datafield = "HorarioSalida" DataFormatString="{0:HH:mm tt}" HeaderText ="Salida" />
                 <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
+                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Especialidaes" />
                 <asp:CommandField ButtonType="Button" ShowEditButton="true" />   
-                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />  
+                <asp:CommandField ButtonType ="Button" ShowDeleteButton="true" />
             </Columns>
         </asp:gridview>
     </div>

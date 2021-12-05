@@ -27,14 +27,15 @@ namespace WebApplication1
             int med = (int)Grilla.DataKeys[e.RowIndex].Values[0];
             Session.Add("eliminar", medicoDB.buscarporID(med));
             Response.Redirect("EliminarMedico.aspx");
-        }
-
+        }  
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             int med = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
             Session.Add("modificar", medicoDB.buscarporID(med)); 
             Response.Redirect("ModificarMedico.aspx");
         }
+ 
+
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Medico> medicosBusqueda = medicoDB.buscar(txtBusqueda.Text);
@@ -50,6 +51,10 @@ namespace WebApplication1
 
         }
 
-
+        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session.Add("EspMedico", medicoDB.listarEspecialidadesMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            Response.Redirect("EspecialidadesMedico.aspx");
+        }
     }
 }

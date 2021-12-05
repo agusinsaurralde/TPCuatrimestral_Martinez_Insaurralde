@@ -26,6 +26,13 @@ namespace WebApplication1
             Session.Add("editarTurno", turnoBD.buscarTurno(turnito.Numero));
             Response.Redirect("ModificarTurno.aspx");
         }
+
+        protected void Click_Agregar(object sender, EventArgs e)
+        {
+
+            Response.Redirect("AsignarTurno.aspx");
+
+        }
     }
 
 

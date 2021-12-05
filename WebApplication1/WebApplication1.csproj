@@ -124,6 +124,7 @@
     <Content Include="ErrorModificar.aspx" />
     <Content Include="EliminarCorrecto.aspx" />
     <Content Include="ErrorEliminar.aspx" />
+    <Content Include="EspecialidadesMedico.aspx" />
     <Content Include="Ingreso.aspx" />
     <Content Include="ModificarEmpleado.aspx" />
     <Content Include="ModificarUsuario.aspx" />
@@ -333,6 +334,13 @@
     </Compile>
     <Compile Include="ErrorEliminar.aspx.designer.cs">
       <DependentUpon>ErrorEliminar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EspecialidadesMedico.aspx.cs">
+      <DependentUpon>EspecialidadesMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EspecialidadesMedico.aspx.designer.cs">
+      <DependentUpon>EspecialidadesMedico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ingreso.aspx.cs">
       <DependentUpon>Ingreso.aspx</DependentUpon>

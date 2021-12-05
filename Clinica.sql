@@ -4,126 +4,13 @@ create database Clinica
 go
 use Clinica
 go
-create table TurnoTrabajo(
-    ID int PRIMARY KEY IDENTITY(1,1) not null,
-    Turno VARCHAR(6) UNIQUE not null,
-	CONSTRAINT CHK_Turno CHECK (Turno NOT LIKE '%[^A-Z]%')
-)
-go
-create table Medico(
-    ID int PRIMARY KEY not NULL IDENTITY(1,1),
-    DNI VARCHAR(8) UNIQUE not null,
-	Matricula VARCHAR(10) Unique not null,
-    Nombre VARCHAR(50) not null,
-    Apellido VARCHAR(50) not null,
-    Telefono VARCHAR(15) not null,
-    Email VARCHAR(320) UNIQUE not null,
-    Direccion VARCHAR(320) not null,
-    FechaNacimiento DATE not null,
-    IDTurnoTrabajo int not null,
-    HoraEntrada DATETIME not null,
-    HoraSalida DATETIME not null,
-
-	CONSTRAINT FK_IDTurnoTrabajo FOREIGN KEY (IDTurnoTrabajo) REFERENCES TurnoTrabajo(ID),
-	CONSTRAINT CHK_DNIMedico CHECK (DNI NOT LIKE '%[^0-9]%'),
-	CONSTRAINT CHK_Matricula CHECK (Matricula NOT LIKE '%[^0-9]%'),
-	CONSTRAINT CHK_TelefonoMedico CHECK (Telefono NOT LIKE '%[^0-9]%'),
-	CONSTRAINT CHK_EmailMedico CHECK (Email LIKE '__%@__%.__%'),
-	CONSTRAINT CHK_DireccionMedico CHECK (Direccion LIKE '[A-Z]%[0-9]'),
-	CONSTRAINT CHK_FechaNacimiento CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
-)
-Alter table Medico
-add Estado bit
-
-select * from medico
-select * from EspecialidadXMedico
-go
-create table Especialidad(
-    ID int PRIMARY KEY IDENTITY(1,1) not null,
-    Nombre VARCHAR(50) UNIQUE not NULL,
-)
-GO
-Alter table Especialidad
-add Estado bit;
-Select * from Especialidad
-update Especialidad SET Estado = 1
-
-create table EspecialidadXMedico(
-    ID int PRIMARY KEY IDENTITY(1,1) not null,
-    IDEspecialidad int not null,
-    IDMedico int not null,
-
-	CONSTRAINT FK_IDMedico FOREIGN KEY (IDMedico) REFERENCES Medico(ID),
-	CONSTRAINT FK_IDEspecialidad FOREIGN KEY (IDEspecialidad) REFERENCES Especialidad(ID)
-)
-Alter table EspecialidadXMedico
-add Estado bit;
-update especialidadXMedico set estado = 1
-GO
-create table Cobertura(
-    ID int PRIMARY KEY IDENTITY(1,1) not null,
-    Nombre VARCHAR(30) not null
-)
-go
-select * from Cobertura
-Alter table Cobertura
-add Estado bit;
-update Cobertura SET Estado = 1
-
-select * from Usuario
-Alter table Usuario add Estado bit
-
-create table Paciente(
-    ID int PRIMARY KEY IDENTITY(1,1) not null,
-    DNI VARCHAR(8) UNIQUE not null,
-    Nombre VARCHAR(50) not null,
-    Apellido VARCHAR(50) not null,
-    Telefono VARCHAR(15) not null,
-    Email VARCHAR(320) null,
-    Direccion VARCHAR(320) not null,
-    FechaNacimiento DATE not null,
-    Cobertura int not null,
-
-	CONSTRAINT FK_IDCobertura FOREIGN KEY (Cobertura) REFERENCES Cobertura(ID),
-
-	CONSTRAINT CHK_DNIPaciente CHECK (DNI NOT LIKE '%[^0-9]%'),
-	CONSTRAINT CHK_TelefonoPaciente CHECK (Telefono NOT LIKE '%[^0-9]%'),
-	CONSTRAINT CHK_EmailPaciente CHECK (Email LIKE '__%@__%.__%'),
-	CONSTRAINT CHK_DireccionPaciente CHECK (Direccion LIKE '[A-Z]%[0-9]'),
-	CONSTRAINT CHK_FechaNacimientoPaciente CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
-)
-Alter table Paciente
-add Estado bit;
-
-update Paciente SET Estado = 1
-
-GO
-create table HistoriaClinica(
-    ID int PRIMARY KEY IDENTITY(1,1) not null,
-	IDPaciente int not null,
-	Fecha DATE not null,
-    Descripcion VARCHAR(500) not null,
-
-	CONSTRAINT FK_IDPacienteHC FOREIGN KEY (IDPaciente) REFERENCES Paciente(ID)
-)
-GO
-
-Alter table HistoriaClinica
-add Estado bit;
-
-update HistoriaClinica SET Estado = 1
-
+--TIPOEMPLEADO------------------------------
 create table TipoEmpleado(
     ID int PRIMARY key IDENTITY(1,1) not null,
-    Tipo VARCHAR(14) not null,
+    Tipo VARCHAR(14) not null
 )
 GO
-
-Alter table TipoEmpleado
-add Estado bit;
-
-update TipoEmpleado SET Estado = 1
-
+--EMPLEADO----------------------------------
 create table Empleado(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
     DNI VARCHAR(8) UNIQUE NOT NULL,
@@ -134,6 +21,7 @@ create table Empleado(
     Direccion VARCHAR(320) NOT NULL,
     FechaNacimiento DATE NOT NULL,
     IDTipo int NOT NULL,
+	Estado bit not null,
 
 	CONSTRAINT FK_IDTipoEmpleado FOREIGN KEY (IDTipo) REFERENCES TipoEmpleado(ID),
 	CONSTRAINT CHK_DNIEmpleado CHECK (DNI NOT LIKE '%[^0-9]%'),
@@ -142,24 +30,113 @@ create table Empleado(
 	CONSTRAINT CHK_DireccionEmpleado CHECK (Direccion LIKE '[A-Z]%[0-9]'),
 	CONSTRAINT CHK_FechaNacimientoEmpleado CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
-GO
-
-Alter table Empleado
-add Estado bit;
-
-update Empleado SET Estado = 1
-
-Create table EstadoTurno(
+go
+--TURNOTRABAJO---------------------------------
+create table TurnoTrabajo(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
-    Descripcion VARCHAR(20)
+    Turno VARCHAR(6) UNIQUE not null,
+	CONSTRAINT CHK_Turno CHECK (Turno NOT LIKE '%[^A-Z]%')
 )
 go
+--ESPECIALIDAD---------------------------------
+create table Especialidad(
+    ID int PRIMARY KEY IDENTITY(1,1) not null,
+    Nombre VARCHAR(50) UNIQUE not NULL,
+	Estado bit not null
+)
+GO
+--ESPECIALIDADXMEDICO------------------------------
+create table EspecialidadXMedico(
+    ID int PRIMARY KEY IDENTITY(1,1) not null,
+    IDEspecialidad int not null,
+    IDMedico int not null,
+	Lunes bit null,
+	Martes bit null,
+	Miercoles bit null,
+	Jueves bit null,
+	Viernes bit null,
+	Sabado bit null,
+	IDTurnoTrabajo int FOREIGN KEY REFERENCES TurnoTrabajo(ID),
+	HorarioEntrada datetime not null,
+	HorarioSalida datetime not null,
+	Estado bit not null,
 
-Alter table EstadoTurno
-add Estado bit;
+	CONSTRAINT FK_IDMedico FOREIGN KEY (IDMedico) REFERENCES Empleado(ID),
+	CONSTRAINT FK_IDEspecialidad FOREIGN KEY (IDEspecialidad) REFERENCES Especialidad(ID)
+)
+GO
+--DIASHABILESMEDICO---------------------------------
+/*CREATE TABLE DiasHabilesMedico(
+	IDESPXMED INT NOT NULL FOREIGN KEY REFERENCES ESPECIALIDADXMEDICO(ID),
+	Lunes bit null,
+	Martes bit null,
+	Miercoles bit null,
+	Jueves bit null,
+	Viernes bit null,
+	Sabado bit null,
+	IDTurnoTrabajo int FOREIGN KEY REFERENCES TurnoTrabajo(ID),
+	HorarioEntrada datetime not null,
+	HorarioSalida datetime not null,
+	Estado bit not null
+)*/
+go
+--DATOSMEDICO---------------------------------------
+create table DatosMedico(
+    ID int PRIMARY KEY not NULL,
+	Matricula VARCHAR(10) Unique not null,
+	Estado bit not null,
 
-update EstadoTurno SET Estado = 1
+	CONSTRAINT FK_ID FOREIGN KEY (ID) REFERENCES Empleado(ID),
+	CONSTRAINT CHK_Matricula CHECK (Matricula NOT LIKE '%[^0-9]%'),
+)
+go
+--COBERTURA----------------------------------------
+create table Cobertura(
+    ID int PRIMARY KEY IDENTITY(1,1) not null,
+    Nombre VARCHAR(30) not null,
+	Estado bit not null
+)
+go
+--PACIENTE-------------------------------------------
+create table Paciente(
+    ID int PRIMARY KEY IDENTITY(1,1) not null,
+    DNI VARCHAR(8) UNIQUE not null,
+    Nombre VARCHAR(50) not null,
+    Apellido VARCHAR(50) not null,
+    Telefono VARCHAR(15) not null,
+    Email VARCHAR(320) null,
+    Direccion VARCHAR(320) not null,
+    FechaNacimiento DATE not null,
+    Cobertura int not null,
+	Estado bit not null,
 
+	CONSTRAINT FK_IDCobertura FOREIGN KEY (Cobertura) REFERENCES Cobertura(ID),
+
+	CONSTRAINT CHK_DNIPaciente CHECK (DNI NOT LIKE '%[^0-9]%'),
+	CONSTRAINT CHK_TelefonoPaciente CHECK (Telefono NOT LIKE '%[^0-9]%'),
+	CONSTRAINT CHK_EmailPaciente CHECK (Email LIKE '__%@__%.__%'),
+	CONSTRAINT CHK_DireccionPaciente CHECK (Direccion LIKE '[A-Z]%[0-9]'),
+	CONSTRAINT CHK_FechaNacimientoPaciente CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
+)
+GO
+--HISTORIACLINICA----------------------------------
+create table HistoriaClinica(
+    ID int PRIMARY KEY IDENTITY(1,1) not null,
+	IDPaciente int not null,
+	Fecha DATE not null,
+    Descripcion VARCHAR(500) not null,
+	Estado bit not null,
+
+	CONSTRAINT FK_IDPacienteHC FOREIGN KEY (IDPaciente) REFERENCES Paciente(ID)
+)
+GO
+--ESTADOTURNO--------------------------------------
+Create table EstadoTurno(
+    ID int PRIMARY KEY IDENTITY(1,1) not null,
+    Descripcion VARCHAR(20) not null
+)
+go
+--TURNO----------------------------------------------
 create table Turno(
     Numero int PRIMARY KEY IDENTITY(1,1) NOT NULL,
     IDPaciente int not null,
@@ -175,276 +152,291 @@ create table Turno(
 	CONSTRAINT FK_IDEspXMedico FOREIGN KEY (IDEspXMedico) REFERENCES EspecialidadXMedico(ID),
 	CONSTRAINT FK_IDRecepcionista FOREIGN KEY (IDRecepcionista) REFERENCES Empleado(ID),
 	CONSTRAINT FK_IDEstado FOREIGN KEY (IDEstado) REFERENCES EstadoTurno(ID),
-	
 	CONSTRAINT CHK_Dia CHECK (Dia >getdate()),
 )
 go  
+--TipoUsuario----------------------------------
 create table TipoUsuario(
     ID int PRIMARY key IDENTITY(1,1) not null,
-    Nombre VARCHAR (8) not null
+    Nombre VARCHAR (13) not null
 )
-select * from tipousuario
-alter table tipousuario
-alter column nombre varchar(13)
-insert into tipousuario(nombre) values('Recepcionista')
+--INSERT
+go
+insert into tipousuario(nombre) values('Médico')
+go
 insert into tipousuario(nombre) values('Administrador')
-insert into tipousuario(nombre) values('Medico')
-update tipousuario set nombre = 'Administrador' where id = 2
-
-update tipousuario set ID = 2 where Nombre = 'Administrador'
+go
+insert into tipousuario(nombre) values('Recepcionista')
 
 GO
-
-Alter table TipoUsuario
-add Estado bit;
-
-update TipoUsuario SET Estado = 1
-
+--USUARIO-----------------------------------------------
 create table Usuario(
     ID int PRIMARY KEY not null,
-    NombreUsuario VARCHAR(15) UNIQUE,
-    Contraseña VARCHAR(15),
-    IDTipo int
+    NombreUsuario VARCHAR(15) UNIQUE not null,
+    Contraseña VARCHAR(15) not null,
+    IDTipo int not null,
+	Estado bit not null
 
-	CONSTRAINT FK_IDTipoUsuario FOREIGN KEY (IDTipo) REFERENCES TipoUsuario(ID),
-	CONSTRAINT CHK_NombreUsuario CHECK(Contraseña NOT LIKE '%[|!"#$%&/()=?¡¿´¨*[]{}]%')
+	CONSTRAINT FK_IDTipoUsuario FOREIGN KEY (IDTipo) REFERENCES TipoUsuario(ID)
 )
 
-Alter table Usuario
-add Estado bit;
-
-update Usuario SET Estado = 1
-
-Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(124578, 'dmastopierro', '123medico', 1, 1)
-Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(9999, 'mster', '123admin', 2, 1)
-Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(1010, 'cmedina', '123recep', 3, 1)
 
 
-select * from Usuario
+/*select * from Usuario
 select * from tipoempleado
 select * from empleado
-select * from medico
 select * from TipoUsuario
 select * from Cobertura
 select * from Especialidad
 select * from HistoriaClinica
-select * from Paciente
-
-update TipoUsuario SET Nombre = 'Recepcionista'
-where ID=3
+select * from Paciente*/
+go
+set dateformat 'dmy'
 -----------Insert especialidades-------------------------
 go
-insert Especialidad(Nombre) values('Anestesiología')
+insert Especialidad(Nombre, Estado) values('Anestesiología', 1)
 go
-insert Especialidad(Nombre) values('Anatomía Patológica')
+insert Especialidad(Nombre, Estado) values('Anatomía Patológica', 1)
 go
-insert Especialidad(Nombre) values('Cardiología')
+insert Especialidad(Nombre, Estado) values('Angiología y Cirugía Vascular', 1)
 go
-insert Especialidad(Nombre) values('Cardiología Intervencionista')
+insert Especialidad(Nombre, Estado) values('Cardiología', 1)
+GO
+insert Especialidad(Nombre, Estado) values('Cardiología Intervencionista', 1)
 go
-insert Especialidad(Nombre) values('Cirugía Pediátrica')
+insert Especialidad(Nombre, Estado) values('Cirugía General', 1)
 go
-insert Especialidad(Nombre) values('Cirugía General')
+insert Especialidad(Nombre, Estado) values('Cirugía Oncólogica', 1)
 go
-insert Especialidad(Nombre) values('Cirugía Plástica y Reconstructiva')
+insert Especialidad(Nombre, Estado) values('Cirugía Pediátrica', 1)
 go
-insert Especialidad(Nombre) values('Angiología y Cirugía Vascular')
+insert Especialidad(Nombre, Estado) values('Cirugía Plástica y Reconstructiva', 1)
 go
-insert Especialidad(Nombre) values('Dermatología')
+insert Especialidad(Nombre, Estado) values('Clínica Médica', 1)
 go
-insert Especialidad(Nombre) values('Endoscopía')
+insert Especialidad(Nombre, Estado) values('Dermatología', 1)
 go
-insert Especialidad(Nombre) values('Gastroenterología')
+insert Especialidad(Nombre, Estado) values('Endoscopía', 1)
 go
-insert Especialidad(Nombre) values('Ginecología y Obstetricía')
+insert Especialidad(Nombre, Estado) values('Gastroenterología', 1)
 go
-insert Especialidad(Nombre) values('Hematología')
+insert Especialidad(Nombre, Estado) values('Ginecología y Obstetricía', 1)
 go
-insert Especialidad(Nombre) values('Infectología')
+insert Especialidad(Nombre, Estado) values('Hematología', 1)
 go
-insert Especialidad(Nombre) values('Medicina Aeroespacial')
+insert Especialidad(Nombre, Estado) values('Infectología', 1)
 go
-insert Especialidad(Nombre) values('Medicina de Rehabilitación')
+insert Especialidad(Nombre, Estado) values('Medicina Aeroespacial', 1)
 go
-insert Especialidad(Nombre) values('Medicina Interna')
+insert Especialidad(Nombre, Estado) values('Medicina del Enfermo en Estado Crítico', 1)
 go
-insert Especialidad(Nombre) values('Nefrología')
+insert Especialidad(Nombre, Estado) values('Medicina de Rehabilitación', 1)
 go
-insert Especialidad(Nombre) values('Neurología')
+insert Especialidad(Nombre, Estado) values('Medicina Interna', 1)
 go
-insert Especialidad(Nombre) values('Neumonología')
+insert Especialidad(Nombre, Estado) values('Nefrología', 1)
 go
-insert Especialidad(Nombre) values('Oftalmología')
+insert Especialidad(Nombre, Estado) values('Neumonología', 1)
 go
-insert Especialidad(Nombre) values('Ortopedia')
+insert Especialidad(Nombre, Estado) values('Neurología', 1)
 go
-insert Especialidad(Nombre) values('Otorrinolaringología')
+insert Especialidad(Nombre, Estado) values('Oftalmología', 1)
 go
-insert Especialidad(Nombre) values('Patología Clinica')
+insert Especialidad(Nombre, Estado) values('Oncólogía Medica', 1)
 go
-insert Especialidad(Nombre) values('Pediatría')
+insert Especialidad(Nombre, Estado) values('Oncólogía Pediátrica', 1)
 go
-insert Especialidad(Nombre) values('Psiquiatría General')
+insert Especialidad(Nombre, Estado) values('Ortopedia', 1)
 go
-insert Especialidad(Nombre) values('Radiología e Imagen')
+insert Especialidad(Nombre, Estado) values('Otorrinolaringología', 1)
 go
-insert Especialidad(Nombre) values('Medicina del Enfermo en Estado Crítico')
+insert Especialidad(Nombre, Estado) values('Patología Clinica', 1)
 go
-insert Especialidad(Nombre) values('Urología')
+insert Especialidad(Nombre, Estado) values('Pediatría', 1)
 go
-insert Especialidad(Nombre) values('Cirugía Oncólogica')
+insert Especialidad(Nombre, Estado) values('Psiquiatría General', 1)
 go
-insert Especialidad(Nombre) values('Oncólogía Medica')
+insert Especialidad(Nombre, Estado) values('Radiología e Imagen', 1)
 go
-insert Especialidad(Nombre) values('Oncólogía Pediátrica')
+insert Especialidad(Nombre, Estado) values('Radio-Oncólogía', 1)
 go
-insert Especialidad(Nombre) values('Radio-Oncólogía')
+insert Especialidad(Nombre, Estado) values('Urología', 1)
+go
 
----------------------INSERT MEDICOS--------------------------------------
---set dateformat 'dmy'
+-----------------------------INSERT PACIENTES--------------------------------------------
+insert Cobertura(Nombre, Estado)VALUES('OSDE', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSECAC', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSPATCA', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSDEPYM', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSPIAD', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('Particular', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('Unión Personal', 1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123456', 'Jose', 'Argento', '753951', 'argentoJ@hotmail.com', 'Flores 1855', '10-05-1996',1,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123457', 'Erica', 'Rivas', '753952', 'rivasR@hotmail.com', 'Montes 1387', '23-05-1966',1,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123458', 'Marcelo', 'de Bellis', '753953', 'debellisM@hotmail.com', 'San Justo 503', '01-01-2000',2,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123459', 'Manuel', 'Wirtz', '753954', 'wirtzM@hotmail.com', 'Rojas 8088', '02-02-2010',2,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123450', 'Carla', 'Quevedo', '753955', 'quevedoC@hotmail.com', 'Rosset 99', '23-04-1988',3,1)
+go
+insert HistoriaClinica(IDPaciente, Descripcion, Fecha, Estado) VALUES (1, 'Síndrome de intestino irritable', '10-10-2021', 1)
+GO
+insert HistoriaClinica(IDPaciente, Descripcion, Fecha, Estado) VALUES (2, 'Síndrome de ovario poliquístico', '07-11-2021', 1)
 
-SELECT * FROM Medico
 
+---------------------insert Empleado----------------------------
+------Tipo
+go
+insert into TipoEmpleado(Tipo) values('Médico')
+go
+insert into TipoEmpleado(Tipo) values('Administrador')
+go
+insert into TipoEmpleado(Tipo) values('Recepcionista')
+--------------------Médico
+
+go
+INSERT EstadoTurno(Descripcion)VALUES('Programado')
+go
+INSERT EstadoTurno(Descripcion)VALUES('Cerrado')
+go
+INSERT EstadoTurno(Descripcion)VALUES('Reprogramado')
+go
+INSERT EstadoTurno(Descripcion)VALUES('Cancelado')
+go
+INSERT EstadoTurno(Descripcion)VALUES('No asistió')
+----------------Turno
+go
 INSERT TurnoTrabajo(Turno)VALUES('Mañana')
 go
 INSERT TurnoTrabajo(Turno)VALUES('Tarde')
 go
 INSERT TurnoTrabajo(Turno)VALUES('Noche')
+-----------Medicos
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124578, 'Dante', 'Mastopierro', 784512, 'mastopierroD@hotmail.com','Av.Cordoba 1642','10-10-1981','11345', 1, '07:00', '15:00')
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124578, 'Dante', 'Mastopierro', '784512', 'mastopierroD@hotmail.com','Av.Cordoba 1642','10-10-1981', 1,1)
+go																						 
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124570, 'Franco', 'Tirri', '784510', 'tirriF@hotmail.com','Av.Rivadavia 5201','01-4-1991',1,1)
+go																						  
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124571, 'Diego', 'Gomez','7845113', 'gomezD@hotmail.com','Calle de tierra 1500','06-6-1998',1,1)
+go																						 
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124572, 'Rodrigo', 'De la Serna', '784513', 'delasarnaR@hotmail.com','Bolivia 5654','10-4-1988',1,1)
+go																						
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124573, 'Doris', 'Blanca', '784514', 'blancaD@hotmail.com','P´sherman 42','07-05-1987',1,1)
+go																						  
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124574, 'Ana', 'Celentano', '784515', 'celentanoA@hotmail.com','Riobamba 7812','05-11-1990',1,1)
+go																						 
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124575, 'Sergio', 'Podeley', '784516', 'podeleyS@hotmail.com','Neyer 88','14-02-1971',1,1)
+go																						  
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124576, 'Rosina', 'Soto', '784517', 'sotoR@hotmail.com','Av.Carabobo 3200','13-09-1986',1,1)
+go																						 
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124577, 'Ariel', 'Staltari', '784518', 'staltariA@hotmail.com','Barrilete 6767','15-08-1979',1,1)
+go																						 
+insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124579, 'Agusto', 'Britez', '784519', 'britezA@hotmail.com','Chile 2311','18-03-1993',1,1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124570, 'Franco', 'Tirri', 784510, 'tirriF@hotmail.com','Av.Rivadavia 5201','01-4-1991','12345', 1, '07:00', '15:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(1,'11345', 1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124571, 'Diego', 'Gomez', 784511, 'gomezD@hotmail.com','Calle de tierra 1500','06-6-1998','26758', 1, '07:00', '15:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(2,'12345',  1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124572, 'Rodrigo', 'De la sarna', 784513, 'delasarnaR@hotmail.com','Bolivia 5654','10-4-1988','48973', 1, '07:00', '15:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(3,'26758',  1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124573, 'Doris', 'Blanca', 784514, 'blancaD@hotmail.com','P´sherman 42','07-05-1987','90675', 2, '15:00', '23:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(4,'48973',  1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124574, 'Ana', 'Celentano', 784515, 'celentanoA@hotmail.com','Riobamba 7812','05-11-1990','34678', 2, '15:00', '23:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(5,'90675',  1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124575, 'Sergio', 'Podeley', 784516, 'podeleyS@hotmail.com','Neyer 88','14-02-1971','87964', 2, '15:00', '23:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(6,'34678',  1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124576, 'Rosina', 'Soto', 784517, 'sotoR@hotmail.com','Av.Carabobo 3200','13-09-1986','37624', 2, '15:00', '23:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(7,'87964',  1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124577, 'Ariel', 'Staltari', 784518, 'staltariA@hotmail.com','Barrilete 6767','15-08-1979','87592', 3, '23:00', '07:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(8,'37624',  1)
 go
-insert Medico(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Matricula, IDTurnoTrabajo, HoraEntrada, HoraSalida) VALUES(124579, 'Agusto', 'Britez', 784519, 'britezA@hotmail.com','Chile 2311','18-03-1993','98637', 3, '23:00', '07:00')
+insert DatosMedico(ID,Matricula, Estado) VALUES(9,'87592',  1)
+go
+insert DatosMedico(ID,Matricula, Estado) VALUES(10,'98637', 1)
+go
+--usuarios medicos--------------
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(1, 'medico', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(2, 'ftirri', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(3, 'dgomez', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(4, 'rdelaserna', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(5, 'bdoris', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(6, 'acelentano', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(7, 'spodeley', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(8, 'rsoto', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(9, 'astaltari', '123medico', 1, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(10, 'abritez', '123medico', 1, 1)
+go
+--EspecialidadXMedico--------------------
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(1, 10, 1, 1, 1, 1, 1, 1, 0, 1, '08:00', '11:00')
+go														   																	 
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(2, 10, 1, 1, 1, 1, 0, 0, 0 ,1, '09:00', '12:00')
+go														   																	 
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(2, 1, 1, 0, 0, 0, 1, 1, 1 ,1, '09:00', '12:00')
+go														   																	
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(3, 3, 1, 0, 0, 0, 1, 1, 1, 1, '08:00', '12:00')
+go														   																	  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(4, 5, 1, 1, 1, 1, 0, 0, 0, 2, '12:00', '15:00')
+go														   																	
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(5, 13, 1, 1, 1, 0, 0, 1, 1, 2, '15:00', '18:00')
+go														   																
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(6, 15, 1, 1, 1, 0, 0, 0, 0, 2, '16:00', '19:00')
+go														   																	 
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(7, 14, 1, 1, 1, 1, 1, 1, 0, 2, '15:00', '18:00')
+go														   																	
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(8, 14, 1, 0, 1, 1, 1, 1, 1, 3, '18:00', '22:00')
+go														   																	 
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(9, 5, 1 ,1, 1, 1, 1, 0, 0, 3, '19:00', '23:00')
+go
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(10, 5, 1, 1, 1, 1, 1, 0, 0, 3, '19:00', '23:00')
+go
+----Administradores y recepcionistas
 
-<<<<<<< HEAD
-select * from Medico
-
-=======
-UPDATE Medico SET Estado = 1 WHERE DNI = 124575
-select * from Medico
->>>>>>> 500ca9d5ad6c073cecd7dc24227b5a00dbf31d7d
------------------------------INSERT PACIENTES--------------------------------------------
-insert Cobertura(Nombre)VALUES('Royalcanin')
+insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(9999, 2, 'Maria', 'Ster', 535353, 'sterM@hotmail.com', 'Monte agudo 1742', '10-10-2002',1)
 go
-insert Cobertura(Nombre)VALUES('Purina')
-go
-insert Cobertura(Nombre)VALUES('Infinity')
-go
-insert Cobertura(Nombre)VALUES('Whiskas')
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura)VALUES(123456, 'Jose', 'Argento', 753951, 'argentoJ@hotmail.com', 'Flores 1855', '10-05-1996',1)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura)VALUES(123457, 'Erica', 'Rivas', 753952, 'rivasR@hotmail.com', 'Montes 1387', '23-05-1966',1)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura)VALUES(123458, 'Marcelo', 'de Bellis', 753953, 'debellisM@hotmail.com', 'San Justo 503', '01-01-2000',2)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura)VALUES(123459, 'Manuel', 'Wirtz', 753954, 'wirtzM@hotmail.com', 'Rojas 8088', '02-02-2010',2)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura)VALUES(123450, 'Carla', 'Quevedo', 753955, 'quevedoC@hotmail.com', 'Rosset 99', '23-04-1988',3)
-go
-UPDATE Paciente SET Estado = 1 WHERE DNI = 123450
-select * from Paciente
----------------------insert Estado----------------------------
-INSERT EstadoTurno(Descripcion)VALUES('Programado')
-INSERT EstadoTurno(Descripcion)VALUES('Cerrado')
-INSERT EstadoTurno(Descripcion)VALUES('Reprogramado')
-INSERT EstadoTurno(Descripcion)VALUES('Cancelado')
-INSERT EstadoTurno(Descripcion)VALUES('No asistió')
----------------------insert Empleado----------------------------
-
-INSERT TipoEmpleado(Tipo)VALUES('Administrativo')
+insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(8888, 3, 'Roberto', 'Totora', 121212, 'robertototo@hotmail.com', 'Hernandez Hijo 4212', '14-12-1994',1)
 GO
-INSERT TipoEmpleado(Tipo)VALUES('Recepcionista')
+insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(7777, 3, 'Luna', 'Riveros', 456873, 'riverosL@hotmail.com', 'Sucre 2626', '08-2-2002',1)
 GO
-insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(9999, 1, 'Maria', 'Ster', 535353, 'sterM@hotmail.com', 'Monte agudo 1742', '10-10-2002')
+insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(4444, 3, 'Alicia', 'Becker', 124574, 'beckerA@hotmail.com', 'Vaporub 12', '05-06-1990',1)
+GO
+insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(5555, 3, 'Theodore Jasper', 'Detweiler', 976431, 'detweilerTJ@hotmail.com', 'AV.Siempre Viva 742', '13-06-1988',1)
+GO
+insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(1010, 2, 'Carla', 'Medina', 395864, 'medinaC@hotmail.com', 'Santa Maria de oro 2354', '13-10-1996',1)
+GO
+insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(1111, 2, 'Gregorio', 'Atlante', 895623, 'atlanteG@hotmail.com', 'Italia 44', '02-07-1998',1)
 go
-insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(8888, 1, 'Roberto', 'Totora', 121212, 'robertototo@hotmail.com', 'Hernandez Hijo 4212', '14-12-1994')
-GO
-insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(7777, 1, 'Luna', 'Riveros', 456873, 'riverosL@hotmail.com', 'Sucre 2626', '08-2-2002')
-GO
-insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(4444, 1, 'Alicia', 'Becker', 124574, 'beckerA@hotmail.com', 'Vaporub 12', '05-06-1990')
-GO
-insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(5555, 1, 'Theodore Jasper', 'Detweiler', 976431, 'detweilerTJ@hotmail.com', 'AV.Siempre Viva 742', '13-06-1988')
-insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(1010, 2, 'Carla', 'Medina', 395864, 'medinaC@hotmail.com', 'Santa Maria de oro 2354', '13-10-1996')
-GO
-insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(1111, 2, 'Gregorio', 'Atlante', 895623, 'atlanteG@hotmail.com', 'Italia 44', '02-07-1998')
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(11, 'admin', '123admin', 2, 1)
 go
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(23,1)
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(12, 'recepcionista', '123recep', 3, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(13, 'lriveros', '123recep', 3, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(14, 'abecker', '123recep', 3, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(15, 'tjasper', '123recep', 3, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(16, 'cmedina', '123admin', 2, 1)
+go
+Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(17, 'gatlante', '123admin', 2, 1)
+
+---TURNOS----------------------------------------------------------------
 GO
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(2,2)
-GO
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(1,14)
-GO
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(20,17)
-GO
-INSERT EspecialidadXMedico(IDEspecialidad,IDMedico)VALUES(6,16)
-GO
-INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio,HoraFin)VALUES(5,2,'01-01-2022','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00', '10:00')
-select * from EspecialidadXMedico
+INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio,HoraFin)VALUES(5,1,'01-01-2022','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00', '10:00')
 
---CONSULTA TURNO
-CREATE VIEW VW_TURNO AS
-	SELECT T.Numero AS NUMERO, P.Apellido AS APELLIDOPACIENTE, P.Nombre AS NOMBREPACIENTE, E.Nombre AS ESPECIALIDAD, M.Apellido AS APELLIDOMEDICO, M.Nombre AS NOMBREMEDICO, 
-	T.HoraInicio AS HORAINICIO, T.HoraFin AS HORAFIN, T.Dia AS DIA, 
-	T.OBSERVACIONES AS OBSERVACIONES,EMP.Apellido AS APELLIDORECEPCIONISTA, EMP.Nombre AS NOMBRERECEPCIONISTA, ET.Descripcion AS ESTADO from Turno AS T 
-	INNER JOIN Paciente AS P ON T.IDPaciente = P.ID
-	INNER JOIN EspecialidadXMedico AS EXM ON EXM.ID = T.IDEspXMedico
-	INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad
-	INNER JOIN Medico AS M ON M.ID = EXM.IDMedico 
-	INNER JOIN Empleado AS EMP ON EMP.ID = T.IDRecepcionista
-	INNER JOIN EstadoTurno AS ET ON ET.ID = T.IDEstado
-
-SELECT * FROM VW_TURNO
-
-use Clinica
-
-select * from Especialidad
-
-select * from Empleado
-
-SELECT * FROM Turno
-
-Select * FROM Paciente
-
-SELECT * From EspecialidadXMedico
-SELECT * FROM Medico
-SELECT * FROM Especialidad
-
-select
-T.Numero as NumTurno,
-P.Apellido as Apellido,
-P.Nombre as Nombre,
-Es.Nombre as Especialidad,
-M.Nombre as NombMedico,
-M.Apellido as ApeMedico,
-T.Dia as Dia,
-T.HoraInicio as HoraIni,
-T.HoraFin as HoraFin,
-T.Observaciones as Observaciones,
-Em.Nombre as Recepcionista,
-Est.Descripcion as Estado
-from Turno as T
-INNER JOIN Paciente as P on P.ID = T.IDPaciente
-INNER JOIN EspecialidadXMedico as E on E.ID = T.IDEspXMedico
-INNER JOIN Especialidad as Es on Es.ID=E.IDEspecialidad
-INNER JOIN Medico as M on M.ID=E.IDMedico
-INNER JOIN Empleado as Em on Em.ID=T.IDRecepcionista
-INNER JOIN EstadoTurno as Est on Est.ID=T.IDEstado
-WHERE T.Numero = 1
-
-select T.Numero as NumeroTurno, P.ID as IDPaciente, P.Apellido as ApellidoP, P.Nombre as NombreP, Es.ID as IDEsp, Es.Nombre as NombreEs, M.ID as IDmedico, M.Nombre as NombreM, M.Apellido as ApellidoM, T.Dia as Dia, T.HoraInicio as HI, T.HoraFin as HF, T.Observaciones as Obs, Em.ID as EmpleadoID, Em.Nombre as NombreEm, Em.Apellido as ApellidoEm, Est.ID as EstadoID, Est.Descripcion as EstadoD FROM Turno as T INNER JOIN Paciente as P on P.ID = T.IDPaciente INNER JOIN EspecialidadXMedico as E on E.ID = T.IDEspXMedico INNER JOIN Especialidad as Es on Es.ID = E.IDEspecialidad INNER JOIN Medico as M on M.ID = E.IDMedico INNER JOIN Empleado as Em on Em.ID = T.IDRecepcionista INNER JOIN EstadoTurno as Est on Est.ID = T.IDEstado WHERE T.Numero = 1
