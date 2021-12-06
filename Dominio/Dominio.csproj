@@ -44,11 +44,11 @@
     <Compile Include="Cobertura.cs" />
     <Compile Include="DiasHabilesMedico.cs" />
     <Compile Include="Especialidad.cs" />
-    <Compile Include="EspecialidadesMedico.cs" />
     <Compile Include="EstadoTurno.cs" />
     <Compile Include="HistoriaClinica.cs" />
     <Compile Include="Medico.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="MedicoEspecialidades.cs" />
     <Compile Include="TipoEmpleado.cs" />
     <Compile Include="TipoUsuario.cs" />
     <Compile Include="TurnoTrabajo.cs" />

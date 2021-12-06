@@ -12,7 +12,7 @@ namespace WebApplication1
     public partial class Formulario_web11 : System.Web.UI.Page
     {
         MedicoDB medicoDB = new MedicoDB();
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             EspecialidadDB espDB = new EspecialidadDB();
@@ -42,14 +42,22 @@ namespace WebApplication1
                 ddlistEstado.DataValueField = "ID";
                 ddlistEstado.DataBind();
 
-                List<Medico> medico = medicoDB.listarMedico();
-                Session["listaMedico"] = medico;
-
-                ddlistMedico.DataSource = medico;
+                /* List<Medico> medico = medicoDB.listarMedico();
+                 Session["listaMedico"] = medico;*/
+                List<MedicoEspecialidades> espMedicos = medicoDB.listarEspecialidadesMedico();
+                Session["listaMedicoEsp"] = espMedicos;
+                ddlistMedico.DataSource = espMedicos;
                 ddlistMedico.DataTextField = "NombreCompleto";
                 ddlistMedico.DataValueField = "ID";
                 ddlistMedico.DataBind();
                 ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));
+
+
+                /*ddlistMedico.DataSource = medico;
+                ddlistMedico.DataTextField = "NombreCompleto";
+                ddlistMedico.DataValueField = "ID";
+                ddlistMedico.DataBind();
+                ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));*/
 
             }
 
@@ -57,7 +65,8 @@ namespace WebApplication1
         protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-            ddlistMedico.DataSource = ((List<Medico>)Session["listaMedico"]).FindAll(x => x.Especialidad.Id == ID);
+            
+            ddlistMedico.DataSource = ((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID);
             ddlistMedico.DataBind();
             ddlistMedico.Enabled = true;
             txtFecha.Enabled = true;
@@ -65,7 +74,8 @@ namespace WebApplication1
         protected void txtFecha_textChanged(object sender, EventArgs e)
         {
             ddlistHora.Enabled = true;
-            int idMedico = int.Parse(ddlistMedico.SelectedItem.Value);
+   
+           /* int idMedico = int.Parse(ddlistMedico.SelectedItem.Value);
             Medico medSeleccionado = medicoDB.buscarporID(idMedico);
             DateTime hora = medSeleccionado.HorarioEntrada;
             System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
@@ -123,7 +133,7 @@ namespace WebApplication1
                     ddlistHora.Items.Add(new ListItem(hora.ToString("HH:mm")));
                     hora += horaSumar;
                 }
-            }
+            }*/
         }
 
         protected void Click_Buscar(object sender, EventArgs e)
@@ -194,6 +204,9 @@ namespace WebApplication1
             }
         }
 
-
+        protected void Calendario_SelectionChanged(object sender, EventArgs e)
+        {
+            txtFecha.Text = Calendario.SelectedDate.ToString();
+        }
     }
 }

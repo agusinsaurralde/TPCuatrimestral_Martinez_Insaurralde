@@ -40,6 +40,9 @@
             <label for="ddlistHora" class="form-label">Horario</label>
             <asp:DropDownList ID="ddlistHora" class="form-select" CssClass="form-select" SelectedIndexChanged="ddlistaDia_SelectedIndexChanged" AutoPostBack="true" runat="server" Enabled="False" EnableViewState="True"></asp:DropDownList>
         </div>
+        <div> 
+             <asp:Calendar runat="server" ID="Calendario" OnSelectionChanged="Calendario_SelectionChanged"></asp:Calendar>          
+        </div>
 
         </ContentTemplate>
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class EspecialidadesMedico : Medico
+    public class MedicoEspecialidades : Medico
     {
         public Especialidad especialidad { get; set; }
     }

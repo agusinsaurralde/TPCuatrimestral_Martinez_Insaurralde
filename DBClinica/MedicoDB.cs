@@ -57,7 +57,7 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-        public List<Medico> listarEspecialidadesMedico(int id)
+       /* public List<Medico> listarEspecialidadesMedico(int id)
         {
             List<Medico> lista = new List<Medico>();
             ConexionDB datos = new ConexionDB();
@@ -98,7 +98,7 @@ namespace DBClinica
             {
                 datos.cerrarConexion();
             }
-        }
+        }*/
         public void agregar(Medico MedicoNuevo)
         {
             ConexionDB datos = new ConexionDB();
@@ -190,7 +190,7 @@ namespace DBClinica
             {
 
                 
-                datos.setearConsulta("SELECT M.ID, M.DNI, M.Matricula, M.Apellido, M.Nombre, CONCAT(M.Nombre, ' ', M.Apellido) AS NombreCompleto, E.ID AS IDEspecialidad, E.Nombre AS Especialidad, M.Telefono, M.Email, M.Direccion, M.FechaNacimiento, M.IDTurnoTrabajo, T.Turno, M.HoraEntrada, M.HoraSalida, M.Estado FROM Medico AS M INNER JOIN TurnoTrabajo AS T ON T.ID = M.IDTurnoTrabajo INNER JOIN EspecialidadXMedico AS EXM ON EXM.IDMedico = M.ID INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad WHERE M.Apellido LIKE '" + valorBuscado + "%' OR M.Nombre LIKE '" + valorBuscado + "%' OR M.Apellido LIKE '" + valorBuscado + "%' OR M.Matricula LIKE '" + valorBuscado + "%'"); 
+                datos.setearConsulta("SELECT ID, DNI, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto, Nombre, Apellido, Matricula, Direccion, FechaNacimiento, Telefono, Email, Estado FROM VW_MEDICO WHERE Apellido LIKE '" + valorBuscado + "%' OR Nombre LIKE '" + valorBuscado + "%' OR  CONCAT(Nombre, ' ', Apellido) LIKE '" + valorBuscado + "%' OR M.Matricula LIKE '" + valorBuscado + "%'"); 
                 datos.ejecutarLectura();      
 
                 while (datos.Lector.Read())
@@ -202,19 +202,11 @@ namespace DBClinica
                     aux.Matricula = (string)datos.Lector["Matricula"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
-                    aux.Especialidad = new Especialidad();
-                    aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
-                    aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];  
                     aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Dirección = (string)datos.Lector["Direccion"];
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                    aux.Turno = new TurnoTrabajo();
-                    aux.Turno.ID = (int)datos.Lector["IDTurnoTrabajo"];
-                    aux.Turno.NombreTurno = (string)datos.Lector["Turno"];
-                    aux.HorarioEntrada = (DateTime)datos.Lector["HoraEntrada"];
-                    aux.HorarioSalida = (DateTime)datos.Lector["HoraSalida"];
                     aux.Estado = (bool)datos.Lector["Estado"];
 
                     lista.Add(aux);
@@ -232,7 +224,42 @@ namespace DBClinica
             }
         }
 
-        public List<Medico> listarMedicoXEspecialidad(int IDEspecialidad)
+        public List<MedicoEspecialidades> listarEspecialidadesMedico()
+        {
+            List<MedicoEspecialidades> lista = new List<MedicoEspecialidades>();
+            ConexionDB datos = new ConexionDB();
+            try
+            {
+                datos.setearConsulta("SELECT EXM.IDEspecialidad, ESP.Nombre as Especialidad, EXM.IDMedico, E.Apellido, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Nombre, E.Apellido FROM EspecialidadXMedico AS EXM INNER JOIN Empleado AS E ON E.ID = EXM.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = EXM.IDEspecialidad");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    MedicoEspecialidades aux = new MedicoEspecialidades();
+                    aux.ID = (int)datos.Lector["IDMedico"];
+                    aux.especialidad.Id = (int)datos.Lector["IDEspecialidad"];
+                    aux.especialidad.Nombre = (string)datos.Lector["Especialidad"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];   
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        /*public List<Medico> listarMedicoXEspecialidad(int IDEspecialidad)
         {
             List<Medico> lista = new List<Medico>();
             ConexionDB datos = new ConexionDB();
@@ -278,7 +305,7 @@ namespace DBClinica
             {
                 datos.cerrarConexion();
             }
-        }
+        }*/
 
     }
 }

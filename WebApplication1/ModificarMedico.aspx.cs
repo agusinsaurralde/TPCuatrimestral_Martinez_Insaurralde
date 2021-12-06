@@ -38,14 +38,11 @@ namespace WebApplication1
                     txtMatricula.Text = medico.Matricula;
                     txtApellido.Text = medico.Apellido;
                     txtNombre.Text = medico.Nombre;
-                    ddlistEspecialidad.SelectedValue = medico.Especialidad.Id.ToString();
                     txtFechaNac.Text = medico.FechaNacimiento.ToString("dd-mm-yyyy");
                     txtTelefono.Text = medico.Telefono;
                     txtEmail.Text = medico.Email;
                     txtDireccion.Text = medico.Dirección;
-                    ddlistTurno.SelectedValue = medico.Turno.ID.ToString();
-                    txtEntrada.Text = medico.HorarioEntrada.ToString("HH:mm");
-                    txtSalida.Text = medico.HorarioSalida.ToString("HH:mm");
+
                 }
             }
             catch (Exception ex)
@@ -71,16 +68,10 @@ namespace WebApplication1
                 modMedico.Matricula = txtMatricula.Text;
                 modMedico.Apellido = txtApellido.Text;
                 modMedico.Nombre = txtNombre.Text;
-                modMedico.Especialidad = new Especialidad();
-                modMedico.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
                 modMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
                 modMedico.Telefono = txtTelefono.Text;
                 modMedico.Email = txtEmail.Text;
                 modMedico.Dirección = txtDireccion.Text;
-                modMedico.Turno = new TurnoTrabajo();
-                modMedico.Turno.ID = int.Parse(ddlistTurno.SelectedItem.Value);
-                modMedico.HorarioEntrada = DateTime.Parse(txtEntrada.Text);
-                modMedico.HorarioSalida = DateTime.Parse(txtSalida.Text);
 
                 cargar.modificar(modMedico);
 

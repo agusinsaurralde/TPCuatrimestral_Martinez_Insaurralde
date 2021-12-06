@@ -17,10 +17,10 @@ namespace WebApplication1
 
             foreach(Medico medico in listaEsp)
             {
-                txtEspecialidad.Text = medico.Especialidad.Nombre;
+                /*txtEspecialidad.Text = medico.Especialidad.Nombre;
                 txtTurno.Text = medico.Turno.NombreTurno;
                 txtEntrada.Text = medico.HorarioEntrada.ToString("HH:mm");
-                txtSalida.Text = medico.HorarioSalida.ToString("HH:mm");
+                txtSalida.Text = medico.HorarioSalida.ToString("HH:mm");*/
             }
         }
     }

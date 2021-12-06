@@ -220,7 +220,7 @@ namespace WebApplication1
         {
             // los medicos no tienen ID especialidad en la DB.
             // si o si tenes que compárar contra la tabla que tiene EspecialidadXmedico
-            int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
+            /*int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
             MedicoDB dato = new MedicoDB();
             List<Medico> listMedico = dato.listarMedicoXEspecialidad(ID);
             ddlistMedicoNombre.DataSource = listMedico;
@@ -230,7 +230,7 @@ namespace WebApplication1
             ddlistMedicoApellido.DataSource = listMedico;
             ddlistMedicoApellido.DataTextField = "Apellido";
             ddlistMedicoApellido.DataValueField = "Id";
-            ddlistMedicoApellido.DataBind();
+            ddlistMedicoApellido.DataBind();*/
         }
     }
 }

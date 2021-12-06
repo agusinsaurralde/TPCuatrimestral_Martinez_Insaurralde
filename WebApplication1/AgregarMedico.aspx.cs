@@ -55,16 +55,10 @@ namespace WebApplication1
                 NuevoMedico.Matricula = txtMatricula.Text;
                 NuevoMedico.Apellido = txtApellido.Text;
                 NuevoMedico.Nombre = txtNombre.Text;
-                NuevoMedico.Especialidad = new Especialidad();
-                NuevoMedico.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
                 NuevoMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
                 NuevoMedico.Telefono = txtTelefono.Text;
                 NuevoMedico.Email = txtEmail.Text;
                 NuevoMedico.Dirección = txtDireccion.Text;
-                NuevoMedico.Turno = new TurnoTrabajo();
-                NuevoMedico.Turno.ID = int.Parse(ddlistTurno.SelectedItem.Value);
-                NuevoMedico.HorarioEntrada = DateTime.Parse(txtEntrada.Text);
-                NuevoMedico.HorarioSalida = DateTime.Parse(txtSalida.Text);
                 NuevoMedico.Estado = true;
                 cargar.agregar(NuevoMedico);
 

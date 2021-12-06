@@ -53,8 +53,8 @@ namespace WebApplication1
 
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session.Add("EspMedico", medicoDB.listarEspecialidadesMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
-            Response.Redirect("EspecialidadesMedico.aspx");
+            /*Session.Add("EspMedico", medicoDB.listarEspecialidadesMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            Response.Redirect("EspecialidadesMedico.aspx");*/
         }
     }
 }
