@@ -266,7 +266,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("SELECT DH.ID, DH.IDMedico, CONCAT(E.Apellido, ' ', E.Nombre) AS NombreCompleto, E.Apellido, E.Nombre, DH.IDEspecialidad, ESP.Nombre, DH.NombreDia, DH.HorarioEntrada, DH.HorarioSalida FROM DiasHabilesMedico as DH INNER JOIN Empleado AS E ON E.ID = DH.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = DH.IDEspecialidad");
+                datos.setearConsulta("SELECT DH.ID, DH.IDMedico, CONCAT(E.Apellido, ' ', E.Nombre) AS NombreCompleto, E.Apellido, E.Nombre, DH.IDEspecialidad, ESP.Nombre as Especialidad, DH.IdDia, D.NombreDia, DH.HorarioEntrada, DH.HorarioSalida FROM DiasHabilesMedico as DH INNER JOIN Empleado AS E ON E.ID = DH.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = DH.IDEspecialidad INNER JOIN DIAS AS D ON D.ID = DH.IDDia");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -281,8 +281,11 @@ namespace DBClinica
                     aux.Medico.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Medico.Nombre = (string)datos.Lector["Nombre"];
                     aux.Medico.Apellido = (string)datos.Lector["Apellido"];
+                    aux.IdDia = (int)datos.Lector["IDDia"];
                     aux.NombreDia = (string)datos.Lector["NombreDia"];
-                    aux.HorarioEntrada = (DateTime)datos.Lector["HorarioSalida"];
+                    aux.HorarioEntrada = (DateTime)datos.Lector["HorarioEntrada"];
+                    aux.HorarioSalida = (DateTime)datos.Lector["HorarioSalida"];
+
 
                     lista.Add(aux);
                 }

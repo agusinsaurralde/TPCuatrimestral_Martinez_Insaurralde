@@ -24,24 +24,20 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="col-md-3">
-            <label for="ddlistEspecialidad" class="form-label">Especialidad</label>
-            <asp:DropDownList ID="ddlistEspecialidad" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+            <asp:Label Text="Especialidad" ID="lblEspecialidad" Visible = false CssClass="form-label" runat="server" />
+            <asp:DropDownList ID="ddlistEspecialidad" Visible = false class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
           </div>
 
         <div class="col-md-3">
-            <label for="ddlistMedico" class="form-label">Médico</label>
-            <asp:DropDownList ID="ddlistMedico" class="form-select" CssClass="form-select" runat="server" Enabled="False" EnableViewState="True" ></asp:DropDownList>
+            <asp:Label Text="Médico" ID="lblMedico" Visible = false CssClass="form-label" runat="server" />
+            <asp:DropDownList ID="ddlistMedico" Visible = false class="form-select" CssClass="form-select" runat="server" EnableViewState="True" ></asp:DropDownList>
         </div>
         <div class="col-md-3">
-            <label for="txtFecha" class="form-label">Día</label>
-            <asp:TextBox type="date" ID="txtFecha" CssClass="form-select" AutoPostBack="true" DataFormatString="{0:d}" runat="server" OnTextChanged="txtFecha_textChanged" Enabled="False" />
+             <asp:Calendar Visible ="false" runat="server" ID="Calendario" OnDayRender="Calendario_DayRender" OnSelectionChanged="Calendario_SelectionChanged"></asp:Calendar>          
         </div>
         <div class="col-md-3">
-            <label for="ddlistHora" class="form-label">Horario</label>
-            <asp:DropDownList ID="ddlistHora" class="form-select" CssClass="form-select" SelectedIndexChanged="ddlistaDia_SelectedIndexChanged" AutoPostBack="true" runat="server" Enabled="False" EnableViewState="True"></asp:DropDownList>
-        </div>
-        <div> 
-             <asp:Calendar runat="server" ID="Calendario" OnSelectionChanged="Calendario_SelectionChanged"></asp:Calendar>          
+            <asp:Label Text="Horario" ID="lblHora" Visible = false CssClass="form-label" runat="server" />
+            <asp:DropDownList ID="ddlistHora" Visible = false class="form-select" CssClass="form-select" SelectedIndexChanged="ddlistaHora_SelectedIndexChanged" AutoPostBack="true" runat="server" Enabled="False" EnableViewState="True"></asp:DropDownList>
         </div>
 
         </ContentTemplate>
@@ -50,8 +46,8 @@
 
           
      <div class="col-md-4">
-            <label for="txtObservaciones" class="form-label">Observaciones</label>
-            <asp:TextBox  class="form-control" ID="txtObservaciones"  runat="server" />
+            <asp:Label Text="Observaciones" ID="lblObservaciones" Visible = false CssClass="form-label" runat="server" />
+            <asp:TextBox  class="form-control" Visible = false ID="txtObservaciones"  runat="server" />
      </div>
 
     <div class="col-md-3">

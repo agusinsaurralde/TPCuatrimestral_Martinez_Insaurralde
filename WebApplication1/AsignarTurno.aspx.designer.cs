@@ -60,6 +60,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label txtCobertura;
 
         /// <summary>
+        /// Control lblEspecialidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEspecialidad;
+
+        /// <summary>
         /// Control ddlistEspecialidad.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlistEspecialidad;
+
+        /// <summary>
+        /// Control lblMedico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMedico;
 
         /// <summary>
         /// Control ddlistMedico.
@@ -78,13 +96,22 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList ddlistMedico;
 
         /// <summary>
-        /// Control txtFecha.
+        /// Control Calendario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFecha;
+        protected global::System.Web.UI.WebControls.Calendar Calendario;
+
+        /// <summary>
+        /// Control lblHora.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHora;
 
         /// <summary>
         /// Control ddlistHora.
@@ -96,13 +123,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList ddlistHora;
 
         /// <summary>
-        /// Control Calendario.
+        /// Control lblObservaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendario;
+        protected global::System.Web.UI.WebControls.Label lblObservaciones;
 
         /// <summary>
         /// Control txtObservaciones.

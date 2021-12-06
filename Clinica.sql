@@ -49,12 +49,32 @@ create table EspecialidadXMedico(
 	CONSTRAINT FK_IDEspecialidad FOREIGN KEY (IDEspecialidad) REFERENCES Especialidad(ID)
 )
 GO
+--DIAS----------------------
+CREATE TABLE DIAS(
+	ID INT PRIMARY KEY NOT NULL,
+	NombreDia varchar(9) not null
+
+)
+go
+--INSERT--
+INSERT DIAS(ID, NombreDia) VALUES(1, 'Lunes')
+go
+INSERT DIAS(ID, NombreDia) VALUES(2, 'Martes')
+go
+INSERT DIAS(ID, NombreDia) VALUES(3, 'Miércoles')
+go
+INSERT DIAS(ID, NombreDia) VALUES(4, 'Jueves')
+go
+INSERT DIAS(ID, NombreDia) VALUES(5, 'Viernes')
+go
+INSERT DIAS(ID, NombreDia) VALUES(6, 'Sábado')
+go
 --DIASHABILESMEDICO---------------------------------
 CREATE TABLE DiasHabilesMedico(
 	ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	IDMedico INT NOT NULL FOREIGN KEY REFERENCES Empleado(ID),
 	IDEspecialidad INT NOT NULL FOREIGN KEY REFERENCES Especialidad(ID),
-	NombreDia varchar(9) not null,
+	IDDia int not null FOREIGN KEY REFERENCES Dias(ID),
 	HorarioEntrada datetime not null,
 	HorarioSalida datetime not null,
 	Estado bit not null
@@ -380,37 +400,37 @@ insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(9, 5, 1)
 go																		  
 insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(10, 5,1)
 --DiasHabiles---------------------------
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 'Lunes', '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 1, '8:00', '12:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 'Martes', '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 2, '8:00', '12:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 'Jueves', '15:00', '19:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 4, '15:00', '19:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 'Sábado', '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 6, '13:00', '17:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 'Martes', '9:00', '13:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 2, '9:00', '13:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 1,  'Miércoles', '15:00', '19:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 1, 3, '15:00', '19:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(3, 3,  'Viernes', '16:00', '20:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(3, 3,  5, '16:00', '20:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(4, 5,  'Lunes', '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(4, 5, 1, '8:00', '12:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(5, 13, 'Lunes', '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(5, 13, 1, '8:00', '12:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(6, 15, 'Viernes', '16:00', '20:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(6, 15, 5, '16:00', '20:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(7, 14, 'Viernes', '16:00', '20:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(7, 14, 5, '16:00', '20:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(8, 14, 'Sábado', '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(8, 14, 6, '13:00', '17:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(9, 5, 'Sábado', '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(9, 5, 6, '13:00', '17:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(10, 5, 'Sábado', '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(10, 5, 6, '13:00', '17:00', 1)
 
 ----Administradores y recepcionistas															
 

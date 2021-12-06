@@ -52,6 +52,92 @@ namespace DBClinica
             }
         }
 
+        public List<Empleado> listarRecepcionista()
+        {
+            List<Empleado> lista = new List<Empleado>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo LIKE 'Recepcionista'");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Empleado aux = new Empleado();
+
+                    aux.ID = (int)datos.Lector["ID"];
+                    aux.DNI = (string)datos.Lector["DNI"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    aux.TipoEmp = new TipoEmpleado();
+                    aux.TipoEmp.ID = (int)datos.Lector["IDTipo"];
+                    aux.TipoEmp.Nombre = (string)datos.Lector["Tipo"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public List<Empleado> listarAdministrador()
+        {
+            List<Empleado> lista = new List<Empleado>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("SELECT E.ID, E.DNI,CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo LIKE 'Administrador'");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Empleado aux = new Empleado();
+
+                    aux.ID = (int)datos.Lector["ID"];
+                    aux.DNI = (string)datos.Lector["DNI"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    aux.TipoEmp = new TipoEmpleado();
+                    aux.TipoEmp.ID = (int)datos.Lector["IDTipo"];
+                    aux.TipoEmp.Nombre = (string)datos.Lector["Tipo"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void agregar(Empleado EmpleadoNuevo)
         {
             ConexionDB datos = new ConexionDB();
