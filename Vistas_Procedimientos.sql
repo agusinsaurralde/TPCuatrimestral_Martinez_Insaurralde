@@ -81,10 +81,8 @@ CREATE PROCEDURE SP_ELIMINARMEDICO(
 AS
 BEGIN
 	UPDATE DatosMedico SET Estado = 0 WHERE ID = @ID
-	UPDATE Empleado SET Estado = 0 WHERE ID = @ID
 	UPDATE EspecialidadXMedico SET ESTADO = 0 WHERE IDMedico = @ID
+	UPDATE DiasHabilesMedico SET Estado = 0 WHERE IDMedico = @ID
+	UPDATE Empleado SET Estado = 0 WHERE ID = @ID
 END
 
-select * from EspecialidadXMedico
-SELECT IDEspecialidad, IDMedico, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, IDTurnoTrabajo, T.Turno, HorarioEntrada, HorarioSalida, Estado FROM EspecialidadXMedico AS EXM 
-INNER JOIN TurnoTrabajo AS T ON T.ID = EXM.IDTurnoTrabajo

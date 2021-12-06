@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cobertura.cs" />
+    <Compile Include="DiasHabilesMedico.cs" />
     <Compile Include="Especialidad.cs" />
+    <Compile Include="EspecialidadesMedico.cs" />
     <Compile Include="EstadoTurno.cs" />
     <Compile Include="HistoriaClinica.cs" />
     <Compile Include="Medico.cs" />

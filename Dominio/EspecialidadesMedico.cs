@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Medico : Persona
+    class EspecialidadesMedico : Medico
     {
-        public int ID { get; set; }
-        public string Matricula { get; set; }
+        public Especialidad especialidad { get; set; }
     }
 }

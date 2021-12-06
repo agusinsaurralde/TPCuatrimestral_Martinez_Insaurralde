@@ -31,13 +31,6 @@ create table Empleado(
 	CONSTRAINT CHK_FechaNacimientoEmpleado CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
 go
---TURNOTRABAJO---------------------------------
-create table TurnoTrabajo(
-    ID int PRIMARY KEY IDENTITY(1,1) not null,
-    Turno VARCHAR(6) UNIQUE not null,
-	CONSTRAINT CHK_Turno CHECK (Turno NOT LIKE '%[^A-Z]%')
-)
-go
 --ESPECIALIDAD---------------------------------
 create table Especialidad(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -50,15 +43,6 @@ create table EspecialidadXMedico(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
     IDEspecialidad int not null,
     IDMedico int not null,
-	Lunes bit null,
-	Martes bit null,
-	Miercoles bit null,
-	Jueves bit null,
-	Viernes bit null,
-	Sabado bit null,
-	IDTurnoTrabajo int FOREIGN KEY REFERENCES TurnoTrabajo(ID),
-	HorarioEntrada datetime not null,
-	HorarioSalida datetime not null,
 	Estado bit not null,
 
 	CONSTRAINT FK_IDMedico FOREIGN KEY (IDMedico) REFERENCES Empleado(ID),
@@ -66,19 +50,15 @@ create table EspecialidadXMedico(
 )
 GO
 --DIASHABILESMEDICO---------------------------------
-/*CREATE TABLE DiasHabilesMedico(
-	IDESPXMED INT NOT NULL FOREIGN KEY REFERENCES ESPECIALIDADXMEDICO(ID),
-	Lunes bit null,
-	Martes bit null,
-	Miercoles bit null,
-	Jueves bit null,
-	Viernes bit null,
-	Sabado bit null,
-	IDTurnoTrabajo int FOREIGN KEY REFERENCES TurnoTrabajo(ID),
+CREATE TABLE DiasHabilesMedico(
+	ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	IDMedico INT NOT NULL FOREIGN KEY REFERENCES Empleado(ID),
+	IDEspecialidad INT NOT NULL FOREIGN KEY REFERENCES Especialidad(ID),
+	NombreDia varchar(9) not null,
 	HorarioEntrada datetime not null,
 	HorarioSalida datetime not null,
 	Estado bit not null
-)*/
+)
 go
 --DATOSMEDICO---------------------------------------
 create table DatosMedico(
@@ -301,7 +281,7 @@ go
 insert into TipoEmpleado(Tipo) values('Administrador')
 go
 insert into TipoEmpleado(Tipo) values('Recepcionista')
---------------------Médico
+
 
 go
 INSERT EstadoTurno(Descripcion)VALUES('Programado')
@@ -313,13 +293,7 @@ go
 INSERT EstadoTurno(Descripcion)VALUES('Cancelado')
 go
 INSERT EstadoTurno(Descripcion)VALUES('No asistió')
-----------------Turno
-go
-INSERT TurnoTrabajo(Turno)VALUES('Mañana')
-go
-INSERT TurnoTrabajo(Turno)VALUES('Tarde')
-go
-INSERT TurnoTrabajo(Turno)VALUES('Noche')
+
 -----------Medicos
 go
 insert Empleado(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, IDTipo, Estado) VALUES(124578, 'Dante', 'Mastopierro', '784512', 'mastopierroD@hotmail.com','Av.Cordoba 1642','10-10-1981', 1,1)
@@ -384,29 +358,61 @@ go
 Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(10, 'abritez', '123medico', 1, 1)
 go
 --EspecialidadXMedico--------------------
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(1, 10, 1, 1, 1, 1, 1, 1, 0, 1, '08:00', '11:00')
-go														   																	 
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(2, 10, 1, 1, 1, 1, 0, 0, 0 ,1, '09:00', '12:00')
-go														   																	 
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(2, 1, 1, 0, 0, 0, 1, 1, 1 ,1, '09:00', '12:00')
-go														   																	
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(3, 3, 1, 0, 0, 0, 1, 1, 1, 1, '08:00', '12:00')
-go														   																	  
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(4, 5, 1, 1, 1, 1, 0, 0, 0, 2, '12:00', '15:00')
-go														   																	
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(5, 13, 1, 1, 1, 0, 0, 1, 1, 2, '15:00', '18:00')
-go														   																
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(6, 15, 1, 1, 1, 0, 0, 0, 0, 2, '16:00', '19:00')
-go														   																	 
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(7, 14, 1, 1, 1, 1, 1, 1, 0, 2, '15:00', '18:00')
-go														   																	
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(8, 14, 1, 0, 1, 1, 1, 1, 1, 3, '18:00', '22:00')
-go														   																	 
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(9, 5, 1 ,1, 1, 1, 1, 0, 0, 3, '19:00', '23:00')
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(1, 10,1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(2, 10,1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(2, 1, 1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(3, 3, 1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(4, 5, 1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(5, 13,1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(6, 15,1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(7, 14,1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(8, 14,1)
+go														   				  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(9, 5, 1)
+go																		  
+insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(10, 5,1)
+--DiasHabiles---------------------------
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 'Lunes', '8:00', '12:00', 1)
 go
-insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado ,IDTurnoTrabajo, HorarioEntrada, HorarioSalida) VALUES(10, 5, 1, 1, 1, 1, 1, 0, 0, 3, '19:00', '23:00')
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 'Martes', '8:00', '12:00', 1)
 go
-----Administradores y recepcionistas
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 'Jueves', '15:00', '19:00', 1)
+
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 'Sábado', '13:00', '17:00', 1)
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 'Martes', '9:00', '13:00', 1)
+
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 1,  'Miércoles', '15:00', '19:00', 1)
+
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(3, 3,  'Viernes', '16:00', '20:00', 1)
+
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado) VALUES(4, 5,  'Lunes', '8:00', '12:00', 1)
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(5, 13, 'Lunes', '8:00', '12:00', 1)
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(6, 15, 'Viernes', '16:00', '20:00', 1)
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(7, 14, 'Viernes', '16:00', '20:00', 1)
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(8, 14, 'Sábado', '13:00', '17:00', 1)
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(9, 5, 'Sábado', '13:00', '17:00', 1)
+go
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, NombreDIA, HorarioEntrada, HorarioSalida, Estado)	VALUES(10, 5, 'Sábado', '13:00', '17:00', 1)
+
+----Administradores y recepcionistas															
 
 insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(9999, 2, 'Maria', 'Ster', 535353, 'sterM@hotmail.com', 'Monte agudo 1742', '10-10-2002',1)
 go
