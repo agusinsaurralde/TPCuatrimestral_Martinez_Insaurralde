@@ -230,18 +230,59 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("SELECT EXM.IDEspecialidad, ESP.Nombre as Especialidad, EXM.IDMedico, E.Apellido, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Nombre, E.Apellido FROM EspecialidadXMedico AS EXM INNER JOIN Empleado AS E ON E.ID = EXM.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = EXM.IDEspecialidad");
+                datos.setearConsulta("SELECT EXM.IDEspecialidad as IDEspecialidad, ESP.Nombre as Especialidad, EXM.IDMedico, E.Apellido, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Nombre, E.Apellido FROM EspecialidadXMedico AS EXM INNER JOIN Empleado AS E ON E.ID = EXM.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = EXM.IDEspecialidad");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     MedicoEspecialidades aux = new MedicoEspecialidades();
                     aux.ID = (int)datos.Lector["IDMedico"];
+                    aux.especialidad = new Especialidad();
                     aux.especialidad.Id = (int)datos.Lector["IDEspecialidad"];
                     aux.especialidad.Nombre = (string)datos.Lector["Especialidad"];
                     aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];   
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<DiasHabilesMedico> listarDiasHabiles()
+        {
+            List<DiasHabilesMedico> lista = new List<DiasHabilesMedico>();
+            ConexionDB datos = new ConexionDB();
+            try
+            {
+                datos.setearConsulta("SELECT DH.ID, DH.IDMedico, CONCAT(E.Apellido, ' ', E.Nombre) AS NombreCompleto, E.Apellido, E.Nombre, DH.IDEspecialidad, ESP.Nombre, DH.NombreDia, DH.HorarioEntrada, DH.HorarioSalida FROM DiasHabilesMedico as DH INNER JOIN Empleado AS E ON E.ID = DH.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = DH.IDEspecialidad");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    DiasHabilesMedico aux = new DiasHabilesMedico();
+                    aux.ID = (int)datos.Lector["ID"];
+                    aux.Especialidad = new Especialidad();
+                    aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
+                    aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
+                    aux.Medico = new Medico();
+                    aux.Medico.ID = (int)datos.Lector["IDMedico"];
+                    aux.Medico.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Medico.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Medico.Apellido = (string)datos.Lector["Apellido"];
+                    aux.NombreDia = (string)datos.Lector["NombreDia"];
+                    aux.HorarioEntrada = (DateTime)datos.Lector["HorarioSalida"];
 
                     lista.Add(aux);
                 }

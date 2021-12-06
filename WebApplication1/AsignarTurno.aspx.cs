@@ -42,8 +42,6 @@ namespace WebApplication1
                 ddlistEstado.DataValueField = "ID";
                 ddlistEstado.DataBind();
 
-                /* List<Medico> medico = medicoDB.listarMedico();
-                 Session["listaMedico"] = medico;*/
                 List<MedicoEspecialidades> espMedicos = medicoDB.listarEspecialidadesMedico();
                 Session["listaMedicoEsp"] = espMedicos;
                 ddlistMedico.DataSource = espMedicos;
@@ -51,13 +49,6 @@ namespace WebApplication1
                 ddlistMedico.DataValueField = "ID";
                 ddlistMedico.DataBind();
                 ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));
-
-
-                /*ddlistMedico.DataSource = medico;
-                ddlistMedico.DataTextField = "NombreCompleto";
-                ddlistMedico.DataValueField = "ID";
-                ddlistMedico.DataBind();
-                ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));*/
 
             }
 
