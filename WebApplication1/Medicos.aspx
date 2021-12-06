@@ -4,11 +4,14 @@
     <h1>Médicos</h1>
     <hr />
 
-    <div>
-        <asp:TextBox ID="txtBusqueda" runat="server" />
-        <asp:Button Text="Buscar" OnClick="Click_Buscar" runat="server" />
-        <asp:Button Text="Agregar" OnClick ="Click_Agregar" runat="server" />
+    <div class="input-group mb-3">
+        <asp:TextBox class="form-control" ID="txtBusqueda" aria-describedby="button-addon2" runat="server" />
+        <asp:Button Text="Buscar" OnClick ="Click_Buscar" class="btn btn-outline-secondary" runat="server" />
     </div>
+   <div>       
+        <asp:Button Text="Agregar" class="btn btn-primary" OnClick="Click_Agregar" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" runat="server" />
+   </div> 
+
     <div>
         <asp:Label ID="lblBusquedaIncorrecta" Text="" runat="server" /></div>
     <div>
@@ -22,9 +25,9 @@
                 <asp:BoundField datafield = "Dirección" HeaderText ="Dirección" />
                 <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="Fecha de Nacimiento" />
                 <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
-                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Especialidaes" />
-                <asp:CommandField ButtonType="Button" ShowEditButton="true" />   
-                <asp:CommandField ButtonType ="Button" ShowDeleteButton="true" />
+                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Especialidades"  ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" />
+                <asp:CommandField ButtonType="Button"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" />   
+                <asp:CommandField ButtonType="Button"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC"/>  
             </Columns>
         </asp:gridview>
     </div>

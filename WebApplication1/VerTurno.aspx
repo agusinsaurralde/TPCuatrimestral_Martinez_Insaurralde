@@ -3,21 +3,18 @@
 
     <h1>Ver Turnos</h1>
     <hr />
-    <div>
-        <asp:DropDownList runat="server">
-            <asp:ListItem Text="Seleccionar criterio" />
-            <asp:ListItem Text="Nombre" />
-            <asp:ListItem Text="Número" />
+    <div class="input-group mb-3">
+        <asp:TextBox class="form-control" ID="txtBusqueda" runat="server" />  
+        <asp:DropDownList ID="ddlistCriterio" class="btn btn-outline-secondary dropdown-toggle" runat="server">
+            <asp:ListItem Text="Paciente" />
             <asp:ListItem Text="Médico" />
-         </asp:DropDownList>
-        <asp:TextBox runat="server" />
-        <asp:Button Text="Buscar" runat="server" />
-        <asp:Button Text="Agregar" OnClick="Click_Agregar" runat="server" />
+            </asp:DropDownList>
+        <asp:Button Text="Buscar" OnClick ="Click_Buscar" class="btn btn-outline-secondary" runat="server" />
     </div>
      <div class="container">
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowEditing="Grilla_editar" DataKeyNames="Numero"  >
             <Columns>   
-               <asp:BoundField datafield = "Numero" HeaderText ="ID" />
+               <asp:BoundField datafield = "Numero" HeaderText ="#" />
                 <asp:BoundField datafield = "Paciente.NombreCompleto" HeaderText ="Paciente" />
                 <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="Especialidad" />
                 <asp:BoundField datafield = "Medico.NombreCompleto" HeaderText ="Médico" />
@@ -27,7 +24,7 @@
                 <asp:BoundField datafield = "Observaciones" HeaderText ="Observaciones" />
                 <asp:BoundField datafield = "AdministrativoResponsable.NombreCompleto" HeaderText ="Recepcionista" />
                 <asp:BoundField datafield = "Estado.Estado" HeaderText ="Estado" />
-                <asp:CommandField ButtonType="Button" ShowEditButton="true" />
+                <asp:CommandField ButtonType="Button"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" />   
             </Columns>
         </asp:gridview>
     </div>

@@ -40,7 +40,6 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-
         public void AgregarCobertura(Cobertura CoberturaNueva)
         {
             ConexionDB datos = new ConexionDB();
@@ -100,31 +99,51 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-
-        public Cobertura buscarporID(Cobertura IDBuscado)
+        public Cobertura buscarporID(int IDBuscado)
         {
+
+            CoberturaDB coberturaDB = new CoberturaDB();
+            List<Cobertura> listacoberturas = coberturaDB.lista();
+            Cobertura cobertura = listacoberturas.Find(x => x.Id == IDBuscado);
+            return cobertura;
+        }
+
+        public List<Cobertura> buscar(string cobertura)
+        {
+            List<Cobertura> lista = new List<Cobertura>();
             ConexionDB datos = new ConexionDB();
+
             try
             {
-
-                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura WHERE ID = " + IDBuscado.Id + "");
+                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura WHERE Nombre LIKE '" + cobertura + "%'");
                 datos.ejecutarLectura();
-                datos.Lector.Read();
-                Cobertura aux = new Cobertura();
-                aux.Id = (int)datos.Lector["ID"];
-                aux.Nombre = (string)datos.Lector["Nombre"];
-                aux.Estado = (bool)datos.Lector["Estado"];
 
-                return aux;
+                while (datos.Lector.Read())
+                {
+                    Cobertura aux = new Cobertura();
+                    aux.Id = (int)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+                    lista.Add(aux);
+                }
+
+                return lista;
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
+
         }
+
+
+        
     }
 }
+   
+

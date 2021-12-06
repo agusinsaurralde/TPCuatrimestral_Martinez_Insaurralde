@@ -33,6 +33,17 @@ namespace WebApplication1
             Response.Redirect("AsignarTurno.aspx");
 
         }
+
+        protected void Click_Buscar(object sender, EventArgs e)
+        {
+            List<Turno> turnosBusqueda = turnoBD.buscar(ddlistCriterio.SelectedItem.Text, txtBusqueda.Text);
+            if (turnosBusqueda != null)
+            {
+                Grilla.DataSource = turnosBusqueda;
+                Grilla.DataBind();
+            }
+
+        }
     }
 
 

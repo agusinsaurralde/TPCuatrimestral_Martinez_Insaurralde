@@ -102,24 +102,38 @@ namespace DBClinica
             }
         }
 
-        public Especialidad buscarporID(Especialidad IDBuscado)
+        public Especialidad buscarporID(int IDBuscado)
         {
+
+            EspecialidadDB especialidadDB = new EspecialidadDB();
+            List<Especialidad> listaespecialidades = especialidadDB.lista();
+            Especialidad especialidad = listaespecialidades.Find(x => x.Id == IDBuscado);
+            return especialidad;
+        }
+
+        public List<Especialidad> buscar(string especialidad)
+        {
+            List<Especialidad> lista = new List<Especialidad>();
             ConexionDB datos = new ConexionDB();
+
             try
             {
-
-                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Especialidad WHERE ID = " + IDBuscado.Id + "");
+                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad WHERE Nombre LIKE '" + especialidad + "%'");
                 datos.ejecutarLectura();
-                datos.Lector.Read();
-                Especialidad aux = new Especialidad();
-                aux.Id = (int)datos.Lector["ID"];
-                aux.Nombre = (string)datos.Lector["Nombre"];
-                aux.Estado = (bool)datos.Lector["Estado"];
+                while (datos.Lector.Read())
+                {
+                    Especialidad aux = new Especialidad();
+                    aux.Id = (int)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+                    lista.Add(aux);
+                }
 
-                return aux;
+                return lista;
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
             finally

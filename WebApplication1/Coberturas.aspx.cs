@@ -11,11 +11,10 @@ namespace WebApplication1
 {
     public partial class Formulario_web115 : System.Web.UI.Page
     {
-        CoberturaDB ClinicaDB = new CoberturaDB();
-        Cobertura cob = new Cobertura();
+        CoberturaDB coberturaDB = new CoberturaDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Grilla.DataSource = ClinicaDB.lista();
+            Grilla.DataSource = coberturaDB.lista();
             Grilla.DataBind();
         }
         protected void Click_Agregar(object sender, EventArgs e)
@@ -25,16 +24,23 @@ namespace WebApplication1
 
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {  
-            cob.Id = (int)Grilla.DataKeys[e.RowIndex].Values[0];
-            Session.Add("eliminar", ClinicaDB.buscarporID(cob));
+            Session.Add("eliminar", coberturaDB.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
             Response.Redirect("EliminarCobertura.aspx");
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-            cob.Id = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
-            Session.Add("modificar", ClinicaDB.buscarporID(cob));
+            Session.Add("modificar", coberturaDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
             Response.Redirect("ModificarCobertura.aspx");
+        }
+        protected void Click_Buscar(object sender, EventArgs e)
+        {
+            List<Cobertura> coberturasBusqueda = coberturaDB.buscar(txtBusqueda.Text);
+            if (coberturasBusqueda != null)
+            {
+                Grilla.DataSource = coberturasBusqueda;
+                Grilla.DataBind();
+            }
         }
 
     }

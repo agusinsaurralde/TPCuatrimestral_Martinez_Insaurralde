@@ -25,16 +25,24 @@ namespace WebApplication1
 
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
-            emp.ID = (int)Grilla.DataKeys[e.RowIndex].Values[0];
-            Session.Add("eliminar", db.buscarporID(emp));
+            Session.Add("eliminar", db.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
             Response.Redirect("EliminarEmpleado.aspx");
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-            emp.ID = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
-            Session.Add("modificar", db.buscarporID(emp));
+            Session.Add("modificar", db.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
             Response.Redirect("ModificarEmpleado.aspx");
+        }
+        protected void Click_Buscar(object sender, EventArgs e)
+        {
+            List<Empleado> empleadoBusqueda = db.buscarEmpleado(txtBusqueda.Text);
+            if (empleadoBusqueda != null)
+            {
+                Grilla.DataSource = empleadoBusqueda;
+                Grilla.DataBind();
+            }
+
         }
     }
 }

@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo");
+                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista'");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -213,33 +213,50 @@ namespace DBClinica
             }
         }
 
-        public Empleado buscarporID(Empleado IDBuscado)
+        public Empleado buscarporID(int IDBuscado)
         {
+
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> listaempleados = empleadoDB.listarEmpleado();
+            Empleado empleado = listaempleados.Find(x => x.ID == IDBuscado);
+            return empleado;
+        }
+
+        public List<Empleado> buscarEmpleado(string empleado)
+        {
+            List<Empleado> lista = new List<Empleado>();
             ConexionDB datos = new ConexionDB();
+
             try
             {
-
-                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE E.ID = " + IDBuscado.ID + "");
+                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE (T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista') AND (E.Nombre LIKE '" + empleado + "%' OR E.Apellido LIKE '"+ empleado + "%' OR CONCAT(E.Apellido, ' ', E.Nombre) LIKE '"+ empleado + "%' )");
                 datos.ejecutarLectura();
-                datos.Lector.Read();
-                Empleado aux = new Empleado();
-                aux.ID = (int)datos.Lector["ID"];
-                aux.DNI = (string)datos.Lector["DNI"];
-                aux.Apellido = (string)datos.Lector["Apellido"];
-                aux.Nombre = (string)datos.Lector["Nombre"];
-                aux.Telefono = (string)datos.Lector["Telefono"];
-                aux.Email = (string)datos.Lector["Email"];
-                aux.Dirección = (string)datos.Lector["Direccion"];
-                aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                aux.TipoEmp = new TipoEmpleado();
-                aux.TipoEmp.ID = (int)datos.Lector["IDTipo"];
-                aux.TipoEmp.Nombre = (string)datos.Lector["Tipo"];
-                aux.Estado = (bool)datos.Lector["Estado"];
 
-                return aux;
+                while (datos.Lector.Read())
+                {
+                    Empleado aux = new Empleado();
+
+                    aux.ID = (int)datos.Lector["ID"];
+                    aux.DNI = (string)datos.Lector["DNI"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    aux.TipoEmp = new TipoEmpleado();
+                    aux.TipoEmp.ID = (int)datos.Lector["IDTipo"];
+                    aux.TipoEmp.Nombre = (string)datos.Lector["Tipo"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+
+                    lista.Add(aux);
+                }
+                return lista;
             }
+
             catch (Exception ex)
             {
+
                 throw ex;
             }
             finally
@@ -247,7 +264,6 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-
     }
 }
 
