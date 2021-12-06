@@ -30,6 +30,11 @@ namespace WebApplication1
                 empleado = (Empleado)Session["eliminar"];
                 db.eliminar(empleado);
 
+                Usuario usuario = new Usuario();
+                UsuarioDB usuarioDB = new UsuarioDB();
+                usuario = (Usuario)Session["eliminarUsuario"];
+                usuarioDB.eliminar(usuario);
+
                 Response.Redirect("EliminarCorrecto.aspx?eliminado=" + eliminado, false);
             }
             catch (Exception)

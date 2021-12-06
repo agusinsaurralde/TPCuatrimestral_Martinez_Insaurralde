@@ -30,6 +30,8 @@ create table Empleado(
 	CONSTRAINT CHK_DireccionEmpleado CHECK (Direccion LIKE '[A-Z]%[0-9]'),
 	CONSTRAINT CHK_FechaNacimientoEmpleado CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
+Select * from Empleado where Apellido like 'Mastopierro'
+select * from DiasHabilesMedico where id = 1
 go
 --ESPECIALIDAD---------------------------------
 create table Especialidad(
@@ -136,6 +138,7 @@ Create table EstadoTurno(
     Descripcion VARCHAR(20) not null
 )
 go
+
 --TURNO----------------------------------------------
 create table Turno(
     Numero int PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -146,7 +149,6 @@ create table Turno(
     IDRecepcionista int not null,
     IDEstado int not null,
     HoraInicio DATETIME not NULL,
-    HoraFin DATETIME not NULL
 
 	CONSTRAINT FK_IDPacienteTURNO FOREIGN KEY (IDPaciente) REFERENCES Paciente(ID),
 	CONSTRAINT FK_IDEspXMedico FOREIGN KEY (IDEspXMedico) REFERENCES EspecialidadXMedico(ID),
@@ -171,7 +173,7 @@ insert into tipousuario(nombre) values('Recepcionista')
 GO
 --USUARIO-----------------------------------------------
 create table Usuario(
-    ID int PRIMARY KEY not null,
+    ID int PRIMARY KEY not null FOREIGN KEY REFERENCES EMPLEADO(ID),
     NombreUsuario VARCHAR(15) UNIQUE not null,
     Contraseña VARCHAR(15) not null,
     IDTipo int not null,
@@ -212,7 +214,7 @@ insert Especialidad(Nombre, Estado) values('Cirugía Pediátrica', 1)
 go
 insert Especialidad(Nombre, Estado) values('Cirugía Plástica y Reconstructiva', 1)
 go
-insert Especialidad(Nombre, Estado) values('Clínica Médica', 1)
+insert Especialidad(Nombre, Estado) values('Médico Clínico', 1)
 go
 insert Especialidad(Nombre, Estado) values('Dermatología', 1)
 go
@@ -464,5 +466,5 @@ Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(17, 'g
 
 ---TURNOS----------------------------------------------------------------
 GO
-INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio,HoraFin)VALUES(5,1,'01-01-2022','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00', '10:00')
+INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio)VALUES(5,1,'12-12-2021','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00')
 

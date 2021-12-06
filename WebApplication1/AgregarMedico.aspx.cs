@@ -17,35 +17,16 @@ namespace WebApplication1
         {
             TurnoTrabajoDB ttdb = new TurnoTrabajoDB();
             EspecialidadDB espDB = new EspecialidadDB();
-            try
-            {
-                if (!IsPostBack)
-                { 
-                    List<TurnoTrabajo> turnot = ttdb.listar();
-                    ddlistTurno.DataSource = turnot;
-                    ddlistTurno.DataTextField = "NombreTurno";
-                    ddlistTurno.DataValueField = "ID";
-                    ddlistTurno.DataBind();
-
-                    List<Especialidad> esp = espDB.lista();
-                    ddlistEspecialidad.DataSource = esp;
-                    ddlistEspecialidad.DataTextField = "Nombre";
-                    ddlistEspecialidad.DataValueField = "ID";
-                    ddlistEspecialidad.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                Session.Add("Error", ex);
-                //throw ex;
-            }
+   
           
         }
 
         protected void Click_Aceptar(object sender, EventArgs e)
         {
             Medico NuevoMedico = new Medico();
+            Usuario nuevoUsuario = new Usuario();
             MedicoDB cargar = new MedicoDB();
+            UsuarioDB cargarUsuario = new UsuarioDB();
             string agregado = "Médico";
             string error = "médico";
 
@@ -62,11 +43,24 @@ namespace WebApplication1
                 NuevoMedico.Estado = true;
                 cargar.agregar(NuevoMedico);
 
+                List<Medico> medicos = cargar.listarMedico();
+                Medico ultMedico = medicos.Find(x => x.DNI == txtDNI.Text);
+                nuevoUsuario.IDUsuario = ultMedico.ID;
+                nuevoUsuario.NombreUsuario = txtNombreUsuario.Text;
+                nuevoUsuario.Contraseña = txtContraseña.Text;
+                nuevoUsuario.TipoUsuario = new TipoUsuario();
+                nuevoUsuario.TipoUsuario.Id = 1;
+                nuevoUsuario.TipoUsuario.Nombre = "Médico";
+                nuevoUsuario.Estado = true;
+
+                cargarUsuario.AgregarUsuario(nuevoUsuario);
+
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                //Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                throw ex;
             }
             
         }

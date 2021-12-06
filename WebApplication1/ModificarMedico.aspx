@@ -3,6 +3,9 @@
     <br />
     <h1>Modificar Médico</h1>
     <hr />
+    <br />
+    <h4>Datos Personales</h4>
+    <br />
     <div class="row g-3">
       <div class="col-md-4">
            <label for="txtDNI" class="form-label">DNI</label>
@@ -22,12 +25,6 @@
   <div class="col-md-4">
     <label for="txtNombre" class="form-label">Nombre</label>
     <asp:TextBox  class="form-control" ID="txtNombre"  runat="server" />
-  </div>
-
-
-  <div class="col-md-6">
-    <label for="ddlistEspecialidad" class="form-label">Especialidad</label>
-    <asp:DropDownList ID="ddlistEspecialidad" class="form-select" runat="server"></asp:DropDownList>
   </div>
 
 
@@ -52,21 +49,18 @@
     <asp:TextBox class="form-control" ID="txtDireccion" runat="server" />
   </div>
 
-  <div class="col-12">
-    <label for="ddlistTurno" class="form-label">Turno</label>
-    <asp:DropDownList ID="ddlistTurno" class="form-select" runat="server"></asp:DropDownList>
-  </div>
 
-  <div class="col-12">
-    <label for="txtEntrada" class="form-label">Horario de Entrada</label>
-     <asp:TextBox class="form-control" ID="txtEntrada" runat="server" />
+ <br /> 
+ <h4>Usuario</h4>
+ <hr />
+   <div class="col-12">
+    <label for="txtNombreUsuario" class="form-label">Usuario</label>
+    <asp:TextBox class="form-control" ID="txtNombreUsuario" runat="server" />
   </div>
-    
   <div class="col-12">
-    <label for="txtSalida" class="form-label">Horario de Salida</label>
-     <asp:TextBox class="form-control" ID="txtSalida" runat="server" />
+    <label for="txtContraseña" class="form-label">Contraseña</label>
+    <asp:TextBox class="form-control" type="Password" ID="txtContraseña" runat="server" />
   </div>
-
 
   <div class="col-12">
         <asp:Button class="btn btn-primary" Text="Aceptar" OnClick="Click_Aceptar" runat="server" />

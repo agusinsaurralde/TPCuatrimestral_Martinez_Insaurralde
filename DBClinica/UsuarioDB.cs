@@ -38,14 +38,14 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-        public List<Usuario> lista()
+        public List<Usuario> listar()
         {
             List<Usuario> lista = new List<Usuario>();
             ConexionDB datos = new ConexionDB();
 
             try
             {
-                datos.setearConsulta("SELECT U.ID, U.NombreUsuario, U.Contraseña, U.IDTipo AS IDTipo, T.Nombre AS Tipo, U.Estado FROM Usuario AS U INNER JOIN TipoUsuario AS T ON T.ID = U.IDTipo");
+                datos.setearConsulta("SELECT ID, NombreUsuario, Contraseña, Estado FROM Usuario  ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -54,9 +54,6 @@ namespace DBClinica
                     aux.IDUsuario = (int)datos.Lector["ID"];
                     aux.NombreUsuario = (string)datos.Lector["NombreUsuario"];
                     aux.Contraseña = (string)datos.Lector["Contraseña"];
-                    aux.TipoUsuario = new TipoUsuario();
-                    aux.TipoUsuario.Id = (int)datos.Lector["IDTipo"];
-                    aux.TipoUsuario.Nombre = (string)datos.Lector["Tipo"];
                     aux.Estado = (bool)datos.Lector["Estado"];
 
                     lista.Add(aux);
@@ -78,7 +75,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado) VALUES(@NombreUsuario, @Contraseña, @IDTipo, @Estado)");
+                datos.setearConsulta("INSERT Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado) VALUES(@ID, @NombreUsuario, @Contraseña, @IDTipo, @Estado)");
                 datos.setearParametro("@ID", UsuarioNuevo.IDUsuario);
                 datos.setearParametro("@NombreUsuario", UsuarioNuevo.NombreUsuario);
                 datos.setearParametro("@Contraseña", UsuarioNuevo.Contraseña);
@@ -102,12 +99,11 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE Usuario set ID = @ID, NombreUsuario = @NombreUsuario, Contraseña = @Contraseña, IDTipo = @IDTipo, Estado = @Estado WHERE ID =" + ModUsuario.IDUsuario + "");
+                datos.setearConsulta("UPDATE Usuario set ID = @ID, NombreUsuario = @NombreUsuario, Contraseña = @Contraseña, IDTipo = @IDTipo WHERE ID =" + ModUsuario.IDUsuario + "");
                 datos.setearParametro("@ID", ModUsuario.IDUsuario);
                 datos.setearParametro("@NombreUsuario", ModUsuario.NombreUsuario);
                 datos.setearParametro("@Contraseña", ModUsuario.Contraseña);
                 datos.setearParametro("@IDTipo", ModUsuario.TipoUsuario.Id);
-                datos.setearParametro("@Estado", ModUsuario.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -120,13 +116,22 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-        public void EliminarUsuario(Usuario ElimUsuario)
+
+        public Usuario buscarporID(int IDBuscado)
+        {
+            UsuarioDB usuarioDB = new UsuarioDB();
+            List<Usuario> listausuarios = usuarioDB.listar();
+            Usuario usuario = listausuarios.Find(x => x.IDUsuario == IDBuscado);
+            return usuario;
+        }
+
+        public void eliminar(Usuario ElimEUsuario)
         {
             ConexionDB datos = new ConexionDB();
 
             try
             {
-                datos.setearConsulta("UPDATE Usuario SET Estado = 0 WHERE ID = " + ElimUsuario.IDUsuario + "");
+                datos.setearConsulta("Update Usuario SET Estado = 0 where ID = " + ElimEUsuario.IDUsuario + "");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

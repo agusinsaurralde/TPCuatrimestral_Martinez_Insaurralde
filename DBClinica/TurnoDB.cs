@@ -18,7 +18,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT Numero, IDPaciente, CONCAT(NombrePaciente, ' ', ApellidoPaciente) as NombreCompletoPaciente, ApellidoPaciente, NombrePaciente, IDEspecialidad, Especialidad, IDMedico, CONCAT(NombreMedico,' ', ApellidoMedico) as NombreCompletoMedico, ApellidoMedico, NombreMedico, HoraInicio, HoraFin, Dia, Observaciones, IDRecepcionista, CONCAT(NombreRecepcionista,' ', ApellidoRecepcionista) as NombreCompletoRecepcionista, ApellidoRecepcionista, NombreRecepcionista, IDEstado, Estado FROM VW_TURNOS");
+                datos.setearConsulta("SELECT Numero, IDPaciente, CONCAT(NombrePaciente, ' ', ApellidoPaciente) as NombreCompletoPaciente, ApellidoPaciente, NombrePaciente, IDEspecialidad, Especialidad, IDMedico, CONCAT(NombreMedico,' ', ApellidoMedico) as NombreCompletoMedico, ApellidoMedico, NombreMedico, HoraInicio, Dia, Observaciones, IDRecepcionista, CONCAT(NombreRecepcionista,' ', ApellidoRecepcionista) as NombreCompletoRecepcionista, ApellidoRecepcionista, NombreRecepcionista, IDEstado, Estado FROM VW_TURNOS");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -39,7 +39,6 @@ namespace DBClinica
                     aux.Medico.Nombre = (string)datos.Lector["NombreMedico"];
                     aux.Medico.NombreCompleto = (string)datos.Lector["NombreCompletoMedico"];
                     aux.HorarioInicio = (DateTime)datos.Lector["HoraInicio"];
-                    aux.HorarioFin = (DateTime)datos.Lector["HoraFin"];
                     aux.Dia = (DateTime)datos.Lector["Dia"];
                     aux.Observaciones = (string)datos.Lector["Observaciones"];
                     aux.AdministrativoResponsable = new Empleado();
@@ -71,13 +70,12 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("EXEC SP_ASIGNARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @HoraFin, @Observaciones, @IDRecepcionista, @Estado");
+                datos.setearConsulta("EXEC SP_ASIGNARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @Observaciones, @IDRecepcionista, @Estado");
                 datos.setearParametro("@IDPaciente", turnoNuevo.Paciente.ID);
                 datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad.Id);
                 datos.setearParametro("@IDMedico", turnoNuevo.Medico.ID);
                 datos.setearParametro("@Dia", turnoNuevo.Dia);
                 datos.setearParametro("@HoraInicio", turnoNuevo.HorarioInicio);
-                datos.setearParametro("@HoraFin", turnoNuevo.HorarioInicio);
                 datos.setearParametro("@Observaciones", turnoNuevo.Observaciones);
                 datos.setearParametro("@IDRecepcionista", turnoNuevo.AdministrativoResponsable.ID);
                 datos.setearParametro("@Estado", turnoNuevo.Estado.ID);
@@ -99,14 +97,13 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @HoraFin, @Observaciones, @IDRecepcionista, @IDEstado, @Numero");
+                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio @Observaciones, @IDRecepcionista, @IDEstado, @Numero");
                 datos.setearParametro("@Numero", turnoNuevo.Numero);
                 datos.setearParametro("@IDPaciente", turnoNuevo.Paciente.ID);
                 datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad.Id);
                 datos.setearParametro("@IDMedico", turnoNuevo.Medico.ID);
                 datos.setearParametro("@Dia", DateTime.Parse(turnoNuevo.Dia.ToString()));
                 datos.setearParametro("@HoraInicio", DateTime.Parse(turnoNuevo.HorarioInicio.ToString())); ;
-                datos.setearParametro("@HoraFin", DateTime.Parse(turnoNuevo.HorarioInicio.ToString()));
                 datos.setearParametro("@Observaciones", turnoNuevo.Observaciones);
                 datos.setearParametro("@IDRecepcionista", turnoNuevo.AdministrativoResponsable.ID);
                 datos.setearParametro("@IDEstado", turnoNuevo.Estado.ID);
@@ -122,13 +119,21 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
+
+        public Turno buscarporNumero(int num)
+        {
+            TurnoDB turnoDB = new TurnoDB();
+            List<Turno> listaturnos = turnoDB.listarTurno();
+            Turno turno = listaturnos.Find(x => x.Numero == num);
+            return turno;
+        }
         public Turno buscarTurno(int NumeroTurno) // busca directamente un turno pára modificar
         {  
           ConexionDB datos = new ConexionDB();
            try
            {
 
-               datos.setearConsulta("SELECT Numero, IDPaciente, ApellidoPaciente, NombrePaciente, IDEspecialidad, Especialidad, IDMedico, ApellidoMedico, NombreMedico, HoraInicio, HoraFin, Dia, Observaciones, IDRecepcionista, ApellidoRecepcionista, NombreRecepcionista, IDEstado, Estado FROM VW_TURNOS WHERE NUMERO =" + NumeroTurno +"");
+               datos.setearConsulta("SELECT Numero, IDPaciente, ApellidoPaciente, NombrePaciente, IDEspecialidad, Especialidad, IDMedico, ApellidoMedico, NombreMedico, HoraInicio Dia, Observaciones, IDRecepcionista, ApellidoRecepcionista, NombreRecepcionista, IDEstado, Estado FROM VW_TURNOS WHERE NUMERO =" + NumeroTurno +"");
                // consulta que traiga el turno con todos sus datos no sus ID
                datos.ejecutarLectura();
                datos.Lector.Read();
@@ -146,7 +151,6 @@ namespace DBClinica
                 aux.Medico.Apellido = (string)datos.Lector["ApellidoMedico"];
                 aux.Medico.Nombre = (string)datos.Lector["NombreMedico"];
                 aux.HorarioInicio = (DateTime)datos.Lector["HoraInicio"];
-                aux.HorarioFin = (DateTime)datos.Lector["HoraFin"];
                 aux.Dia = (DateTime)datos.Lector["Dia"];
                 aux.Observaciones = (string)datos.Lector["Observaciones"];
                 aux.AdministrativoResponsable = new Empleado();
@@ -210,7 +214,6 @@ namespace DBClinica
                     aux.Medico.Nombre = (string)datos.Lector["NombreMedico"];
                     aux.Medico.NombreCompleto = (string)datos.Lector["NombreCompletoMedico"];
                     aux.HorarioInicio = (DateTime)datos.Lector["HoraInicio"];
-                    aux.HorarioFin = (DateTime)datos.Lector["HoraFin"];
                     aux.Dia = (DateTime)datos.Lector["Dia"];
                     aux.Observaciones = (string)datos.Lector["Observaciones"];
                     aux.AdministrativoResponsable = new Empleado();

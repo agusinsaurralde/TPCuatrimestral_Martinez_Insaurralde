@@ -25,7 +25,9 @@ namespace WebApplication1
                     ddlistTipoEmpleado.DataBind();
 
                     Empleado empleado = new Empleado();
+                    Usuario usuario = new Usuario();
                     empleado = (Empleado)Session["modificar"];
+                    usuario = (Usuario)Session["modificarUsuario"];
                     txtDNI.Text = empleado.DNI;
                     txtApellido.Text = empleado.Apellido;
                     txtNombre.Text = empleado.Nombre;
@@ -34,6 +36,8 @@ namespace WebApplication1
                     txtTelefono.Text = empleado.Telefono;
                     txtEmail.Text = empleado.Email;
                     txtDireccion.Text = empleado.Dirección;
+                    txtNombreUsuario.Text = usuario.NombreUsuario;
+                    txtContraseña.Text = usuario.Contraseña;
                 }
             }
             catch (Exception ex)
@@ -48,7 +52,9 @@ namespace WebApplication1
         protected void Click_Aceptar(object sender, EventArgs e)
         {
             Empleado modEmpleado = new Empleado();
+            Usuario modUsuario = new Usuario();
             EmpleadoDB cargar = new EmpleadoDB();
+            UsuarioDB cargarUsuario = new UsuarioDB();
             string modificado = "Empleado";
             string error = "empleado";
 
@@ -64,8 +70,14 @@ namespace WebApplication1
                 modEmpleado.Telefono = txtTelefono.Text;
                 modEmpleado.Email = txtEmail.Text;
                 modEmpleado.Dirección = txtDireccion.Text;
-                
+                modUsuario.IDUsuario = ((Empleado)Session["modificar"]).ID;
+                modUsuario.NombreUsuario = txtNombreUsuario.Text;
+                modUsuario.Contraseña = txtContraseña.Text;
+                modUsuario.TipoUsuario = new TipoUsuario();
+                modUsuario.TipoUsuario.Id = int.Parse(ddlistTipoEmpleado.SelectedItem.Value);
+
                 cargar.modificar(modEmpleado);
+                cargarUsuario.ModificarUsuario(modUsuario);
 
                 Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }

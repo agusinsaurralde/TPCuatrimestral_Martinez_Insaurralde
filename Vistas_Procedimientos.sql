@@ -3,7 +3,7 @@ use Clinica
 go
 ---Turnos
 CREATE VIEW VW_TURNOS AS
-select t.Numero, t.IDPaciente, p.Apellido as ApellidoPaciente, p.Nombre as NombrePaciente, e.ID as IDEspecialidad, e.Nombre AS Especialidad, exm.IDMedico as IDMedico, med.Apellido as ApellidoMedico, med.Nombre as NombreMedico, t.HoraInicio, t.HoraFin, t.Dia, t.Observaciones, t.IDRecepcionista, emp.Apellido as ApellidoRecepcionista, emp.Nombre as NombreRecepcionista,
+select t.Numero, t.IDPaciente, p.Apellido as ApellidoPaciente, p.Nombre as NombrePaciente, e.ID as IDEspecialidad, e.Nombre AS Especialidad, exm.IDMedico as IDMedico, med.Apellido as ApellidoMedico, med.Nombre as NombreMedico, t.HoraInicio, t.Dia, t.Observaciones, t.IDRecepcionista, emp.Apellido as ApellidoRecepcionista, emp.Nombre as NombreRecepcionista,
 t.IDEstado, est.Descripcion as Estado from turno as t
 inner join EspecialidadXMedico as exm on exm.ID = t.IDEspXMedico
 inner join Especialidad as e on e.ID = exm.IDEspecialidad
@@ -14,23 +14,23 @@ inner join EstadoTurno as est on est.id = t.IDEstado
 go
 
 CREATE PROCEDURE SP_ASIGNARTURNO(
-	@IDPaciente int, @IDEspecialidad int, @IDMedico int, @Dia date, @HoraInicio datetime, @HoraFin datetime, @Observaciones varchar(500), @IDRecepcionista int, @IDEstado int)
+	@IDPaciente int, @IDEspecialidad int, @IDMedico int, @Dia date, @HoraInicio datetime, @Observaciones varchar(500), @IDRecepcionista int, @IDEstado int)
 AS 
 BEGIN
 	DECLARE @IDEspXMed int
 	Select @IDEspXMed = ID from EspecialidadXMedico where IDMedico = @IDMedico and IDEspecialidad = @IDEspecialidad
-	INSERT INTO Turno(IDPaciente, IDEspXMedico, Dia, Observaciones, IDRecepcionista, IDEstado, HoraInicio, HoraFin)
-	VALUES(@IDPaciente, @IDEspXMed, @Dia, @Observaciones, @IDRecepcionista, @IDEstado, @HoraInicio, @HoraFin)
+	INSERT INTO Turno(IDPaciente, IDEspXMedico, Dia, Observaciones, IDRecepcionista, IDEstado, HoraInicio)
+	VALUES(@IDPaciente, @IDEspXMed, @Dia, @Observaciones, @IDRecepcionista, @IDEstado, @HoraInicio)
 END
 
 go
 CREATE PROCEDURE SP_MODIFICARTURNO(
-	@IDPaciente int, @IDEspecialidad int, @IDMedico int, @Dia date, @HoraInicio datetime, @HoraFin datetime, @Observaciones varchar(500), @IDRecepcionista int, @IDEstado int, @Numero INT)
+	@IDPaciente int, @IDEspecialidad int, @IDMedico int, @Dia date, @HoraInicio datetime, @Observaciones varchar(500), @IDRecepcionista int, @IDEstado int, @Numero INT)
 AS 
 BEGIN
 	DECLARE @IDEspXMed bigint
 	Select @IDEspXMed = ID from EspecialidadXMedico where IDMedico = @IDMedico and IDEspecialidad = @IDEspecialidad
-	UPDATE Turno SET IDPaciente = @IDPaciente, IDEspXMedico = @IDEspXMed, Dia = @Dia, Observaciones = @Observaciones, IDRecepcionista =  @IDRecepcionista, IDEstado = @IDEstado, HoraInicio = @HoraInicio, HoraFin = @HoraFin WHERE Numero = @Numero
+	UPDATE Turno SET IDPaciente = @IDPaciente, IDEspXMedico = @IDEspXMed, Dia = @Dia, Observaciones = @Observaciones, IDRecepcionista =  @IDRecepcionista, IDEstado = @IDEstado, HoraInicio = @HoraInicio WHERE Numero = @Numero
 END
 GO
 
@@ -56,8 +56,8 @@ CREATE PROCEDURE SP_AGREGARMEDICO(
 	@DNI VARCHAR(8), @Matricula VARCHAR(10), @Apellido varchar(50), @Nombre varchar(50), @Telefono varchar(15), @Email varchar(320), @Direccion varchar(320), @FechaNacimiento date)
 AS 
 BEGIN
-	INSERT Empleado(DNI, Apellido, Nombre, Telefono, Email, Direccion, FechaNacimiento, Estado)
-	VALUES(@DNI, @Apellido, @Nombre, @Telefono, @Email, @Direccion, @FechaNacimiento, 1)
+	INSERT Empleado(DNI, Apellido, Nombre, Telefono, Email, Direccion, FechaNacimiento, Estado, IDTipo)
+	VALUES(@DNI, @Apellido, @Nombre, @Telefono, @Email, @Direccion, @FechaNacimiento, 1, 1)
 
 	DECLARE @IDMedico int
 	SELECT @IDMedico = @@IDENTITY
@@ -70,7 +70,7 @@ CREATE PROCEDURE SP_MODIFICARMEDICO(
 AS 
 BEGIN
 	UPDATE Empleado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento WHERE ID = @ID
-	UPDATE DatosMedico SET Matricula = @Matricula
+	UPDATE DatosMedico SET Matricula = @Matricula WHERE ID = @ID
 
 END
 

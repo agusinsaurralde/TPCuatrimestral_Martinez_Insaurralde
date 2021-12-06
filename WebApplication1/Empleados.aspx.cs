@@ -12,7 +12,6 @@ namespace WebApplication1
     public partial class Empleados : System.Web.UI.Page
     {
         EmpleadoDB db = new EmpleadoDB();
-        Empleado emp = new Empleado();
         protected void Page_Load(object sender, EventArgs e)
         {
                 Grilla.DataSource = db.listarEmpleado();
@@ -25,13 +24,17 @@ namespace WebApplication1
 
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
+            UsuarioDB usuarioDB = new UsuarioDB();
             Session.Add("eliminar", db.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
+            Session.Add("eliminarUsuario", usuarioDB.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
             Response.Redirect("EliminarEmpleado.aspx");
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
+            UsuarioDB usuarioDB = new UsuarioDB();
             Session.Add("modificar", db.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
+            Session.Add("modificarUsuario", usuarioDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
             Response.Redirect("ModificarEmpleado.aspx");
         }
         protected void Click_Buscar(object sender, EventArgs e)

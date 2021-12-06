@@ -12,7 +12,6 @@ namespace WebApplication1
     public partial class Formulario_web12 : System.Web.UI.Page
     {
         TurnoDB turnoBD = new TurnoDB();
-        Turno turnito = new Turno();
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -22,8 +21,7 @@ namespace WebApplication1
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-            turnito.Numero = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
-            Session.Add("editarTurno", turnoBD.buscarTurno(turnito.Numero));
+            Session.Add("editarTurno", turnoBD.buscarporNumero((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
             Response.Redirect("ModificarTurno.aspx");
         }
 

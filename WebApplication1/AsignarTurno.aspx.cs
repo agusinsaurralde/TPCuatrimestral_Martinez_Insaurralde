@@ -123,7 +123,6 @@ namespace WebApplication1
             PacienteDB pacienteDB = new PacienteDB();
             List<Paciente> pacientes = pacienteDB.listarPaciente();
 
-            System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
 
             try
             {
@@ -136,7 +135,6 @@ namespace WebApplication1
                 NuevoTurno.Medico.NombreCompleto = ddlistMedico.SelectedItem.Text;
                 NuevoTurno.Dia = Calendario.SelectedDate;
                 NuevoTurno.HorarioInicio = DateTime.Parse(ddlistHora.SelectedItem.Value);
-                NuevoTurno.HorarioFin = DateTime.Parse(ddlistHora.SelectedItem.Value) + horaSumar;
                 NuevoTurno.Observaciones = txtObservaciones.Text;
                 NuevoTurno.AdministrativoResponsable = new Empleado();
                 NuevoTurno.AdministrativoResponsable.ID = int.Parse(ddlistRecepcionista.SelectedItem.Value);
@@ -157,8 +155,97 @@ namespace WebApplication1
             }
         }
 
+        protected void Calendario_DayRender(object sender, DayRenderEventArgs e)
+        { 
+            e.Day.IsSelectable = false;
+            int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
+            int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
+            List<DiasHabilesMedico> listaDiasHabiles = medicoDB.listarDiasHabiles();
+            List<DiasHabilesMedico> listaFiltrada = listaDiasHabiles.FindAll(x => x.Especialidad.Id == espSeleccionada && x.Medico.ID == medSeleccionado);
+            Session.Add("listaFiltradaDiasHabiles", listaFiltrada);
+
+            foreach (DiasHabilesMedico obj in listaFiltrada)
+            {
+                switch (obj.NombreDia)
+                {
+                    case "Lunes":
+                        if (obj.NombreDia == "Lunes")
+                        {
+                            if (e.Day.Date.DayOfWeek == DayOfWeek.Monday)
+                            {
+                                e.Day.IsSelectable = true;
+                            }
+
+                        }
+                        break;
+                    case "Martes":
+                        if (obj.NombreDia == "Martes")
+                        {
+                            if (e.Day.Date.DayOfWeek == DayOfWeek.Tuesday)
+                            {
+                                e.Day.IsSelectable = true;
+                            }
+
+                        }
+                        break;
+                    case "Miércoles":
+                        if (obj.NombreDia == "Miércoles")
+                        {
+                            if (e.Day.Date.DayOfWeek == DayOfWeek.Wednesday)
+                            {
+                                e.Day.IsSelectable = true;
+                            }
+
+                        }
+                        break;
+                    case "Jueves":
+                        if (obj.NombreDia == "Jueves")
+                        {
+                            if (e.Day.Date.DayOfWeek == DayOfWeek.Thursday)
+                            {
+                                e.Day.IsSelectable = true;
+                            }
+
+                        }
+                        break;
+                    case "Viernes":
+                        if (obj.NombreDia == "Viernes")
+                        {
+                            if (e.Day.Date.DayOfWeek == DayOfWeek.Friday)
+                            {
+                                e.Day.IsSelectable = true;
+                            }
+
+                        }
+                        break;
+                    case "Sábado":
+                        if (obj.NombreDia == "Sábado")
+                        {
+                            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday)
+                            {
+                                e.Day.IsSelectable = true;
+                            }
+
+                        }
+                        break;
+
+                }
+
+            }
+            if (e.Day.Date <= DateTime.Now)
+            {
+                e.Day.IsSelectable = false;
+            }
+
+
+
+        }
         protected void Calendario_SelectionChanged(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                ddlistHora.Items.Clear();
+            }
             lblHora.Visible = true;
             ddlistHora.Visible = true;
             lblObservaciones.Visible = true;
@@ -168,6 +255,7 @@ namespace WebApplication1
             int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
 
             ddlistHora.Enabled = true;
+
 
             DiasHabilesMedico horarioMedico = ((List<DiasHabilesMedico>)Session["listaFiltradaDiasHabiles"]).Find(x => x.IdDia == ((int)Calendario.SelectedDate.DayOfWeek)); //devuelve objeto de dias habiles segun el dia de la semana seleccionado
             DateTime horaInicio = horarioMedico.HorarioEntrada;
@@ -209,89 +297,7 @@ namespace WebApplication1
             }
         }
 
-        protected void Calendario_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date <= DateTime.Now)
-            {
-                e.Day.IsSelectable = false;
-            }
-            int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-            int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
-            List<DiasHabilesMedico> listaDiasHabiles = medicoDB.listarDiasHabiles();
-            List<DiasHabilesMedico> listaFiltrada = listaDiasHabiles.FindAll(x => x.Especialidad.Id == espSeleccionada && x.Medico.ID == medSeleccionado);
-            Session.Add("listaFiltradaDiasHabiles", listaFiltrada);
-
-            foreach (DiasHabilesMedico var in listaFiltrada)
-            {
-                switch (var.NombreDia)
-                {
-                    case "Lunes":
-                        if (var.NombreDia == "Lunes")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Monday)
-                            {
-                                e.Day.IsSelectable = true;
-                            }
-
-                        }
-                        break;
-                    case "Martes":
-                        if (var.NombreDia == "Martes")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Tuesday)
-                            {
-                                e.Day.IsSelectable = true;
-                            }
-
-                        }
-                        break;
-                    case "Miércoles":
-                        if (var.NombreDia == "Miércoles")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Wednesday)
-                            {
-                                e.Day.IsSelectable = true;
-                            }
-
-                        }
-                        break;
-                    case "Jueves":
-                        if (var.NombreDia == "Jueves")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Thursday)
-                            {
-                                e.Day.IsSelectable = true;
-                            }
-
-                        }
-                        break;
-                    case "Viernes":
-                        if (var.NombreDia == "Viernes")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Friday)
-                            {
-                                e.Day.IsSelectable = true;
-                            }
-
-                        }
-                        break;
-                    case "Sábado":
-                        if (var.NombreDia == "Sábado")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday)
-                            {
-                                e.Day.IsSelectable = true;
-                            }
-
-                        }
-                        break;
-
-                }
-
-            }
-
-
-        }
+      
 
     }
 }

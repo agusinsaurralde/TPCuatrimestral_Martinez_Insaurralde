@@ -2,7 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <h1>Agregar Empleado</h1>
     <hr />
-
+    <br />
+     <h4>Datos Personales</h4>
+ <hr />
   <div class="row g-3">
   <div class="col-md-4">
        <label for="txtDNI" class="form-label">DNI</label>
@@ -45,6 +47,17 @@
   <div class="col-12">
     <label for="txtDireccion" class="form-label">Dirección</label>
     <asp:TextBox class="form-control" ID="txtDireccion" runat="server" />
+  </div>
+
+  <h4>Usuario</h4>
+ <hr />
+   <div class="col-12">
+    <label for="txtNombreUsuario" class="form-label">Usuario</label>
+    <asp:TextBox class="form-control" ID="txtNombreUsuario" runat="server" />
+  </div>
+  <div class="col-12">
+    <label for="txtContraseña" class="form-label">Contraseña</label>
+    <asp:TextBox class="form-control" type="Password" ID="txtContraseña" runat="server" />
   </div>
 
   <div class="col-12">

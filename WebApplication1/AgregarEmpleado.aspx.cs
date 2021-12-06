@@ -19,7 +19,8 @@ namespace WebApplication1
                 if (!IsPostBack)
                 {
                     List<TipoEmpleado> empleado = db.listar();
-                    ddlistTipoEmpleado.DataSource = empleado;
+                    List<TipoEmpleado> empleadosSinMedico = empleado.FindAll(x => x.Nombre != "Médico");
+                    ddlistTipoEmpleado.DataSource = empleadosSinMedico;
                     ddlistTipoEmpleado.DataTextField = "Nombre";
                     ddlistTipoEmpleado.DataValueField = "ID";
                     ddlistTipoEmpleado.DataBind();
@@ -37,6 +38,8 @@ namespace WebApplication1
 
             Empleado NuevoEmpleado = new Empleado();
             EmpleadoDB cargar = new EmpleadoDB();
+            Usuario nuevoUsuario = new Usuario();
+            UsuarioDB cargarUsuario = new UsuarioDB();
             string agregado = "Empleado";
             string error = "empleado";
 
@@ -53,14 +56,27 @@ namespace WebApplication1
                 NuevoEmpleado.Email = txtEmail.Text;
                 NuevoEmpleado.Dirección = txtDireccion.Text;
                 NuevoEmpleado.Estado = true;
+                nuevoUsuario.Nombre = txtNombreUsuario.Text;
                 cargar.agregar(NuevoEmpleado);
+
+
+                List<Empleado> empleados = cargar.listarEmpleado();
+                Empleado ultEmpleado = empleados.Find(x => x.DNI == txtDNI.Text);
+                nuevoUsuario.IDUsuario = ultEmpleado.ID;
+                nuevoUsuario.NombreUsuario = txtNombreUsuario.Text;
+                nuevoUsuario.Contraseña = txtContraseña.Text;
+                nuevoUsuario.TipoUsuario = new TipoUsuario();
+                nuevoUsuario.TipoUsuario.Id = int.Parse(ddlistTipoEmpleado.SelectedItem.Value);
+                nuevoUsuario.TipoUsuario.Nombre = ddlistTipoEmpleado.SelectedItem.Text;
+                nuevoUsuario.Estado = true;
+
+                cargarUsuario.AgregarUsuario(nuevoUsuario);
 
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
             catch (Exception ex)
             {
-                throw ex;
-                //Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
 
         }

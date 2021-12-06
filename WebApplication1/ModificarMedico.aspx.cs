@@ -20,20 +20,10 @@ namespace WebApplication1
             {
                 if (!IsPostBack)
                 {
-                    List<TurnoTrabajo> turnot = ttdb.listar();
-                    ddlistTurno.DataSource = turnot;
-                    ddlistTurno.DataTextField = "NombreTurno";
-                    ddlistTurno.DataValueField = "ID";
-                    ddlistTurno.DataBind();
-
-                    List<Especialidad> esp = espDB.lista();
-                    ddlistEspecialidad.DataSource = esp;
-                    ddlistEspecialidad.DataTextField = "Nombre";
-                    ddlistEspecialidad.DataValueField = "ID";
-                    ddlistEspecialidad.DataBind();
 
                     Medico medico = new Medico();
                     medico = (Medico)Session["modificar"];
+                    Usuario usuario = (Usuario)Session["modificarUsuario"];
                     txtDNI.Text = medico.DNI;
                     txtMatricula.Text = medico.Matricula;
                     txtApellido.Text = medico.Apellido;
@@ -42,6 +32,8 @@ namespace WebApplication1
                     txtTelefono.Text = medico.Telefono;
                     txtEmail.Text = medico.Email;
                     txtDireccion.Text = medico.Dirección;
+                    txtNombreUsuario.Text = usuario.NombreUsuario;
+                    txtContraseña.Text = usuario.Contraseña;
 
                 }
             }
@@ -57,7 +49,9 @@ namespace WebApplication1
         protected void Click_Aceptar(object sender, EventArgs e)
         {
             Medico modMedico = new Medico();
+            Usuario modUsuario = new Usuario();
             MedicoDB cargar = new MedicoDB();
+            UsuarioDB cargarUsuario = new UsuarioDB();
             string modificado = "Médico";
             string error = "médico";
 
@@ -74,6 +68,17 @@ namespace WebApplication1
                 modMedico.Dirección = txtDireccion.Text;
 
                 cargar.modificar(modMedico);
+
+  
+                modUsuario.IDUsuario = ((Medico)Session["modificar"]).ID;
+                modUsuario.NombreUsuario = txtNombreUsuario.Text;
+                modUsuario.Contraseña = txtContraseña.Text;
+                modUsuario.TipoUsuario = new TipoUsuario();
+                modUsuario.TipoUsuario.Id = 1;
+                modUsuario.TipoUsuario.Nombre = "Médico";
+                modUsuario.Estado = true;
+
+                cargarUsuario.ModificarUsuario(modUsuario);
 
                 Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }

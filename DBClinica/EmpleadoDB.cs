@@ -143,7 +143,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(@DNI, @IDTipo, @Nombre, @Apellido, @Telefono, @Email, @Direccion, @FechaNacimiento, @Estado)");
+                datos.setearConsulta("insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento)VALUES(@DNI, @IDTipo, @Nombre, @Apellido, @Telefono, @Email, @Direccion, @FechaNacimiento)");
                 datos.setearParametro("@DNI", EmpleadoNuevo.DNI);
                 datos.setearParametro("@IDTipo", EmpleadoNuevo.TipoEmp.ID);
                 datos.setearParametro("@Nombre", EmpleadoNuevo.Nombre);
@@ -152,7 +152,7 @@ namespace DBClinica
                 datos.setearParametro("@Email", EmpleadoNuevo.Email);
                 datos.setearParametro("@Direccion", EmpleadoNuevo.Dirección);
                 datos.setearParametro("@FechaNacimiento", EmpleadoNuevo.FechaNacimiento);
-                datos.setearParametro("@Estado", EmpleadoNuevo.Estado);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -171,7 +171,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE Empleado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, IDTipo = @IDTipo, Estado = @Estado WHERE ID =" + ModEmpleado.ID + "");
+                datos.setearConsulta("UPDATE Empleado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, IDTipo = @IDTipo WHERE ID =" + ModEmpleado.ID + "");
                 datos.setearParametro("@DNI", ModEmpleado.DNI);
                 datos.setearParametro("@Apellido", ModEmpleado.Apellido);
                 datos.setearParametro("@Nombre", ModEmpleado.Nombre);
@@ -180,7 +180,7 @@ namespace DBClinica
                 datos.setearParametro("@Direccion", ModEmpleado.Dirección);
                 datos.setearParametro("@FechaNacimiento", ModEmpleado.FechaNacimiento);
                 datos.setearParametro("@IDTipo", ModEmpleado.TipoEmp.ID);
-                datos.setearParametro("@Estado", ModEmpleado.Estado);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

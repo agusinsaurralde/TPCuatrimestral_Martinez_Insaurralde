@@ -19,8 +19,7 @@
                 <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="Especialidad" />
                 <asp:BoundField datafield = "Medico.NombreCompleto" HeaderText ="Médico" />
                 <asp:BoundField datafield = "Dia" DataFormatString="{0:d}"  HeaderText ="Día" />
-                <asp:BoundField datafield = "HorarioInicio" DataFormatString="{0:HH:mm}"  HeaderText ="Inicio" />
-                <asp:BoundField datafield = "HorarioFin" DataFormatString="{0:HH:mm}" HeaderText ="Finalización" />
+                <asp:BoundField datafield = "HorarioInicio" DataFormatString="{0:HH:mm}"  HeaderText ="Hora" />
                 <asp:BoundField datafield = "Observaciones" HeaderText ="Observaciones" />
                 <asp:BoundField datafield = "AdministrativoResponsable.NombreCompleto" HeaderText ="Recepcionista" />
                 <asp:BoundField datafield = "Estado.Estado" HeaderText ="Estado" />
