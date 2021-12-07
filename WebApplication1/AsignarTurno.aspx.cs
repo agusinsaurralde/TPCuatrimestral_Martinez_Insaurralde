@@ -54,25 +54,7 @@ namespace WebApplication1
             }
 
         }
-        protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-
-            if(((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID) != null)
-            {
-                ddlistMedico.DataSource = ((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID);
-                ddlistMedico.DataBind();
-            }
-
-            lblMedico.Visible = true;
-            ddlistMedico.Visible = true;
-            Calendario.Visible = true;
-            lblHora.Visible = false;
-            ddlistHora.Visible = false;
-            lblObservaciones.Visible = false;
-            txtObservaciones.Visible = false;
-        }
-
+       
         protected void Click_Buscar(object sender, EventArgs e)
         {
             PacienteDB pacienteDB = new PacienteDB();
@@ -114,55 +96,37 @@ namespace WebApplication1
             }
         }
 
-        protected void Click_Aceptar(object sender, EventArgs e)
+        protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
 
-            Turno NuevoTurno = new Turno();
-            TurnoDB cargar = new TurnoDB();
-            string agregado = "Turno";
-            string error = "turno";
-
-            PacienteDB pacienteDB = new PacienteDB();
-            List<Paciente> pacientes = pacienteDB.listarPaciente();
-
-
-            try
+            if (((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID) != null)
             {
-                NuevoTurno.Paciente = pacientes.Find(x => x.DNI == txtDNI.Text);
-                NuevoTurno.Especialidad = new Especialidad();
-                NuevoTurno.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-                NuevoTurno.Especialidad.Nombre = ddlistEspecialidad.SelectedItem.Text;
-                NuevoTurno.Medico = new Medico();
-                NuevoTurno.Medico.ID = int.Parse(ddlistMedico.SelectedItem.Value);
-                NuevoTurno.Medico.NombreCompleto = ddlistMedico.SelectedItem.Text;
-                NuevoTurno.Dia = Calendario.SelectedDate;
-                NuevoTurno.HorarioInicio = DateTime.Parse(ddlistHora.SelectedItem.Value);
-                NuevoTurno.Observaciones = txtObservaciones.Text;
-                NuevoTurno.AdministrativoResponsable = new Empleado();
-                NuevoTurno.AdministrativoResponsable.ID = int.Parse(ddlistRecepcionista.SelectedItem.Value);
-                NuevoTurno.Estado = new EstadoTurno();
-                NuevoTurno.Estado.ID = int.Parse(ddlistEstado.SelectedItem.Value);
+                ddlistMedico.DataSource = ((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID);
+                ddlistMedico.DataBind();
+                ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));
 
-                cargar.agregar(NuevoTurno);
-                List<Turno> listaturnos = cargar.listarTurno();
-
-                Turno ultTurno = listaturnos.FindLast(x => x.Paciente.ID == NuevoTurno.Paciente.ID);
-                NuevoTurno.Numero = ultTurno.Numero;
-                Session.Add("NuevoTurno", NuevoTurno);
-
-                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
-            catch (Exception)
-            {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
-            }
+
+            lblMedico.Visible = true;
+            ddlistMedico.Visible = true;
+            Calendario.Visible = true;
+            lblHora.Visible = false;
+            ddlistHora.Visible = false;
+            lblObservaciones.Visible = false;
+            txtObservaciones.Visible = false;
+        }
+        protected void ddlistMedico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
+            Session.Add("medSeleccionado", medSeleccionado);
         }
 
         protected void Calendario_DayRender(object sender, DayRenderEventArgs e)
         { 
             e.Day.IsSelectable = false;
             int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-            if(ddlistMedico.SelectedItem.Value != null)
+            if((Session["medSeleccionado"]) != null)
             {
                 int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
                 List<DiasHabilesMedico> listaDiasHabiles = medicoDB.listarDiasHabiles();
@@ -304,7 +268,49 @@ namespace WebApplication1
             }
         }
 
-      
+        protected void Click_Aceptar(object sender, EventArgs e)
+        {
+
+            Turno NuevoTurno = new Turno();
+            TurnoDB cargar = new TurnoDB();
+            string agregado = "Turno";
+            string error = "turno";
+
+            PacienteDB pacienteDB = new PacienteDB();
+            List<Paciente> pacientes = pacienteDB.listarPaciente();
+
+
+            try
+            {
+                NuevoTurno.Paciente = pacientes.Find(x => x.DNI == txtDNI.Text);
+                NuevoTurno.Especialidad = new Especialidad();
+                NuevoTurno.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedItem.Value);
+                NuevoTurno.Especialidad.Nombre = ddlistEspecialidad.SelectedItem.Text;
+                NuevoTurno.Medico = new Medico();
+                NuevoTurno.Medico.ID = int.Parse(ddlistMedico.SelectedItem.Value);
+                NuevoTurno.Medico.NombreCompleto = ddlistMedico.SelectedItem.Text;
+                NuevoTurno.Dia = Calendario.SelectedDate;
+                NuevoTurno.HorarioInicio = DateTime.Parse(ddlistHora.SelectedItem.Value);
+                NuevoTurno.Observaciones = txtObservaciones.Text;
+                NuevoTurno.AdministrativoResponsable = new Empleado();
+                NuevoTurno.AdministrativoResponsable.ID = int.Parse(ddlistRecepcionista.SelectedItem.Value);
+                NuevoTurno.Estado = new EstadoTurno();
+                NuevoTurno.Estado.ID = int.Parse(ddlistEstado.SelectedItem.Value);
+
+                cargar.agregar(NuevoTurno);
+                List<Turno> listaturnos = cargar.listarTurno();
+
+                Turno ultTurno = listaturnos.FindLast(x => x.Paciente.ID == NuevoTurno.Paciente.ID);
+                NuevoTurno.Numero = ultTurno.Numero;
+                Session.Add("NuevoTurno", NuevoTurno);
+
+                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
+            }
+            catch (Exception)
+            {
+                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+            }
+        }
 
     }
 }

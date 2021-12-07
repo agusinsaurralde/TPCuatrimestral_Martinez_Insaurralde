@@ -47,5 +47,13 @@ namespace WebApplication1
             }
 
         }
+
+        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UsuarioDB usuarioDB = new UsuarioDB();
+            Session.Add("DetalleEmpleado", usuarioDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            Response.Redirect("DetalleEmpleados.aspx");
+
+        }
     }
 }

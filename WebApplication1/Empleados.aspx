@@ -12,7 +12,7 @@
         <asp:Button Text="Agregar" class="btn btn-primary" OnClick="Click_Agregar" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" runat="server" />
    </div> 
     <div>
-        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" >
+        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" >
             <Columns>
                 <asp:BoundField datafield = "ID" HeaderText ="ID" />
                 <asp:BoundField datafield = "Apellido" HeaderText ="Apellido" />
@@ -23,6 +23,7 @@
                 <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="Fecha de Nacimiento" />
                 <asp:BoundField datafield = "TipoEmp.Nombre" HeaderText ="Tipo de Empleado"/>
                 <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
+                <asp:CommandField ButtonType="Button"  ShowSelectButton="True" SelectText="Detalle" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC"/>  
                 <asp:CommandField ButtonType="Button"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" />   
                 <asp:CommandField ButtonType="Button"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC"/>  
             </Columns>

@@ -30,7 +30,7 @@
 
         <div class="col-md-3">
             <asp:Label Text="Médico" ID="lblMedico" Visible = false CssClass="form-label" runat="server" />
-            <asp:DropDownList ID="ddlistMedico" Visible = false class="form-select" CssClass="form-select" AutoPostBack="true" runat="server" EnableViewState="True" ></asp:DropDownList>
+            <asp:DropDownList ID="ddlistMedico" Visible = false class="form-select" CssClass="form-select"  OnSelectedIndexChanged="ddlistMedico_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True" ></asp:DropDownList>
         </div>
         <div class="col-md-3">
              <asp:Calendar Visible ="false" runat="server" ID="Calendario" OnDayRender="Calendario_DayRender" AutoPostBack="true"  OnSelectionChanged="Calendario_SelectionChanged"></asp:Calendar>          
