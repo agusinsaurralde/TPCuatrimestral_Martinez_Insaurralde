@@ -4,48 +4,47 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DBClinica;
 using Dominio;
+using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Formulario_web18 : System.Web.UI.Page
+    public partial class AgregarHistoriaClinica : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            HistoriaClinica datos = (HistoriaClinica)Session["modificar"];
-            txtNombrePaciente.Text = datos.Paciente.NombreCompleto;
-            lblFecha.Text = datos.Fecha.ToShortDateString();
-            txtDescripcion.Text = datos.Descripcion;
+           Turno datos = (Turno)Session["agregarHistoriaClinica"];
+           txtNombrePaciente.Text = datos.Paciente.NombreCompleto;
+            lblFecha.Text = datos.Dia.ToShortDateString();
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            string modificado = "Historia clínica";
+            string agregado = "Historia clínica";
             string error = "historia clínica";
             try
-            {
+            { 
 
                 HistoriaClinica hc = new HistoriaClinica();
                 HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
-                HistoriaClinica datos = (HistoriaClinica)Session["modificar"];
+                Turno datos = (Turno)Session["agregarHistoriaClinica"];
 
                 hc.Paciente = new Paciente();
                 hc.Paciente.ID = datos.Paciente.ID;
                 hc.Descripcion = txtDescripcion.Text;
-                hc.Fecha = datos.Fecha;
+                hc.Fecha = datos.Dia;
+                
 
-
-                hcDB.ModificarHistoriaClinica(hc);
-                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
+                hcDB.AgregarHistoriaClinica(hc);
+                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
             catch (Exception ex)
             {
-                //Response.Redirect("ErrorModificar.aspx?agregado=" + error, false);
+                //Response.Redirect("ErrorAgregar.aspx?agregado=" + error, false);
 
-                throw ex;
+               throw ex;
             }
-
+           
         }
     }
 }

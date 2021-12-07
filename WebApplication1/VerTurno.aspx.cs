@@ -42,6 +42,13 @@ namespace WebApplication1
             }
 
         }
+
+        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session.Add("agregarHistoriaClinica", turnoBD.buscarporNumero(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            Response.Redirect("AgregarHistoriaClinica.aspx");
+
+        }
     }
 
 

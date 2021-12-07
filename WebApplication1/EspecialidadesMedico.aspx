@@ -1,20 +1,39 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EspecialidadesMedico.aspx.cs" Inherits="WebApplication1.EspecialidadesMedico" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1> <asp:Label Text="" runat="server" /></h1>
-    <%foreach (Dominio.Medico medico in (List<Dominio.Medico>)Session["EspMedico"])
-      { %>
-    <asp:Label Text="" ID="txtEspecialidad" runat="server" />
-    <div>
-        <asp:Label Text="" ID="txtTurno" runat="server" />
-    </div>
-    <div>
-        <asp:Label Text="" ID="txtEntrada" runat="server" />
-    </div>
-    <div>
-        <asp:Label Text="" ID="txtSalida" runat="server" />
-    </div>
-    <div>
-        <asp:Label Text="" ID="txtDiasHabiles" runat="server" />
-    </div>
-    <%} %>
+    
+    <h3> Especialidades</h3>
+    <hr />
+    
+    <%
+      foreach (var item in listaEsp) 
+      {
+            objDias = ((List<Dominio.DiasHabilesMedico>)Session["DiasHabiles"]).Find(x => x.Especialidad.Id == item.especialidad.Id) ;%>
+              <h5><%: item.especialidad.Nombre %></h5>
+                 <hr />
+            <table class="table">
+             <thead>
+               <tr>
+                 <th scope="col">Dia</th>
+                 <th scope="col">Horario</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr>
+                 <td><%: objDias.NombreDia%> </td>
+                 <td><%:objDias.HorarioEntrada.ToString("HH:mm") + " - " + objDias.HorarioSalida.ToString("HH:mm")%></td>
+               </tr>
+           </table>
+
+      <%}%>
+
+      <h3> Usuario</h3>
+      <hr />
+    <div><label>Nombre de Usuario: <%: usuario.NombreUsuario %></label></div>
+    <div><label>Nombre de Usuario: <%: usuario.Contraseña %></label></div>
+       
+        
+    
+    
+    
+   
 </asp:Content>
