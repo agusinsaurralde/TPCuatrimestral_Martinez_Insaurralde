@@ -97,7 +97,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio, @Observaciones, @IDRecepcionista, @IDEstado, @Numero");
+                datos.setearConsulta("EXEC SP_MODIFICARTURNO @IDPaciente, @IDEspecialidad, @IDMedico, @Dia, @HoraInicio @Observaciones, @IDRecepcionista, @IDEstado, @Numero");
                 datos.setearParametro("@Numero", turnoNuevo.Numero);
                 datos.setearParametro("@IDPaciente", turnoNuevo.Paciente.ID);
                 datos.setearParametro("@IDEspecialidad", turnoNuevo.Especialidad.Id);
@@ -127,6 +127,54 @@ namespace DBClinica
             Turno turno = listaturnos.Find(x => x.Numero == num);
             return turno;
         }
+        public Turno buscarTurno(int NumeroTurno) // busca directamente un turno pára modificar
+        {  
+          ConexionDB datos = new ConexionDB();
+           try
+           {
+
+               datos.setearConsulta("SELECT Numero, IDPaciente, ApellidoPaciente, NombrePaciente, IDEspecialidad, Especialidad, IDMedico, ApellidoMedico, NombreMedico, HoraInicio Dia, Observaciones, IDRecepcionista, ApellidoRecepcionista, NombreRecepcionista, IDEstado, Estado FROM VW_TURNOS WHERE NUMERO =" + NumeroTurno +"");
+               // consulta que traiga el turno con todos sus datos no sus ID
+               datos.ejecutarLectura();
+               datos.Lector.Read();
+               Turno aux = new Turno();
+                aux.Numero = (int)datos.Lector["Numero"];
+                aux.Paciente = new Paciente();
+                aux.Paciente.ID = (int)datos.Lector["IDPaciente"];
+                aux.Paciente.Apellido = (string)datos.Lector["ApellidoPaciente"];
+                aux.Paciente.Nombre = (string)datos.Lector["NombrePaciente"];
+                aux.Especialidad = new Especialidad();
+                aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
+                aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
+                aux.Medico = new Medico();
+                aux.Medico.ID = (int)datos.Lector["IDMedico"];
+                aux.Medico.Apellido = (string)datos.Lector["ApellidoMedico"];
+                aux.Medico.Nombre = (string)datos.Lector["NombreMedico"];
+                aux.HorarioInicio = (DateTime)datos.Lector["HoraInicio"];
+                aux.Dia = (DateTime)datos.Lector["Dia"];
+                aux.Observaciones = (string)datos.Lector["Observaciones"];
+                aux.AdministrativoResponsable = new Empleado();
+                aux.AdministrativoResponsable.ID = (int)datos.Lector["IDRecepcionista"];
+                aux.AdministrativoResponsable.Apellido = (string)datos.Lector["ApellidoRecepcionista"];
+                aux.AdministrativoResponsable.Nombre = (string)datos.Lector["NombreRecepcionista"];
+                aux.Estado = new EstadoTurno();
+                aux.Estado.ID = (int)datos.Lector["IDEstado"];
+                aux.Estado.Estado = (string)datos.Lector["Estado"];
+
+
+                return aux;
+           }
+           catch (Exception ex)
+             {
+                throw ex;
+             }
+            finally
+             {
+                datos.cerrarConexion();
+             }
+            
+        }
+
         public List<Turno> buscar(string criterio, string valorBuscado)
         {
             List<Turno> lista = new List<Turno>();

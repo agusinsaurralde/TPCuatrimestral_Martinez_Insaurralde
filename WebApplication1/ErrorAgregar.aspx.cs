@@ -46,10 +46,6 @@ namespace WebApplication1
             {
                 Response.Redirect("AgregarEspecialidad.aspx", false);
             }
-            else if (error == "historia clínica")
-            {
-                Response.Redirect("AgregarHistoriaClinica.aspx", false);
-            }
         }
     }
 }

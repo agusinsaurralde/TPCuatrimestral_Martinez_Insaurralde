@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT H.ID, H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente");
+                datos.setearConsulta("SELECT H.ID, H.IDPaciente, P.Apellido, P.Nombre, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,7 +27,6 @@ namespace DBClinica
                     aux.Paciente.ID = (int)datos.Lector["IDPaciente"];
                     aux.Paciente.Apellido = (string)datos.Lector["Apellido"];
                     aux.Paciente.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Paciente.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 
@@ -51,7 +50,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT HistoriaClinica(IDPaciente, Fecha, Descripcion, Estado) VALUES(@IDPaciente, @Fecha, @Descripcion, 1)");
+                datos.setearConsulta("INSERT HistoriaClinica(IDPaciente, Fecha, Descripcion) VALUES(@IDPaciente, @Fecha, @Descripcion)");
                 datos.setearParametro("@IDPaciente", HCNueva.Paciente.ID);
                 datos.setearParametro("@Fecha", HCNueva.Fecha);
                 datos.setearParametro("@Descripcion", HCNueva.Descripcion);
@@ -108,52 +107,6 @@ namespace DBClinica
             }
         }
 
-        public HistoriaClinica buscarporID(int id)
-        {
-            HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
-            List<HistoriaClinica> listahc = hcDB.lista();
-            HistoriaClinica hc = listahc.Find(x => x.ID == id);
-            return hc;
-        }
-
-        public List<HistoriaClinica> buscar(string nombre)
-        {
-            List<HistoriaClinica> lista = new List<HistoriaClinica>();
-            ConexionDB datos = new ConexionDB();
-
-            try
-            {
-                datos.setearConsulta("SELECT DISTINCT H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente WHERE P.Apellido LIKE '" + nombre + "%' OR P.Nombre LIKE '" + nombre + "%' OR CONCAT(P.Nombre, ' ', P.Apellido)  LIKE '" + nombre + "%'");
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
-                {
-                    HistoriaClinica aux = new HistoriaClinica();
-                    //aux.ID = (int)datos.Lector["ID"];
-                    aux.Paciente = new Paciente();
-                    aux.Paciente.ID = (int)datos.Lector["IDPaciente"];
-                    aux.Paciente.Apellido = (string)datos.Lector["Apellido"];
-                    aux.Paciente.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Paciente.NombreCompleto = (string)datos.Lector["NombreCompleto"];
-                    aux.Fecha = (DateTime)datos.Lector["Fecha"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-
-                    lista.Add(aux);
-                }
-
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-
-
-        }
     }
 }
 

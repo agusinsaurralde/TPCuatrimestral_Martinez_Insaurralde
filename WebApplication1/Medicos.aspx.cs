@@ -36,6 +36,7 @@ namespace WebApplication1
             Session.Add("modificarUsuario", usuarioDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
             Response.Redirect("ModificarMedico.aspx");
         }
+ 
 
         protected void Click_Buscar(object sender, EventArgs e)
         {
@@ -54,9 +55,8 @@ namespace WebApplication1
 
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session.Add("EspMedico", medicoDB.listarEspecialidadesDeUnMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
-            Session.Add("DiasHabiles", medicoDB.listarDiasHabilesDeUnMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
-            Response.Redirect("EspecialidadesMedico.aspx");
+            /*Session.Add("EspMedico", medicoDB.listarEspecialidadesMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            Response.Redirect("EspecialidadesMedico.aspx");*/
         }
     }
 }
