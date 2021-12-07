@@ -65,6 +65,9 @@
   <div class="col-12">
         <asp:Button class="btn btn-primary" Text="Aceptar" OnClick="Click_Aceptar" runat="server" />
   </div>
+   <div class="col-12">
+        <asp:Button class="btn btn-primary" Text="Editar Especialidades" OnClick="Click_EditarEsp" runat="server" />
+  </div>
 </div>
 
 </asp:Content>

@@ -80,13 +80,27 @@ namespace WebApplication1
 
                 cargarUsuario.ModificarUsuario(modUsuario);
 
-                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
+                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
             catch (Exception)
             {
                 Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+              
             }
 
+        }
+
+        protected void Click_EditarEsp(object sender, EventArgs e)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+            List<MedicoEspecialidades> listaEsp = medicoDB.listarEspecialidadesDeUnMedico(((Medico)Session["modificar"]).ID);
+            
+
+            Session.Add("DiasModificar", listaDias);
+            Session.Add("EspModificar", listaEsp);
+
+            Response.Redirect("ModificarEspecialidadesMedico.aspx");
         }
     }
 }

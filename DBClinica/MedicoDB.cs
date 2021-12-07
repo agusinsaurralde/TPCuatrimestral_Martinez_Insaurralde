@@ -149,7 +149,6 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-
         public void agregarEspecialidades(MedicoEspecialidades espAgregadas)
         {
             ConexionDB datos = new ConexionDB();
@@ -197,7 +196,27 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
+        public void modificarDias(DiasHabilesMedico dia)
+        {
+            ConexionDB datos = new ConexionDB();
+            try
+            {
+                datos.setearConsulta("UPDATE DiasHabilesMedico SET IDDia = @idDia, HorarioEntrada = @HorarioEntrada, HorarioSalida = @HorarioSalida WHERE IDMedico =" + dia.ID );
+                datos.setearParametro("@IDDia", dia.IdDia);
+                datos.setearParametro("@HorarioEntrada", dia.HorarioEntrada);
+                datos.setearParametro("@HorarioSalida", dia.HorarioSalida);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminar(Medico ElimMedico)
         {
             ConexionDB datos = new ConexionDB();

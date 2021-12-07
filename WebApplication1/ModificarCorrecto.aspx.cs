@@ -49,6 +49,10 @@ namespace WebApplication1
             {
                 Response.Redirect("VerTurno.aspx", false);
             }
+            else if (modificado == "Día")
+            {
+                Response.Redirect("ModificarEspecialidadesMedico.aspx", false);
+            }
         }
     }
 }
