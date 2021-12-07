@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarHistoriaClinicaMedico.aspx.cs" Inherits="WebApplication1.Formulario_web18" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarHistoriaClinica.aspx.cs" Inherits="WebApplication1.AgregarHistoriaClinica" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <h3>Historia Clínica</h3>
+     <h3>Historia Clínica</h3>
     <hr />
     <h4>
         <asp:Label Text="" ID="txtNombrePaciente" runat="server" />  </h4>  

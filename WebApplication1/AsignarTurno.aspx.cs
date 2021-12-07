@@ -58,9 +58,11 @@ namespace WebApplication1
         {
             int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
 
-            ddlistMedico.DataSource = ((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID);
-            ddlistMedico.DataBind();
-
+            if(((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID) != null)
+            {
+                ddlistMedico.DataSource = ((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID);
+                ddlistMedico.DataBind();
+            }
 
             lblMedico.Visible = true;
             ddlistMedico.Visible = true;
@@ -144,7 +146,8 @@ namespace WebApplication1
                 cargar.agregar(NuevoTurno);
                 List<Turno> listaturnos = cargar.listarTurno();
 
-                NuevoTurno.Numero = listaturnos.Count;
+                Turno ultTurno = listaturnos.FindLast(x => x.Paciente.ID == NuevoTurno.Paciente.ID);
+                NuevoTurno.Numero = ultTurno.Numero;
                 Session.Add("NuevoTurno", NuevoTurno);
 
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
@@ -159,82 +162,86 @@ namespace WebApplication1
         { 
             e.Day.IsSelectable = false;
             int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-            int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
-            List<DiasHabilesMedico> listaDiasHabiles = medicoDB.listarDiasHabiles();
-            List<DiasHabilesMedico> listaFiltrada = listaDiasHabiles.FindAll(x => x.Especialidad.Id == espSeleccionada && x.Medico.ID == medSeleccionado);
-            Session.Add("listaFiltradaDiasHabiles", listaFiltrada);
-
-            foreach (DiasHabilesMedico obj in listaFiltrada)
+            if(ddlistMedico.SelectedItem.Value != null)
             {
-                switch (obj.NombreDia)
+                int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
+                List<DiasHabilesMedico> listaDiasHabiles = medicoDB.listarDiasHabiles();
+                List<DiasHabilesMedico> listaFiltrada = listaDiasHabiles.FindAll(x => x.Especialidad.Id == espSeleccionada && x.Medico.ID == medSeleccionado);
+                Session.Add("listaFiltradaDiasHabiles", listaFiltrada);
+
+                foreach (DiasHabilesMedico obj in listaFiltrada)
                 {
-                    case "Lunes":
-                        if (obj.NombreDia == "Lunes")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Monday)
+                    switch (obj.NombreDia)
+                    {
+                        case "Lunes":
+                            if (obj.NombreDia == "Lunes")
                             {
-                                e.Day.IsSelectable = true;
-                            }
+                                if (e.Day.Date.DayOfWeek == DayOfWeek.Monday)
+                                {
+                                    e.Day.IsSelectable = true;
+                                }
 
-                        }
-                        break;
-                    case "Martes":
-                        if (obj.NombreDia == "Martes")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Tuesday)
+                            }
+                            break;
+                        case "Martes":
+                            if (obj.NombreDia == "Martes")
                             {
-                                e.Day.IsSelectable = true;
-                            }
+                                if (e.Day.Date.DayOfWeek == DayOfWeek.Tuesday)
+                                {
+                                    e.Day.IsSelectable = true;
+                                }
 
-                        }
-                        break;
-                    case "Miércoles":
-                        if (obj.NombreDia == "Miércoles")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Wednesday)
+                            }
+                            break;
+                        case "Miércoles":
+                            if (obj.NombreDia == "Miércoles")
                             {
-                                e.Day.IsSelectable = true;
-                            }
+                                if (e.Day.Date.DayOfWeek == DayOfWeek.Wednesday)
+                                {
+                                    e.Day.IsSelectable = true;
+                                }
 
-                        }
-                        break;
-                    case "Jueves":
-                        if (obj.NombreDia == "Jueves")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Thursday)
+                            }
+                            break;
+                        case "Jueves":
+                            if (obj.NombreDia == "Jueves")
                             {
-                                e.Day.IsSelectable = true;
-                            }
+                                if (e.Day.Date.DayOfWeek == DayOfWeek.Thursday)
+                                {
+                                    e.Day.IsSelectable = true;
+                                }
 
-                        }
-                        break;
-                    case "Viernes":
-                        if (obj.NombreDia == "Viernes")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Friday)
+                            }
+                            break;
+                        case "Viernes":
+                            if (obj.NombreDia == "Viernes")
                             {
-                                e.Day.IsSelectable = true;
-                            }
+                                if (e.Day.Date.DayOfWeek == DayOfWeek.Friday)
+                                {
+                                    e.Day.IsSelectable = true;
+                                }
 
-                        }
-                        break;
-                    case "Sábado":
-                        if (obj.NombreDia == "Sábado")
-                        {
-                            if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday)
+                            }
+                            break;
+                        case "Sábado":
+                            if (obj.NombreDia == "Sábado")
                             {
-                                e.Day.IsSelectable = true;
-                            }
+                                if (e.Day.Date.DayOfWeek == DayOfWeek.Saturday)
+                                {
+                                    e.Day.IsSelectable = true;
+                                }
 
-                        }
-                        break;
+                            }
+                            break;
+
+                    }
 
                 }
+                if (e.Day.Date <= DateTime.Now)
+                {
+                    e.Day.IsSelectable = false;
+                }
 
-            }
-            if (e.Day.Date <= DateTime.Now)
-            {
-                e.Day.IsSelectable = false;
             }
 
 

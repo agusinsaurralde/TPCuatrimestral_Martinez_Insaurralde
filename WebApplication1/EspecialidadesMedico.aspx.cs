@@ -11,17 +11,17 @@ namespace WebApplication1
 {
     public partial class EspecialidadesMedico : System.Web.UI.Page
     {
+
+        public List<MedicoEspecialidades> listaEsp { get; set; }
+        public DiasHabilesMedico objDias { get; set; }
+        public Usuario usuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Medico> listaEsp = (List<Medico>)Session["EspMedico"];
-
-            foreach(Medico medico in listaEsp)
-            {
-                /*txtEspecialidad.Text = medico.Especialidad.Nombre;
-                txtTurno.Text = medico.Turno.NombreTurno;
-                txtEntrada.Text = medico.HorarioEntrada.ToString("HH:mm");
-                txtSalida.Text = medico.HorarioSalida.ToString("HH:mm");*/
-            }
+            listaEsp = (List<Dominio.MedicoEspecialidades>)Session["EspMedico"];
+            UsuarioDB usuarioDB = new UsuarioDB();
+            List<Usuario> listaUsuarios = usuarioDB.listar();
+            
+            usuario = listaUsuarios.Find(x => x.IDUsuario == listaEsp[0].ID);
         }
     }
 }

@@ -126,6 +126,50 @@ namespace DBClinica
             }
         }
 
+        public void agregarDiasHabiles(DiasHabilesMedico diasAgregados)
+        {
+            ConexionDB datos = new ConexionDB();
+            try
+            {
+                datos.setearConsulta("INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(@IDMedico, @IDEspecialidad, @IDDia, @HorarioEntrada, @HorarioSalida, 1)");
+                datos.setearParametro("@IDMedico", diasAgregados.Medico.ID);
+                datos.setearParametro("@IDEspecialidad", diasAgregados.Especialidad.Id);
+                datos.setearParametro("@IDDia", diasAgregados.IdDia);
+                datos.setearParametro("@HorarioEntrada", diasAgregados.HorarioEntrada);
+                datos.setearParametro("@HorarioSalida", diasAgregados.HorarioSalida);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregarEspecialidades(MedicoEspecialidades espAgregadas)
+        {
+            ConexionDB datos = new ConexionDB();
+            try
+            {
+                datos.setearConsulta("INSERT EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(@IDMedico, @IDEspecialidad,1)");
+                datos.setearParametro("@IDMedico", espAgregadas.ID);
+                datos.setearParametro("@IDEspecialidad", espAgregadas.especialidad.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void modificar(Medico ModMedico)
         {
             ConexionDB datos = new ConexionDB();
@@ -259,6 +303,13 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
+        public List<MedicoEspecialidades> listarEspecialidadesDeUnMedico(int ID)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<MedicoEspecialidades> listaespecialidades = medicoDB.listarEspecialidadesMedico();
+            List<MedicoEspecialidades> listaEspDeMedico = listaespecialidades.FindAll(x => x.ID == ID);
+            return listaEspDeMedico;
+        }
 
         public List<DiasHabilesMedico> listarDiasHabiles()
         {
@@ -301,6 +352,13 @@ namespace DBClinica
             {
                 datos.cerrarConexion();
             }
+        }
+        public List<DiasHabilesMedico> listarDiasHabilesDeUnMedico(int ID)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<DiasHabilesMedico> listadias = medicoDB.listarDiasHabiles();
+            List<DiasHabilesMedico> listaDiasDeMedico = listadias.FindAll(x => x.Medico.ID == ID);
+            return listaDiasDeMedico;
         }
 
         /*public List<Medico> listarMedicoXEspecialidad(int IDEspecialidad)

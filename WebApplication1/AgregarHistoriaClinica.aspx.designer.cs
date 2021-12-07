@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class Formulario_web18
+    public partial class AgregarHistoriaClinica
     {
 
         /// <summary>

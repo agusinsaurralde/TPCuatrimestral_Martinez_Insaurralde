@@ -233,9 +233,10 @@ namespace WebApplication1
 
                 Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                throw ex;
+                //Response.Redirect("ErrorModificar.aspx?error=" + error, false);
             }
             
         }

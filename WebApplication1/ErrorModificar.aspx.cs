@@ -41,6 +41,14 @@ namespace WebApplication1
             {
                 Response.Redirect("ModificarEspecialidad.aspx", false);
             }
+            else if (error == "historia clínica")
+            {
+                Response.Redirect("HistoriaClinica.aspx", false);
+            }
+            else if (error == "turno")
+            {
+                Response.Redirect("VerTurno.aspx", false);
+            }
         }
     }
 }
