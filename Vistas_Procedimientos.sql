@@ -78,4 +78,13 @@ BEGIN
 	UPDATE DiasHabilesMedico SET Estado = 0 WHERE IDMedico = @ID
 	UPDATE Empleado SET Estado = 0 WHERE ID = @ID
 END
+GO
+CREATE PROCEDURE SP_ELIMINARESPECIALIDADMEDICO(
+	@IDEspecialidad int, @IDMedico int
+)
+AS
+BEGIN
+	DELETE EspecialidadXMedico WHERE IDMedico =  @IDMedico AND IDEspecialidad = @IDEspecialidad
+	DELETE DiasHabilesMedico WHERE IDMedico = @IDMedico AND IDEspecialidad = @IDEspecialidad
+END
 

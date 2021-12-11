@@ -19,16 +19,11 @@
              </thead>
                 <tbody>
                 <% List<Dominio.DiasHabilesMedico> diasFiltradosPorEspecialidad = listaDias.FindAll(x => x.Especialidad.Id == item.especialidad.Id);
-                    string eliminar = "eliminar";
-                    string editar = "editar";
                     foreach (Dominio.DiasHabilesMedico dias in diasFiltradosPorEspecialidad)
                     {%>
-                             
                                  <tr>
                                    <td><%: dias.NombreDia%> </td>
-                                   <td><%:dias.HorarioEntrada.ToString("HH:mm") + " - " + objDias.HorarioSalida.ToString("HH:mm")%></td>
-                                   <td><a href="EspecialidadesMedico.aspx?id=<%: dias.ID%>&accion=<%:eliminar %>" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Editar</a></td>
-                                   <td><a href="EspecialidadesMedico.aspx?id=<%: dias.ID%>&accion=<%:editar %>" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Editar</a></td>
+                                   <td><%:dias.HorarioEntrada.ToString("HH:mm") + " - " + objDias.HorarioSalida.ToString("HH:mm")%></td> 
                                  </tr>
                     <% } %>
             </table>
@@ -37,11 +32,4 @@
      <% } %>
 
 
-  
-
-   
-  
-
- 
- 
 </asp:Content>

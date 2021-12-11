@@ -15,7 +15,7 @@
     <div>
         <asp:Label ID="lblBusquedaIncorrecta" Text="" runat="server" /></div>
     <div>
-        <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged"  OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+        <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla"  runat="server" AutoPostback="true" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged"  OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>
                 <asp:BoundField datafield = "ID" HeaderText ="#" />
                 <asp:BoundField datafield = "Matricula" HeaderText ="Matrícula" />

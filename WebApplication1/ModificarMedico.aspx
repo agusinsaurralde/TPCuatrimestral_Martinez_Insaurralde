@@ -80,18 +80,23 @@
     <div id="especialidades" class="container tab-pane fade"><br>
       <h3>Especialidades</h3>
         <asp:Button class="btn btn-primary" id="btnAgregar" OnClick="btnAgregar_Click" Text="Agregar" runat="server" />
-       <%foreach (var item in listaEsp) 
-         { 
-            int idEspecialidad = item.especialidad.Id;
-         %>
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <%foreach (var item in listaEsp) 
+                 { 
+                      int idEspecialidad = item.especialidad.Id;
+                  %>
 
-            <div class="card border-primary mb-3" style="max-width: 18rem;">
-               <div class="card-body text-primary">
-                     <h5 class="card-text"><%: item.especialidad.Nombre%></h5>
-                   <a href="ModificarMedico.aspx?id=<%: idEspecialidad%>" class="btn btn-primary">Eliminar</a>
-                </div>
-            </div>
-      <% } %>
+                       <div class="card border-primary mb-3" style="max-width: 18rem;">
+                          <div class="card-body text-primary">
+                                <h5 class="card-text"><%: item.especialidad.Nombre%></h5>
+                              <a href="ModificarMedico.aspx?id=<%:idEspecialidad%>" class="btn btn-primary">Eliminar</a>
+                           </div>
+                       </div>
+                 <% } %>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+       
 
     <h5>Horarios</h5>
         
@@ -131,6 +136,26 @@
 
   </div>
 
+<!-- modal eliminar especialidad -->
+   <asp:Button  style="display:none" runat="server" ID="btnEliminarEspecialidadModal" />
+   <ajaxToolkit:ModalPopupExtender ID="btnEliminarEspecialidad_Modal" CancelControlID="exitEliminarEspecialidad" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnEliminarEspecialidad_Modal" TargetControlID="btnEliminarEspecialidadModal" PopupControlID="PanelEliminarEspecialidad">
+    </ajaxToolkit:ModalPopupExtender>
+
+    <asp:Panel ID="PanelEliminarEspecialidad" BackColor="White" runat="server">
+        <div class="modal-header">
+          <h5 class="modal-title" >Eliminar</h5>
+          <button id="exitEliminarEspecialidad" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label>¿Está seguro que desea eliminar la especialidad?</label>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <asp:Button class="btn btn-primary" ID="btnAceptarEliminarEspecialidad" Text="Aceptar" OnClick="btnAceptarEliminarEspecialidad_Click" AutoPostback="true" runat="server" />
+        </div>
+    </asp:Panel>
+
 
 <!-- modal agregar especialidad -->
    <asp:Button  style="display:none" runat="server" ID="btnEspecialidadModal" />
@@ -140,9 +165,9 @@
     <asp:Panel ID="PanelAgregarEspecialidad" BackColor="White" runat="server">
         <div class="modal-header">
           <h5 class="modal-title" >Agregar Especialidad</h5>
-          <button id="exitAgregar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancelar"></button>
+            <asp:Button id="exitAgregar"  class="btn-close" data-bs-dismiss="modal" aria-label="Cancelar" OnClick="exitAgregar_Click" runat="server" />
         </div>
-        <div class="modal-body">
+        <div class="modal-body"> 
            
             <asp:UpdatePanel runat="server">
             <ContentTemplate>
@@ -202,7 +227,7 @@
           <button id="exitEliminar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <label>¿Está seguro que decía eliminar el día?</label>
+            <label>¿Está seguro que desea eliminar el día?</label>
           
         </div>
         <div class="modal-footer">

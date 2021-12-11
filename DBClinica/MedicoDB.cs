@@ -353,7 +353,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("UPDATE EspecialidadXMedico SET ESTADO = 0 WHERE IDMedico =  " + obj.ID + " AND IDEspecialidad = " + obj.especialidad.Id + "");
+                datos.setearConsulta("EXEC SP_ELIMINARESPECIALIDADMEDICO " + obj.especialidad.Id + ", " + obj.ID + " ");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

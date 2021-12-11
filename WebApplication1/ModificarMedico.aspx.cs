@@ -39,8 +39,8 @@ namespace WebApplication1
                     txtContraseña.Text = usuario.Contraseña;
 
                     EspecialidadDB especialidadDB = new EspecialidadDB();
-                    List<Especialidad> listaEsp = especialidadDB.lista();
-                    ddlistEspecialidad.DataSource = listaEsp;
+                    List<Especialidad> esp = especialidadDB.lista();
+                    ddlistEspecialidad.DataSource = esp;
                     ddlistEspecialidad.DataValueField = "ID";
                     ddlistEspecialidad.DataTextField = "Nombre";
                     ddlistEspecialidad.DataBind();
@@ -55,9 +55,11 @@ namespace WebApplication1
                     cargarHorarios();
 
                 }
-                List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
-                Grilla.DataSource = listaDias;
-                Grilla.DataBind();
+
+                if (Request.QueryString["id"] != null)
+                {
+                    btnEliminarEspecialidad_Modal.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -235,6 +237,15 @@ namespace WebApplication1
         //agregar especialidad
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            ddlistEspecialidad.TabIndex = 0;
+            ddlistEspecialidad.SelectedIndex = ddlistEspecialidad.TabIndex;
+            ddlistEspecialidad.Enabled = true;
+            ddlistDiaAgregar.TabIndex = 0;
+            ddlistDiaAgregar.SelectedIndex = ddlistDiaAgregar.TabIndex;
+            ddlistEntradaAgregar.TabIndex = 0;
+            ddlistEntradaAgregar.SelectedIndex = ddlistEntradaAgregar.TabIndex;
+            txtSalidaAgregar.Text = "";
+
             //quita especialidades que ya tiene el médico
             int cantEsp = ddlistEspecialidad.Items.Count-1;
 
@@ -375,8 +386,28 @@ namespace WebApplication1
 
                 medicoDB.agregarEspecialidades(obj);
             }
+
+            List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+            Grilla.DataSource = listaDias;
+            Grilla.DataBind();
         }
 
+        protected void exitAgregar_Click(object sender, EventArgs e)
+        {
+            
 
+           
+        }
+
+        protected void btnAceptarEliminarEspecialidad_Click(object sender, EventArgs e)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            MedicoEspecialidades medico = new MedicoEspecialidades();
+            medico.especialidad = new Especialidad();
+            medico.especialidad.Id = int.Parse(Request.QueryString["id"]);
+            medico.ID = ((Medico)Session["modificar"]).ID;
+            medicoDB.eliminarEspecialidad(medico);
+
+        }
     }
 }
