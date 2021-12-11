@@ -1,20 +1,6 @@
-﻿header {
-    font-family: Quadraat;
-    color: darkcyan;
-    background-color: lightgray;
-    width: 100%;
-}
-body {
-    font-family: Gotham;
-    display: flex;
-    align-items: center;*/
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-.formIngreso {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-    margin-top: 150px;
+﻿.fondo{
+    background-color: black;
+    filter: opacity(90);
+    opacity: 0.8;
+    z-index:10000;
 }

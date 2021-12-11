@@ -78,42 +78,42 @@
 
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-            <div class="col-md-3">
-            <asp:Label Text="Especialidad" ID="lblEspecialidad" CssClass="form-label" runat="server" />
-            <asp:DropDownList ID="ddlistEspecialidad" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
-          </div>
+               <div class="col-md-3">
+                 <asp:Label Text="Especialidad" ID="lblEspecialidad" CssClass="form-label" runat="server" />
+                 <asp:DropDownList ID="ddlistEspecialidad" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+               </div>
 
-      <div>
-          <div class="col-md-3">
-            <asp:Label Text="Días" ID="lblDias" Visible="false" CssClass="form-label" runat="server" />
-            <asp:DropDownList ID="ddlistDias" Visible="false" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged">
-                <asp:ListItem Text="Seleccionar" />
-                <asp:ListItem Text="Lunes" />
-                <asp:ListItem Text="Martes" />
-                <asp:ListItem Text="Miércoles" />
-                <asp:ListItem Text="Jueves" />
-                <asp:ListItem Text="Viernes" />
-                <asp:ListItem Text="Sábado" />
-            </asp:DropDownList>              
-          </div>
+               <div>
+                   <div class="col-md-3">
+                     <asp:Label Text="Días" ID="lblDias" Visible="false" CssClass="form-label" runat="server" />
+                     <asp:DropDownList ID="ddlistDias" Visible="false" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged">
+                         <asp:ListItem Text="Seleccionar" />
+                         <asp:ListItem Text="Lunes" />
+                         <asp:ListItem Text="Martes" />
+                         <asp:ListItem Text="Miércoles" />
+                         <asp:ListItem Text="Jueves" />
+                         <asp:ListItem Text="Viernes" />
+                         <asp:ListItem Text="Sábado" />
+                     </asp:DropDownList>              
+                   </div>
 
-          <div>
-             <asp:DropDownList ID="ddlistEntrada" Visible="false" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntrada_SelectedIndexChanged"/>
-          </div>
-          <div>
-              <asp:TextBox ID="txtHoraSalida" Visible ="false" Enabled="false" DataFormatString="HH:mm" AutoPostBack="true"  class="form-control" runat="server" />
-          </div>
-          <div>
-             <asp:Button  ID="btnAgregarDia" Text="+ Día" Visible="false" OnClick="Click_AgregarDia" AutoPostBack="true" runat="server" />
-          </div>
-          <div>
-             <asp:Button  ID="btnAgregarEspecialidad" Text="Agregar Especialidad" Visible="false" OnClick="btnAgregarEspecialidad_Click" AutoPostBack="true" runat="server" />
-          </div>
-
+                   <div>
+                      <asp:DropDownList ID="ddlistEntrada" Visible="false" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntrada_SelectedIndexChanged"/>
+                   </div>
+                   <div>
+                       <asp:TextBox ID="txtHoraSalida" Visible ="false" Enabled="false" DataFormatString="HH:mm" AutoPostBack="true"  class="form-control" runat="server" />
+                   </div>
+                   <div>
+                      <asp:Button  ID="btnAgregarDia" Text="+ Día" Visible="false" OnClick="Click_AgregarDia" AutoPostBack="true" runat="server" />
+                   </div>
+                   <div>
+                      <asp:Button  ID="btnAgregarEspecialidad" Text="Agregar Especialidad" Visible="false" OnClick="btnAgregarEspecialidad_Click" AutoPostBack="true" runat="server" />
+                   </div>
+                 </div>
             </ContentTemplate>
-        </asp:UpdatePanel>
+          </asp:UpdatePanel>
       </div>
-
+    
 
     <div id="usuario" class="container tab-pane fade">
      
@@ -132,7 +132,7 @@
          <asp:Button class="btn btn-primary" Text="Aceptar" OnClick="Click_Aceptar" runat="server" />
         </div>
     </div>
-
+    
   </div>
 
 

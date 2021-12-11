@@ -17,6 +17,17 @@ namespace WebApplication1
             Grilla.DataSource = listaDias;
             Grilla.DataBind();
 
+
+            int idMedico = listaDias[0].Medico.ID;
+            List<MedicoEspecialidades> especialidades = new List<MedicoEspecialidades>();
+            Session.Add("especialidades", especialidades);
+            MedicoDB medicoDB = new MedicoDB();
+
+            especialidades = medicoDB.listarEspecialidadesDeUnMedico(idMedico);
+
+            GrillaEspecialidad.DataSource = especialidades;
+            GrillaEspecialidad.DataBind();
+
         }
 
         protected void Grilla_RowEditing(object sender, GridViewEditEventArgs e)
@@ -28,7 +39,14 @@ namespace WebApplication1
 
         protected void Grilla_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            
+        }
 
+        protected void GrillaEspecialidad_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            MedicoEspecialidades especialidad = ((List<MedicoEspecialidades>)Session["especialidades"]).Find(x => x.IDregistro == (int)GrillaEspecialidad.DataKeys[e.RowIndex].Values[0]);
+            Session.Add("eliminar", especialidad);
+            Response.Redirect("EliminarEspecialidadMedico.aspx");
         }
     }
 }

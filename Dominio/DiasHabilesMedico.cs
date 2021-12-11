@@ -15,6 +15,5 @@ namespace Dominio
         public string NombreDia { get; set; }
         public DateTime HorarioEntrada { get; set; }
         public DateTime HorarioSalida { get; set; }
-        public bool Estado { get; set; }
     }
 }

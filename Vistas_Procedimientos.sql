@@ -38,13 +38,6 @@ GO
 ---Medicos
 
 
-/*CREATE VIEW VW_MEDICO AS 
-SELECT E.ID, E.DNI, E.Nombre, E.Apellido, D.Matricula, DH.IDTurnoTrabajo, T.Turno,DH.HorarioEntrada, DH.HorarioSalida, E.Direccion, E.FechaNacimiento, E.Telefono, E.Email, E.Estado FROM Empleado AS E 
-INNER JOIN DatosMedico AS D ON D.ID = E.ID
-INNER JOIN DiasHabilesMedico AS DH ON DH.ID = E.ID
-INNER JOIN TurnoTrabajo AS T ON T.ID = DH.IDTurnoTrabajo
-WHERE E.IDTipo = 1*/
-
 CREATE VIEW VW_MEDICO AS 
 SELECT E.ID, E.DNI, E.Nombre, E.Apellido, D.Matricula, E.Direccion, E.FechaNacimiento, E.Telefono, E.Email, E.Estado FROM Empleado AS E 
 INNER JOIN DatosMedico AS D ON D.ID = E.ID

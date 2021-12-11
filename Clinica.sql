@@ -22,7 +22,6 @@ create table Empleado(
     FechaNacimiento DATE NOT NULL,
     IDTipo int NOT NULL,
 	Estado bit not null,
-
 	CONSTRAINT FK_IDTipoEmpleado FOREIGN KEY (IDTipo) REFERENCES TipoEmpleado(ID),
 	CONSTRAINT CHK_DNIEmpleado CHECK (DNI NOT LIKE '%[^0-9]%'),
 	CONSTRAINT CHK_TelefonoEmpleado CHECK (Telefono NOT LIKE '%[^0-9]%'),
@@ -30,8 +29,6 @@ create table Empleado(
 	CONSTRAINT CHK_DireccionEmpleado CHECK (Direccion LIKE '[A-Z]%[0-9]'),
 	CONSTRAINT CHK_FechaNacimientoEmpleado CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
-Select * from Empleado where Apellido like 'Mastopierro'
-select * from DiasHabilesMedico where id = 1
 go
 --ESPECIALIDAD---------------------------------
 create table Especialidad(
@@ -401,6 +398,7 @@ go
 insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(9, 5, 1)
 go																		  
 insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(10, 5,1)
+go
 --DiasHabiles---------------------------
 INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 1, '8:00', '12:00', 1)
 go
@@ -433,7 +431,7 @@ go
 INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(9, 5, 6, '13:00', '17:00', 1)
 go
 INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(10, 5, 6, '13:00', '17:00', 1)
-
+go
 ----Administradores y recepcionistas															
 
 insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(9999, 2, 'Maria', 'Ster', 535353, 'sterM@hotmail.com', 'Monte agudo 1742', '10-10-2002',1)

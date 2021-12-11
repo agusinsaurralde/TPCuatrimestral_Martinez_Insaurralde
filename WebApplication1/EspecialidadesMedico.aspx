@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EspecialidadesMedico.aspx.cs" Inherits="WebApplication1.EspecialidadesMedico" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <h3> Especialidades</h3>
     <hr />
-    
     <%
       foreach (var item in listaEsp) 
       {
@@ -18,29 +18,30 @@
                </tr>
              </thead>
                 <tbody>
-                <% List<Dominio.DiasHabilesMedico> diasFiltradosPorEspecialidad = ((List<Dominio.DiasHabilesMedico>)Session["DiasHabiles"]).FindAll(x => x.Especialidad.Id == item.especialidad.Id);
-                    
+                <% List<Dominio.DiasHabilesMedico> diasFiltradosPorEspecialidad = listaDias.FindAll(x => x.Especialidad.Id == item.especialidad.Id);
+                    string eliminar = "eliminar";
+                    string editar = "editar";
                     foreach (Dominio.DiasHabilesMedico dias in diasFiltradosPorEspecialidad)
                     {%>
                              
                                  <tr>
                                    <td><%: dias.NombreDia%> </td>
                                    <td><%:dias.HorarioEntrada.ToString("HH:mm") + " - " + objDias.HorarioSalida.ToString("HH:mm")%></td>
+                                   <td><a href="EspecialidadesMedico.aspx?id=<%: dias.ID%>&accion=<%:eliminar %>" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Editar</a></td>
+                                   <td><a href="EspecialidadesMedico.aspx?id=<%: dias.ID%>&accion=<%:editar %>" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Editar</a></td>
                                  </tr>
-                             
                     <% } %>
             </table>
 
-      <%}%>
 
-      <h3> Usuario</h3>
-      <hr />
-    <div><label>Nombre de Usuario: <%: usuario.NombreUsuario %></label></div>
-    <div><label>Nombre de Usuario: <%: usuario.Contraseña %></label></div>
-       
-        
-    
-    
-    
+     <% } %>
+
+
+  
+
    
+  
+
+ 
+ 
 </asp:Content>

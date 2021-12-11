@@ -1,5 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarEspecialidadesMedico.aspx.cs" Inherits="WebApplication1.ModificarEspecialidadesMedico" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+     <div>
+        <asp:GridView CssClass="table table-hover" ID="GrillaEspecialidad"  runat="server" AutoGenerateColumns="False"  SelectedRowStyle-BackColor="#999999" OnRowDeleting="GrillaEspecialidad_RowDeleting" OnRowEditing="Grilla_RowEditing" DataKeyNames="ID" >
+            <Columns>
+                <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="Especialidad" />
+                <asp:CommandField ButtonType="Button"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC"/>  
+            </Columns>
+        </asp:gridview>
+    </div>
+    
     <div>
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False"  SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_RowDeleting" OnRowEditing="Grilla_RowEditing" DataKeyNames="ID" >
             <Columns>

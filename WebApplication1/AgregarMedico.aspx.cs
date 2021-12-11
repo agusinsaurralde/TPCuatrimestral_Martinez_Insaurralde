@@ -73,71 +73,6 @@ namespace WebApplication1
             btnAgregarEspecialidad.Visible = true;
         }
 
-        protected void Click_Aceptar(object sender, EventArgs e)
-        {
-            Medico NuevoMedico = new Medico();
-            Usuario nuevoUsuario = new Usuario();
-            MedicoDB cargar = new MedicoDB();
-            UsuarioDB cargarUsuario = new UsuarioDB();
-            string agregado = "Médico";
-            string error = "médico";
-
-            try
-            {
-                NuevoMedico.DNI = txtDNI.Text;
-                NuevoMedico.Matricula = txtMatricula.Text;
-                NuevoMedico.Apellido = txtApellido.Text;
-                NuevoMedico.Nombre = txtNombre.Text;
-                NuevoMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
-                NuevoMedico.Telefono = txtTelefono.Text;
-                NuevoMedico.Email = txtEmail.Text;
-                NuevoMedico.Dirección = txtDireccion.Text;
-                NuevoMedico.Estado = true;
-                cargar.agregar(NuevoMedico);
-
-                List<Medico> medicos = cargar.listarMedico();
-                Medico ultMedico = medicos.Find(x => x.DNI == txtDNI.Text);
-                nuevoUsuario.IDUsuario = ultMedico.ID;
-                nuevoUsuario.NombreUsuario = txtNombreUsuario.Text;
-                nuevoUsuario.Contraseña = txtContraseña.Text;
-                nuevoUsuario.TipoUsuario = new TipoUsuario();
-                nuevoUsuario.TipoUsuario.Id = 1;
-                nuevoUsuario.TipoUsuario.Nombre = "Médico";
-                nuevoUsuario.Estado = true;
-
-                cargarUsuario.AgregarUsuario(nuevoUsuario);
-
-                List<DiasHabilesMedico> listaDias = (List<DiasHabilesMedico>)Session["diasAgregadros"];
-                List<MedicoEspecialidades> listaEsp = (List<MedicoEspecialidades>)Session["especialidadesAgregadas"];
-
-                listaDias.Count();
-                listaEsp.Count();
-
-                foreach (DiasHabilesMedico obj in listaDias)
-                {
-                    obj.Medico = new Medico();
-                    obj.Medico.ID = ultMedico.ID;
-
-                    cargar.agregarDiasHabiles(obj);  
-                }
-
-                foreach (MedicoEspecialidades obj in listaEsp)
-                {
-                    obj.ID = ultMedico.ID;
-
-                    cargar.agregarEspecialidades(obj);
-                }
-
-                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
-            }
-            catch (Exception ex)
-            {
-                //Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
-                throw ex;
-            }
-
-        }
-
         protected void Click_AgregarDia(object sender, EventArgs e)
         {
             DiasHabilesMedico diaAgregado = new DiasHabilesMedico();
@@ -213,5 +148,67 @@ namespace WebApplication1
             btnAgregarEspecialidad.Visible = false;
 
         }
+        protected void Click_Aceptar(object sender, EventArgs e)
+        {
+            Medico NuevoMedico = new Medico();
+            Usuario nuevoUsuario = new Usuario();
+            MedicoDB cargar = new MedicoDB();
+            UsuarioDB cargarUsuario = new UsuarioDB();
+            string agregado = "Médico";
+            string error = "médico";
+
+            try
+            {
+                NuevoMedico.DNI = txtDNI.Text;
+                NuevoMedico.Matricula = txtMatricula.Text;
+                NuevoMedico.Apellido = txtApellido.Text;
+                NuevoMedico.Nombre = txtNombre.Text;
+                NuevoMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                NuevoMedico.Telefono = txtTelefono.Text;
+                NuevoMedico.Email = txtEmail.Text;
+                NuevoMedico.Dirección = txtDireccion.Text;
+                NuevoMedico.Estado = true;
+                cargar.agregar(NuevoMedico);
+
+                List<Medico> medicos = cargar.listarMedico();
+                Medico ultMedico = medicos.Find(x => x.DNI == txtDNI.Text);
+                nuevoUsuario.IDUsuario = ultMedico.ID;
+                nuevoUsuario.NombreUsuario = txtNombreUsuario.Text;
+                nuevoUsuario.Contraseña = txtContraseña.Text;
+                nuevoUsuario.TipoUsuario = new TipoUsuario();
+                nuevoUsuario.TipoUsuario.Id = 1;
+                nuevoUsuario.TipoUsuario.Nombre = "Médico";
+                nuevoUsuario.Estado = true;
+
+                cargarUsuario.AgregarUsuario(nuevoUsuario);
+
+                List<DiasHabilesMedico> listaDias = (List<DiasHabilesMedico>)Session["diasAgregadros"];
+                List<MedicoEspecialidades> listaEsp = (List<MedicoEspecialidades>)Session["especialidadesAgregadas"];
+
+                foreach (DiasHabilesMedico obj in listaDias)
+                {
+                    obj.Medico = new Medico();
+                    obj.Medico.ID = ultMedico.ID;
+
+                    cargar.agregarDiasHabiles(obj);
+                }
+
+                foreach (MedicoEspecialidades obj in listaEsp)
+                {
+                    obj.ID = ultMedico.ID;
+
+                    cargar.agregarEspecialidades(obj);
+                }
+
+                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
+            }
+            catch (Exception ex)
+            {
+                //Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                throw ex;
+            }
+
+        }
     }
+
 }

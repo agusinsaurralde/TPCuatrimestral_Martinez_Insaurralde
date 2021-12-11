@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -112,6 +116,7 @@
     <Content Include="DetalleEmpleados.aspx" />
     <Content Include="EditarHistoriaClinicaMedico.aspx" />
     <Content Include="EliminarEmpleado.aspx" />
+    <Content Include="EliminarEspecialidadMedico.aspx" />
     <Content Include="Empleados.aspx" />
     <Content Include="ErrorIngreso.aspx" />
     <Content Include="EliminarEspecialidad.aspx" />
@@ -128,7 +133,6 @@
     <Content Include="ErrorEliminar.aspx" />
     <Content Include="EspecialidadesMedico.aspx" />
     <Content Include="Ingreso.aspx" />
-    <Content Include="ModificarDiaMedico.aspx" />
     <Content Include="ModificarEmpleado.aspx" />
     <Content Include="ModificarEspecialidadesMedico.aspx" />
     <Content Include="ModificarUsuario.aspx" />
@@ -255,6 +259,13 @@
     <Compile Include="EliminarEmpleado.aspx.designer.cs">
       <DependentUpon>EliminarEmpleado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EliminarEspecialidadMedico.aspx.cs">
+      <DependentUpon>EliminarEspecialidadMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EliminarEspecialidadMedico.aspx.designer.cs">
+      <DependentUpon>EliminarEspecialidadMedico.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Empleados.aspx.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -366,13 +377,6 @@
     </Compile>
     <Compile Include="Ingreso.aspx.designer.cs">
       <DependentUpon>Ingreso.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModificarDiaMedico.aspx.cs">
-      <DependentUpon>ModificarDiaMedico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModificarDiaMedico.aspx.designer.cs">
-      <DependentUpon>ModificarDiaMedico.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarEmpleado.aspx.cs">
       <DependentUpon>ModificarEmpleado.aspx</DependentUpon>
