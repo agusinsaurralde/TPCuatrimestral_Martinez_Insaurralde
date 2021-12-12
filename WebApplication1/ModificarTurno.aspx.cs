@@ -16,6 +16,14 @@ namespace WebApplication1
             EstadoTurnoDB estadoDB = new EstadoTurnoDB();
             EspecialidadDB especialidadBD = new EspecialidadDB();
             MedicoDB medicoBD = new MedicoDB();
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "Debes iniciar sesión");
+                Response.Redirect("ErrorIngreso.aspx", false);
+            }
+
 
             if (!IsPostBack)
             {
@@ -32,6 +40,11 @@ namespace WebApplication1
                 ddlistRecepcionista.DataTextField = "NombreCompleto";
                 ddlistRecepcionista.DataValueField = "ID";
                 ddlistRecepcionista.DataBind();
+
+                Empleado empleaLog = new Empleado();
+                empleaLog = empleadoDB.empleadoLogueado((int)userLog.IDUsuario);
+                lblUsuarioLogueado.Text = empleaLog.NombreCompleto;
+
 
                 /*List<Especialidad> listEspecialidad = especialidadBD.lista();
                 ddlistEspecialidad.DataSource = listEspecialidad;

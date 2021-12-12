@@ -264,6 +264,46 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
+
+        public Empleado empleadoLogueado(int IDUsuarioLogueado)
+        { // le das el ID de usuario y te trae el empelado logueado.
+            ConexionDB datos = new ConexionDB();
+            Empleado empleadoEncontrado = new Empleado();
+
+            try
+            {
+                datos.setearConsulta("SELECT E.ID as ID, E.DNI as DNI, E.Nombre as Nombre, E.Apellido as Apellido, E.Telefono as Telefono, E.Email as Email, E.Direccion as Direccion, E.FechaNacimiento as FechaNacimiento, E.IDTipo as IDTipo, U.NombreUsuario as NombreUsuario, E.Estado as Estado FROM Empleado as E INNER JOIN Usuario as U on E.ID = U.ID WHERE E.ID =" + IDUsuarioLogueado + ""); // aca una consulta que tragia los datos de ese usuario
+                datos.ejecutarLectura();
+
+                datos.Lector.Read();
+
+                empleadoEncontrado.ID = (int)datos.Lector["ID"];
+                empleadoEncontrado.DNI = (string)datos.Lector["DNI"];
+                empleadoEncontrado.NombreCompleto = (string)datos.Lector["Nombre"] + (string)datos.Lector["Apellido"];
+                empleadoEncontrado.Nombre = (string)datos.Lector["Nombre"];
+                empleadoEncontrado.Apellido = (string)datos.Lector["Apellido"];
+                empleadoEncontrado.Telefono = (string)datos.Lector["Telefono"];
+                empleadoEncontrado.Email = (string)datos.Lector["Email"];
+                empleadoEncontrado.Dirección = (string)datos.Lector["Email"];
+                empleadoEncontrado.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                empleadoEncontrado.TipoEmp = new TipoEmpleado();
+                empleadoEncontrado.TipoEmp.ID = (int)datos.Lector["IDTipo"];
+                empleadoEncontrado.TipoEmp.Nombre = (string)datos.Lector["NombreUsuario"];
+                empleadoEncontrado.Estado = (bool)datos.Lector["Estado"];
+
+                return empleadoEncontrado;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
 

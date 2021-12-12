@@ -43,7 +43,8 @@
         </div>
         <br/>
         <div class="col-md-3">
-            <label for="ddlistRecepcionista" class="form-label">Recepcionista</label>
+            <label for="ddlistRecepcionista" class="form-label">Recepcionista: </label>
+            <asp:Label ID="lblUsuarioLogueado" Text="" class="for-label" runat="server"></asp:Label>
             <asp:DropDownList ID="ddlistRecepcionista" class="form-select" runat="server"></asp:DropDownList>
     </div>
      <div>
