@@ -13,7 +13,7 @@ namespace WebApplication1
     public partial class Formulario_web21 : System.Web.UI.Page
     {
         public List<MedicoEspecialidades> listaEsp { get; set; }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MedicoDB medicoDB = new MedicoDB(); 
@@ -46,20 +46,34 @@ namespace WebApplication1
                     ddlistEspecialidad.DataBind();
                     ddlistEspecialidad.Items.Insert(0, new ListItem("Seleccionar", "0"));
 
+                    List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+                    Grilla.DataSource = listaDias;
+                    Grilla.DataBind();
 
                     List<MedicoEspecialidades> espAgregadas = new List<MedicoEspecialidades>();
                     List<DiasHabilesMedico> diasAgregados = new List<DiasHabilesMedico>();
-                    Session.Add("especialidadesAgregadas", espAgregadas);
+
                     Session.Add("diasAgregadros", diasAgregados);
 
-                    cargarHorarios();
-
                 }
-
-                if (Request.QueryString["id"] != null)
+                if(Request.QueryString["accion"] != null)
                 {
-                    btnEliminarEspecialidad_Modal.Show();
+                    if (Request.QueryString["accion"] == "eliminar")
+                    {
+                        btnEliminarEspecialidad_Modal.Show();
+                    }
+                    else if (Request.QueryString["accion"] == "agregarDia")
+                    {
+                       cargarDiasAgregarAEspExistente();
+                       cargarHorarios();
+                       ddlistEntradaAgregarDia.Items.Insert(0, new ListItem("Seleccionar", "0"));
+                        List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+                        grillaAgregarDia.DataSource = listaDias.FindAll(x => x.Especialidad.Id == int.Parse(Request.QueryString["id"]));
+                        grillaAgregarDia.DataBind();
+                        btnModalAgregarDia_Modal.Show();
+                    }
                 }
+               
             }
             catch (Exception ex)
             {
@@ -114,7 +128,23 @@ namespace WebApplication1
 
         }
 
-      
+        protected void cargarDiasAgregarAEspExistente()
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+
+            foreach (var item in listaDias)
+            {
+                for (int x = 0; x < 7; x++)
+                {
+                    if (ddlistAgregarDiaEspecialidadExistente.Items[x].Text == item.NombreDia)
+                    {
+                        ddlistAgregarDiaEspecialidadExistente.Items[x].Enabled = false;
+                    }
+                }
+
+            }
+        }
         protected void cargarDiasEditar(int id)
         {
             MedicoDB medicoDB = new MedicoDB();
@@ -130,8 +160,6 @@ namespace WebApplication1
                     int c = ddlistDia.Items.Count;
                     for (int x = 0; x < 6; x++)
                     {
-                        string nombre = ddlistDia.Items[x].Text;
-                        string filt = item.NombreDia;
                         if (ddlistDia.Items[x].Text == item.NombreDia)
                         {
                             ddlistDia.Items[x].Enabled = false;
@@ -170,9 +198,9 @@ namespace WebApplication1
             {
                 ddlistEntrada.Items.Add(horaEntrada.ToShortTimeString());
                 ddlistEntradaAgregar.Items.Add(horaEntrada.ToShortTimeString());
+                ddlistEntradaAgregarDia.Items.Add(horaEntrada.ToShortTimeString());
                 horaEntrada += horaSumar;
             }
-
         }
         protected void cargarValoresAnteriores(int id)
         {
@@ -187,13 +215,14 @@ namespace WebApplication1
 
         }
 
-        //Editar y eliminar días
+
+        //EDITAR DÍAS
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(Grilla.SelectedDataKey.Value);
             Session.Add("idEditarDia", id);
             cargarDiasEditar(id); ;
-            //cargarHorarios();
+            cargarHorarios();
             cargarValoresAnteriores(id);
             btnEditar_ModalPopupExtender.Show();
         }
@@ -225,27 +254,39 @@ namespace WebApplication1
             Session.Add("idEliminarDia", id);
 
         }
+        //ELIMINAR DÍAS
         protected void btnAceptarEliminar_Click(object sender, EventArgs e)
         {
             MedicoDB medicoDB = new MedicoDB();
             medicoDB.eliminarDias((int)Session["idEliminarDia"]);
-
-
+            List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+            Grilla.DataSource = listaDias;
+            Grilla.DataBind();
         }
 
 
-        //agregar especialidad
+        //AGREGAR ESPECIALIDAD
+        //abre modal
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            ddlistEspecialidad.TabIndex = 0;
-            ddlistEspecialidad.SelectedIndex = ddlistEspecialidad.TabIndex;
-            ddlistEspecialidad.Enabled = true;
-            ddlistDiaAgregar.TabIndex = 0;
-            ddlistDiaAgregar.SelectedIndex = ddlistDiaAgregar.TabIndex;
-            ddlistEntradaAgregar.TabIndex = 0;
-            ddlistEntradaAgregar.SelectedIndex = ddlistEntradaAgregar.TabIndex;
-            txtSalidaAgregar.Text = "";
-
+            //limpia el form
+            if(ddlistEspecialidad.SelectedIndex != 0)
+            {
+                ddlistEspecialidad.TabIndex = 0;
+                ddlistEspecialidad.SelectedIndex = ddlistEspecialidad.TabIndex;
+                ddlistEspecialidad.Enabled = true;
+                ddlistDiaAgregar.TabIndex = 0;
+                ddlistDiaAgregar.SelectedIndex = ddlistDiaAgregar.TabIndex;
+                ddlistEntradaAgregar.TabIndex = 0;
+                ddlistEntradaAgregar.SelectedIndex = ddlistEntradaAgregar.TabIndex;
+                txtSalidaAgregar.Text = "";
+                lblAgregado.Visible = false;
+                btnAgregarEspecialidadDB.Enabled = true;
+                grillaDiasAgregados.DataSource = null;
+                grillaDiasAgregados.DataBind();
+                btnAgregarEspecialidad_Modal.Show();
+            }
+            
             //quita especialidades que ya tiene el médico
             int cantEsp = ddlistEspecialidad.Items.Count-1;
 
@@ -261,31 +302,47 @@ namespace WebApplication1
             }
 
             cargarDias();
-            //cargarHorarios();
+            cargarHorarios();
             ddlistEntradaAgregar.Items.Insert(0, new ListItem("Seleccionar", "0"));
             btnAgregarEspecialidad_Modal.Show();
         }
-        protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        //agrega especialidad a la DB
+        protected void btnAgregarEspecialidadDB_Click(object sender, EventArgs e)
         {
-            lblDias.Visible = true;
-            ddlistDiaAgregar.Visible = true;
-            ddlistEspecialidad.Enabled = false;
-        }
-        protected void ddlistDiaAgregar_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlistEntradaAgregar.Visible = true;
-            txtSalidaAgregar.Visible = true;
+            MedicoEspecialidades espAgregada = new MedicoEspecialidades();
+            try
+            {
+                espAgregada.especialidad = new Especialidad();
+                espAgregada.especialidad.Id = int.Parse(ddlistEspecialidad.SelectedValue);
+                espAgregada.ID = ((Medico)Session["modificar"]).ID;
+                MedicoDB medicoDB = new MedicoDB();
+                medicoDB.agregarEspecialidades(espAgregada);
+
+                btnCerrar.Enabled = false;
+                lblAgregado.Visible = true;
+                ddlistDiaAgregar.Enabled = true;
+                ddlistEntradaAgregar.Enabled = true;
+                ddlistEspecialidad.Enabled = false;
+                btnAgregarEspecialidadDB.Enabled = false;
+                ddlistDiaAgregar.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
+        //agrega horario de entrada y salida
         protected void ddlistEntradaAgregar_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.TimeSpan horaSumar = new System.TimeSpan(0, 4, 0, 0);
-            //
             DateTime horaSalida = Convert.ToDateTime(ddlistEntradaAgregar.SelectedItem.ToString()) + horaSumar;
             txtSalidaAgregar.Text = horaSalida.ToShortTimeString();
-            btnAgregarDia.Visible = true;
-            btnAgregaEspecialidadModal.Visible = true;
+            btnAgregarDia.Enabled = true;
+           
         }
+        //agrega dia a la base de datos
         protected void btnAgregarDia_Click(object sender, EventArgs e)
         {
 
@@ -294,13 +351,17 @@ namespace WebApplication1
             diaAgregado.Especialidad = new Especialidad();
             diaAgregado.Especialidad.Id = int.Parse(ddlistEspecialidad.SelectedValue);
             diaAgregado.IdDia = ddlistDiaAgregar.SelectedIndex;
+            diaAgregado.Medico = new Medico();
+            diaAgregado.Medico.ID = ((Medico)Session["modificar"]).ID;
             diaAgregado.NombreDia = ddlistDiaAgregar.SelectedItem.Text;
             diaAgregado.HorarioEntrada = DateTime.Parse(ddlistEntradaAgregar.SelectedItem.Value);
             diaAgregado.HorarioSalida = DateTime.Parse(txtSalidaAgregar.Text);
 
-            ((List<DiasHabilesMedico>)Session["diasAgregadros"]).Add(diaAgregado);
 
-            //saca dias que ya fueron agregados
+            MedicoDB medicoDB = new MedicoDB();
+            medicoDB.agregarDiasHabiles(diaAgregado);
+
+            //saca dias que ya fueron agregados de la ddlist
             for (int x = 0; x < 7; x++)
             {
                 if (ddlistDiaAgregar.Items[x].Text == diaAgregado.NombreDia)
@@ -309,96 +370,41 @@ namespace WebApplication1
                 }
             }
 
+            //limpia form para cargar otro día
             ddlistEntradaAgregar.TabIndex = 0;
             ddlistDiaAgregar.TabIndex = 0;
             ddlistEntradaAgregar.SelectedIndex = ddlistEntrada.TabIndex;
             ddlistDiaAgregar.SelectedIndex = ddlistEspecialidad.TabIndex;
 
-            ddlistEntrada.Visible = false;
-            lblDias.Visible = false;
+            ddlistEntrada.Enabled = false;
             txtSalidaAgregar.Text = "";
-            txtSalidaAgregar.Visible = false;
-            btnAgregarDia.Visible = false;
-            btnAgregaEspecialidadModal.Visible = true;
+            txtSalidaAgregar.Enabled = false;
+            btnAgregarDia.Enabled = false;
+            //btnAgregarOtraEspecialidad.Enabled = true;
 
-        }
-        protected void btnAgregarEspecialidadModal_Click(object sender, EventArgs e)
-        {
-            MedicoEspecialidades espAgregada = new MedicoEspecialidades();
-
-            espAgregada.especialidad = new Especialidad();
-            espAgregada.especialidad.Id = int.Parse(ddlistEspecialidad.SelectedValue);
-            espAgregada.especialidad.Nombre = ddlistEspecialidad.SelectedItem.Value;
-
-            ((List<MedicoEspecialidades>)Session["especialidadesAgregadas"]).Add(espAgregada);
-
-
-            int cantEsp = ddlistEspecialidad.Items.Count;
-            for (int i = 0; i < cantEsp; i++)
-            {
-                if (ddlistEspecialidad.Items[i].Enabled == true && ddlistEspecialidad.Items[i].Text == espAgregada.especialidad.Nombre)
-                {
-                    ddlistEspecialidad.Items[i].Enabled = false;
-                }
-            }
-
-
-            ddlistEspecialidad.TabIndex = 0;
-            ddlistEntradaAgregar.TabIndex = 0;
-            ddlistDiaAgregar.TabIndex = 0;
-            ddlistEntradaAgregar.SelectedIndex = ddlistEntrada.TabIndex;
-            ddlistDiaAgregar.SelectedIndex = ddlistDiaAgregar.TabIndex;
-            ddlistEspecialidad.SelectedIndex = ddlistEspecialidad.TabIndex;
-
-            ddlistEntradaAgregar.Visible = false;
-            lblDias.Visible = false;
-            ddlistDiaAgregar.Visible = false;
-            txtSalidaAgregar.Text = "";
-            txtSalidaAgregar.Visible = false;
-            btnAgregarDia.Visible = false;
-            btnAgregaEspecialidadModal.Visible = false;
-
-            ddlistEspecialidad.Enabled = true;
-
-        }
-        protected void btnAceptarEspecialidad_Click(object sender, EventArgs e)
-        {
-            MedicoDB medicoDB = new MedicoDB();
-            List<DiasHabilesMedico> listaDiasAgregados = (List<DiasHabilesMedico>)Session["diasAgregadros"];
-            List<MedicoEspecialidades> listaEspAgregadas = (List<MedicoEspecialidades>)Session["especialidadesAgregadas"];
-
-            int idMedico = ((Medico)Session["modificar"]).ID;
-
-           int c= listaDiasAgregados.Count;
-            int d=listaEspAgregadas.Count;
-
-            foreach (DiasHabilesMedico obj in listaDiasAgregados)
-            {
-                obj.Medico = new Medico();
-                obj.Medico.ID = idMedico;
-
-                medicoDB.agregarDiasHabiles(obj);
-            }
-
-            foreach (MedicoEspecialidades obj in listaEspAgregadas)
-            {
-                obj.ID = idMedico;
-
-                medicoDB.agregarEspecialidades(obj);
-            }
-
+            //carga grilla con los días agregados
             List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
             Grilla.DataSource = listaDias;
             Grilla.DataBind();
-        }
 
-        protected void exitAgregar_Click(object sender, EventArgs e)
+        }
+        protected void btnAgregarOtraEspecialidad_Click(object sender, EventArgs e)
         {
-            
-
-           
+            ddlistEspecialidad.TabIndex = 0;
+            ddlistEspecialidad.SelectedIndex = ddlistEspecialidad.TabIndex;
+            ddlistEspecialidad.Enabled = true;
+            ddlistDiaAgregar.TabIndex = 0;
+            ddlistDiaAgregar.SelectedIndex = ddlistDiaAgregar.TabIndex;
+            ddlistEntradaAgregar.TabIndex = 0;
+            ddlistEntradaAgregar.SelectedIndex = ddlistEntradaAgregar.TabIndex;
+            txtSalidaAgregar.Text = "";
+            lblAgregado.Visible = false;
+            btnAgregarEspecialidadDB.Enabled = true;
+            grillaDiasAgregados.DataSource = null;
+            grillaDiasAgregados.DataBind();
+            btnAgregarEspecialidad_Modal.Show();
         }
-
+        //ELIMINAR ESPECIALIDAD
         protected void btnAceptarEliminarEspecialidad_Click(object sender, EventArgs e)
         {
             MedicoDB medicoDB = new MedicoDB();
@@ -407,7 +413,47 @@ namespace WebApplication1
             medico.especialidad.Id = int.Parse(Request.QueryString["id"]);
             medico.ID = ((Medico)Session["modificar"]).ID;
             medicoDB.eliminarEspecialidad(medico);
+            Response.Redirect("ModificarMedico.aspx");
+        }
+
+
+
+        //AGREGA DÍA A ESPECIALIDAD EXISTENTE
+        protected void ddlistEntradaAgregarDia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            System.TimeSpan horaSumar = new System.TimeSpan(0, 4, 0, 0);
+            DateTime horaSalida = Convert.ToDateTime(ddlistEntradaAgregarDia.SelectedItem.ToString()) + horaSumar;
+            txtSalidaAgregarDia.Text = horaSalida.ToShortTimeString();
+        }
+        protected void btnAceptarAgregarDia_Click(object sender, EventArgs e)
+        {
+            DiasHabilesMedico dia = new DiasHabilesMedico();
+            dia.IdDia = ddlistAgregarDiaEspecialidadExistente.SelectedIndex;
+            dia.Medico = new Medico();
+            dia.Medico.ID = ((Medico)Session["modificar"]).ID;
+            dia.Especialidad = new Especialidad();
+            dia.Especialidad.Id = int.Parse(Request.QueryString["id"]);
+            dia.HorarioEntrada = DateTime.Parse(ddlistEntradaAgregar.SelectedItem.Value);
+            dia.HorarioSalida = DateTime.Parse(txtSalidaAgregarDia.Text);
+
+            MedicoDB medicoDB = new MedicoDB();
+            medicoDB.agregarDiasHabiles(dia);
+            ddlistAgregarDiaEspecialidadExistente.TabIndex = 0;
+            ddlistAgregarDiaEspecialidadExistente.SelectedIndex = ddlistAgregarDiaEspecialidadExistente.TabIndex;
+            ddlistEntradaAgregarDia.TabIndex = 0;
+            ddlistEntradaAgregarDia.SelectedIndex = ddlistEntradaAgregarDia.TabIndex;
+            cargarDiasAgregarAEspExistente();
+            cargarHorarios();
+            txtSalidaAgregarDia.Text = "";
+            ddlistEntradaAgregar.Items.Insert(0, new ListItem("Seleccionar", "0"));
+            List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+            grillaAgregarDia.DataSource = listaDias.FindAll(x => x.Especialidad.Id == int.Parse(Request.QueryString["id"]));
+            grillaAgregarDia.DataBind();
+
+            Grilla.DataSource = listaDias;
+            Grilla.DataBind();
 
         }
+
     }
 }

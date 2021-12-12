@@ -84,7 +84,7 @@ CREATE PROCEDURE SP_ELIMINARESPECIALIDADMEDICO(
 )
 AS
 BEGIN
-	DELETE EspecialidadXMedico WHERE IDMedico =  @IDMedico AND IDEspecialidad = @IDEspecialidad
 	DELETE DiasHabilesMedico WHERE IDMedico = @IDMedico AND IDEspecialidad = @IDEspecialidad
+	UPDATE EspecialidadXMedico SET ESTADO = 0 WHERE IDMedico =  @IDMedico AND IDEspecialidad = @IDEspecialidad
 END
 

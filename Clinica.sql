@@ -30,6 +30,9 @@ create table Empleado(
 	CONSTRAINT CHK_FechaNacimientoEmpleado CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
 go
+select * from empleado where nombre like 'Ana'
+select * from especialidadxmedico where idmedico = 7
+select * from diashabilesmedico
 --ESPECIALIDAD---------------------------------
 create table Especialidad(
     ID int PRIMARY KEY IDENTITY(1,1) not null,

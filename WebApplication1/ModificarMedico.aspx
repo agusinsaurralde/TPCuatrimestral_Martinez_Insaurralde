@@ -82,17 +82,20 @@
         <asp:Button class="btn btn-primary" id="btnAgregar" OnClick="btnAgregar_Click" Text="Agregar" runat="server" />
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <%foreach (var item in listaEsp) 
-                 { 
-                      int idEspecialidad = item.especialidad.Id;
-                  %>
-
-                       <div class="card border-primary mb-3" style="max-width: 18rem;">
-                          <div class="card-body text-primary">
-                                <h5 class="card-text"><%: item.especialidad.Nombre%></h5>
-                              <a href="ModificarMedico.aspx?id=<%:idEspecialidad%>" class="btn btn-primary">Eliminar</a>
-                           </div>
-                       </div>
+                <%foreach (var item in listaEsp)
+                    {
+                        string eliminar = "eliminar";
+                        string agregarDia = "agregarDia";
+                        if (item.Estado == true)
+                        { %>
+                                   <div class="card border-primary mb-3" style="max-width: 18rem;">
+                                 <div class="card-body text-primary">
+                                       <h5 class="card-text"><%: item.especialidad.Nombre%></h5>
+                                     <a href="ModificarMedico.aspx?id=<%:item.especialidad.Id%>&accion=<%:eliminar %>" class="btn btn-primary">Eliminar</a>
+                                     <a href="ModificarMedico.aspx?id=<%:item.especialidad.Id%>&accion=<%:agregarDia%>" class="btn btn-primary">Agregar Día</a>
+                                  </div>
+                              </div>
+                         <%}%>
                  <% } %>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -100,7 +103,7 @@
 
     <h5>Horarios</h5>
         
-                <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_RowDeleting" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+                <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla" AutoPostback="true" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_RowDeleting" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>
                 <asp:BoundField datafield = "ID" HeaderText ="#" />
                 <asp:BoundField datafield = "especialidad.Nombre" HeaderText ="Especialidad" />
@@ -151,9 +154,63 @@
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <asp:Button Text="Cancelar" class="btn btn-secondary" data-bs-dismiss="modal" runat="server" />
             <asp:Button class="btn btn-primary" ID="btnAceptarEliminarEspecialidad" Text="Aceptar" OnClick="btnAceptarEliminarEspecialidad_Click" AutoPostback="true" runat="server" />
         </div>
+    </asp:Panel>
+
+<!-- modal agregar dia a especialidad existente -->
+    <asp:Button  style="display:none" runat="server" ID="btnModalAgregarDia" />
+   <ajaxToolkit:ModalPopupExtender ID="btnModalAgregarDia_Modal" CancelControlID="exitAgregarDia" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnModalAgregarDia_Modal" TargetControlID="btnModalAgregarDia" PopupControlID="PanelAgregarDia">
+    </ajaxToolkit:ModalPopupExtender>
+
+    <asp:Panel ID="PanelAgregarDia" BackColor="White" runat="server">
+        
+        <div class="modal-header">
+          <h5 class="modal-title" >Agregar Día</h5>
+            <asp:Button id="exitAgregarDia"  class="btn-close" data-bs-dismiss="modal" aria-label="Cancelar" runat="server" />
+        </div>
+        <div class="modal-body"> 
+            <asp:UpdatePanel runat="server">
+                 <ContentTemplate>
+                  <div>
+                     <asp:Label Text="Día" CssClass="form-label" runat="server" />
+                     <asp:DropDownList ID="ddlistAgregarDiaEspecialidadExistente" class="form-select" runat="server" AutoPostBack="true">
+                         <asp:ListItem Text="Seleccionar" />
+                         <asp:ListItem Text="Lunes" />
+                         <asp:ListItem Text="Martes" />
+                         <asp:ListItem Text="Miércoles" />
+                         <asp:ListItem Text="Jueves" />
+                         <asp:ListItem Text="Viernes" />
+                         <asp:ListItem Text="Sábado" />
+                     </asp:DropDownList>      
+                 </div>
+                <div>
+                      <asp:Label Text="Rango horario" CssClass="form-label" runat="server" />
+                     <asp:DropDownList ID="ddlistEntradaAgregarDia" class="form-select" OnSelectedIndexChanged="ddlistEntradaAgregarDia_SelectedIndexChanged" runat="server" AutoPostBack="true"  />
+               </div>
+
+               <div>
+                   <asp:TextBox ID="txtSalidaAgregarDia"  Enabled="false" DataFormatString="HH:mm" AutoPostBack="true"  class="form-control" runat="server" />
+               </div>
+              
+                     <div>
+                        <asp:GridView ID="grillaAgregarDia" AutoGenerateColumns="False" CssClass="table table-hover" HeaderStyle-CssClass="table-dark" BorderStyle="None" AutoPostback="true" runat="server">
+                       <Columns>
+                            <asp:BoundField datafield = "NombreDia" HeaderText="Dia" />
+                             <asp:BoundField datafield = "HorarioEntrada" DataFormatString="{0:HH:mm}" HeaderText ="Entrada" />
+                             <asp:BoundField datafield = "HorarioSalida" DataFormatString="{0:HH:mm}" HeaderText ="Salida" />
+
+                       </Columns>
+                   </asp:GridView>
+                     </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            </div>
+        <div class="modal-footer">
+          <asp:Button  ID="btnAceptarAgregarDia" class="btn btn-primary" Text="Aceptar" OnClick="btnAceptarAgregarDia_Click"  runat="server" />
+        </div>
+
     </asp:Panel>
 
 
@@ -163,54 +220,71 @@
     </ajaxToolkit:ModalPopupExtender>
 
     <asp:Panel ID="PanelAgregarEspecialidad" BackColor="White" runat="server">
+
         <div class="modal-header">
           <h5 class="modal-title" >Agregar Especialidad</h5>
-            <asp:Button id="exitAgregar"  class="btn-close" data-bs-dismiss="modal" aria-label="Cancelar" OnClick="exitAgregar_Click" runat="server" />
+            <asp:Button id="exitAgregar"  class="btn-close" data-bs-dismiss="modal" aria-label="Cancelar" runat="server" />
         </div>
+
         <div class="modal-body"> 
-           
             <asp:UpdatePanel runat="server">
             <ContentTemplate>
+                <asp:Label Text="Especialidad" ID="lblEspecialidad" CssClass="form-label" runat="server" />
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                  <div class="btn-group" role="group">
+                     <asp:DropDownList ID="ddlistEspecialidad" class="form-select" runat="server" AutoPostBack="true" ></asp:DropDownList>
+                      <asp:Button Text="Agregar" class="btn btn-primary" ID="btnAgregarEspecialidadDB" OnClick="btnAgregarEspecialidadDB_Click" runat="server" />
+                      <asp:Label Text="Agregado" ID="lblAgregado" Visible="false" runat="server" />
+                  </div>
+                </div>
+
+                <div>
+                  <asp:Label Text="Día" ID="lblDias" CssClass="form-label" runat="server" />
+                  <asp:DropDownList ID="ddlistDiaAgregar" Enabled="false" class="form-select" runat="server" AutoPostBack="true">
+                      <asp:ListItem Text="Seleccionar" />
+                      <asp:ListItem Text="Lunes" />
+                      <asp:ListItem Text="Martes" />
+                      <asp:ListItem Text="Miércoles" />
+                      <asp:ListItem Text="Jueves" />
+                      <asp:ListItem Text="Viernes" />
+                      <asp:ListItem Text="Sábado" />
+                  </asp:DropDownList>              
+                </div>
+
                <div>
-                 <asp:Label Text="Especialidad" ID="lblEspecialidad" CssClass="form-label" runat="server" />
-                 <asp:DropDownList ID="ddlistEspecialidad" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+                  <asp:Label Text="Rango horario" CssClass="form-label" runat="server" />
+                  <asp:DropDownList ID="ddlistEntradaAgregar" Enabled="false" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntradaAgregar_SelectedIndexChanged" />
                </div>
 
                <div>
-                   <div>
-                     <asp:Label Text="Días" ID="lblDias" Visible="false" CssClass="form-label" runat="server" />
-                     <asp:DropDownList ID="ddlistDiaAgregar" Visible="false" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDiaAgregar_SelectedIndexChanged">
-                         <asp:ListItem Text="Seleccionar" />
-                         <asp:ListItem Text="Lunes" />
-                         <asp:ListItem Text="Martes" />
-                         <asp:ListItem Text="Miércoles" />
-                         <asp:ListItem Text="Jueves" />
-                         <asp:ListItem Text="Viernes" />
-                         <asp:ListItem Text="Sábado" />
-                     </asp:DropDownList>              
-                   </div>
+                   <asp:TextBox ID="txtSalidaAgregar"  Enabled="false" DataFormatString="HH:mm" AutoPostBack="true"  class="form-control" runat="server" />
+               </div>
 
-                   <div>
-                      <asp:DropDownList ID="ddlistEntradaAgregar" Visible="false" class="form-select" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntradaAgregar_SelectedIndexChanged"/>
-                   </div>
-                   <div>
-                       <asp:TextBox ID="txtSalidaAgregar" Visible ="false" Enabled="false" DataFormatString="HH:mm" AutoPostBack="true"  class="form-control" runat="server" />
-                   </div>
-                   <div>
-                      <asp:Button  ID="btnAgregarDia" Text="+ Día" Visible="false" OnClick="btnAgregarDia_Click" AutoPostBack="true" runat="server" />
-                   </div>
-                   <div>
-                      <asp:Button  ID="btnAgregaEspecialidadModal" Text="Agregar Especialidad" Visible="false" OnClick="btnAgregarEspecialidadModal_Click" AutoPostBack="true" runat="server" />
-                   </div>
-                 </div>
+               <div>
+                  <asp:Button  ID="btnAgregarDia" Text="+ Día"  class="btn btn-secondary" Enabled="false" OnClick="btnAgregarDia_Click" AutoPostBack="true" runat="server" />
+               </div>
 
-            </ContentTemplate>
-          </asp:UpdatePanel>
+               <div>
+               
+                    <asp:GridView ID="grillaDiasAgregados" AutoGenerateColumns="False" CssClass="table table-hover" HeaderStyle-CssClass="table-dark" BorderStyle="None" AutoPostback="true" runat="server">
+                       <Columns>
+                            <asp:BoundField datafield = "NombreDia" HeaderText="Dia" />
+                             <asp:BoundField datafield = "HorarioEntrada" DataFormatString="{0:HH:mm}" HeaderText ="Entrada" />
+                             <asp:BoundField datafield = "HorarioSalida" DataFormatString="{0:HH:mm}" HeaderText ="Salida" />
 
-        </div>
+                       </Columns>
+                   </asp:GridView>
+           
+                       
+               </div>    
+                   </ContentTemplate>
+                 </asp:UpdatePanel>
+             </div>
+                    
+        
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <asp:Button class="btn btn-primary" ID="btnAceptarEspecialidad" Text="Aceptar" OnClick="btnAceptarEspecialidad_Click" runat="server" />
+          <asp:Button Text="Cerrar" id="btnCerrar" class="btn btn-secondary" data-bs-dismiss="modal"  runat="server" />
+          <asp:Button  ID="btnAgregarOtraEspecialidad" class="btn btn-primary" Text="Agregar otra especialidad" OnClick="btnAgregarOtraEspecialidad_Click" runat="server" />
         </div>
     </asp:Panel>
 
@@ -262,6 +336,7 @@
             </asp:DropDownList>
             </div>
 
+          
             <div>
                  <asp:Label Text="Horario" runat="server" />
                  <asp:DropDownList ID="ddlistEntrada" class="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntrada_SelectedIndexChanged" runat="server"> </asp:DropDownList>

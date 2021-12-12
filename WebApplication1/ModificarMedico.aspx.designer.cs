@@ -159,6 +159,87 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnAceptarEliminarEspecialidad;
 
         /// <summary>
+        /// Control btnModalAgregarDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalAgregarDia;
+
+        /// <summary>
+        /// Control btnModalAgregarDia_Modal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender btnModalAgregarDia_Modal;
+
+        /// <summary>
+        /// Control PanelAgregarDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelAgregarDia;
+
+        /// <summary>
+        /// Control exitAgregarDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button exitAgregarDia;
+
+        /// <summary>
+        /// Control ddlistAgregarDiaEspecialidadExistente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlistAgregarDiaEspecialidadExistente;
+
+        /// <summary>
+        /// Control ddlistEntradaAgregarDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlistEntradaAgregarDia;
+
+        /// <summary>
+        /// Control txtSalidaAgregarDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSalidaAgregarDia;
+
+        /// <summary>
+        /// Control grillaAgregarDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grillaAgregarDia;
+
+        /// <summary>
+        /// Control btnAceptarAgregarDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarAgregarDia;
+
+        /// <summary>
         /// Control btnEspecialidadModal.
         /// </summary>
         /// <remarks>
@@ -213,6 +294,24 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList ddlistEspecialidad;
 
         /// <summary>
+        /// Control btnAgregarEspecialidadDB.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarEspecialidadDB;
+
+        /// <summary>
+        /// Control lblAgregado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAgregado;
+
+        /// <summary>
         /// Control lblDias.
         /// </summary>
         /// <remarks>
@@ -258,22 +357,31 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnAgregarDia;
 
         /// <summary>
-        /// Control btnAgregaEspecialidadModal.
+        /// Control grillaDiasAgregados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregaEspecialidadModal;
+        protected global::System.Web.UI.WebControls.GridView grillaDiasAgregados;
 
         /// <summary>
-        /// Control btnAceptarEspecialidad.
+        /// Control btnCerrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptarEspecialidad;
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
+
+        /// <summary>
+        /// Control btnAgregarOtraEspecialidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarOtraEspecialidad;
 
         /// <summary>
         /// Control btnModalEliminar.
