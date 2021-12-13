@@ -11,7 +11,7 @@
         <br/>
         <div>
             <asp:Label ID="lblPaciente" Text="" class="form-label" runat="server" />
-            <!--<asp:TextBox ID="txtPacienteNombre" class="form-control"  runat="server"/>-->
+            <asp:TextBox ID="txtPacienteNombre" class="form-control"  runat="server"/>
         </div>
         <br/>
         <div>
@@ -43,9 +43,9 @@
         </div>
         <br/>
         <div class="col-md-3">
-            <label for="ddlistRecepcionista" class="form-label">Recepcionista: </label>
+            <label for="lblUsuarioLogueado" class="form-label">Recepcionista: </label>
             <asp:Label ID="lblUsuarioLogueado" Text="" class="for-label" runat="server"></asp:Label>
-            <asp:DropDownList ID="ddlistRecepcionista" class="form-select" runat="server"></asp:DropDownList>
+            <%--<asp:DropDownList ID="ddlistRecepcionista" class="form-select" runat="server"></asp:DropDownList>--%>
     </div>
      <div>
             <label for="ddlistEstado" class="form-label">Estado</label>

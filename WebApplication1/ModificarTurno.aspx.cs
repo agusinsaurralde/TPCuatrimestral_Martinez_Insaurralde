@@ -36,10 +36,10 @@ namespace WebApplication1
                 //provisiorio
                 EmpleadoDB empleadoDB = new EmpleadoDB();
                 List<Empleado> emp = empleadoDB.listarRecepcionista();
-                ddlistRecepcionista.DataSource = emp;
-                ddlistRecepcionista.DataTextField = "NombreCompleto";
-                ddlistRecepcionista.DataValueField = "ID";
-                ddlistRecepcionista.DataBind();
+                //ddlistRecepcionista.DataSource = emp;
+                //ddlistRecepcionista.DataTextField = "NombreCompleto";
+                //ddlistRecepcionista.DataValueField = "ID";
+                //ddlistRecepcionista.DataBind();
 
                 Empleado empleaLog = new Empleado();
                 empleaLog = empleadoDB.empleadoLogueado((int)userLog.IDUsuario);
@@ -79,7 +79,8 @@ namespace WebApplication1
                     txtObservaciones.Text = turnoSesion.Observaciones;
 
 
-                    ddlistRecepcionista.SelectedValue = turnoSesion.AdministrativoResponsable.ID.ToString();
+                    //ddlistRecepcionista.SelectedValue = turnoSesion.AdministrativoResponsable.ID.ToString();
+                    lblUsuarioLogueado.Text = empleaLog.NombreCompleto.ToString();
 
                     ddlistEstado.SelectedValue = turnoSesion.Estado.ID.ToString();
                 }
@@ -214,6 +215,12 @@ namespace WebApplication1
         {
             string modificado = "Turno";
             string error = "turno";
+
+            Usuario userLog = (Usuario)Session["Usuario"];
+            EmpleadoDB empleadoLogDB = new EmpleadoDB();
+            Empleado empleadoLog = new Empleado();
+            empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
+
             try
             {
 
@@ -236,7 +243,7 @@ namespace WebApplication1
                 turnoModificado.Observaciones = txtObservaciones.Text;
 
                 turnoModificado.AdministrativoResponsable = new Empleado();
-                turnoModificado.AdministrativoResponsable.ID = int.Parse(ddlistRecepcionista.SelectedItem.Value);
+                turnoModificado.AdministrativoResponsable.ID = empleadoLog.ID; //int.Parse(ddlistRecepcionista.SelectedItem.Value);
 
                 turnoModificado.Estado = new EstadoTurno();
                 turnoModificado.Estado.ID = int.Parse(ddlistEstado.SelectedValue.ToString());
