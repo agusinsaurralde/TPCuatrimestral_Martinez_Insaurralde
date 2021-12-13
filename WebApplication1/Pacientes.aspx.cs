@@ -31,9 +31,8 @@ namespace WebApplication1
 
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
-            paciente = db.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]);
-            Session.Add("eliminar", paciente);
-            Response.Redirect("EliminarPaciente.aspx");
+            Session.Add("eliminar", (int)Grilla.DataKeys[e.RowIndex].Values[0]);
+            EliminarPaciente_Modal.Show();
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
@@ -54,5 +53,20 @@ namespace WebApplication1
 
         }
 
+        protected void btnAceptarEliminar_Click(object sender, EventArgs e)
+        {
+            string error = "paciente";
+            try
+            {
+                int idPaciente = (int)Session["eliminar"];
+                db.eliminar(idPaciente);
+                Grilla.DataSource = db.listarPaciente();
+                Grilla.DataBind();
+            }
+            catch (Exception)
+            {
+                Response.Redirect("ErrorEliminar.aspx?error=" + error, false);
+            }
+        }
     }
 }

@@ -4,32 +4,57 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
+using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Formulario_web1 : System.Web.UI.Page
+    public partial class Formulario_web12 : System.Web.UI.Page
     {
+        TurnoDB turnoBD = new TurnoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuario"] == null)
+            
+            Grilla.DataSource = turnoBD.listarTurno();
+            Grilla.DataBind();
+        }
+
+        protected void Grilla_editar(object sender, GridViewEditEventArgs e)
+        {
+            Session.Add("editarTurno", turnoBD.buscarporNumero((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
+            Response.Redirect("ModificarTurno.aspx");
+        }
+
+        protected void Click_Agregar(object sender, EventArgs e)
+        {
+
+            Response.Redirect("AsignarTurno.aspx");
+
+        }
+
+        protected void Click_Buscar(object sender, EventArgs e)
+        {
+            List<Turno> turnosBusqueda = turnoBD.buscar(ddlistCriterio.SelectedItem.Text, txtBusqueda.Text);
+            if (turnosBusqueda != null)
             {
-                Session.Add("Error", "Debes iniciar sesión");
-                Response.Redirect("ErrorIngreso.aspx", false);
+                Grilla.DataSource = turnosBusqueda;
+                Grilla.DataBind();
             }
+
         }
 
-        protected void Redirect_Click(object sender, EventArgs e)
+        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Response.Redirect("AsignarTurno.aspx", false);
-        }
-        protected void Click_VerTurnos(object sender, EventArgs e)
-        {
-            Response.Redirect("VerTurno.aspx", false);
+            Session.Add("agregarHistoriaClinica", turnoBD.buscarporNumero(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            Response.Redirect("AgregarHistoriaClinica.aspx");
+
         }
 
-        protected void SpecialtysView_Click(object sender, EventArgs e)
+        protected void AsignarTurno_Click(object sender, EventArgs e)
         {
-            Response.Redirect("SpecialtysViews.aspx", false);
+            Response.Redirect("AsignarTurno.aspx");
         }
     }
+
+
 }

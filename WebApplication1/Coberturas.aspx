@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Coberturas.aspx.cs" Inherits="WebApplication1.Formulario_web115" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <h1>Coberturas</h1>
@@ -17,14 +19,86 @@
             </div>
          </div>
     </div>
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+             <div>
+            <asp:GridView CssClass="table table-hover" ID="Grilla" AutoPostback="true" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+                <Columns>
+                    <asp:BoundField datafield = "ID" HeaderText ="ID" />            
+                    <asp:BoundField datafield = "Nombre" HeaderText ="COBERTURA" />  
+                    <asp:BoundField datafield = "Estado" HeaderText ="ESTADO" />                                
+                    <asp:CommandField ButtonType="Image" ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
+                    <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
+                </Columns>
+            </asp:gridview>
+        </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
-         <div>
-        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
-            <Columns>
-                <asp:BoundField datafield = "Nombre" HeaderText ="COBERTURA" />            
-                <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
-                <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
-            </Columns>
-        </asp:gridview>
-    </div>
+
+    <!-- modal agregar cobertura-->
+    <asp:Button  style="display:none" runat="server" ID="btnAgregarCoberturaModal" />
+    
+   <ajaxToolkit:ModalPopupExtender ID="btnAgregarCobertura_Modal" CancelControlID="exit" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnAgregarCobertura_Modal" TargetControlID="btnAgregarCoberturaModal" PopupControlID="PanelAgregarCobertura">
+    </ajaxToolkit:ModalPopupExtender>
+  
+    <asp:Panel ID="PanelAgregarCobertura" BackColor="White" runat="server">
+        <div class="modal-header">
+          <h5 class="modal-title" >Agregar Cobertura</h5>
+          <button id="exit" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="txtCobertura" class="form-label">Cobertura</label>
+            <asp:TextBox class="form-control rounded-pill" ID="txtCobertura"  runat="server" />
+          
+        </div>
+        <div class="modal-footer">
+            <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" Text="Aceptar" OnClick="btnAceptar_Click" runat="server" />
+        </div>
+    </asp:Panel>
+
+
+    <!-- modal editar cobertura-->
+    <asp:Button  style="display:none" runat="server" ID="btnEditarCobertura" />
+    
+   <ajaxToolkit:ModalPopupExtender ID="editarCobertura_Modal" CancelControlID="exitEditar" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="editarCobertura_Modal" TargetControlID="btnEditarCobertura" PopupControlID="PanelEditarCobertura">
+    </ajaxToolkit:ModalPopupExtender>
+  
+    <asp:Panel ID="PanelEditarCobertura" BackColor="White" runat="server">
+        <div class="modal-header">
+          <h5 class="modal-title" >Editar Cobertura</h5>
+          <button id="exitEditar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="txtEditarCobertura" class="form-label">Cobertura</label>
+            <asp:TextBox class="form-control  rounded-pill" ID="txtEditarCobertura" runat="server" />
+        </div>
+        <div class="modal-footer">
+            <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEditar" Text="Aceptar" OnClick="btnAceptarEditar_Click" runat="server" />
+        </div>
+    </asp:Panel>
+
+
+       <!-- modal eliminar cobertura-->
+    <asp:Button  style="display:none" runat="server" ID="btnEliminarCoberturaModal" />
+    
+   <ajaxToolkit:ModalPopupExtender ID="eliminarCobertura_Modal" CancelControlID="exitEliminar" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="eliminarCobertura_Modal" TargetControlID="btnEliminarCoberturaModal" PopupControlID="PanelEliminarCobertura">
+    </ajaxToolkit:ModalPopupExtender>
+  
+    <asp:Panel ID="PanelEliminarCobertura" BackColor="White" runat="server">
+        <div class="modal-header">
+          <h5 class="modal-title" >Eliminar Cobertura</h5>
+          <button id="exitEliminar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <asp:Label Text="¿Está seguro que desea eliminar la cobertura?" runat="server" />
+          
+        </div>
+        <div class="modal-footer">
+            <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEliminar" Text="Aceptar" OnClick="btnAceptarEliminar_Click" runat="server" />
+        </div>
+    </asp:Panel>
 </asp:Content>

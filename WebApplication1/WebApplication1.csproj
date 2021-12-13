@@ -134,25 +134,23 @@
     <Content Include="EspecialidadesMedico.aspx" />
     <Content Include="Iconos\pencil-square.svg" />
     <Content Include="Iconos\pencil.svg" />
+    <Content Include="Iconos\search.svg" />
     <Content Include="Iconos\x-circle.svg" />
     <Content Include="Ingreso.aspx" />
     <Content Include="ModificarEmpleado.aspx" />
     <Content Include="ModificarEspecialidadesMedico.aspx" />
     <Content Include="ModificarUsuario.aspx" />
-    <Content Include="EliminarUsuario.aspx" />
     <Content Include="Usuarios.aspx" />
     <Content Include="ModificarCobertura.aspx" />
     <Content Include="EliminarCobertura.aspx" />
     <Content Include="ModificarMedico.aspx" />
     <Content Include="EliminarMedico.aspx" />
     <Content Include="ModificarPaciente.aspx" />
-    <Content Include="EliminarPaciente.aspx" />
     <Content Include="ModificarEspecialidad.aspx" />
     <Content Include="HistoriaClinicaDetalle.aspx" />
     <Content Include="HistoriaClinica.aspx" />
-    <Content Include="TurnosMedico.aspx" />
     <Content Include="ModificarTurno.aspx" />
-    <Content Include="VerTurno.aspx" />
+    <Content Include="Turnos.aspx" />
     <Content Include="Pacientes.aspx" />
     <Content Include="Medicos.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -165,7 +163,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="SpecialtysViews.aspx" />
-    <Content Include="Turnos.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -402,13 +399,6 @@
     <Compile Include="ModificarUsuario.aspx.designer.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EliminarUsuario.aspx.cs">
-      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EliminarUsuario.aspx.designer.cs">
-      <DependentUpon>EliminarUsuario.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -451,13 +441,6 @@
     <Compile Include="ModificarPaciente.aspx.designer.cs">
       <DependentUpon>ModificarPaciente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EliminarPaciente.aspx.cs">
-      <DependentUpon>EliminarPaciente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EliminarPaciente.aspx.designer.cs">
-      <DependentUpon>EliminarPaciente.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ModificarEspecialidad.aspx.cs">
       <DependentUpon>ModificarEspecialidad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -479,13 +462,6 @@
     <Compile Include="HistoriaClinica.aspx.designer.cs">
       <DependentUpon>HistoriaClinica.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TurnosMedico.aspx.cs">
-      <DependentUpon>TurnosMedico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TurnosMedico.aspx.designer.cs">
-      <DependentUpon>TurnosMedico.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ModificarTurno.aspx.cs">
       <DependentUpon>ModificarTurno.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -493,12 +469,12 @@
     <Compile Include="ModificarTurno.aspx.designer.cs">
       <DependentUpon>ModificarTurno.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VerTurno.aspx.cs">
-      <DependentUpon>VerTurno.aspx</DependentUpon>
+    <Compile Include="Turnos.aspx.cs">
+      <DependentUpon>Turnos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VerTurno.aspx.designer.cs">
-      <DependentUpon>VerTurno.aspx</DependentUpon>
+    <Compile Include="Turnos.aspx.designer.cs">
+      <DependentUpon>Turnos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pacientes.aspx.cs">
       <DependentUpon>Pacientes.aspx</DependentUpon>
@@ -528,13 +504,6 @@
     </Compile>
     <Compile Include="SpecialtysViews.aspx.designer.cs">
       <DependentUpon>SpecialtysViews.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Turnos.aspx.cs">
-      <DependentUpon>Turnos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Turnos.aspx.designer.cs">
-      <DependentUpon>Turnos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

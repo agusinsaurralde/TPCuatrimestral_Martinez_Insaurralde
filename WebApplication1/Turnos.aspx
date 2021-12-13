@@ -1,27 +1,36 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Turnos.aspx.cs" Inherits="WebApplication1.Formulario_web1" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Turnos.aspx.cs" Inherits="WebApplication1.Formulario_web12" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <body>
-        <h3>Turnos</h3>
-        <hr />
-        <div style = "float: left">   
-            <div  style="padding: 40px 10px">
-                <asp:Button Text="Asignar turno" runat="server" OnClick="Redirect_Click" />
-            </div>
-        </div>
-
-        <div style = "float: left" >  
-            <div style="padding: 40px 10px">
-                <asp:Button Text="Ver turnos"  OnClick="Click_VerTurnos" runat="server" />
-            </div>
-        </div>
-
-        <div style = "float: left">
-            <div style="padding: 40px 10px">
-                <asp:Button Text = "Ver Especialidades" runat="server" OnClick="SpecialtysView_Click" />
-            </div>
-        </div>
-        <br />
-        <br />
-    </body>
+    <br />
+    <h1>Turnos</h1>
+    <hr />
+    <div class="row">
+         <div class="col ">
+                  <asp:Button Text="Asignar Turno" CssClass="btn btn-primary rounded-pill" OnClick="AsignarTurno_Click" Font-Bold="true" runat="server" />
+    </div>
+    <div class="input-group mb-3">
+        <asp:TextBox class="form-control" ID="txtBusqueda" runat="server" />  
+        <asp:DropDownList ID="ddlistCriterio" class="btn btn-outline-secondary dropdown-toggle" runat="server">
+            <asp:ListItem Text="Paciente" />
+            <asp:ListItem Text="Médico" />
+            </asp:DropDownList>
+        <asp:Button Text="Buscar" OnClick ="Click_Buscar" class="btn btn-outline-secondary" runat="server" />
+    </div>
+    </div>
+   
+     <div class="container">
+        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowEditing="Grilla_editar" DataKeyNames="Numero" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+            <Columns>   
+                <asp:BoundField datafield = "Paciente.NombreCompleto" HeaderText ="PACIENTE" />
+                <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="ESPECIALIDAD" />
+                <asp:BoundField datafield = "Medico.NombreCompleto" HeaderText ="MÉDICO" />
+                <asp:BoundField datafield = "Dia" DataFormatString="{0:d}"  HeaderText ="DÍA" />
+                <asp:BoundField datafield = "HorarioInicio" DataFormatString="{0:HH:mm}"  HeaderText ="HORA" />
+                <asp:BoundField datafield = "Observaciones" HeaderText ="OBSERVACIONES" />
+                <asp:BoundField datafield = "AdministrativoResponsable.NombreCompleto" HeaderText ="RECEPCIONISTA" />
+                <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
+                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Agregar Observación" ControlStyle-CssClass="btn btn-primary rounded-pill"/> 
+            </Columns>
+        </asp:gridview>
+    </div>
+ 
 </asp:Content>

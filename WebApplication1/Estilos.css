@@ -1,4 +1,9 @@
-﻿
+﻿.fondo {
+    background-color: black;
+    filter: opacity(90);
+    opacity: 0.8;
+    z-index: 10000;
+}
 
 * {
     font-family: Gotham;

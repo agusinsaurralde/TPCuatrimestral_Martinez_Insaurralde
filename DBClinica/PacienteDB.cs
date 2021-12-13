@@ -108,13 +108,13 @@ namespace DBClinica
             }
         }
 
-        public void eliminar(Paciente ElimPaciente)
+        public void eliminar(int id)
         {
             ConexionDB datos = new ConexionDB();
 
             try
             {
-                datos.setearConsulta("Update Paciente SET Estado = 0 where ID = " + ElimPaciente.ID + "");
+                datos.setearConsulta("Update Paciente SET Estado = 0 where ID = " + id + "");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

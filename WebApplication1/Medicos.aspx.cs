@@ -14,14 +14,14 @@ namespace WebApplication1
         MedicoDB medicoDB = new MedicoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Grilla.DataSource = medicoDB.listarMedico();
+            List<Medico> listaMedicos = medicoDB.listarMedico();
+            Grilla.DataSource = listaMedicos;
             Grilla.DataBind();
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {
             Response.Redirect("AgregarMedico.aspx");
         }
-
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
             UsuarioDB usuarioDB = new UsuarioDB();
@@ -32,8 +32,11 @@ namespace WebApplication1
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             UsuarioDB usuarioDB = new UsuarioDB();
-            Session.Add("modificar", medicoDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
-            Session.Add("modificarUsuario", usuarioDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
+            int ID = (int)Grilla.DataKeys[e.NewEditIndex].Values[0];
+            Medico medico = medicoDB.buscarporID(ID);
+            Usuario usuario = usuarioDB.buscarporID(ID);
+            Session.Add("modificar", medico);
+            Session.Add("modificarUsuario", usuario);
             Response.Redirect("ModificarMedico.aspx");
         }
 
@@ -53,7 +56,7 @@ namespace WebApplication1
         }
 
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {   
             Session.Add("EspMedico", medicoDB.listarEspecialidadesDeUnMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
             Session.Add("DiasHabiles", medicoDB.listarDiasHabilesDeUnMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
             Response.Redirect("EspecialidadesMedico.aspx");

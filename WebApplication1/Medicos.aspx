@@ -37,6 +37,7 @@
          <div  class="rounded_corners">
              <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoPostback="true"  AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
                  <Columns>
+                     <asp:BoundField datafield = "ID" HeaderText ="ID" />
                      <asp:BoundField datafield = "Matricula" HeaderText ="MATRÍCULA" />
                      <asp:BoundField datafield = "NombreCompleto" HeaderText ="NOMBRE" />              
                      <asp:BoundField datafield = "Telefono" HeaderText ="TELÉFONO" />

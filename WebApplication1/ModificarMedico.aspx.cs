@@ -90,7 +90,6 @@ namespace WebApplication1
             Usuario modUsuario = new Usuario();
             MedicoDB cargar = new MedicoDB();
             UsuarioDB cargarUsuario = new UsuarioDB();
-            string modificado = "Médico";
             string error = "médico";
 
             try

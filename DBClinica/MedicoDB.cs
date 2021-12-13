@@ -57,48 +57,6 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-       /* public List<Medico> listarEspecialidadesMedico(int id)
-        {
-            List<Medico> lista = new List<Medico>();
-            ConexionDB datos = new ConexionDB();
-
-            try
-            {
-                datos.setearConsulta("SELECT IDEspecialidad, E.Nombre as Especialidad, IDMedico, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, IDTurnoTrabajo, T.Turno, HorarioEntrada, HorarioSalida FROM EspecialidadXMedico AS EXM INNER JOIN TurnoTrabajo AS T ON T.ID = EXM.IDTurnoTrabajo INNER JOIN Especialidad AS E ON E.ID = EXM.IDEspecialidad WHERE IDMedico = " + id + "");
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
-                {
-                    Medico aux = new Medico();
-                    aux.ID = (int)datos.Lector["IDMedico"];
-                    aux.Especialidad = new Especialidad();
-                    aux.Especialidad.Id = (int)datos.Lector["IDEspecialidad"];
-                    aux.Especialidad.Nombre = (string)datos.Lector["Especialidad"];
-                    aux.Turno = new TurnoTrabajo();
-                    aux.Turno.ID = (int)datos.Lector["IDTurnoTrabajo"];
-                    aux.Turno.NombreTurno = (string)datos.Lector["Turno"];
-                    aux.Lunes = (bool)datos.Lector["Lunes"];
-                    aux.Martes = (bool)datos.Lector["Martes"];
-                    aux.Miercoles = (bool)datos.Lector["Miercoles"];
-                    aux.Jueves = (bool)datos.Lector["Jueves"];
-                    aux.Viernes = (bool)datos.Lector["Viernes"];
-                    aux.Sabado = (bool)datos.Lector["Sabado"];
-                    aux.HorarioEntrada = (DateTime)datos.Lector["HorarioEntrada"];
-                    aux.HorarioSalida = (DateTime)datos.Lector["HorarioSalida"];
-
-                    lista.Add(aux);
-                }
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }*/
         public void agregar(Medico MedicoNuevo)
         {
             ConexionDB datos = new ConexionDB();
