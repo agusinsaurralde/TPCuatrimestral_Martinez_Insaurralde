@@ -45,36 +45,47 @@
         </asp:ScriptManager>
 
 
-        <ul class="nav nav-pills nav-fill bg-dark">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="Default.aspx">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Turnos">Turnos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Pacientes">Pacientes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/Medicos">Médicos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/HistoriaClinica">Historia Clínica</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/Ingreso">Iniciar Sesión</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/Coberturas">Coberturas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/Usuarios">Usuarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/Empleados">Empleados</a>
-            </li>
-        </ul>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="tituloNavbar">
+          <a class="navbar-brand" href="/Default">CLÍNICA DEMAR</a>
+    </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/Default">INICIO</a>
+      <a class="nav-item nav-link" href="/Turnos">TURNOS</a>
+      <a class="nav-item nav-link" href="/Pacientes">PACIENTES</a>
+      <a class="nav-item nav-link" href="/HistoriaClinica">HISTORIA CLÍNICA</a>
+      <a class="nav-item nav-link" href="/Medicos">MÉDICOS</a>
+      <a class="nav-item nav-link" href="/SpecialtysViews">ESPECIALIDADES</a>
+      <a class="nav-item nav-link" href="/Coberturas">COBERTURAS</a>
+      <a class="nav-item nav-link" href="/Empleados">EMPLEADOS</a>
+      <a class="nav-item nav-link" href="/Ingreso">INICIAR SESIÓN</a>
+
+    </div>
+  </div>
+</nav>
+  
+<!--
+    <nav>
+        <h1>CLÍNICA DEMAR</h1>
+        <div class="menu">
+            <a class="is-active" href="/Default">INICIO</a>
+            <a class="nav-item nav-link" href="/Turnos">TURNOS</a>
+            <a class="nav-item nav-link" href="/Pacientes">PACIENTES</a>
+            <a class="nav-item nav-link" href="/HistoriaClinica">HISTORIA CLÍNICA</a>
+            <a class="nav-item nav-link" href="/Medicos">MÉDICOS</a>
+            <a class="nav-item nav-link" href="/SpecialtysViews">ESPECIALIDADES</a>
+            <a class="nav-item nav-link" href="/Coberturas">COBERTURAS</a>
+            <a class="nav-item nav-link" href="/Empleados">EMPLEADOS</a>
+            <a class="nav-item nav-link" href="/Ingreso">INICIAR SESIÓN</a>
+        </div>
+    </nav>
+
+    -->
 
 <%--        <nav class="navbar navbar-expand-lg navbar-white bg-dark">
             <div class="container-fluid badge rounded-pill bg-warning text-dark">

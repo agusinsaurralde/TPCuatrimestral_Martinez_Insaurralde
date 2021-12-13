@@ -132,6 +132,9 @@
     <Content Include="EliminarCorrecto.aspx" />
     <Content Include="ErrorEliminar.aspx" />
     <Content Include="EspecialidadesMedico.aspx" />
+    <Content Include="Iconos\pencil-square.svg" />
+    <Content Include="Iconos\pencil.svg" />
+    <Content Include="Iconos\x-circle.svg" />
     <Content Include="Ingreso.aspx" />
     <Content Include="ModificarEmpleado.aspx" />
     <Content Include="ModificarEspecialidadesMedico.aspx" />

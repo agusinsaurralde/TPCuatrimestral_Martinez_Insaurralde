@@ -1,36 +1,57 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Medicos.aspx.cs" Inherits="WebApplication1.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
     <h1>Médicos</h1>
     <hr />
 
-    <div class="input-group mb-3">
-        <asp:TextBox class="form-control" ID="txtBusqueda" aria-describedby="button-addon2" runat="server" />
-        <asp:Button Text="Buscar" OnClick ="Click_Buscar" class="btn btn-outline-secondary" runat="server" />
-    </div>
-   <div>       
-        <asp:Button Text="Agregar" class="btn btn-primary" OnClick="Click_Agregar" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" runat="server" />
-   </div> 
+    <div class="container">
+        <div class="d-flex flex-row-reverse">
+         <div class="col-md-4">
+            <div class="input-group mb-3">
+                 <asp:TextBox class="form-control" ID="txtBusqueda" aria-describedby="button-addon2" runat="server" />
+                 <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
+            </div>
+          </div>
+            <div class="col ">
+                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
+            </div>
+         </div>
 
-    <div>
-        <asp:Label ID="lblBusquedaIncorrecta" Text="" runat="server" /></div>
-    <div>
-        <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla"  runat="server" AutoPostback="true" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged"  OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" EmptyDataRowStyle-BorderStyle="None" HeaderStyle-BorderColor="#333333" HeaderStyle-CssClass="table-dark" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
-            <Columns>
-                <asp:BoundField datafield = "ID" HeaderText ="#" />
-                <asp:BoundField datafield = "Matricula" HeaderText ="Matrícula" />
-                <asp:BoundField datafield = "NombreCompleto" HeaderText ="Nombre y apellido" />              
-                <asp:BoundField datafield = "Telefono" HeaderText ="Teléfono" />
-                <asp:BoundField datafield = "Email" HeaderText ="Email" />
-                <asp:BoundField datafield = "Dirección" HeaderText ="Dirección" />
-                <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="Fecha de Nacimiento" />
-                <asp:BoundField datafield = "Estado" HeaderText ="Estado" />
-                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Especialidades"  ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" />
-                <asp:CommandField ButtonType="Button"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC" />   
-                <asp:CommandField ButtonType="Button"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary" ControlStyle-BackColor="#0099CC" ControlStyle-BorderColor="#0099CC"/>  
+        <div class="row">
+             <asp:Label ID="lblBusquedaIncorrecta" Text="" runat="server" />
+        </div>
 
-            </Columns>
-        </asp:gridview>
+
+
+         <style>
+        .rounded_corners {
+            border-radius: 15px;
+             overflow: hidden;
+        }
+
+            
+    </style>
+
+
+         <div  class="rounded_corners">
+             <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoPostback="true"  AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+                 <Columns>
+                     <asp:BoundField datafield = "Matricula" HeaderText ="MATRÍCULA" />
+                     <asp:BoundField datafield = "NombreCompleto" HeaderText ="NOMBRE" />              
+                     <asp:BoundField datafield = "Telefono" HeaderText ="TELÉFONO" />
+                     <asp:BoundField datafield = "Email" HeaderText ="EMAIL" />
+                     <asp:BoundField datafield = "Dirección" HeaderText ="DIRECCIÓN" />
+                     <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="FECHA DE NACIMIENTO" />
+                     <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Especialidades" ControlStyle-Font-Bold="true" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BorderStyle="None" />
+                     <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
+                     <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
+                     
+                 </Columns>
+             </asp:gridview>
+        </div>
+
+ 
     </div>
    
 </asp:Content>

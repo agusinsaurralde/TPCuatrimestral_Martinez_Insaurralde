@@ -58,5 +58,7 @@ namespace WebApplication1
             Session.Add("DiasHabiles", medicoDB.listarDiasHabilesDeUnMedico(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
             Response.Redirect("EspecialidadesMedico.aspx");
         }
+
+     
     }
 }
