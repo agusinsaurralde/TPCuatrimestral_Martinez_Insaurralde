@@ -23,18 +23,7 @@
         </div>
 
 
-
-         <style>
-        .rounded_corners {
-            border-radius: 15px;
-             overflow: hidden;
-        }
-
-            
-    </style>
-
-
-         <div  class="rounded_corners">
+         <div  >
              <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoPostback="true"  AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
                  <Columns>
                      <asp:BoundField datafield = "ID" HeaderText ="ID" />

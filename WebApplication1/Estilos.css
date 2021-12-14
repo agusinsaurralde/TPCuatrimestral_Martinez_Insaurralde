@@ -1,4 +1,15 @@
-﻿.fondo {
+﻿.estilo label {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.rounded_corners {
+    border-radius: 15px;
+    overflow: hidden;
+    color: red;
+}
+
+.fondo {
     background-color: black;
     filter: opacity(90);
     opacity: 0.8;

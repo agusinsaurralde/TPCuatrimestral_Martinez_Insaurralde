@@ -51,15 +51,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
-        /// Control ddlistCobertura.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlistCobertura;
-
-        /// <summary>
         /// Control txtFechaNac.
         /// </summary>
         /// <remarks>
@@ -159,13 +150,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnAgregarDia;
 
         /// <summary>
-        /// Control btnAgregarEspecialidad.
+        /// Control Grilla.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarEspecialidad;
+        protected global::System.Web.UI.WebControls.GridView Grilla;
 
         /// <summary>
         /// Control txtNombreUsuario.

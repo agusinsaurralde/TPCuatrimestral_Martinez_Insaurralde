@@ -36,8 +36,8 @@ namespace WebApplication1
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             /*Session.Add("modificar", especialidadDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
-             txtEditarEspecialidad.Text = ((Especialidad)Session["modificar"]).Nombre;
-             editarEspecialidad_Modal.Show();*/
+            txtEditarEspecialidad.Text = ((Especialidad)Session["modificar"]).Nombre;
+            editarEspecialidad_Modal.Show();*/
             precargar((int)Grilla.DataKeys[e.NewEditIndex].Values[0]);
             editarEspecialidad_Modal.Show();
         }
@@ -129,5 +129,6 @@ namespace WebApplication1
             }
         }
 
+       
     }
 }

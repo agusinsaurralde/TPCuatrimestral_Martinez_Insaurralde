@@ -3,12 +3,7 @@
     <br />
     <h3>Modificar Paciente</h3>
     <hr />
-    <style>
-        .estilo label{
-            font-weight: bold;
-            font-size: 12px;
-        }
-    </style>
+
   <div class="estilo">
 <div class="container">
   <div class="row">
