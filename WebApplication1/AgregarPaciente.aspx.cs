@@ -62,5 +62,10 @@ namespace WebApplication1
             }
 
         }
+
+        protected void Cancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pacientes.aspx");
+        }
     }
 }

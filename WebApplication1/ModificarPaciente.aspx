@@ -1,55 +1,76 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarPaciente.aspx.cs" Inherits="WebApplication1.Formulario_web2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Modificar Paciente</h1>
+    <br />
+    <h3>Modificar Paciente</h3>
     <hr />
-
-  <div class="row g-3">
-  <div class="col-md-4">
+    <style>
+        .estilo label{
+            font-weight: bold;
+            font-size: 12px;
+        }
+    </style>
+  <div class="estilo">
+<div class="container">
+  <div class="row">
+  <div class="col-md-3" style="margin-bottom: 40px">
        <label for="txtDNI" class="form-label">DNI</label>
-       <asp:TextBox type="number" class="form-control" ID="txtDNI"  runat="server" />
+       <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
+  </div>
   </div>
 
-  <div class="col-md-4">
-    <label for="txtApellido" class="form-label">Apellido</label>
-    <asp:TextBox  class="form-control" ID="txtApellido"  runat="server" />
+<div class="row">
+  <div class="col-md-3" style="margin-bottom: 40px"">
+    <label for="txtApellido" class="form-label">APELLIDO</label>
+    <asp:TextBox  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
   </div>
-
-  <div class="col-md-4">
-    <label for="txtNombre" class="form-label">Nombre</label>
-    <asp:TextBox  class="form-control" ID="txtNombre"  runat="server" />
-  </div>
-
-
-  <div class="col-md-6">
-    <label for="ddlistCobertura" class="form-label">Cobertura</label>
-    <asp:DropDownList ID="ddlistCobertura" class="form-select" runat="server"></asp:DropDownList>
+    <div class="col-md-3" style="margin-bottom: 40px">
+    <label for="txtNombre" class="form-label">NOMBRE</label>
+    <asp:TextBox  class="form-control rounded-pill" ID="txtNombre"  runat="server" />
   </div>
 
 
-  <div class="col-md-3">
-    <label for="txtFechaNac" class="form-label">Fecha de Nacimiento</label>
-    <asp:TextBox type="date" class="form-control" ID="txtFechaNac" runat="server" />
+<div class="row">
+  <div class="col-md-3" style="margin-bottom: 40px">
+    <label for="ddlistCobertura" class="form-label">COBERTURA</label>
+    <asp:DropDownList ID="ddlistCobertura" class="form-select rounded-pill" runat="server"></asp:DropDownList>
   </div>
+    <div class="col-md-3" style="margin-bottom: 40px">
+    <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
+    <asp:TextBox type="date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
+  </div>
+ </div>
 
 
-  <div class="col-md-3">
-    <label for="txtTelefono" class="form-label">Teléfono</label>
-    <asp:TextBox type="tel" class="form-control" ID="txtTelefono" runat="server" />
+<div class="row">
+  <div class="col-md-3" style="margin-bottom: 40px">
+    <label for="txtTelefono" class="form-label">TELÉFONO</label>
+    <asp:TextBox type="tel" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
   </div>
+    <div class="col-md-3" style="margin-bottom: 40px">
+    <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
+    <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
+  </div>
+ </div>
 
-  <div class="col-12">
-    <label for="txtEmail" class="form-label">Email</label>
-    <asp:TextBox type="email" class="form-control" ID="txtEmail" runat="server" />
+<div class="row">
+  <div class="col-md-6" style="margin-bottom: 40px">
+    <label for="txtEmail" class="form-label">EMAIL</label>
+    <asp:TextBox type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
   </div>
+ </div>
 
-  <div class="col-12">
-    <label for="txtDireccion" class="form-label">Dirección</label>
-    <asp:TextBox class="form-control" ID="txtDireccion" runat="server" />
-  </div>
-
-  <div class="col-12">
-        <asp:Button class="btn btn-primary" Text="Aceptar" OnClick="Click_Aceptar" runat="server" />
-  </div>
+      
+<div class="row" style="margin-bottom: 20px">
+   
+         <div class="col-md-1">
+               <asp:Button class="btn btn-outline-secondary rounded-pill" Text="CANCELAR" Font-Size="Small" BorderColor="White" Font-Bold="true" OnClick="Cancelar_Click" runat="server" />
+         </div>
+         <div class="col-md-1"  >
+               <asp:Button class="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Size="Small" Font-Bold="true" OnClick="Click_Aceptar" runat="server" />
+         </div>
+   
 </div>
-
+</div>
+</div>
+</div>
 </asp:Content>

@@ -4,10 +4,10 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <h1>Pacientes</h1>
+    <h3>Pacientes</h3>
     <hr />
     
-    <div class="container">
+    <div class="container" style="margin:20px 0px 20px 0px">
         <div class="d-flex flex-row-reverse">
          <div class="col-md-4">
             <div class="input-group mb-3">
@@ -20,8 +20,10 @@
             </div>
          </div>
     </div>
-   <div>
-        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+
+
+   <div style="margin-bottom:40px">
+        <asp:GridView CssClass="table table-hover" ID="Grilla" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>
                 <asp:BoundField datafield = "DNI" HeaderText ="DNI" />
                 <asp:BoundField datafield = "NombreCompleto" HeaderText ="NOMBRE" />

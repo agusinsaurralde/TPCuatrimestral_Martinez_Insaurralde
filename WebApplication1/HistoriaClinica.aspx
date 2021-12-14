@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="HistoriaClinica.aspx.cs" Inherits="WebApplication1.Formulario_web15" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <h1>Historia Clínica</h1>
+    <h3>Historia Clínica</h3>
     <hr />
-     <div class="container">
+     <div class="container" style="margin:20px 0px 20px 0px">
         <div class="d-flex flex-row-reverse">
          <div class="col-md-4">
             <div class="input-group mb-3">
@@ -14,7 +14,7 @@
          </div>
     </div>
   
-     <div class="container">
+     <div class="container" style="margin-bottom:40px">
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" SelectedRowStyle-BackColor="#999999" DataKeyNames="ID"  HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>   
                 <asp:BoundField datafield = "Paciente.NombreCompleto" HeaderText ="PACIENTE" />

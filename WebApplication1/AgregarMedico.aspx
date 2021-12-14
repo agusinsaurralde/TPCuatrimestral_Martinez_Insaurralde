@@ -2,79 +2,96 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <h1>Agregar Médico</h1>
+    <h3>Agregar Médico</h3>
     <hr />
     <br />
    
   <!-- tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-bs-toggle="tab" href="#datos">Datos Personales</a>
+      <a class="nav-link active" data-bs-toggle="tab" style="font-weight:500" href="#datos">DATOS PERSONALES</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#especialidades">Especialidades</a>
+      <a class="nav-link" data-bs-toggle="tab" style="font-weight:500" href="#especialidades">ESPECIALIDADES</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#usuario">Usuario</a>
+      <a class="nav-link" data-bs-toggle="tab" style="font-weight:500" href="#usuario">USUARIO</a>
     </li>
   </ul>
 
   <!-- contenido -->
   <div class="tab-content">
     <div id="datos" class="container tab-pane active"><br>
-      <h4>Datos Personales</h4>
-        <hr />
+
       <br />
 
-       <div class="row g-3">
-           <div class="col-md-4">
-               <label for="txtDNI" class="form-label">DNI</label>
-               <asp:TextBox class="form-control" ID="txtDNI" runat="server" />
-           </div>
+           <style>
+        .estilo label{
+            font-weight: bold;
+            font-size: 12px;
+        }
+      </style>
+     <div class="estilo">
+        <div class="container">
+  <div class="row">
+  <div class="col-md-3" style="margin-bottom: 40px">
+       <label for="txtDNI" class="form-label">DNI</label>
+       <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
+  </div>
+       <div class="col-md-3" style="margin-bottom: 40px">
+       <label for="txtMatricula" class="form-label">MATRICULA</label>
+       <asp:TextBox class="form-control rounded-pill" ID="txtMatricula"  runat="server" />
+  </div>
+  </div>
 
-           <div class="col-md-4">
-               <label for="txtMatricula" class="form-label">Matrícula</label>
-               <asp:TextBox class="form-control" ID="txtMatricula" runat="server" />
-           </div>
-
-           <div class="col-md-4">
-               <label for="txtApellido" class="form-label">Apellido</label>
-               <asp:TextBox class="form-control" ID="txtApellido" runat="server" />
-           </div>
-
-           <div class="col-md-4">
-               <label for="txtNombre" class="form-label">Nombre</label>
-               <asp:TextBox class="form-control" ID="txtNombre" runat="server" />
-           </div>
-
-
-           <div class="col-md-3">
-               <label for="txtFechaNac" class="form-label">Fecha de Nacimiento</label>
-               <asp:TextBox type="date" class="form-control" ID="txtFechaNac" runat="server" />
-           </div>
-
-
-           <div class="col-md-3">
-               <label for="txtTelefono" class="form-label">Teléfono</label>
-               <asp:TextBox type="tel" class="form-control" ID="txtTelefono" runat="server" />
-           </div>
-
-           <div class="col-12">
-               <label for="txtEmail" class="form-label">Email</label>
-               <asp:TextBox type="email" class="form-control" ID="txtEmail" runat="server" />
-           </div>
-
-           <div class="col-12">
-               <label for="txtDireccion" class="form-label">Dirección</label>
-               <asp:TextBox class="form-control" ID="txtDireccion" runat="server" />
-           </div>
-
+        <div class="row">
+          <div class="col-md-3" style="margin-bottom: 40px"">
+            <label for="txtApellido" class="form-label">APELLIDO</label>
+            <asp:TextBox  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
+          </div>
+            <div class="col-md-3" style="margin-bottom: 40px">
+            <label for="txtNombre" class="form-label">NOMBRE</label>
+            <asp:TextBox  class="form-control rounded-pill" ID="txtNombre"  runat="server" />
+          </div>
+        
+        
+        <div class="row">
+          <div class="col-md-3" style="margin-bottom: 40px">
+            <label for="ddlistCobertura" class="form-label">COBERTURA</label>
+            <asp:DropDownList ID="ddlistCobertura" class="form-select rounded-pill" runat="server"></asp:DropDownList>
+          </div>
+            <div class="col-md-3" style="margin-bottom: 40px">
+            <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
+            <asp:TextBox type="date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
+          </div>
          </div>
+        
+        
+        <div class="row">
+          <div class="col-md-3" style="margin-bottom: 40px">
+            <label for="txtTelefono" class="form-label">TELÉFONO</label>
+            <asp:TextBox type="tel" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
+          </div>
+            <div class="col-md-3" style="margin-bottom: 40px">
+            <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
+            <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
+          </div>
+         </div>
+        
+        <div class="row">
+          <div class="col-md-6" style="margin-bottom: 40px">
+            <label for="txtEmail" class="form-label">EMAIL</label>
+            <asp:TextBox type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
+          </div>
+         </div>
+        
+        
+            </div>
+        </div>
     </div>
-
+</div>
 
     <div id="especialidades" class="container tab-pane fade"><br>
-      <h3>Especialidades</h3>
 
         <asp:UpdatePanel runat="server">
             <ContentTemplate>

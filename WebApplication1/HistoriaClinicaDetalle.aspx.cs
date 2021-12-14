@@ -14,7 +14,7 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             List<HistoriaClinica> listaPorPaciente = (List<HistoriaClinica>)Session["Historia"];
-
+            lblNombrePaciente.Text = listaPorPaciente[0].Paciente.NombreCompleto;
             Grilla.DataSource = listaPorPaciente;
             Grilla.DataBind();
         }
