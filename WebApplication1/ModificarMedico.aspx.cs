@@ -127,7 +127,6 @@ namespace WebApplication1
             }
 
         }
-
         protected void cargarDiasEditar(int id)
         {
             MedicoDB medicoDB = new MedicoDB();
@@ -182,9 +181,7 @@ namespace WebApplication1
 
             while (horaEntrada <= horaMaxEntrada)
             {
-                ddlistEntrada.Items.Add(horaEntrada.ToShortTimeString());
-                ddlistEntradaAgregar.Items.Add(horaEntrada.ToShortTimeString());
-                ddlistEntradaAgregarDia.Items.Add(horaEntrada.ToShortTimeString());
+                ddlist.Items.Add(horaEntrada.ToShortTimeString());
                 horaEntrada += horaSumar;
             }
         }
@@ -222,9 +219,7 @@ namespace WebApplication1
 
         //EDITAR DÍAS
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int cant = ddlistDia.Items.Count;
-            
+        {            
             int id = Convert.ToInt32(Grilla.SelectedDataKey.Value);
             Session.Add("idEditarDia", id);
             cargarDiasEditar(id); ;

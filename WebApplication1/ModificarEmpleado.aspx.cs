@@ -48,8 +48,11 @@ namespace WebApplication1
 
 
         }
-
-        protected void Click_Aceptar(object sender, EventArgs e)
+        protected void Cancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Empleados.aspx");
+        }
+            protected void Click_Aceptar(object sender, EventArgs e)
         {
             Empleado modEmpleado = new Empleado();
             Usuario modUsuario = new Usuario();

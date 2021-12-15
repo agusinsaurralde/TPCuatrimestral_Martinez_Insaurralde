@@ -74,11 +74,16 @@ namespace WebApplication1
 
                 Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
 
+        }
+
+        protected void Cancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Empleados.aspx");
         }
     }
 }

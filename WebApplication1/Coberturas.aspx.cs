@@ -14,8 +14,11 @@ namespace WebApplication1
         CoberturaDB coberturaDB = new CoberturaDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Grilla.DataSource = coberturaDB.lista();
-            Grilla.DataBind();
+            if (!IsPostBack)
+            {
+                Grilla.DataSource = coberturaDB.lista();
+                Grilla.DataBind();
+            }  
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {

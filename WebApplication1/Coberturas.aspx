@@ -71,8 +71,8 @@
           <button id="exitEditar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <label for="txtEditarCobertura" class="form-label">Cobertura</label>
-            <asp:TextBox class="form-control  rounded-pill" ID="txtEditarCobertura" runat="server" />
+            <asp:Label Text="COBERTURA" CssClass="form-label" Font-Bold="true" Font-Size="Small" runat="server" />
+            <asp:TextBox ID="txtEditarCobertura" CssClass="form-control rounded-pill"  runat="server" />
         </div>
         <div class="modal-footer">
             <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
