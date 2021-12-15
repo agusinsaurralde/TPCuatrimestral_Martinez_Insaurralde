@@ -115,7 +115,6 @@
     <Content Include="AsignarTurno.aspx" />
     <Content Include="DetalleEmpleados.aspx" />
     <Content Include="EditarHistoriaClinicaMedico.aspx" />
-    <Content Include="EliminarEmpleado.aspx" />
     <Content Include="EliminarEspecialidadMedico.aspx" />
     <Content Include="Empleados.aspx" />
     <Content Include="ErrorIngreso.aspx" />
@@ -144,7 +143,6 @@
     <Content Include="ModificarCobertura.aspx" />
     <Content Include="EliminarCobertura.aspx" />
     <Content Include="ModificarMedico.aspx" />
-    <Content Include="EliminarMedico.aspx" />
     <Content Include="ModificarPaciente.aspx" />
     <Content Include="ModificarEspecialidad.aspx" />
     <Content Include="HistoriaClinicaDetalle.aspx" />
@@ -251,13 +249,6 @@
     </Compile>
     <Compile Include="EditarHistoriaClinicaMedico.aspx.designer.cs">
       <DependentUpon>EditarHistoriaClinicaMedico.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EliminarEmpleado.aspx.cs">
-      <DependentUpon>EliminarEmpleado.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EliminarEmpleado.aspx.designer.cs">
-      <DependentUpon>EliminarEmpleado.aspx</DependentUpon>
     </Compile>
     <Compile Include="EliminarEspecialidadMedico.aspx.cs">
       <DependentUpon>EliminarEspecialidadMedico.aspx</DependentUpon>
@@ -426,13 +417,6 @@
     </Compile>
     <Compile Include="ModificarMedico.aspx.designer.cs">
       <DependentUpon>ModificarMedico.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EliminarMedico.aspx.cs">
-      <DependentUpon>EliminarMedico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EliminarMedico.aspx.designer.cs">
-      <DependentUpon>EliminarMedico.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarPaciente.aspx.cs">
       <DependentUpon>ModificarPaciente.aspx</DependentUpon>

@@ -71,9 +71,9 @@ namespace WebApplication1
                     lblMedico.Text = "Medico: " + turnoSesion.Medico.Nombre + " "+ turnoSesion.Medico.Apellido;
 
 
-                    //Calendario.SelectedDate = turnoSesion.Dia;
+                    Calendario.SelectedDate = turnoSesion.Dia;
 
-                    //ddlistHora.Text = turnoSesion.HorarioInicio.ToString("HH:mm");
+                    ddlistHora.SelectedValue = turnoSesion.HorarioInicio.ToShortTimeString();
 
                     lblObservaciones.Text = "Observaciones:";
                     txtObservaciones.Text = turnoSesion.Observaciones;
@@ -178,39 +178,6 @@ namespace WebApplication1
 
         }
 
-        protected void btnBuscar_Click(object sender, EventArgs e)
-        {
-           /* TurnoDB turno = new TurnoDB();
-            Turno turnitoChiquito = new Turno();
-            int NumeroTurno = int.Parse(txtBuscar.Text.ToString());
-            turnitoChiquito=turno.buscarTurno(NumeroTurno);
-            lblNumeroTurno.Text = "N° Turno: " + turnitoChiquito.Numero.ToString();
-            lblPacienteNombre.Text = "Nombre de Paciente:";
-            txtPacienteNombre.Text = turnitoChiquito.Paciente.Nombre;
-            lblPacienteApellido.Text = "Apellido del Paciente:";
-            txtPacienteApellido.Text = turnitoChiquito.Paciente.Apellido;
-            lblEspecialidad.Text = "Especialidad:";
-            ddlistEspecialidad.DataTextField = turnitoChiquito.Especialidad.Nombre; // khe?
-            ddlistEspecialidad.SelectedValue = turnitoChiquito.Especialidad.Id.ToString();
-            lblMedico.Text = "Medico Nombre:";
-            ddlistMedico.Text = turnitoChiquito.Medico.Nombre;
-            lblMedicoApellido.Text = "Medico Apellido";
-            ddlistMedicoApellido.Text = turnitoChiquito.Medico.Apellido;
-            lblHoraInicio.Text = "Hora de inicio del turno:";
-            txtHoraInicio.Text = turnitoChiquito.HorarioInicio.ToString("HH:mm");
-            lblHoraFin.Text = "Hora de fin del turno";
-            txtHoraFin.Text = turnitoChiquito.HorarioFin.ToString("HH:mm");
-            lblFecha.Text = "Fecha del turno:";
-            txtFecha.Text = turnitoChiquito.Dia.ToString("dd/MM/yyyy");
-            lblObservaciones.Text = "Observaciones:";
-            txtObservaciones.Text = turnitoChiquito.Observaciones;
-            lblEmpleadoNombre.Text = "Nombre Empleado:";
-            txtEmpleadoNombre.Text = turnitoChiquito.AdministrativoResponsable.Nombre;
-            lblEmpleadoApellido.Text = "Apellido Empleado:";
-            txtEmpleadoApellido.Text = turnitoChiquito.AdministrativoResponsable.Apellido;
-            ddlistEstado.SelectedItem.Text = turnitoChiquito.Estado.Estado.ToString();*/
-        }
-
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             string modificado = "Turno";
@@ -266,13 +233,6 @@ namespace WebApplication1
             Response.Redirect("VerTurno.aspx", false);
         }
 
-        protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           /* int ID = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-
-            ddlistMedico.DataSource = ((List<MedicoEspecialidades>)Session["listaMedicoEsp"]).FindAll(x => x.especialidad.Id == ID);
-            ddlistMedico.DataBind();*/
-        }
         protected void Calendario_SelectionChanged(object sender, EventArgs e)
         {
             if (IsPostBack)

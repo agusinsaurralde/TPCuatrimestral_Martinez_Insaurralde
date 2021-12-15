@@ -5,9 +5,9 @@
 
         function checkOk() {
             swal("Ok!", "Los cambios fueron guardados :D!", "success");
-            buttons: ["ok"];
-            setTimeout(function () { window.location.href = "Turnos.aspx"; }, 5000); // 5seg desp de dar clilck a aceptar esto redirecciona a turnos.
+            setTimeout(function () { window.location.href = "Turnos.aspx"; }, 1500); 
         }
+ 
     </script>
 
 
@@ -24,17 +24,14 @@
         <br/>
         <div>
             <asp:Label ID="lblPaciente" Text="" class="form-label" runat="server" />
-            <asp:TextBox ID="txtPacienteNombre" class="form-control"  runat="server"/>
         </div>
         <br/>
         <div>
             <asp:Label ID="lblEspecialidad" Text="" class="from-label" runat="server" />
-            <!--<asp:DropDownList ID="ddlistEspecialidad" class="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>-->
         </div>
         <br/>
         <div>
             <asp:Label Text="" ID="lblMedico"  CssClass="form-label" runat="server" />
-             <!--<asp:DropDownList ID="ddlistMedico" class="form-select" CssClass="form-select" runat="server" EnableViewState="True" ></asp:DropDownList>-->
         </div>
         <br/>
     <asp:UpdatePanel runat="server">

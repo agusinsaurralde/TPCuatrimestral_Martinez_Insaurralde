@@ -28,10 +28,8 @@ namespace WebApplication1
 
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
-            UsuarioDB usuarioDB = new UsuarioDB();
-            Session.Add("eliminar", db.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
-            Session.Add("eliminarUsuario", usuarioDB.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
-            Response.Redirect("EliminarEmpleado.aspx");
+            Session.Add("eliminar", (int)Grilla.DataKeys[e.RowIndex].Values[0]);
+            btnEliminar_Modal.Show();
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
@@ -53,11 +51,22 @@ namespace WebApplication1
         }
 
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        { 
             UsuarioDB usuarioDB = new UsuarioDB();
-            Session.Add("DetalleEmpleado", usuarioDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
-            Response.Redirect("DetalleEmpleados.aspx");
+            Usuario usuario = usuarioDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value));
+            lblUsuario.Text = usuario.NombreUsuario;
+            lblContraseña.Text = usuario.Contraseña;
+            btnUsuario_Modal.Show();
+        }
 
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            empleadoDB.eliminar((int)Session["eliminar"]);
+            UsuarioDB usuarioDB = new UsuarioDB();
+            usuarioDB.eliminar((int)Session["eliminar"]);
+            Grilla.DataSource = db.listarEmpleado();
+            Grilla.DataBind();
         }
     }
 }

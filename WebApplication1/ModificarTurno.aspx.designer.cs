@@ -33,15 +33,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblPaciente;
 
         /// <summary>
-        /// Control txtPacienteNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPacienteNombre;
-
-        /// <summary>
         /// Control lblEspecialidad.
         /// </summary>
         /// <remarks>
@@ -51,15 +42,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblEspecialidad;
 
         /// <summary>
-        /// Control ddlistEspecialidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlistEspecialidad;
-
-        /// <summary>
         /// Control lblMedico.
         /// </summary>
         /// <remarks>
@@ -67,15 +49,6 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMedico;
-
-        /// <summary>
-        /// Control ddlistMedico.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlistMedico;
 
         /// <summary>
         /// Control Calendario.

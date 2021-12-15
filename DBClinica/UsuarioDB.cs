@@ -75,12 +75,12 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado) VALUES(@ID, @NombreUsuario, @Contraseña, @IDTipo, @Estado)");
+                datos.setearConsulta("INSERT Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado) VALUES(@ID, @NombreUsuario, @Contraseña, @IDTipo, 1)");
                 datos.setearParametro("@ID", UsuarioNuevo.IDUsuario);
                 datos.setearParametro("@NombreUsuario", UsuarioNuevo.NombreUsuario);
                 datos.setearParametro("@Contraseña", UsuarioNuevo.Contraseña);
                 datos.setearParametro("@IDTipo", UsuarioNuevo.TipoUsuario.Id);
-                datos.setearParametro("@Estado", UsuarioNuevo.Estado);
+        
 
                 datos.ejecutarAccion();
             }
@@ -125,13 +125,13 @@ namespace DBClinica
             return usuario;
         }
 
-        public void eliminar(Usuario ElimEUsuario)
+        public void eliminar(int ElimEUsuario)
         {
             ConexionDB datos = new ConexionDB();
 
             try
             {
-                datos.setearConsulta("Update Usuario SET Estado = 0 where ID = " + ElimEUsuario.IDUsuario + "");
+                datos.setearConsulta("Update Usuario SET Estado = 0 where ID = " + ElimEUsuario + "");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
