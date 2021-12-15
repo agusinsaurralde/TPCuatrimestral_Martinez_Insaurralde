@@ -192,6 +192,26 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
+
+        public void cancelarTurno(int id)
+        {
+            List<Turno> lista = new List<Turno>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("UPDATE Turno SET IDEstado = 4 WHERE Numero = " + id + "");
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 
 }

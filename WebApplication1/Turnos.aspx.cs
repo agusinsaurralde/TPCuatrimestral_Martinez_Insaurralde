@@ -57,6 +57,20 @@ namespace WebApplication1
         {
             Response.Redirect("AsignarTurno.aspx");
         }
+
+        protected void Grilla_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Session.Add("id", (int)Grilla.DataKeys[e.RowIndex].Values[0]);
+            cancelarTurno_Modal.Show();
+        }
+
+        protected void btnAceptarCancelar_Click(object sender, EventArgs e)
+        {
+            TurnoDB turnoDB = new TurnoDB();
+            turnoDB.cancelarTurno((int)Session["id"]);
+            Grilla.DataSource = turnoBD.listarTurno();
+            Grilla.DataBind();
+        }
     }
 
 
