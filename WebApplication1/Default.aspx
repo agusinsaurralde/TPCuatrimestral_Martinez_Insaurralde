@@ -4,7 +4,7 @@
 <div>
     <header class="bg-secondary">  
         <asp:Label ID="lblNombreUsuario" Text="" runat="server" />
-       <asp:ImageButton ID="btnLogOut" ImageUrl="https://image.flaticon.com/icons/png/512/25/25706.png" Width="15px" Height="15px" OnClick="btnLogOut_Click" runat="server" />
+       <asp:ImageButton ID="btnLogOut" ImageUrl="https://image.flaticon.com/icons/png/512/25/25706.png" Width="18px" Height="19px" Style="margin-left: 1000px; margin-top:0;" OnClick="btnLogOut_Click" runat="server" />
         
     </header>
 </div>

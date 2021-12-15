@@ -1,7 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarTurno.aspx.cs" Inherits="WebApplication1.Formulario_web13" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-        <h3>Modificar turno</h3>
+    <script type="text/javascript">
+
+        function checkOk() {
+            swal("Ok!", "Los cambios fueron guardados :D!", "success");
+            buttons: ["ok"];
+            setTimeout(function () { window.location.href = "Turnos.aspx"; }, 5000); // 5seg desp de dar clilck a aceptar esto redirecciona a turnos.
+        }
+    </script>
+
+
+
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>  
+            <h3>Modificar turno</h3>
         <hr />
         <br/>
 
@@ -53,9 +66,12 @@
     </div>
         <br/>
             <div>
-                <asp:Button ID="btnAceptar" Text="Aceptar" Onclick="btnAceptar_Click" runat ="server" />
+                <asp:Button ID="btnAceptar" Text="Aceptar" OnClientClick="return checkOk()" Onclick="btnAceptar_Click" runat ="server" />
                 <asp:Button ID="btnCancelar" Text="Cancelar" Onclick="btnCancelar_Click" runat="server" />
             </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+        
         
 
 </asp:Content>

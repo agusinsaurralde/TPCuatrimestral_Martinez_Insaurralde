@@ -47,7 +47,7 @@ namespace WebApplication1
             }
             else if (modificado == "Turno")
             {
-                Response.Redirect("VerTurno.aspx", false);
+                Response.Redirect("Turnos.aspx", false);
             }
             else if (modificado == "Día")
             {

@@ -251,7 +251,7 @@ namespace WebApplication1
 
                 cargar.modificar(turnoModificado);
 
-                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
+                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
             catch (Exception ex)
             {
