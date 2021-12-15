@@ -14,9 +14,13 @@ namespace WebApplication1
         MedicoDB medicoDB = new MedicoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Medico> listaMedicos = medicoDB.listarMedico();
-            Grilla.DataSource = listaMedicos;
-            Grilla.DataBind();
+            if (!IsPostBack)
+            {
+                List<Medico> listaMedicos = medicoDB.listarMedico();
+                Grilla.DataSource = listaMedicos;
+                Grilla.DataBind();
+            }
+
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {

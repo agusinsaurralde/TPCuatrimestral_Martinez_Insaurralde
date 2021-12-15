@@ -14,8 +14,12 @@ namespace WebApplication1
         EmpleadoDB db = new EmpleadoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
                 Grilla.DataSource = db.listarEmpleado();
                 Grilla.DataBind();
+            }
+               
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {

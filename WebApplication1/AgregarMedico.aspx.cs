@@ -48,7 +48,6 @@ namespace WebApplication1
                 ddlistDias.Enabled = true;
             }
         }
-
         protected void ddlistDias_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlistDias.SelectedIndex == 0)
@@ -72,7 +71,6 @@ namespace WebApplication1
             }
 
         }
-
         protected void ddlistEntrada_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(ddlistDias.SelectedIndex != 0)
@@ -84,7 +82,6 @@ namespace WebApplication1
             }
          
         }
-
         protected void Click_AgregarDia(object sender, EventArgs e)
         {
             DiasHabilesMedico diaAgregado = new DiasHabilesMedico();
@@ -108,11 +105,11 @@ namespace WebApplication1
 
                 if (listaEspAgregadas.Find(x => x.especialidad.Nombre == diaAgregado.Especialidad.Nombre) == null)
                 {
-                    MedicoEspecialidades hol = new MedicoEspecialidades();
-                    hol.especialidad = new Especialidad();
-                    hol.especialidad.Id = diaAgregado.Especialidad.Id;
-                    hol.especialidad.Nombre = diaAgregado.Especialidad.Nombre;
-                    ((List<MedicoEspecialidades>)Session["especialidadesAgregadas"]).Add(hol);
+                    MedicoEspecialidades esp = new MedicoEspecialidades();
+                    esp.especialidad = new Especialidad();
+                    esp.especialidad.Id = diaAgregado.Especialidad.Id;
+                    esp.especialidad.Nombre = diaAgregado.Especialidad.Nombre;
+                    ((List<MedicoEspecialidades>)Session["especialidadesAgregadas"]).Add(esp);
                 }
             }
             else
@@ -152,9 +149,7 @@ namespace WebApplication1
                 List<DiasHabilesMedico> lista = (List<DiasHabilesMedico>)Session["diasAgregados"];
                 Grilla.DataSource = lista;
                 Grilla.DataBind();
-
-            }
-            
+            }   
         }
 
        
@@ -164,7 +159,6 @@ namespace WebApplication1
             Usuario nuevoUsuario = new Usuario();
             MedicoDB cargar = new MedicoDB();
             UsuarioDB cargarUsuario = new UsuarioDB();
-            string agregado = "Médico";
             string error = "médico";
 
             try
@@ -219,6 +213,7 @@ namespace WebApplication1
             }
 
         }
+
     }
 
 }

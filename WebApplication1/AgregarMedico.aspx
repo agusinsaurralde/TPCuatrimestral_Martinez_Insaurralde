@@ -24,25 +24,21 @@
  
 
   <div class="tab-content">
-    <div id="datos" class="container tab-pane active"><br>
-
-      <br />
-
-  
+    <div id="datos" class="container tab-pane active">
 
         <div class="estilo">
-          <div class="row">
-             <div class="col-md-3" style="margin-bottom: 40px">
+          <div class="row justify-content-center">
+             <div class="col-md-3" style="margin-bottom: 40px; margin-top:60px">
                   <label for="txtDNI" class="form-label">DNI</label>
                   <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
              </div>
-             <div class="col-md-3" style="margin-bottom: 40px">
+             <div class="col-md-3" style="margin-bottom: 40px;margin-top:60px">
                   <label for="txtMatricula" class="form-label">MATRÍCULA</label>
                   <asp:TextBox class="form-control rounded-pill" ID="txtMatricula"  runat="server" />
              </div>
           </div>
         
-          <div class="row">
+          <div class="row justify-content-center">
             <div class="col-md-3" style="margin-bottom: 40px"">
               <label for="txtApellido" class="form-label">APELLIDO</label>
               <asp:TextBox  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
@@ -53,7 +49,7 @@
             </div>
            </div>
                 
-            <div class="row">
+            <div class="row justify-content-center">
                  <div class="col-md-3" style="margin-bottom: 40px">
                    <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
                    <asp:TextBox type="date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
@@ -65,14 +61,14 @@
              </div>
                
                 
-             <div class="row">
+             <div class="row justify-content-center">
               
-               <div class="col-md-3" style="margin-bottom: 40px">
+               <div class="col-md-3" style="margin-bottom: 70px">
                  <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
                  <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
                </div>
-                <div class="col-md-3" style="margin-bottom: 40px">
-                 <label for="txtEmail" class="form-label">EMAIL</label>
+                <div class="col-md-3" style="margin-bottom: 70px">
+                 <label for="txtEmail" class="form-label">E-MAIL</label>
                  <asp:TextBox type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
                </div>
               </div>
@@ -86,17 +82,17 @@
          <div class="estilo">
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
-                 <div class="row" style="margin-bottom: 40px">
+                 <div class="row justify-content-center" style="margin-bottom: 40px;margin-top:40px"">
                    <div class="col-md-3">
                      <asp:Label Text="ESPECIALIDAD" ID="lblEspecialidad" CssClass="form-label" runat="server" />
                      <asp:DropDownList ID="ddlistEspecialidad" class="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
                    </div>
                   </div>
 
-                   <div class="row" style="margin-bottom: 40px">
+                   <div class="row justify-content-center" style="margin-bottom: 40px">
                        <div class="col-md-3">
                          <asp:Label Text="DÍA" ID="lblDias" Enabled="false" CssClass="form-label" runat="server" />
-                         <asp:DropDownList ID="ddlistDias" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged">
+                         <asp:DropDownList ID="ddlistDias" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged1">
                              <asp:ListItem Text="Seleccionar" />
                              <asp:ListItem Text="Lunes" />
                              <asp:ListItem Text="Martes" />
@@ -108,17 +104,17 @@
                        </div>
                      </div>
 
-                    <div class="row" style="margin-bottom: 40px">
-                       <div class="col-md-3" >
+                    <div class="row justify-content-center" style="margin-bottom: 40px">
+                       <div class="col-md-1" >
                            <asp:Label Text="RANGO HORARIO" CssClass="form-label" runat="server" />
                           <asp:DropDownList ID="ddlistEntrada" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntrada_SelectedIndexChanged"/>
                        </div>
-                       <div class="col-md-3" style="margin:25px 0px 0px 0px">
+                       <div class="col-md-1" style="margin:25px 0px 0px 0px">
                            <asp:TextBox ID="txtHoraSalida" Enabled="false"  CssClass="form-select rounded-pill" DataFormatString="HH:mm" AutoPostBack="true" runat="server" />
                        </div>
                     </div>
 
-                       <div class="row">
+                       <div class="row justify-content-center">
                            <div class="col-md-3" style="margin:0px 0px 40px 550px">
                              <asp:Button  ID="btnAgregarDia" Text="+ DÍA" CssClass="btn btn-primary rounded-pill" Enabled="false" OnClick="Click_AgregarDia" AutoPostBack="true" runat="server" />
                            </div>
@@ -146,23 +142,31 @@
 
     <div id="usuario" class="container tab-pane fade">
      <div class="estilo">
-        <h4>Usuario</h4>
-         <hr />
-           <div class="col-12">
-            <label for="txtNombreUsuario" class="form-label">Usuario</label>
-            <asp:TextBox class="form-control" ID="txtNombreUsuario" runat="server" />
-          </div>
-          <div class="col-12">
-            <label for="txtContraseña" class="form-label">Contraseña</label>
-            <asp:TextBox class="form-control" type="Password" ID="txtContraseña" runat="server" />
-          </div>
-         <br />
-         <div class="col-12">
-         <asp:Button class="btn btn-primary" Text="Aceptar" OnClick="Click_Aceptar" runat="server" />
-        </div>
+            <div class="container">
+               <div class="row d-flex justify-content-center" style="margin-top:60px">
+                   <div class="col-md-3">
+                  <label for="txtNombreUsuario" class="form-label">USUARIO</label>
+                  <asp:TextBox class="form-control rounded-pill" ID="txtNombreUsuario" runat="server" />
+                </div>
+               </div>
+
+               <div class="row justify-content-center" style="margin-top:40px">
+                    <div class="col-md-3" >
+                  <label for="txtContraseña" class="form-label">CONTRASEÑA</label>
+                  <asp:TextBox class="form-control rounded-pill" type="Password" ID="txtContraseña" runat="server" />
+                </div>
+               </div>
+
+               <div class="row justify-content-center" style="margin:40px 0px 60px 320px">
+                    
+                   <div class="col-md-3">
+                    <asp:Button class="btn btn-primary rounded-pill" Font-Size="Small" Font-Bold="true" Text="ACEPTAR" OnClick="Click_Aceptar" runat="server" />
+                  </div>
+               </div>
+             </div>
          </div>
     </div>
-   </div>
+ </div>
  
 
      
