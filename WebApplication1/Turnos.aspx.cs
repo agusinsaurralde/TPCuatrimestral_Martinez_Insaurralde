@@ -14,9 +14,12 @@ namespace WebApplication1
         TurnoDB turnoBD = new TurnoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            Grilla.DataSource = turnoBD.listarTurno();
-            Grilla.DataBind();
+            if (!IsPostBack)
+            {
+                Grilla.DataSource = turnoBD.listarTurno();
+                Grilla.DataBind();
+            }
+
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)

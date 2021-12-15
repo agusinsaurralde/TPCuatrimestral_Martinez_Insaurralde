@@ -27,6 +27,7 @@
                 <asp:BoundField datafield = "HorarioInicio" DataFormatString="{0:HH:mm}"  HeaderText ="HORA" />
                 <asp:BoundField datafield = "Observaciones" HeaderText ="OBSERVACIONES" />
                 <asp:BoundField datafield = "AdministrativoResponsable.NombreCompleto" HeaderText ="RECEPCIONISTA" />
+                <asp:BoundField datafield = "Estado.Estado" HeaderText ="ESTADO" />
                 <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
                 <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Agregar Observación" ControlStyle-CssClass="btn btn-primary rounded-pill"/> 
             </Columns>

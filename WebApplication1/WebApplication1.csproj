@@ -112,7 +112,6 @@
     <Content Include="AgregarEmpleado.aspx" />
     <Content Include="AgregarEspecialidad.aspx" />
     <Content Include="AgregarHistoriaClinica.aspx" />
-    <Content Include="AsignarTurno.aspx" />
     <Content Include="DetalleEmpleados.aspx" />
     <Content Include="EditarHistoriaClinicaMedico.aspx" />
     <Content Include="EliminarEspecialidadMedico.aspx" />
@@ -139,6 +138,7 @@
     <Content Include="ModificarEmpleado.aspx" />
     <Content Include="ModificarEspecialidadesMedico.aspx" />
     <Content Include="ModificarUsuario.aspx" />
+    <Content Include="AsignarTurno.aspx" />
     <Content Include="Usuarios.aspx" />
     <Content Include="ModificarCobertura.aspx" />
     <Content Include="EliminarCobertura.aspx" />
@@ -229,13 +229,6 @@
       <DependentUpon>AgregarHistoriaClinica.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="AsignarTurno.aspx.cs">
-      <DependentUpon>AsignarTurno.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AsignarTurno.aspx.designer.cs">
-      <DependentUpon>AsignarTurno.aspx</DependentUpon>
-    </Compile>
     <Compile Include="DetalleEmpleados.aspx.cs">
       <DependentUpon>DetalleEmpleados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -389,6 +382,13 @@
     </Compile>
     <Compile Include="ModificarUsuario.aspx.designer.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AsignarTurno.aspx.cs">
+      <DependentUpon>AsignarTurno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AsignarTurno.aspx.designer.cs">
+      <DependentUpon>AsignarTurno.aspx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>

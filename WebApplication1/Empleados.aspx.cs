@@ -18,8 +18,7 @@ namespace WebApplication1
             {
                 Grilla.DataSource = db.listarEmpleado();
                 Grilla.DataBind();
-            }
-               
+            } 
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {

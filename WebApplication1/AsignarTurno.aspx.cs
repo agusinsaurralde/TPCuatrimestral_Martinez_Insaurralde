@@ -9,20 +9,24 @@ using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Formulario_web11 : System.Web.UI.Page
+    public partial class prueba : System.Web.UI.Page
     {
-        MedicoDB medicoDB = new MedicoDB();
-        TurnoDB turnoDB = new TurnoDB();
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            EspecialidadDB espDB = new EspecialidadDB();
-            EmpleadoDB empledoDB = new EmpleadoDB();
-            EstadoTurnoDB estadoDB = new EstadoTurnoDB();
+            Usuario userLog = (Usuario)Session["Usuario"];
 
-
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "Debes iniciar sesión");
+                Response.Redirect("ErrorIngreso.aspx", false);
+            }
             if (!IsPostBack)
             {
+                EspecialidadDB espDB = new EspecialidadDB();
+                EmpleadoDB empledoDB = new EmpleadoDB();
+                EstadoTurnoDB estadoDB = new EstadoTurnoDB();
+                MedicoDB medicoDB = new MedicoDB();
+
                 List<Especialidad> esp = espDB.lista();
                 ddlistEspecialidad.DataSource = esp;
                 ddlistEspecialidad.DataTextField = "Nombre";
@@ -31,17 +35,17 @@ namespace WebApplication1
                 ddlistEspecialidad.Items.Insert(0, new ListItem("Seleccionar Especialidad", "0"));
 
                 //provisiorio
-                List<Empleado> emp = empledoDB.listarRecepcionista();
-                ddlistRecepcionista.DataSource = emp;
-                ddlistRecepcionista.DataTextField = "NombreCompleto";
-                ddlistRecepcionista.DataValueField = "ID";
-                ddlistRecepcionista.DataBind();
+               // List<Empleado> emp = empledoDB.listarRecepcionista();
+                //ddlistRecepcionista.DataSource = emp;
+               // ddlistRecepcionista.DataTextField = "NombreCompleto";
+               // ddlistRecepcionista.DataValueField = "ID";
+               // ddlistRecepcionista.DataBind();
                 //provisiorio
-                List<EstadoTurno> estado = estadoDB.listar();
-                ddlistEstado.DataSource = estado;
-                ddlistEstado.DataTextField = "Estado";
-                ddlistEstado.DataValueField = "ID";
-                ddlistEstado.DataBind();
+               // List<EstadoTurno> estado = estadoDB.listar();
+                //ddlistEstado.DataSource = estado;
+               // ddlistEstado.DataTextField = "Estado";
+                //ddlistEstado.DataValueField = "ID";
+                //ddlistEstado.DataBind();
 
                 List<MedicoEspecialidades> espMedicos = medicoDB.listarEspecialidadesMedico();
                 Session["listaMedicoEsp"] = espMedicos;
@@ -51,11 +55,52 @@ namespace WebApplication1
                 ddlistMedico.DataBind();
                 ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));
 
+                MultiView.ActiveViewIndex = 0;
+                lblPaciente.Font.Bold = true;
+                lblPaciente.ForeColor = System.Drawing.Color.RoyalBlue;
+                lblServicio.ForeColor = System.Drawing.Color.Gray;
+                lblHorario.ForeColor = System.Drawing.Color.Gray;
+
             }
+ 
 
         }
-       
-        protected void Click_Buscar(object sender, EventArgs e)
+
+        protected void btn0a1_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 1;
+            lblPaciente.Font.Bold = false;
+            lblPaciente.ForeColor = System.Drawing.Color.Gray;
+            lblServicio.Font.Bold = true;
+            lblServicio.ForeColor = System.Drawing.Color.RoyalBlue;
+
+        }
+        protected void btn1a2_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 2;
+            lblServicio.Font.Bold = false;
+            lblServicio.ForeColor = System.Drawing.Color.Gray;
+            lblHorario.Font.Bold = true;
+            lblHorario.ForeColor = System.Drawing.Color.RoyalBlue;
+        }
+        protected void btn1a0_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 0;
+            lblServicio.Font.Bold = false;
+            lblServicio.ForeColor = System.Drawing.Color.Gray;
+            lblPaciente.Font.Bold = true;
+            lblPaciente.ForeColor = System.Drawing.Color.RoyalBlue;
+
+        }
+        protected void btn2a1_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 1;
+            lblHorario.Font.Bold = false;
+            lblHorario.ForeColor = System.Drawing.Color.Gray;
+            lblServicio.Font.Bold = true;
+            lblServicio.ForeColor = System.Drawing.Color.RoyalBlue;
+        }
+        protected void btnBuscar_Click(object sender, EventArgs e)
         {
             PacienteDB pacienteDB = new PacienteDB();
             List<Paciente> listapacientes = pacienteDB.listarPaciente();
@@ -64,35 +109,23 @@ namespace WebApplication1
             if (datosPaciente == null)
             {
                 txtPaciente.Text = "Paciente inexistente";
-                txtApellido.Text = "";
                 txtNombre.Text = "";
 
-                lblEspecialidad.Visible = false;
-                ddlistEspecialidad.Visible = false;
-                lblMedico.Visible = false;
-                ddlistMedico.Visible = false;
-                Calendario.Visible = false;
-                lblHora.Visible = false;
-                ddlistHora.Visible = false;
-                lblObservaciones.Visible = false;
-                txtObservaciones.Visible = false;
+                ddlistEspecialidad.Enabled = false;
+                ddlistMedico.Enabled = false;
+                Calendario.Enabled = false;
+                ddlistHora.Enabled = false;
             }
             else
             {
                 txtPaciente.Text = "Paciente existente";
-                txtApellido.Text = "Apellido: " + datosPaciente.Apellido;
-                txtNombre.Text = "Nombre: " + datosPaciente.Nombre;
+                txtNombre.Text = "Nombre: " + datosPaciente.NombreCompleto;
                 txtCobertura.Text = "Cobertura: " + datosPaciente.Cobertura.Nombre;
 
-                lblEspecialidad.Visible = true;
-                ddlistEspecialidad.Visible = true;
-                lblMedico.Visible = true;
-                ddlistMedico.Visible = false;
-                Calendario.Visible = false;
-                lblHora.Visible = false;
-                ddlistHora.Visible = false;
-                lblObservaciones.Visible = false;
-                txtObservaciones.Visible = false;
+                ddlistEspecialidad.Enabled = true;
+                ddlistMedico.Enabled = false;
+                Calendario.Enabled = false;
+                ddlistHora.Enabled = false;
             }
         }
 
@@ -108,14 +141,65 @@ namespace WebApplication1
 
             }
 
-            lblMedico.Visible = true;
-            ddlistMedico.Visible = true;
-            Calendario.Visible = true;
-            lblHora.Visible = false;
-            ddlistHora.Visible = false;
-            lblObservaciones.Visible = false;
-            txtObservaciones.Visible = false;
+            ddlistMedico.Enabled = true;
+            Calendario.Enabled = true;
+            ddlistHora.Enabled = false;
         }
+
+        protected void Calendario_SelectionChanged(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                ddlistHora.Items.Clear();
+            }
+            ddlistHora.Enabled = true;
+
+            int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
+            int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
+
+
+
+            DiasHabilesMedico horarioMedico = ((List<DiasHabilesMedico>)Session["listaFiltradaDiasHabiles"]).Find(x => x.IdDia == ((int)Calendario.SelectedDate.DayOfWeek)); //devuelve objeto de dias habiles segun el dia de la semana seleccionado
+            DateTime horaInicio = horarioMedico.HorarioEntrada;
+            System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
+
+            TurnoDB turnoDB = new TurnoDB();
+            List<Turno> listaTurnos = turnoDB.listarTurno();
+            List<Turno> turnosFiltradosMedico = listaTurnos.FindAll(x => x.Dia.ToShortDateString() == Calendario.SelectedDate.ToShortDateString() && x.Medico.ID == medSeleccionado && (x.Estado.Estado == "Programado" || x.Estado.Estado == "Reprogramado")); //lista con turnos programados del medico en el dia seleccionado
+            List<Turno> turnosFiltradosPaciente = listaTurnos.FindAll(x => x.Dia.ToShortDateString() == Calendario.SelectedDate.ToShortDateString() && x.Paciente.DNI == txtDNI.Text && (x.Estado.Estado == "Programado" || x.Estado.Estado == "Reprogramado")); //lista con turnos programados del paciente en el dia seleccionado
+
+            List<string> horarios = new List<string>();
+            for (int x = 0; x < 3; x++) //guarda los horarios
+            {
+                horarios.Add(horaInicio.ToShortTimeString());
+                ddlistHora.Items.Add(horaInicio.ToShortTimeString());
+                horaInicio += horaSumar;
+            }
+
+            if (turnosFiltradosMedico != null)
+            {
+                foreach (string hora in horarios)
+                {
+                    Turno turnoProgramado = turnosFiltradosMedico.Find(x => x.HorarioInicio.ToString("HH:mm") == hora);
+                    if (turnoProgramado != null)
+                    {
+                        ddlistHora.Items.Remove(hora);
+                    }
+                }
+            }
+            if (turnosFiltradosPaciente != null)
+            {
+                foreach (string hora in horarios)
+                {
+                    Turno turnoProgramado = turnosFiltradosPaciente.Find(x => x.HorarioInicio.ToString("HH:mm") == hora);
+                    if (turnoProgramado != null)
+                    {
+                        ddlistHora.Items.Remove(hora);
+                    }
+                }
+            }
+        }
+
         protected void ddlistMedico_SelectedIndexChanged(object sender, EventArgs e)
         {
             int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
@@ -123,11 +207,12 @@ namespace WebApplication1
         }
 
         protected void Calendario_DayRender(object sender, DayRenderEventArgs e)
-        { 
+        {
             e.Day.IsSelectable = false;
             int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-            if((Session["medSeleccionado"]) != null)
+            if ((Session["medSeleccionado"]) != null)
             {
+                MedicoDB medicoDB = new MedicoDB();
                 int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
                 List<DiasHabilesMedico> listaDiasHabiles = medicoDB.listarDiasHabiles();
                 List<DiasHabilesMedico> listaFiltrada = listaDiasHabiles.FindAll(x => x.Especialidad.Id == espSeleccionada && x.Medico.ID == medSeleccionado);
@@ -205,72 +290,11 @@ namespace WebApplication1
                 {
                     e.Day.IsSelectable = false;
                 }
-
-            }
-
-
-
-        }
-        protected void Calendario_SelectionChanged(object sender, EventArgs e)
-        {
-            if (IsPostBack)
-            {
-                ddlistHora.Items.Clear();
-            }
-            lblHora.Visible = true;
-            ddlistHora.Visible = true;
-            lblObservaciones.Visible = true;
-            txtObservaciones.Visible = true;
-
-            int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
-            int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
-
-            ddlistHora.Enabled = true;
-
-
-            DiasHabilesMedico horarioMedico = ((List<DiasHabilesMedico>)Session["listaFiltradaDiasHabiles"]).Find(x => x.IdDia == ((int)Calendario.SelectedDate.DayOfWeek)); //devuelve objeto de dias habiles segun el dia de la semana seleccionado
-            DateTime horaInicio = horarioMedico.HorarioEntrada;
-            System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
-
-            List<Turno> listaTurnos = turnoDB.listarTurno();
-            List<Turno> turnosFiltradosMedico = listaTurnos.FindAll(x => x.Dia.ToShortDateString() == Calendario.SelectedDate.ToShortDateString() && x.Medico.ID == medSeleccionado && (x.Estado.Estado == "Programado" || x.Estado.Estado == "Reprogramado")); //lista con turnos programados del medico en el dia seleccionado
-            List<Turno> turnosFiltradosPaciente = listaTurnos.FindAll(x => x.Dia.ToShortDateString() == Calendario.SelectedDate.ToShortDateString() && x.Paciente.DNI == txtDNI.Text && (x.Estado.Estado == "Programado" || x.Estado.Estado == "Reprogramado")); //lista con turnos programados del paciente en el dia seleccionado
-
-           List<string> horarios = new List<string>();
-            for (int x = 0; x < 3; x++) //guarda los horarios
-            {
-                horarios.Add(horaInicio.ToShortTimeString());
-                ddlistHora.Items.Add(horaInicio.ToShortTimeString());
-                horaInicio += horaSumar;
-            }
-
-            if (turnosFiltradosMedico != null)
-            {
-                foreach(string hora in horarios)
-                {
-                    Turno turnoProgramado = turnosFiltradosMedico.Find(x => x.HorarioInicio.ToString("HH:mm") == hora);
-                    if(turnoProgramado != null)
-                    {
-                        ddlistHora.Items.Remove(hora);
-                    }
-                }
-            }
-            if (turnosFiltradosPaciente != null)
-            {
-                foreach (string hora in horarios)
-                {
-                    Turno turnoProgramado = turnosFiltradosPaciente.Find(x => x.HorarioInicio.ToString("HH:mm") == hora);
-                    if (turnoProgramado != null)
-                    {
-                        ddlistHora.Items.Remove(hora);
-                    }
-                }
             }
         }
 
-        protected void Click_Aceptar(object sender, EventArgs e)
+        protected void Aceptar_Click(object sender, EventArgs e)
         {
-
             Turno NuevoTurno = new Turno();
             TurnoDB cargar = new TurnoDB();
             string agregado = "Turno";
@@ -278,6 +302,11 @@ namespace WebApplication1
 
             PacienteDB pacienteDB = new PacienteDB();
             List<Paciente> pacientes = pacienteDB.listarPaciente();
+
+            Usuario userLog = (Usuario)Session["Usuario"];
+            EmpleadoDB empleadoLogDB = new EmpleadoDB();
+            Empleado empleadoLog = new Empleado();
+            empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
 
 
             try
@@ -293,9 +322,9 @@ namespace WebApplication1
                 NuevoTurno.HorarioInicio = DateTime.Parse(ddlistHora.SelectedItem.Value);
                 NuevoTurno.Observaciones = txtObservaciones.Text;
                 NuevoTurno.AdministrativoResponsable = new Empleado();
-                NuevoTurno.AdministrativoResponsable.ID = int.Parse(ddlistRecepcionista.SelectedItem.Value);
+                NuevoTurno.AdministrativoResponsable.ID = empleadoLog.ID; //int.Parse(ddlistRecepcionista.SelectedItem.Value);
                 NuevoTurno.Estado = new EstadoTurno();
-                NuevoTurno.Estado.ID = int.Parse(ddlistEstado.SelectedItem.Value);
+                NuevoTurno.Estado.ID = 1;
 
                 cargar.agregar(NuevoTurno);
                 List<Turno> listaturnos = cargar.listarTurno();
@@ -311,6 +340,5 @@ namespace WebApplication1
                 Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
         }
-
     }
 }
