@@ -4,20 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
 using Dominio;
 using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Formulario_web113 : System.Web.UI.Page
+    public partial class PRUEBA : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            EspecialidadDB espDB = new EspecialidadDB();
             if (!IsPostBack)
             {
+                EspecialidadDB espDB = new EspecialidadDB();
                 List<Especialidad> lista = espDB.lista();
                 Session["listaEsp"] = lista;
                 ddlistEspecialidad.DataSource = lista;
@@ -31,16 +29,57 @@ namespace WebApplication1
                 Session.Add("especialidadesAgregadas", especialidadesAgregadas);
                 List<DiasHabilesMedico> diasAgregados = new List<DiasHabilesMedico>();
                 Session.Add("diasAgregados", diasAgregados);
+
+                MultiView.ActiveViewIndex = 0;
+                lblDatos.Font.Bold = true;
+                lblDatos.ForeColor = System.Drawing.Color.RoyalBlue;
+                lblEspecialidades.ForeColor = System.Drawing.Color.Gray;
+                lblUsuario.ForeColor = System.Drawing.Color.Gray;
+
             }
+
             
+        }
 
+        protected void btn0a1_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 1;
+            lblDatos.Font.Bold = false;
+            lblDatos.ForeColor = System.Drawing.Color.Gray;
+            lblEspecialidades.Font.Bold = true;
+            lblEspecialidades.ForeColor = System.Drawing.Color.RoyalBlue;
 
+        }
+        protected void btn1a2_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 2;
+            lblEspecialidades.Font.Bold = false;
+            lblEspecialidades.ForeColor = System.Drawing.Color.Gray;
+            lblUsuario.Font.Bold = true;
+            lblUsuario.ForeColor = System.Drawing.Color.RoyalBlue;
+        }
+        protected void btn1a0_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 0;
+            lblEspecialidades.Font.Bold = false;
+            lblEspecialidades.ForeColor = System.Drawing.Color.Gray;
+            lblDatos.Font.Bold = true;
+            lblDatos.ForeColor = System.Drawing.Color.RoyalBlue;
+
+        }
+        protected void btn2a1_Click(object sender, EventArgs e)
+        {
+            MultiView.ActiveViewIndex = 1;
+            lblUsuario.Font.Bold = false;
+            lblUsuario.ForeColor = System.Drawing.Color.Gray;
+            lblEspecialidades.Font.Bold = true;
+            lblEspecialidades.ForeColor = System.Drawing.Color.RoyalBlue;
         }
 
         protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ddlistEspecialidad.SelectedIndex == 0)
-            { 
+            if (ddlistEspecialidad.SelectedIndex == 0)
+            {
                 ddlistDias.Enabled = false;
             }
             else
@@ -73,14 +112,14 @@ namespace WebApplication1
         }
         protected void ddlistEntrada_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ddlistDias.SelectedIndex != 0)
+            if (ddlistDias.SelectedIndex != 0)
             {
                 System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
                 DateTime horaSalida = Convert.ToDateTime(ddlistEntrada.SelectedItem.ToString()) + horaSumar;
                 txtHoraSalida.Text = horaSalida.ToShortTimeString();
                 btnAgregarDia.Enabled = true;
             }
-         
+
         }
         protected void Click_AgregarDia(object sender, EventArgs e)
         {
@@ -94,12 +133,12 @@ namespace WebApplication1
             diaAgregado.HorarioEntrada = DateTime.Parse(ddlistEntrada.SelectedItem.Value);
             diaAgregado.HorarioSalida = DateTime.Parse(txtHoraSalida.Text);
 
-           
+
             //lista que guarda dias
             ((List<DiasHabilesMedico>)Session["diasAgregados"]).Add(diaAgregado);
 
             //lista que guarda especialidades
-            if((List<MedicoEspecialidades>)Session["especialidadesAgregadas"] != null)
+            if ((List<MedicoEspecialidades>)Session["especialidadesAgregadas"] != null)
             {
                 List<MedicoEspecialidades> listaEspAgregadas = (List<MedicoEspecialidades>)Session["especialidadesAgregadas"];
 
@@ -123,7 +162,7 @@ namespace WebApplication1
             //saca dias que ya fueron agregados
             for (int x = 0; x < 7; x++)
             {
-                if(ddlistDias.Items[x].Text == diaAgregado.NombreDia)
+                if (ddlistDias.Items[x].Text == diaAgregado.NombreDia)
                 {
                     ddlistDias.Items[x].Enabled = false;
                 }
@@ -144,16 +183,16 @@ namespace WebApplication1
 
         protected void cargarGrilla()
         {
-            if((List<DiasHabilesMedico>)Session["diasAgregados"] != null)
+            if ((List<DiasHabilesMedico>)Session["diasAgregados"] != null)
             {
                 List<DiasHabilesMedico> lista = (List<DiasHabilesMedico>)Session["diasAgregados"];
                 Grilla.DataSource = lista;
                 Grilla.DataBind();
-            }   
+            }
         }
 
-       
-        protected void Click_Aceptar(object sender, EventArgs e)
+
+        protected void Aceptar_Click(object sender, EventArgs e)
         {
             Medico NuevoMedico = new Medico();
             Usuario nuevoUsuario = new Usuario();
@@ -215,5 +254,4 @@ namespace WebApplication1
         }
 
     }
-
 }

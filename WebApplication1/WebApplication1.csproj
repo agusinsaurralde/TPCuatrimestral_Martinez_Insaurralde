@@ -119,7 +119,6 @@
     <Content Include="ErrorIngreso.aspx" />
     <Content Include="EliminarEspecialidad.aspx" />
     <Content Include="AgregarPaciente.aspx" />
-    <Content Include="AgregarMedico.aspx" />
     <Content Include="EliminarHistoriaClinica.aspx" />
     <Content Include="Coberturas.aspx" />
     <Content Include="AgregarCobertura.aspx" />
@@ -138,7 +137,7 @@
     <Content Include="ModificarEspecialidadesMedico.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="AsignarTurno.aspx" />
-    <Content Include="PRUEBA.aspx" />
+    <Content Include="AgregarMedico.aspx" />
     <Content Include="Usuarios.aspx" />
     <Content Include="ModificarCobertura.aspx" />
     <Content Include="EliminarCobertura.aspx" />
@@ -278,13 +277,6 @@
     <Compile Include="AgregarPaciente.aspx.designer.cs">
       <DependentUpon>AgregarPaciente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AgregarMedico.aspx.cs">
-      <DependentUpon>AgregarMedico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AgregarMedico.aspx.designer.cs">
-      <DependentUpon>AgregarMedico.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EliminarHistoriaClinica.aspx.cs">
       <DependentUpon>EliminarHistoriaClinica.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -383,12 +375,12 @@
     <Compile Include="AsignarTurno.aspx.designer.cs">
       <DependentUpon>AsignarTurno.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PRUEBA.aspx.cs">
-      <DependentUpon>PRUEBA.aspx</DependentUpon>
+    <Compile Include="AgregarMedico.aspx.cs">
+      <DependentUpon>AgregarMedico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PRUEBA.aspx.designer.cs">
-      <DependentUpon>PRUEBA.aspx</DependentUpon>
+    <Compile Include="AgregarMedico.aspx.designer.cs">
+      <DependentUpon>AgregarMedico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
