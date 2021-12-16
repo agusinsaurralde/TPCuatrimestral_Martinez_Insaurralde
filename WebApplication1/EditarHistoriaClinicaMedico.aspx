@@ -1,19 +1,42 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarHistoriaClinicaMedico.aspx.cs" Inherits="WebApplication1.Formulario_web18" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <h3>Historia Clínica</h3>
-    <hr />
-    <h4>
-        <asp:Label Text="" ID="txtNombrePaciente" runat="server" />  </h4>  
+     <script>
+        function validar() {
+            var descripcion = document.getElementById("<% = txtDescripcion.ClientID %>").value;
+
+            if (descripcion === "") {
+                $("#txtDescripcion").addClass("is-invalid");
+                return false;
+            }
+            else {
+                $("#txtDescripcion").removeClass("is-invalid");
+            }
+            return true;
+
+        }
+     </script>
+    
+    <style>
+        td{
+              font-weight: bold;
+              font-size: 12px;
+        }
+    </style>
+
+
+    <h3 style="margin-top:40px">Historia Clínica - <asp:Label Text="" ID="txtNombrePaciente" runat="server" /></h3>
+    <br />
+  
         <div>
         <table class="table">
              <tr>
-                <td>Fecha</td> <td>Descripción</td> 
+                <td>FECHA</td> <td>DESCRIPCIÓN</td> 
             </tr>
             <tr>
                 <td>
-                    <asp:Label Text="" ID="lblFecha" runat="server" /> </td><td><asp:TextBox runat="server" TextMode="MultiLine" ID="txtDescripcion" Text="" Height="78px" Width="1180px" /></td>  
+                    <asp:Label Text="" ID="lblFecha" runat="server" /> </td><td><asp:TextBox CssClass="form-control" ClientIDMode="Static" runat="server" TextMode="MultiLine" ID="txtDescripcion" Text="" Height="78px" Width="1180px" /></td>  
             </tr>
         </table>
         </div>
-        <div><asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" runat="server" /></div>
+        <div class="d-flex justify-content-end"><asp:Button Text="ACEPTAR" ID="btnAceptar" OnClientClick="return validar()" OnClick="btnAceptar_Click" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" runat="server" /></div>
 </asp:Content>

@@ -33,21 +33,6 @@ namespace WebApplication1
             eliminarEspecialidad_Modal.Show();
         }
 
-        protected void Grilla_editar(object sender, GridViewEditEventArgs e)
-        {
-            /*Session.Add("modificar", especialidadDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
-            txtEditarEspecialidad.Text = ((Especialidad)Session["modificar"]).Nombre;
-            editarEspecialidad_Modal.Show();*/
-            precargar((int)Grilla.DataKeys[e.NewEditIndex].Values[0]);
-            editarEspecialidad_Modal.Show();
-        }
-
-        protected void precargar(int id)
-        {
-           Especialidad esp = especialidadDB.buscarporID(id);
-           txtEditarEspecialidad.Text = esp.Nombre;
-        }
-
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Especialidad> especialidadBusqueda = especialidadDB.buscar(txtBusqueda.Text);
@@ -117,10 +102,12 @@ namespace WebApplication1
 
             try
             {
-                modEspecialidad.Id = ((Especialidad)Session["id"]).Id;
+                modEspecialidad.Id = ((int)Session["idEditarEspecialidad"]);
                 modEspecialidad.Nombre = txtEditarEspecialidad.Text;
 
                 cargar.ModificarEspecialidad(modEspecialidad);
+                Grilla.DataSource = especialidadDB.lista();
+                Grilla.DataBind();
 
             }
             catch (Exception)
@@ -129,6 +116,21 @@ namespace WebApplication1
             }
         }
 
-       
+        protected void cargarValoresAnteriores(int id)
+        {
+            EspecialidadDB especialidadDB = new EspecialidadDB();
+            Especialidad esp = especialidadDB.buscarporID(((int)Session["idEditarEspecialidad"]));
+            txtEditarEspecialidad.Text = esp.Nombre;
+        }
+        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(Grilla.SelectedDataKey.Value);
+            Session.Add("idEditarEspecialidad", id);
+            cargarValoresAnteriores(id);
+
+           // Session.Add("modificar", especialidadDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            //txtEditarEspecialidad.Text = ((Especialidad)Session["modificar"]).Nombre;
+            editarEspecialidad_Modal.Show();
+        }
     }
 }

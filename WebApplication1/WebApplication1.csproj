@@ -123,7 +123,6 @@
     <Content Include="EliminarHistoriaClinica.aspx" />
     <Content Include="Coberturas.aspx" />
     <Content Include="AgregarCobertura.aspx" />
-    <Content Include="AgregarUsuario.aspx" />
     <Content Include="AgregarCorrecto.aspx" />
     <Content Include="ErrorAgregar.aspx" />
     <Content Include="ErrorModificar.aspx" />
@@ -305,13 +304,6 @@
     </Compile>
     <Compile Include="AgregarCobertura.aspx.designer.cs">
       <DependentUpon>AgregarCobertura.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AgregarUsuario.aspx.cs">
-      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AgregarUsuario.aspx.designer.cs">
-      <DependentUpon>AgregarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="AgregarCorrecto.aspx.cs">
       <DependentUpon>AgregarCorrecto.aspx</DependentUpon>

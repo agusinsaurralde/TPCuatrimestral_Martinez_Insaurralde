@@ -2,6 +2,33 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function validar() {
+            var especialidad = document.getElementById("<% = txtEspecialidad.ClientID %>").value;
+            var editarEsp = document.getElementById("<% = txtEditarEspecialidad.ClientID %>").value;
+
+            if (especialidad === "") {
+                 $("#txtEspecialidad").addClass("is-invalid");
+                 return false;
+            }
+            else {
+                $("#txtEspecialidad").removeClass("is-invalid");
+            }
+
+            if (editarEsp == "") {
+                $("#txtEditarEspecialidad").addClass("is-invalid");
+                return false;
+            }
+            else {
+                $("#txtEditarEspecialidad").removeClass("is-invalid");
+            }
+             return true;
+
+         }
+    </script>
+
+
+
     <link href="Estilos.css" rel="stylesheet" />
     <br />
      <h1>Especialidades</h1>
@@ -28,11 +55,11 @@
             <asp:UpdatePanel runat="server">
         <ContentTemplate>
     <div>
-        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" AutoPostback="true" SelectedRowStyle-BackColor="#999999" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+        <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" AutoPostback="true" OnRowDeleting="Grilla_eliminar" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>
                 <asp:BoundField datafield = "Nombre" HeaderText ="ESPECIALIDAD" />
                 <asp:BoundField datafield = "Estado" HeaderText ="ESTADO" />
-                <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
+                <asp:CommandField ButtonType="Image" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" SelectImageUrl="Iconos/pencil-square.svg" />   
                 <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
                      
             </Columns>
@@ -54,12 +81,12 @@
         </div>
         <div class="modal-body">
             <label for="txtEspecialidad" class="form-label">Especialidad</label>
-            <asp:TextBox class="form-control rounded-pill" ID="txtEspecialidad"  runat="server" />
+            <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtEspecialidad"  runat="server" />
           
         </div>
         <div class="modal-footer">
             <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" Text="Aceptar" OnClick="btnAceptar_Click" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" OnClientClick="return validar()" Text="Aceptar" OnClick="btnAceptar_Click" runat="server" />
         </div>
     </asp:Panel>
 
@@ -72,17 +99,25 @@
     <asp:Panel ID="PanelEditarEspecialidad" BackColor="White" runat="server">
         <div class="modal-header">
           <h5 class="modal-title" >Editar Especialidad</h5>
-          <button id="exitEditar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <asp:Button id="exitEditar" class="btn-close" data-bs-dismiss="modal" runat="server" />
         </div>
+
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
         <div class="modal-body">
-            <label for="txtEditarEspecialidad" class="form-label">Especialidad</label>
-            <asp:TextBox class="form-control rounded-pill" ID="txtEditarEspecialidad" runat="server" />
-          
+
+                 <asp:Label Text="ESPECIALIDAD" class="form-label" Font-Bold="true" Font-Size="Small" runat="server" />
+                 <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtEditarEspecialidad" runat="server" />
+
         </div>
+                     </ContentTemplate>
+        </asp:UpdatePanel>
         <div class="modal-footer">
-            <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEditar" Text="Aceptar" OnClick="btnAceptarEditar_Click" runat="server" />
+
+                <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
+                 <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEditar" OnClientClick="return validar()" Text="Aceptar" OnClick="btnAceptarEditar_Click" runat="server" />
         </div>
+           
     </asp:Panel>
 
 

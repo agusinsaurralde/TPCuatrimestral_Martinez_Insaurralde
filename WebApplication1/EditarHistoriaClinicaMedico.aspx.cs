@@ -33,7 +33,7 @@ namespace WebApplication1
                 hc.Paciente = new Paciente();
                 hc.Paciente.ID = datos.Paciente.ID;
                 hc.Descripcion = txtDescripcion.Text;
-                hc.Fecha = datos.Fecha;
+                hc.Fecha = DateTime.Now;
 
 
                 hcDB.ModificarHistoriaClinica(hc);

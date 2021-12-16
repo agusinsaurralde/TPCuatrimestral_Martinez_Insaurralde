@@ -2,6 +2,34 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+     <script>
+        function validar() {
+            var cobertura = document.getElementById("<% = txtCobertura.ClientID %>").value;
+            var coberturaEd = document.getElementById("<% = txtEditarCobertura.ClientID %>").value;
+
+            if (cobertura === "") {
+                $("#txtCobertura").addClass("is-invalid");
+                 return false;
+            }
+            else {
+                $("#txtCobertura").removeClass("is-invalid");
+            }
+
+            if (coberturaEd == "") {
+                $("#txtEditarCobertura").addClass("is-invalid");
+                return false;
+            }
+            else {
+                $("#txtEditarCobertura").removeClass("is-invalid");
+            }
+             return true;
+
+         }
+     </script>
+
+    
+    
+    
     <br />
     <h1>Coberturas</h1>
     <hr />
@@ -49,12 +77,12 @@
         </div>
         <div class="modal-body">
             <label for="txtCobertura" class="form-label">Cobertura</label>
-            <asp:TextBox class="form-control rounded-pill" ID="txtCobertura"  runat="server" />
+            <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtCobertura"  runat="server" />
           
         </div>
         <div class="modal-footer">
             <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" Text="Aceptar" OnClick="btnAceptar_Click" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" OnClientClick="return validar()" Text="Aceptar" OnClick="btnAceptar_Click" runat="server" />
         </div>
     </asp:Panel>
 
@@ -72,11 +100,11 @@
         </div>
         <div class="modal-body">
             <asp:Label Text="COBERTURA" CssClass="form-label" Font-Bold="true" Font-Size="Small" runat="server" />
-            <asp:TextBox ID="txtEditarCobertura" CssClass="form-control rounded-pill"  runat="server" />
+            <asp:TextBox ID="txtEditarCobertura" ClientIDMode="Static" CssClass="form-control rounded-pill"  runat="server" />
         </div>
         <div class="modal-footer">
             <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEditar" Text="Aceptar" OnClick="btnAceptarEditar_Click" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEditar" OnClientClick="return validar()" Text="Aceptar" OnClick="btnAceptarEditar_Click" runat="server" />
         </div>
     </asp:Panel>
 

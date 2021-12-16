@@ -1,10 +1,105 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarEmpleado.aspx.cs" Inherits="WebApplication1.AgregarEmpleado" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    
+    <script>
+        function validar() {
+            var dni = document.getElementById("<% = txtDNI.ClientID %>").value;
+            var apellido = document.getElementById("<% = txtApellido.ClientID %>").value;
+            var nombre = document.getElementById("<% = txtNombre.ClientID %>").value;
+            var telefono = document.getElementById("<% = txtTelefono.ClientID %>").value;
+            var fecha = document.getElementById("<% = txtFechaNac.ClientID %>").value;
+            var email = document.getElementById("<% = txtEmail.ClientID %>").value;
+            var direccion = document.getElementById("<% = txtDireccion.ClientID %>").value;
+            var usuario = document.getElementById("<% = txtNombreUsuario.ClientID %>").value;
+            var contraseña = document.getElementById("<% = txtContraseña.ClientID %>").value;
+
+
+            var valido = true;
+
+            if (dni === "") {
+                $("#txtDNI").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtDNI").removeClass("is-invalid");
+            }
+
+            if (apellido === "") {
+                $("#txtApellido").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtApellido").removeClass("is-invalid");
+            }
+
+            if (nombre === "") {
+                $("#txtNombre").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtNombre").removeClass("is-invalid");
+            }
+
+            if (telefono === "") {
+                $("#txtTelefono").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtTelefono").removeClass("is-invalid");
+            }
+
+            if (fecha === "") {
+                $("#txtFechaNac").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtFechaNac").removeClass("is-invalid");
+            }
+
+            if (email === "") {
+                $("#txtEmail").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtEmail").removeClass("is-invalid");
+            }
+
+            if (direccion === "") {
+                $("#txtDireccion").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtDireccion").removeClass("is-invalid");
+            }
+
+            if (usuario === "") {
+                $("#txtNombreUsuario").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtNombreUsuario").removeClass("is-invalid");
+            }
+
+            if (contraseña === "") {
+                $("#txtContraseña").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtContraseña").removeClass("is-invalid");
+            }
+
+            if (!valido) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+    
+    
+    
     <br />
      <h3>Agregar Empleado</h3>
     <hr />
-
- 
 
   <div class="estilo">
      <div class="container">
@@ -15,18 +110,18 @@
               </div>
           <div class="col-md-3" style="margin:40px 0px 40px 0px">
                <label for="txtDNI" class="form-label">DNI</label>
-               <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
+               <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtDNI"  runat="server" />
           </div>
           </div>
         
         <div class="row justify-content-center">
           <div class="col-md-3" style="margin-bottom: 40px"">
             <label for="txtApellido" class="form-label">APELLIDO</label>
-            <asp:TextBox  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
+            <asp:TextBox  class="form-control rounded-pill" ClientIDMode="Static" ID="txtApellido"  runat="server" />
           </div>
             <div class="col-md-3" style="margin-bottom: 40px">
             <label for="txtNombre" class="form-label">NOMBRE</label>
-            <asp:TextBox  class="form-control rounded-pill" ID="txtNombre"  runat="server" />
+            <asp:TextBox  class="form-control rounded-pill" ClientIDMode="Static" ID="txtNombre"  runat="server" />
           </div>
         </div>
         
@@ -37,7 +132,7 @@
           </div>
             <div class="col-md-3" style="margin-bottom: 40px">
             <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
-            <asp:TextBox type="date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
+            <asp:TextBox type="date" class="form-control rounded-pill" ClientIDMode="Static" ID="txtFechaNac" runat="server" />
           </div>
          </div>
         
@@ -45,18 +140,18 @@
         <div class="row justify-content-center">
           <div class="col-md-3" style="margin-bottom: 40px">
             <label for="txtTelefono" class="form-label">TELÉFONO</label>
-            <asp:TextBox type="tel" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
+            <asp:TextBox type="tel" class="form-control rounded-pill" ClientIDMode="Static" ID="txtTelefono" runat="server" />
           </div>
             <div class="col-md-3" style="margin-bottom: 40px">
             <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
-            <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
+            <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtDireccion" runat="server" />
           </div>
          </div>
         
         <div class="row justify-content-center">
           <div class="col-md-6" style="margin-bottom: 40px">
             <label for="txtEmail" class="form-label">EMAIL</label>
-            <asp:TextBox type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
+            <asp:TextBox type="email" class="form-control rounded-pill" ClientIDMode="Static" ID="txtEmail" runat="server" />
           </div>
          </div>
         
@@ -77,11 +172,11 @@
          
            <div class="col-md-3" style="margin:40px 0px 70px 0px">
               <label for="txtNombreUsuario" class="form-label">USUARIO</label>
-              <asp:TextBox class="form-control rounded-pill" ID="txtNombreUsuario" runat="server" />
+              <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtNombreUsuario" runat="server" />
            </div>
            <div class="col-md-3" style="margin:40px 0px 70px 0px">
              <label for="txtContraseña" class="form-label">CONTRASEÑA</label>
-             <asp:TextBox class="form-control rounded-pill" type="Password" ID="txtContraseña" runat="server" />
+             <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" type="Password" ID="txtContraseña" runat="server" />
            </div>
          </div>              
        
@@ -94,7 +189,7 @@
                      <asp:Button class="btn btn-outline-secondary rounded-pill" Text="CANCELAR" Font-Size="Small" BorderColor="White" OnClick="Cancelar_Click" Font-Bold="true" runat="server" />
                </div>
                <div class="col"  >
-                     <asp:Button class="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Size="Small" Font-Bold="true" OnClick="Click_Aceptar" runat="server" />
+                     <asp:Button class="btn btn-primary rounded-pill" Text="ACEPTAR" OnClientClick="return validar()" Font-Size="Small" Font-Bold="true" OnClick="Click_Aceptar" runat="server" />
                </div>
         </div>
     </div>
