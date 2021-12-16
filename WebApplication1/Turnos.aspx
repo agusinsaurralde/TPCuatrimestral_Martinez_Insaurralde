@@ -30,9 +30,9 @@
                 <asp:BoundField datafield = "Observaciones" HeaderText ="OBSERVACIONES" />
                 <asp:BoundField datafield = "AdministrativoResponsable.NombreCompleto" HeaderText ="RECEPCIONISTA" />
                 <asp:BoundField datafield = "Estado.Estado" HeaderText ="ESTADO" />
-                <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
+                <asp:CommandField  ButtonType="Button" ShowEditButton="true" EditText="OBSERVACIÓN +"  ControlStyle-Font-Bold="true" ControlStyle-Font-Size="Small" ControlStyle-CssClass="btn btn-primary rounded-pill"/>
+                <asp:CommandField  ButtonType="Image" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" SelectImageUrl="Iconos/pencil-square.svg"/>
                 <asp:CommandField ButtonType="Image"  ShowDeleteButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" DeleteImageUrl="Iconos/x-circle.svg" />                   
-                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Agregar Observación" ControlStyle-CssClass="btn btn-primary rounded-pill"/> 
             </Columns>
         </asp:gridview>
     </div>
@@ -58,6 +58,27 @@
         </div>
     </asp:Panel>
 
+
+
+        <!-- modal editar restringido-->
+    <asp:Button  style="display:none" runat="server" ID="btnEditarRestringido" />
+    
+   <ajaxToolkit:ModalPopupExtender ID="btnEditarRestringido_Modal" CancelControlID="exitEditar" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnEditarRestringido_Modal" TargetControlID="btnEditarRestringido" PopupControlID="PanelEditar">
+    </ajaxToolkit:ModalPopupExtender>
+    
+    <asp:Panel ID="PanelEditar" BackColor="White" runat="server">
+        <div class="modal-header">
+          <h5 class="modal-title" >Editar Turnos</h5>
+          <button id="exitEditar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <asp:Label Text="No se puede editar un turno cerrado." runat="server" />
+          
+        </div>
+        <div class="modal-footer">
+            <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
+        </div>
+    </asp:Panel>
 
 
 </asp:Content>

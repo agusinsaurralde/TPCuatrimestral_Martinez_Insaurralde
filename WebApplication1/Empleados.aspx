@@ -24,6 +24,7 @@
             <ContentTemplate>
               <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" Font-Size="15px" AutoPostback="true" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small">
                   <Columns>
+                      <asp:BoundField datafield = "DNI" HeaderText ="DNI" />
                       <asp:BoundField datafield = "Apellido" HeaderText ="APELLIDO" />
                       <asp:BoundField datafield = "Nombre" HeaderText ="NOMBRE" />
                       <asp:BoundField datafield = "Telefono" HeaderText ="TELÉFONO" />
@@ -32,7 +33,7 @@
                       <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="FECHA DE NACIMIENTO" />
                       <asp:BoundField datafield = "TipoEmp.Nombre" HeaderText ="TIPO"/>
                       <asp:BoundField datafield = "Estado" HeaderText ="ESTADO"/>
-                      <asp:CommandField ButtonType="Button"  ShowSelectButton="True" SelectText="Detalle" ControlStyle-CssClass="btn btn-primary rounded-pill"/>  
+                      <asp:CommandField ButtonType="Button"  ShowSelectButton="True" SelectText="USUARIO" ControlStyle-Font-Bold="true" ControlStyle-Font-Size="Small" ControlStyle-CssClass="btn btn-primary rounded-pill"/>  
                       <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
                       <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
                   </Columns>
@@ -66,24 +67,28 @@
    <ajaxToolkit:ModalPopupExtender ID="btnUsuario_Modal" CancelControlID="exitUsuario" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnUsuario_Modal" TargetControlID="btnUsuario" PopupControlID="PanelUsuario">
     </ajaxToolkit:ModalPopupExtender>
     
-    <asp:Panel ID="PanelUsuario" BackColor="White" runat="server">
+    <asp:Panel ID="PanelUsuario" Width="300px" BackColor="White" runat="server">
         <div class="modal-header">
           <h5 class="modal-title" >Usuario</h5>
           <button id="exitUsuario" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col">
-                    <asp:Label Text="NOMBRE DE USUARIO: " Font-Bold="true" Font-Size="Small" runat="server" />
-                    <asp:Label id="lblUsuario" runat="server" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                      <asp:Label Text="CONTRASEÑA: " Font-Bold="true" Font-Size="Small" runat="server" />
-                      <asp:Label id="lblContraseña" runat="server" />
-                </div>
-            </div>
+        <div class="modal-body" style="margin:30px 0px 30px 0px">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                  <div class="row">
+                      <div class="col">
+                          <asp:Label Text="NOMBRE DE USUARIO: " Font-Bold="true" Font-Size="Small" runat="server" />
+                          <asp:Label id="lblUsuario" runat="server" />
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                            <asp:Label Text="CONTRASEÑA: " Font-Bold="true" Font-Size="Small" runat="server" />
+                            <asp:Label id="lblContraseña" runat="server" />
+                      </div>
+                  </div>
+              </ContentTemplate>
+       </asp:UpdatePanel>
             
         </div>
         <div class="modal-footer">

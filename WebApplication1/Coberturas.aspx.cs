@@ -31,12 +31,6 @@ namespace WebApplication1
             eliminarCobertura_Modal.Show();
         }
 
-        protected void Grilla_editar(object sender, GridViewEditEventArgs e)
-        {
-            Session.Add("modificar", coberturaDB.buscarporID((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
-            txtEditarCobertura.Text = ((Cobertura)Session["modificar"]).Nombre;
-            editarCobertura_Modal.Show();
-        }
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Cobertura> coberturasBusqueda = coberturaDB.buscar(txtBusqueda.Text);
@@ -98,12 +92,21 @@ namespace WebApplication1
                 modCobertura.Nombre = txtEditarCobertura.Text;
 
                 cargar.ModificarCobertura(modCobertura);
+                Grilla.DataSource = coberturaDB.lista();
+                Grilla.DataBind();
 
             }
             catch (Exception)
             {
                 Response.Redirect("ErrorModificar.aspx?error=" + error, false);
             }
+        }
+
+        protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session.Add("modificar", coberturaDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
+            txtEditarCobertura.Text = ((Cobertura)Session["modificar"]).Nombre;
+            editarCobertura_Modal.Show();
         }
     }
 }

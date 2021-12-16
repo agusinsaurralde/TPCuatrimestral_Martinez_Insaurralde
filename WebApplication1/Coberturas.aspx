@@ -50,12 +50,12 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
              <div>
-            <asp:GridView CssClass="table table-hover" ID="Grilla" AutoPostback="true" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+            <asp:GridView CssClass="table table-hover" ID="Grilla" AutoPostback="true" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
                 <Columns>
                     <asp:BoundField datafield = "ID" HeaderText ="ID" />            
                     <asp:BoundField datafield = "Nombre" HeaderText ="COBERTURA" />  
                     <asp:BoundField datafield = "Estado" HeaderText ="ESTADO" />                                
-                    <asp:CommandField ButtonType="Image" ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
+                    <asp:CommandField ButtonType="Image" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" SelectImageUrl="Iconos/pencil-square.svg" />   
                     <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
                 </Columns>
             </asp:gridview>
@@ -70,19 +70,21 @@
    <ajaxToolkit:ModalPopupExtender ID="btnAgregarCobertura_Modal" CancelControlID="exit" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnAgregarCobertura_Modal" TargetControlID="btnAgregarCoberturaModal" PopupControlID="PanelAgregarCobertura">
     </ajaxToolkit:ModalPopupExtender>
   
-    <asp:Panel ID="PanelAgregarCobertura" BackColor="White" runat="server">
+    <asp:Panel ID="PanelAgregarCobertura" Width="400px" BackColor="White" runat="server">
         <div class="modal-header">
           <h5 class="modal-title" >Agregar Cobertura</h5>
           <button id="exit" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <label for="txtCobertura" class="form-label">Cobertura</label>
-            <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtCobertura"  runat="server" />
-          
+        <div class="modal-body" style="margin:25px 15px 35px 15px">
+            <div class="row"><asp:Label Text="COBERTURA" class="form-label" Font-Size="Small" Font-Bold="true" runat="server" /></div>
+            <div class="row">
+                <div class="col"><asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtCobertura"  runat="server" /></div>
+            </div>
+            
         </div>
         <div class="modal-footer">
-            <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" OnClientClick="return validar()" Text="Aceptar" OnClick="btnAceptar_Click" runat="server" />
+            <asp:Button Text="CANCELAR" class="btn btn-outline-secondary rounded-pill" Font-Size="Small" Font-Bold="true" BorderStyle="None" data-bs-dismiss="modal" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" Font-Size="Small" Font-Bold="true" OnClientClick="return validar()" Text="ACEPTAR" OnClick="btnAceptar_Click" runat="server" />
         </div>
     </asp:Panel>
 
@@ -93,18 +95,27 @@
    <ajaxToolkit:ModalPopupExtender ID="editarCobertura_Modal" CancelControlID="exitEditar" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="editarCobertura_Modal" TargetControlID="btnEditarCobertura" PopupControlID="PanelEditarCobertura">
     </ajaxToolkit:ModalPopupExtender>
   
-    <asp:Panel ID="PanelEditarCobertura" BackColor="White" runat="server">
-        <div class="modal-header">
-          <h5 class="modal-title" >Editar Cobertura</h5>
-          <button id="exitEditar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <asp:Label Text="COBERTURA" CssClass="form-label" Font-Bold="true" Font-Size="Small" runat="server" />
-            <asp:TextBox ID="txtEditarCobertura" ClientIDMode="Static" CssClass="form-control rounded-pill"  runat="server" />
-        </div>
+    <asp:Panel ID="PanelEditarCobertura" Width="400px" BackColor="White" runat="server">
+       
+                <div class="modal-header">
+                  <h5 class="modal-title" >Editar Cobertura</h5>
+                     <button id="exitEditar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="margin:25px 15px 35px 15px">
+                    <div class="row"> <asp:Label Text="COBERTURA" CssClass="form-label" Font-Bold="true" Font-Size="Small" runat="server" /></div>
+                 <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="row">
+                            <div class="col"> <asp:TextBox ID="txtEditarCobertura" ClientIDMode="Static" CssClass="form-control rounded-pill"  runat="server" /></div>
+                        </div>
+                    </ContentTemplate>
+                 </asp:UpdatePanel>
+                </div>
+        
+        
         <div class="modal-footer">
-            <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEditar" OnClientClick="return validar()" Text="Aceptar" OnClick="btnAceptarEditar_Click" runat="server" />
+            <asp:Button Text="CANCELAR" class="btn btn-outline-secondary rounded-pill" Font-Size="Small" Font-Bold="true" BorderStyle="None" data-bs-dismiss="modal" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEditar" OnClientClick="return validar()" Font-Size="Small" Font-Bold="true" BorderStyle="None" Text="ACEPTAR" OnClick="btnAceptarEditar_Click" runat="server" />
         </div>
     </asp:Panel>
 

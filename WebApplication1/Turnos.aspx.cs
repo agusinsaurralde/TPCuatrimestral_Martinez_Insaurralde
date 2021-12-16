@@ -24,8 +24,10 @@ namespace WebApplication1
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-            Session.Add("editarTurno", turnoBD.buscarporNumero((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
-            Response.Redirect("ModificarTurno.aspx");
+
+            Session.Add("agregarHistoriaClinica", turnoBD.buscarporNumero((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
+            Response.Redirect("AgregarHistoriaClinica.aspx");
+
         }
 
         protected void Click_Agregar(object sender, EventArgs e)
@@ -48,9 +50,16 @@ namespace WebApplication1
 
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session.Add("agregarHistoriaClinica", turnoBD.buscarporNumero(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
-            Response.Redirect("AgregarHistoriaClinica.aspx");
-
+            int num = Convert.ToInt32(Grilla.SelectedDataKey.Value);
+            Session.Add("editarTurno", turnoBD.buscarporNumero(num));
+            if (((Turno)Session["editarTurno"]).Estado.Estado != "Cerrado")
+            {
+                Response.Redirect("ModificarTurno.aspx");
+            }
+            else
+            {
+                btnEditarRestringido_Modal.Show();
+            }
         }
 
         protected void AsignarTurno_Click(object sender, EventArgs e)
@@ -71,6 +80,7 @@ namespace WebApplication1
             Grilla.DataSource = turnoBD.listarTurno();
             Grilla.DataBind();
         }
+
     }
 
 

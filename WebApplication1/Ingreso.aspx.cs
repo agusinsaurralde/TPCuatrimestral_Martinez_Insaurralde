@@ -13,6 +13,17 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                TurnoDB turnoDB = new TurnoDB();
+                List<Turno> lista = turnoDB.listarTurno();
+                List<Turno> turnosVencidos = lista.FindAll(x => x.Dia < DateTime.Now);
+
+                foreach (var item in turnosVencidos)
+                {
+                    turnoDB.cerrarTurno(item.Numero);
+                }
+            }
 
         }
 

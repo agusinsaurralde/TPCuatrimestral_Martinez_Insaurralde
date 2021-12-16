@@ -138,6 +138,7 @@
     <Content Include="ModificarEspecialidadesMedico.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="AsignarTurno.aspx" />
+    <Content Include="PRUEBA.aspx" />
     <Content Include="Usuarios.aspx" />
     <Content Include="ModificarCobertura.aspx" />
     <Content Include="EliminarCobertura.aspx" />
@@ -381,6 +382,13 @@
     </Compile>
     <Compile Include="AsignarTurno.aspx.designer.cs">
       <DependentUpon>AsignarTurno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PRUEBA.aspx.cs">
+      <DependentUpon>PRUEBA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PRUEBA.aspx.designer.cs">
+      <DependentUpon>PRUEBA.aspx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
