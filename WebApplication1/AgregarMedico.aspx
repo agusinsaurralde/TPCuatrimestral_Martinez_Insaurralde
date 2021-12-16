@@ -92,7 +92,7 @@
                    <div class="row justify-content-center" style="margin-bottom: 40px">
                        <div class="col-md-3">
                          <asp:Label Text="DÍA" ID="lblDias" Enabled="false" CssClass="form-label" runat="server" />
-                         <asp:DropDownList ID="ddlistDias" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged1">
+                         <asp:DropDownList ID="ddlistDias" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged">
                              <asp:ListItem Text="Seleccionar" />
                              <asp:ListItem Text="Lunes" />
                              <asp:ListItem Text="Martes" />

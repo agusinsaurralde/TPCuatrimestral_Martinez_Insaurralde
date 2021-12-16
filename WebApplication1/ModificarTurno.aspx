@@ -14,57 +14,74 @@
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>  
-            <h3>Modificar turno</h3>
+            <h3 style="margin-top:30px; margin-bottom:20px">Modificar turno</h3>
         <hr />
-        <br/>
 
-        <div> 
-             <asp:Label ID="lblNumeroTurno" Text="" class="form-control" runat="server" />   
-        </div>
-        <br/>
-        <div>
-            <asp:Label ID="lblPaciente" Text="" class="form-label" runat="server" />
-        </div>
-        <br/>
-        <div>
-            <asp:Label ID="lblEspecialidad" Text="" class="from-label" runat="server" />
-        </div>
-        <br/>
-        <div>
-            <asp:Label Text="" ID="lblMedico"  CssClass="form-label" runat="server" />
-        </div>
-        <br/>
+            <div class="row"> 
+                <div class="col-md-3">
+                    <h5>Datos</h5>
+                </div>
+                <div class="col-md-3 justify-content-center">
+                    <asp:Label Text="N° TURNO: " Font-Size="Small" Font-Bold="true" runat="server" />
+                     <asp:Label ID="lblNumeroTurno" class="form-label" runat="server" />  
+                </div>
+            </div>
+            <div class="row justify-content-center" style="margin-bottom:7px">
+                <div class="col-md-6">
+                    <asp:Label Text="PACIENTE: " Font-Size="Small" Font-Bold="true" runat="server" />
+                    <asp:Label ID="lblPaciente" Font-Size="15px" class="form-label" runat="server" />
+                </div>
+            </div>
+            <div class="row justify-content-center" style="margin-bottom:7px">
+                <div class="col-md-6">
+                    <asp:Label Text="ESPECIALIDAD: " Font-Size="Small" Font-Bold="true" runat="server" />
+                    <asp:Label ID="lblEspecialidad" Font-Size="15px" class="from-label" runat="server" />
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                     <asp:Label Text="MÉDICO: " Font-Size="Small" Font-Bold="true" runat="server" />
+                    <asp:Label Text="" ID="lblMedico" Font-Size="15px" CssClass="form-label" runat="server" />
+                </div>
+            </div>
+
+      <hr />
+  <div class="container" style="margin-top: 40px">
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div>
-             <asp:Calendar  runat="server" ID="Calendario" OnDayRender="Calendario_DayRender" OnSelectionChanged="Calendario_SelectionChanged"></asp:Calendar>          
-        </div>
-        <div>
-            <asp:Label Text="Horario" ID="lblHora" CssClass="form-label" runat="server" />
-            <asp:DropDownList ID="ddlistHora"  class="form-select" CssClass="form-select" Enabled ="false"  SelectedIndexChanged="ddlistaHora_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True"></asp:DropDownList>
-        </div>
+            <div class="row">
+                <div class="col-md-3"><h5>Horario</h5></div>
+                     
+                     <div class="col-md-3 justify-content-center">
+                         <asp:Calendar  runat="server" ID="Calendario" OnDayRender="Calendario_DayRender" OnSelectionChanged="Calendario_SelectionChanged"></asp:Calendar>          
+                      </div>
+                     <div class="col-md-3 justify-content-center">
+                         <asp:Label Text="HORARIO" ID="lblHora" Font-Size="Small" Font-Bold="true" CssClass="form-label" runat="server" />
+                         <asp:DropDownList ID="ddlistHora"  class="form-select" OnSelectedIndexChanged="ddlistHora_SelectedIndexChanged" CssClass="form-select rounded-pill" SelectedIndexChanged="ddlistaHora_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True"></asp:DropDownList>
+                     </div>
+                </div>
         </ContentTemplate>
     </asp:UpdatePanel>
          
-        <br/>
-        <div>
-            <asp:Label ID="lblObservaciones" Text="" class="from-label" runat="server" />
-            <asp:TextBox  class="form-control" ID="txtObservaciones"  runat="server" />
+        <div class="row justify-content-center" style="margin-top:30PX">
+             <div class="col-md-6">
+                 <asp:Label ID="lblObservaciones" Text="OBSERVACIONES" Font-Size="Small" Font-Bold="true" class="from-label" runat="server" />
+                 <asp:TextBox  CssClass="form-control" TextMode="MultiLine" Enabled="false" Rows="3" ID="txtObservaciones"  runat="server" />
+             </div>
         </div>
-        <br/>
-        <div class="col-md-3">
+    </div>
+        <!--<div class="col-md-3">
             <label for="lblUsuarioLogueado" class="form-label">Recepcionista: </label>
             <asp:Label ID="lblUsuarioLogueado" Text="" class="for-label" runat="server"></asp:Label>
-            <%--<asp:DropDownList ID="ddlistRecepcionista" class="form-select" runat="server"></asp:DropDownList>--%>
-    </div>
-     <div>
-            <label for="ddlistEstado" class="form-label">Estado</label>
-            <asp:DropDownList ID="ddlistEstado" class="form-select" runat="server"></asp:DropDownList>
-    </div>
-        <br/>
-            <div>
-                <asp:Button ID="btnAceptar" Text="Aceptar" OnClientClick="return checkOk()" Onclick="btnAceptar_Click" runat ="server" />
-                <asp:Button ID="btnCancelar" Text="Cancelar" Onclick="btnCancelar_Click" runat="server" />
+        </div>-->
+
+            <div class="row justify-content-end" style="margin-top:60px">
+                <div class="col-md-1">
+                     <asp:Button ID="btnCancelar" CssClass="btn btn-outline-secondary rounded-pill" BorderStyle="none" Text="CANCELAR" Font-Size="Small" Font-Bold="true"  Onclick="btnCancelar_Click" runat="server" />
+                </div>
+                <div class="col-md-1">
+                     <asp:Button ID="btnAceptar" CssClass="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Size="Small" Font-Bold="true"  OnClientClick="return checkOk()" Onclick="btnAceptar_Click" runat ="server" />
+                </div>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

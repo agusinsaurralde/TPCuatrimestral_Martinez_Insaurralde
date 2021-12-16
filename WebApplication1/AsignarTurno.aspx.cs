@@ -109,8 +109,9 @@ namespace WebApplication1
             if (datosPaciente == null)
             {
                 txtPaciente.Text = "Paciente inexistente";
-                txtNombre.Text = "";
 
+                txtDNI.Text = "";
+                txtCobertura.Visible = false;
                 ddlistEspecialidad.Enabled = false;
                 ddlistMedico.Enabled = false;
                 Calendario.Enabled = false;
@@ -118,10 +119,10 @@ namespace WebApplication1
             }
             else
             {
-                txtPaciente.Text = "Paciente existente";
-                txtNombre.Text = "Nombre: " + datosPaciente.NombreCompleto;
+                txtPaciente.Text = "Nombre: " + datosPaciente.NombreCompleto;
                 txtCobertura.Text = "Cobertura: " + datosPaciente.Cobertura.Nombre;
 
+                txtCobertura.Visible = true;
                 ddlistEspecialidad.Enabled = true;
                 ddlistMedico.Enabled = false;
                 Calendario.Enabled = false;
@@ -144,10 +145,12 @@ namespace WebApplication1
             ddlistMedico.Enabled = true;
             Calendario.Enabled = true;
             ddlistHora.Enabled = false;
+
         }
 
         protected void Calendario_SelectionChanged(object sender, EventArgs e)
         {
+            btnAceptar.Enabled = true;
             if (IsPostBack)
             {
                 ddlistHora.Items.Clear();
@@ -156,7 +159,6 @@ namespace WebApplication1
 
             int espSeleccionada = int.Parse(ddlistEspecialidad.SelectedItem.Value);
             int medSeleccionado = int.Parse(ddlistMedico.SelectedItem.Value);
-
 
 
             DiasHabilesMedico horarioMedico = ((List<DiasHabilesMedico>)Session["listaFiltradaDiasHabiles"]).Find(x => x.IdDia == ((int)Calendario.SelectedDate.DayOfWeek)); //devuelve objeto de dias habiles segun el dia de la semana seleccionado
@@ -291,6 +293,7 @@ namespace WebApplication1
                     e.Day.IsSelectable = false;
                 }
             }
+
         }
 
         protected void Aceptar_Click(object sender, EventArgs e)

@@ -176,7 +176,7 @@ namespace WebApplication1
         protected void cargarHorarios(DropDownList ddlist)
         {
             DateTime horaEntrada = Convert.ToDateTime("8:00");
-            DateTime horaMaxEntrada = Convert.ToDateTime("18:00");
+            DateTime horaMaxEntrada = Convert.ToDateTime("19:00");
             System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
 
             while (horaEntrada <= horaMaxEntrada)
@@ -229,7 +229,7 @@ namespace WebApplication1
         }
         protected void ddlistEntrada_SelectedIndexChanged(object sender, EventArgs e)
         {
-            System.TimeSpan horaSumar = new System.TimeSpan(0, 4, 0, 0);
+            System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
             txtHoraSalida.Text = (Convert.ToDateTime(ddlistEntrada.SelectedValue) + horaSumar).ToShortTimeString();
         }
         protected void btnAceptarEditar_Click(object sender, EventArgs e)
@@ -275,8 +275,9 @@ namespace WebApplication1
                 ddlistEspecialidad.TabIndex = 0;
                 ddlistEspecialidad.SelectedIndex = ddlistEspecialidad.TabIndex;
                 ddlistEspecialidad.Enabled = true;
-                ddlistDiaAgregar.TabIndex = 0;
-                ddlistDiaAgregar.SelectedIndex = ddlistDiaAgregar.TabIndex;
+                // ddlistDiaAgregar.TabIndex = 0;
+                //ddlistDiaAgregar.SelectedIndex = ddlistDiaAgregar.TabIndex;
+                ddlistDiaAgregar.Items.Clear();
                 ddlistEntradaAgregar.TabIndex = 0;
                 ddlistEntradaAgregar.SelectedIndex = ddlistEntradaAgregar.TabIndex;
                 txtSalidaAgregar.Text = "";
@@ -299,9 +300,9 @@ namespace WebApplication1
                     }
                 }
             }
-
+           
             cargarDias(ddlistDiaAgregar);
-            cargarHorarios(ddlistEntradaAgregar);
+            //cargarHorarios(ddlistEntradaAgregar);
             ddlistEntradaAgregar.Items.Insert(0, new ListItem("Seleccionar", "0"));
             btnAgregarEspecialidad_Modal.Show();
         }
@@ -332,7 +333,7 @@ namespace WebApplication1
         {
             if (ddlistDiaAgregar.SelectedIndex != 0)
             {
-                System.TimeSpan horaSumar = new System.TimeSpan(0, 4, 0, 0);
+                System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
                 DateTime horaSalida = Convert.ToDateTime(ddlistEntradaAgregar.SelectedItem.ToString()) + horaSumar;
                 txtSalidaAgregar.Text = horaSalida.ToShortTimeString();
                 btnAgregarDia.Enabled = true;
@@ -456,7 +457,7 @@ namespace WebApplication1
         //AGREGA DÍA A ESPECIALIDAD EXISTENTE
         protected void ddlistEntradaAgregarDia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            System.TimeSpan horaSumar = new System.TimeSpan(0, 4, 0, 0);
+            System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
             DateTime horaSalida = Convert.ToDateTime(ddlistEntradaAgregarDia.SelectedItem.ToString()) + horaSumar;
             txtSalidaAgregarDia.Text = horaSalida.ToShortTimeString();
         }

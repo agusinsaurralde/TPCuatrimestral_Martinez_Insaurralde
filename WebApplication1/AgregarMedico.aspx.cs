@@ -62,7 +62,7 @@ namespace WebApplication1
                 System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
 
 
-                while (hora < horaMax)
+                while (hora <= horaMax)
                 {
                     ddlistEntrada.Items.Add(hora.ToShortTimeString());
                     hora += horaSumar;
@@ -75,7 +75,7 @@ namespace WebApplication1
         {
             if(ddlistDias.SelectedIndex != 0)
             {
-                System.TimeSpan horaSumar = new System.TimeSpan(0, 4, 0, 0);
+                System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
                 DateTime horaSalida = Convert.ToDateTime(ddlistEntrada.SelectedItem.ToString()) + horaSumar;
                 txtHoraSalida.Text = horaSalida.ToShortTimeString();
                 btnAgregarDia.Enabled = true;

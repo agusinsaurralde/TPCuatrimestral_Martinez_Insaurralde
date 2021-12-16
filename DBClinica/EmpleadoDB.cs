@@ -266,7 +266,7 @@ namespace DBClinica
         }
 
         public Empleado empleadoLogueado(int IDUsuarioLogueado)
-        { // le das el ID de usuario y te trae el empelado logueado.
+        { // le das el ID de usuario y te trae el empleado logueado.
             ConexionDB datos = new ConexionDB();
             Empleado empleadoEncontrado = new Empleado();
 

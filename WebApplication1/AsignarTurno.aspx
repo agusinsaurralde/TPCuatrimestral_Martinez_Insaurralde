@@ -1,5 +1,47 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AsignarTurno.aspx.cs" Inherits="WebApplication1.prueba" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    
+    <script>
+        function validarDNI() {
+            var dni = document.getElementById("<% = txtDNI.ClientID %>").value;
+
+            if (dni === "") {
+                $("#txtDNI").addClass("is-invalid");
+                return false;
+            }
+            else {
+                $("#txtDNI").removeClass("is-invalid");
+            }
+            return true;
+
+        }
+        function validarEspecialidadMedico() {
+            var especialidad = document.getElementById("ddlistEspecialidad");
+            var medico = document.getElementById("ddlistMedico");
+
+            var indiceE = especialidad.options[especialidad.selectedIndex].index;
+            var indiceM = medico.options[medico.selectedIndex].index;
+
+            if (indiceE === 0) {
+                $("#ddlistEspecialidad").addClass("is-invalid");
+                return false;
+            }
+            else {
+                $("#ddlistEspecialidad").removeClass("is-invalid");
+            }
+
+            if (indiceM === 0) {
+                $("#ddlistMedico").addClass("is-invalid");
+                return false;
+            }
+            else {
+                $("#ddlistMedico").removeClass("is-invalid");
+            }
+            return true;
+        }
+    </script>
+    
+    
     <h3 style="margin-top:40px">Asignar Turno</h3>
     <br />
     <div class="row estilo" style="margin-top:40px">
@@ -8,35 +50,42 @@
         <div class="col"><asp:Label Text="3.HORARIO"  Font-Size="Small" ID="lblHorario" runat="server" /></div>
     </div>
     <hr />
+
     <asp:MultiView ID="MultiView" runat="server">
         <asp:View ID="vistaPaciente" runat="server">
 
-            <div class="row justify-content-center" style="margin-top:40px">
+            <div class="row justify-content-center needs-validation" style="margin-top:40px">
                 <div class="col-md-2 estilo" style="margin-right:110px">
                     <label for="txtDNI" class="form-label">DNI</label>
                 </div>
+
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-2">
-                   <asp:TextBox  CssClass="form-control rounded-pill" ID="txtDNI"  runat="server" />
+                   <asp:TextBox ClientIDMode="Static" CssClass="form-control rounded-pill" ID="txtDNI"  runat="server" />
                </div>
                 <div class="col-md-1" style="margin-bottom:40px">
-                     <asp:Button CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" Text="BUSCAR" OnClick="btnBuscar_Click" runat="server" />
+                     <asp:Button CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" Text="BUSCAR" OnClientClick="return validarDNI()" OnClick="btnBuscar_Click" runat="server" />
                 </div>
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <asp:Label Text="" ID="txtPaciente" runat="server" />
-                    <asp:Label Text="" ID="txtNombre" runat="server" />
+                 </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-2">
                     <asp:Label Text="" ID="txtCobertura" runat="server" />
                  </div>
             </div>
+             
 
             <hr />
              <div class="row justify-content-end" style="margin-bottom:100px">
                   <div class="col-md-2">
-                      <asp:Button Text="SIGUIENTE >" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn0a1" runat="server" OnClick="btn0a1_Click" />
+                      <asp:Button Text="SIGUIENTE >" OnClientClick="return validarDNI()" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn0a1" runat="server" OnClick="btn0a1_Click" />
                   </div>
              </div>
         </asp:View>
@@ -48,15 +97,13 @@
                        <div class="row justify-content-center" style="margin:60px 0px 60px 0px">
                            <div class="col-md-3">
                                 <asp:Label Text="ESPECIALIDAD" Font-Bold="true" Font-Size="Small" ID="lblEspecialidad" CssClass="form-label" runat="server" />
-                                <asp:DropDownList ID="ddlistEspecialidad" Enabled = false CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlistEspecialidad" ClientIDMode="Static" Enabled = false CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
                             </div>
                            <div class="col-md-3">
                                <asp:Label Text="MÉDICO" Font-Bold="true" Font-Size="Small" ID="lblMedico"  CssClass="form-label" runat="server" />
-                               <asp:DropDownList ID="ddlistMedico" Enabled = false class="form-select" CssClass="form-select rounded-pill"  OnSelectedIndexChanged="ddlistMedico_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True" ></asp:DropDownList>
+                               <asp:DropDownList ID="ddlistMedico" ClientIDMode="Static" Enabled = false class="form-select" CssClass="form-select rounded-pill"  OnSelectedIndexChanged="ddlistMedico_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True" ></asp:DropDownList>
                            </div>
                        </div>
-
-
 
                    </ContentTemplate>
             </asp:UpdatePanel>  
@@ -67,7 +114,7 @@
                      <asp:Button Text="< ANTERIOR" CssClass="btn btn-secondary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn1a0" runat="server" OnClick="btn1a0_Click"  />
                  </div>
                  <div class="col-md-2" style="margin-left:350px">
-                     <asp:Button Text="SIGUIENTE >" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn1a2" runat="server" OnClick="btn1a2_Click" />
+                     <asp:Button Text="SIGUIENTE >" OnClientClick="return validarEspecialidadMedico()" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn1a2" runat="server" OnClick="btn1a2_Click" />
                  </div>
              </div>
                     
@@ -94,7 +141,7 @@
                         <asp:Button Text="< ANTERIOR" CssClass="btn btn-secondary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn2a1" OnClick="btn2a1_Click" runat="server" />  
                       </div>
                       <div class="col-md-2" style="margin-left:350px">
-                          <asp:Button Text="ACEPTAR" CssClass="btn btn-primary rounded-pill" Font-Bold="true" OnClick="Aceptar_Click" Font-Size="Small" runat="server" />
+                          <asp:Button ID="btnAceptar" Text="ACEPTAR" CssClass="btn btn-primary rounded-pill" Enabled="false" Font-Bold="true" OnClick="Aceptar_Click" Font-Size="Small" runat="server" />
                       </div>
                   </div>
               </div>
