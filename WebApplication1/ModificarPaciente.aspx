@@ -73,8 +73,7 @@
             return true;
         }
     </script>
-    
-    
+
     <br />
     <h3>Modificar Paciente</h3>
     <hr />

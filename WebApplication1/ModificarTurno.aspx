@@ -4,10 +4,16 @@
     <script type="text/javascript">
 
         function checkOk() {
-            swal("Ok!", "Los cambios fueron guardados :D!", "success");
-            setTimeout(function () { window.location.href = "Turnos.aspx"; }, 1500); 
+            /*swal("Ok!", "Los cambios fueron guardados :D!", "success");*/
+            swal({
+                title: "Ok!",
+                text: "Los cambios fueron guardados :D!",
+                icon: "success",
+                button: false, // con esto ya esta el boton no se muestra
+            });
+            setTimeout(function () { window.location.href = "Turnos.aspx"; }, 1800);
         }
- 
+
     </script>
 
 
