@@ -27,6 +27,11 @@ namespace WebApplication1
                 Response.Redirect("ErrorPermisosAcceso.aspx", false);
 
             }
+            else if (userLog.TipoUsuario.Nombre == "Recepcionista")
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+            }
             if (!IsPostBack)
             {
                 Grilla.DataSource = coberturaDB.lista();
@@ -70,6 +75,8 @@ namespace WebApplication1
                 NuevaCobertura.Nombre = txtCobertura.Text;
                 NuevaCobertura.Estado = true;
                 cargar.AgregarCobertura(NuevaCobertura);
+                Grilla.DataSource = coberturaDB.lista();
+                Grilla.DataBind();
             }
             catch (Exception)
             {

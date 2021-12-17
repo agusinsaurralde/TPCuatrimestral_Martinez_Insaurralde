@@ -27,6 +27,11 @@ namespace WebApplication1
                 Response.Redirect("ErrorPermisosAcceso.aspx", false);
 
             }
+            else if (userLog.TipoUsuario.Nombre == "Recepcionista")
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+            }
             if (!IsPostBack)
             {
                 Grilla.DataSource = especialidadDB.lista();

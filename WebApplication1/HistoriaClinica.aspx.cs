@@ -20,6 +20,11 @@ namespace WebApplication1
                 Session.Add("Error", "Debes iniciar sesión");
                 Response.Redirect("ErrorIngreso.aspx", false);
             }
+            else if (userLog.TipoUsuario.Nombre == "Recepcionista")
+            {
+                Session.Add("Error", "Acceso denegado");
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+            }
             else
             {
                 EmpleadoDB empleadoLogDB = new EmpleadoDB();

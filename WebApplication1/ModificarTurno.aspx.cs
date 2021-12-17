@@ -267,7 +267,15 @@ namespace WebApplication1
                 turnoModificado.Observaciones = txtObservaciones.Text;
 
                 turnoModificado.AdministrativoResponsable = new Empleado();
-                turnoModificado.AdministrativoResponsable.ID = empleadoLog.ID; //int.Parse(ddlistRecepcionista.SelectedItem.Value);
+                if (empleadoLog.TipoEmp.Nombre == "Recepcionista")
+                {
+                    turnoModificado.AdministrativoResponsable.ID = empleadoLog.ID; 
+                }
+                else
+                {
+                    turnoModificado.AdministrativoResponsable.ID = ((Turno)Session["EditarTurno"]).AdministrativoResponsable.ID;
+                }
+                
 
                 turnoModificado.Estado = new EstadoTurno();
                 turnoModificado.Estado.ID = 3;
