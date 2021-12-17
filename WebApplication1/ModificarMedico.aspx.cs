@@ -544,9 +544,6 @@ namespace WebApplication1
             multiview.ActiveViewIndex = index;
         }
 
-
-
-
         //GUARDA EN DB
         protected void btnAceptarDatos_Click(object sender, EventArgs e)
         {

@@ -110,14 +110,14 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
-        public void eliminar(Medico ElimMedico)
+        public void eliminar(int ElimMedico)
         {
             ConexionDB datos = new ConexionDB();
 
             try
             {
                 datos.setearConsulta("EXEC SP_ELIMINARMEDICO @IDMedico");
-                datos.setearParametro("@IDMedico", ElimMedico.ID);
+                datos.setearParametro("@IDMedico", ElimMedico);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

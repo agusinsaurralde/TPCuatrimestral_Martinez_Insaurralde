@@ -28,10 +28,13 @@ namespace WebApplication1
         }
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
-            UsuarioDB usuarioDB = new UsuarioDB();
+           /* UsuarioDB usuarioDB = new UsuarioDB();
             Session.Add("eliminar", medicoDB.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
             Session.Add("eliminarUsuario", usuarioDB.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
-            Response.Redirect("EliminarMedico.aspx");
+            Response.Redirect("EliminarMedico.aspx");*/
+
+            Session.Add("idEliminar", (int)Grilla.DataKeys[e.RowIndex].Values[0]);
+            btnEliminar_Modal.Show();
         }  
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
@@ -66,6 +69,22 @@ namespace WebApplication1
             Response.Redirect("EspecialidadesMedico.aspx");
         }
 
-     
+        protected void btnAceptarEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                MedicoDB medicoDB = new MedicoDB();
+                medicoDB.eliminar((int)Session["idEliminar"]);
+                Grilla.DataSource = medicoDB.listarMedico();
+                Grilla.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
