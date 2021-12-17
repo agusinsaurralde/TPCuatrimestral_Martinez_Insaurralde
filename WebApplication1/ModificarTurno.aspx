@@ -1,23 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarTurno.aspx.cs" Inherits="WebApplication1.Formulario_web13" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <script type="text/javascript">
-
-        function checkOk() {
-            /*swal("Ok!", "Los cambios fueron guardados :D!", "success");*/
-            swal({
-                title: "Ok!",
-                text: "Los cambios fueron guardados :D!",
-                icon: "success",
-                button: false, // con esto ya esta el boton no se muestra
-            });
-            setTimeout(function () { window.location.href = "Turnos.aspx"; }, 1800);
-        }
-
-    </script>
-
-
-
     <asp:UpdatePanel runat="server">
         <ContentTemplate>  
             <h3 style="margin-top:30px; margin-bottom:20px">Modificar turno</h3>
@@ -86,7 +68,7 @@
                      <asp:Button ID="btnCancelar" CssClass="btn btn-outline-secondary rounded-pill" BorderStyle="none" Text="CANCELAR" Font-Size="Small" Font-Bold="true"  Onclick="btnCancelar_Click" runat="server" />
                 </div>
                 <div class="col-md-1">
-                     <asp:Button ID="btnAceptar" CssClass="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Size="Small" Font-Bold="true"  OnClientClick="return checkOk()" Onclick="btnAceptar_Click" runat ="server" />
+                     <asp:Button ID="btnAceptar" CssClass="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Size="Small" Font-Bold="true" Onclick="btnAceptar_Click" runat ="server" />
                 </div>
             </div>
         </ContentTemplate>
