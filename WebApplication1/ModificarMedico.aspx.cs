@@ -23,7 +23,6 @@ namespace WebApplication1
             {
                 if (!IsPostBack)
                 {
-
                     Medico medico = new Medico();
                     medico = (Medico)Session["modificar"];
                     Usuario usuario = (Usuario)Session["modificarUsuario"];
@@ -61,6 +60,7 @@ namespace WebApplication1
                 {
                     if (Request.QueryString["accion"] == "eliminar")
                     {
+                        multiview.ActiveViewIndex = 1;
                         btnEliminarEspecialidad_Modal.Show();
                     }
                     else if (Request.QueryString["accion"] == "agregarDia")
@@ -71,8 +71,18 @@ namespace WebApplication1
                             ddlistEntradaAgregarDia.Items.Insert(0, new ListItem("Seleccionar", "0"));
                         }
                        cargarDias(ddlistAgregarDiaEspecialidadExistente);
+
+
+                        multiview.ActiveViewIndex = 1;
                        btnModalAgregarDia_Modal.Show();
                     }
+                }
+
+                if(Request.QueryString["index"] != null)
+                {
+                    int index = int.Parse(Request.QueryString["index"]);
+                    multiview.ActiveViewIndex = index;
+                   
                 }
                
             }
@@ -302,7 +312,6 @@ namespace WebApplication1
             }
            
             cargarDias(ddlistDiaAgregar);
-            //cargarHorarios(ddlistEntradaAgregar);
             ddlistEntradaAgregar.Items.Insert(0, new ListItem("Seleccionar", "0"));
             btnAgregarEspecialidad_Modal.Show();
         }
@@ -325,8 +334,11 @@ namespace WebApplication1
             }
             else
             {
+                ddlistEntradaAgregar.Items.Clear();
                 ddlistEntradaAgregar.Enabled = true;
                 cargarHorarios(ddlistEntradaAgregar);
+                ddlistEntradaAgregar.Items.Insert(0, new ListItem("Seleccionar", "0"));
+
             }
         }
         protected void ddlistEntradaAgregar_SelectedIndexChanged(object sender, EventArgs e)
@@ -426,16 +438,17 @@ namespace WebApplication1
                     obj.ID = idMedico;
                     cargar.agregarEspecialidades(obj);
                 }
-
-                Response.Redirect("ModificarMedico.aspx");
+                ((List<DiasHabilesMedico>)Session["diasAgregados"]).Clear();
+                ((List<MedicoEspecialidades>)Session["especialidadesAgregadas"]).Clear();
+                int index = 1;
+                Response.Redirect("ModificarMedico.aspx?index=" + index, false) ;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            ((List<DiasHabilesMedico>)Session["diasAgregados"]).Clear();
-            ((List<MedicoEspecialidades>)Session["especialidadesAgregadas"]).Clear();
+            
         }
         //ELIMINAR ESPECIALIDAD
         protected void btnAceptarEliminarEspecialidad_Click(object sender, EventArgs e)
@@ -446,11 +459,14 @@ namespace WebApplication1
             medico.especialidad.Id = int.Parse(Request.QueryString["id"]);
             medico.ID = ((Medico)Session["modificar"]).ID;
             medicoDB.eliminarEspecialidad(medico);
-            Response.Redirect("ModificarMedico.aspx");
+            int index = 1;
+            Response.Redirect("ModificarMedico.aspx?index=" + index, false);
         }
         protected void btnCancelarEliminarEsp_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ModificarMedico.aspx");
+            //cargarGrilla();
+            int index = 1;
+            Response.Redirect("ModificarMedico.aspx?index=" + index, false);
         }
 
 
@@ -460,8 +476,10 @@ namespace WebApplication1
             System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
             DateTime horaSalida = Convert.ToDateTime(ddlistEntradaAgregarDia.SelectedItem.ToString()) + horaSumar;
             txtSalidaAgregarDia.Text = horaSalida.ToShortTimeString();
+            btnAgregarDiaAGrilla.Enabled = true;
         }
-        protected void btnAceptarAgregarDia_Click(object sender, EventArgs e)
+
+        protected void btnAgregarDiaAGrilla_Click(object sender, EventArgs e)
         {
             DiasHabilesMedico dia = new DiasHabilesMedico();
             dia.IdDia = ddlistAgregarDiaEspecialidadExistente.SelectedIndex;
@@ -470,30 +488,120 @@ namespace WebApplication1
             dia.Medico.ID = ((Medico)Session["modificar"]).ID;
             dia.Especialidad = new Especialidad();
             dia.Especialidad.Id = int.Parse(Request.QueryString["id"]);
-            dia.HorarioEntrada = DateTime.Parse(ddlistEntradaAgregar.SelectedItem.Value);
+            dia.HorarioEntrada = DateTime.Parse(ddlistEntradaAgregarDia.SelectedItem.Value);
             dia.HorarioSalida = DateTime.Parse(txtSalidaAgregarDia.Text);
 
-            MedicoDB medicoDB = new MedicoDB();
-            medicoDB.agregarDiasHabiles(dia);
             ((List<DiasHabilesMedico>)Session["diasAgregados"]).Add(dia);
             ddlistAgregarDiaEspecialidadExistente.TabIndex = 0;
             ddlistAgregarDiaEspecialidadExistente.SelectedIndex = ddlistAgregarDiaEspecialidadExistente.TabIndex;
             ddlistEntradaAgregarDia.TabIndex = 0;
             ddlistEntradaAgregarDia.SelectedIndex = ddlistEntradaAgregarDia.TabIndex;
-            cargarDias(ddlistAgregarDiaEspecialidadExistente);
-            cargarHorarios(ddlistEntradaAgregarDia);
+            ddlistEntradaAgregarDia.Enabled = false;
+            //cargarDias(ddlistAgregarDiaEspecialidadExistente);
+            
+            for (int x = 0; x < 7; x++)
+            {
+                if (ddlistAgregarDiaEspecialidadExistente.Items[x].Text == dia.NombreDia)
+                {
+                    ddlistAgregarDiaEspecialidadExistente.Items[x].Enabled = false;
+                }
+
+            }
+            //cargarHorarios(ddlistEntradaAgregarDia);
             txtSalidaAgregarDia.Text = "";
-            ddlistEntradaAgregar.Items.Insert(0, new ListItem("Seleccionar", "0"));
+            btnAgregarDiaAGrilla.Enabled = false;
+            //ddlistEntradaAgregarDia.Items.Insert(0, new ListItem("Seleccionar", "0"));
 
 
             cargarGrillaModal(grillaAgregarDia);
-            cargarGrilla();
+           
+        }
 
+        protected void btnAceptarAgregarDia_Click(object sender, EventArgs e)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+
+            List<DiasHabilesMedico> lista = (List<DiasHabilesMedico>)Session["diasAgregados"];
+            foreach (var item in lista)
+            {
+                medicoDB.agregarDiasHabiles(item);
+            }
+            cargarGrilla();
+            int index = 1;
+            Response.Redirect("ModificarMedico.aspx?index=" + index, false);
         }
         protected void btnCancelarDia_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ModificarMedico.aspx");
+            int index = 1;
+            Response.Redirect("ModificarMedico.aspx?index=" + index, false);
         }
 
+
+
+        protected void Menu_MenuItemClick(object sender, MenuEventArgs e)
+        {
+            int index = int.Parse(e.Item.Value);
+            multiview.ActiveViewIndex = index;
+        }
+
+
+
+
+        //GUARDA EN DB
+        protected void btnAceptarDatos_Click(object sender, EventArgs e)
+        {
+            Medico modMedico = new Medico();
+            MedicoDB cargar = new MedicoDB();
+
+            try
+            {
+                modMedico.ID = ((Medico)Session["modificar"]).ID;
+                modMedico.DNI = txtDNI.Text;
+                modMedico.Matricula = txtMatricula.Text;
+                modMedico.Apellido = txtApellido.Text;
+                modMedico.Nombre = txtNombre.Text;
+                modMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                modMedico.Telefono = txtTelefono.Text;
+                modMedico.Email = txtEmail.Text;
+                modMedico.Dirección = txtDireccion.Text;
+
+                cargar.modificar(modMedico);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
+
+        protected void btnAceptarUsuario_Click(object sender, EventArgs e)
+        {
+            Usuario modUsuario = new Usuario();
+            UsuarioDB cargarUsuario = new UsuarioDB();
+
+            try
+            {
+                modUsuario.IDUsuario = ((Medico)Session["modificar"]).ID;
+                modUsuario.NombreUsuario = txtNombreUsuario.Text;
+                modUsuario.Contraseña = txtContraseña.Text;
+                modUsuario.TipoUsuario = new TipoUsuario();
+                modUsuario.TipoUsuario.Id = 1;
+                modUsuario.TipoUsuario.Nombre = "Médico";
+                modUsuario.Estado = true;
+
+                cargarUsuario.ModificarUsuario(modUsuario);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+
+       
     }
 }

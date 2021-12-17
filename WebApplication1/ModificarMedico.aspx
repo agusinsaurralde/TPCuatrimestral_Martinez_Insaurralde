@@ -4,150 +4,294 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script>
+        function validarVistaDatos() {
+            var dni = document.getElementById("<% = txtDNI.ClientID %>").value;
+            var matricula = document.getElementById("<% = txtMatricula.ClientID %>").value;
+            var apellido = document.getElementById("<% = txtApellido.ClientID %>").value;
+            var nombre = document.getElementById("<% = txtNombre.ClientID %>").value;
+            var telefono = document.getElementById("<% = txtTelefono.ClientID %>").value;
+            var fecha = document.getElementById("<% = txtFechaNac.ClientID %>").value;
+            var email = document.getElementById("<% = txtEmail.ClientID %>").value;
+            var direccion = document.getElementById("<% = txtDireccion.ClientID %>").value;
+            var valido = true;
+
+            if (dni === "") {
+                $("#txtDNI").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtDNI").removeClass("is-invalid");
+            }
+
+            if (matricula === "") {
+                $("#txtMatricula").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtDNI").removeClass("is-invalid");
+            }
+
+            if (apellido === "") {
+                $("#txtApellido").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtApellido").removeClass("is-invalid");
+            }
+
+            if (nombre === "") {
+                $("#txtNombre").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtNombre").removeClass("is-invalid");
+            }
+
+            if (telefono === "") {
+                $("#txtTelefono").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtTelefono").removeClass("is-invalid");
+            }
+
+            if (fecha === "") {
+                $("#txtFechaNac").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtFechaNac").removeClass("is-invalid");
+            }
+
+            if (email === "") {
+                $("#txtEmail").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtEmail").removeClass("is-invalid");
+            }
+
+            if (direccion === "") {
+                $("#txtDireccion").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtDireccion").removeClass("is-invalid");
+            }
+
+            if (!valido) {
+                return false;
+            }
+            return true;
+        }
+
+        function validarAgregarEsp() {
+            var grilla = document.getElementById("<% = grillaDiasAgregados.ClientID %>");
+
+            if (grilla === null) {
+                alert("Debe agregar una especialidad");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validarAgregarDia() {
+            var grilla = document.getElementById("<% = grillaAgregarDia.ClientID %>");
+            
+            if (grilla === null) {
+                alert("Debe agregar un día");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validarVistaUsuario() {
+            var usuario = document.getElementById("<% = txtNombreUsuario.ClientID %>").value;
+            var contraseña = document.getElementById("<% = txtContraseña.ClientID %>").value;
+
+            var valido = true;
+
+            if (usuario === "") {
+                $("#txtNombreUsuario").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtNombreUsuario").removeClass("is-invalid");
+            }
+
+            if (contraseña === "") {
+                $("#txtContraseña").addClass("is-invalid");
+                valido = false;
+            }
+            else {
+                $("#txtContraseña").removeClass("is-invalid");
+            }
+
+
+            if (!valido) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+
+
+
+
+
     <br />
     <h1>Modificar Médico</h1>
     <hr />
     <br />
-      <!-- tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" data-bs-toggle="tab" href="#datos">Datos Personales</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#especialidades">Especialidades</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#usuario">Usuario</a>
-    </li>
-  </ul>
 
-      <!-- contenido -->
-  <div class="tab-content">
-       <!-- datos personales -->
-
-      <div id="datos" class="container tab-pane active">
-       <div class="estilo">
-          <div class="row justify-content-center">
-             <div class="col-md-3" style="margin-bottom: 40px; margin-top:60px">
-                  <label for="txtDNI" class="form-label">DNI</label>
-                  <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
-             </div>
-             <div class="col-md-3" style="margin-bottom: 40px;margin-top:60px">
-                  <label for="txtMatricula" class="form-label">MATRÍCULA</label>
-                  <asp:TextBox class="form-control rounded-pill" ID="txtMatricula"  runat="server" />
-             </div>
-          </div>
-        
-          <div class="row justify-content-center">
-            <div class="col-md-3" style="margin-bottom: 40px"">
-              <label for="txtApellido" class="form-label">APELLIDO</label>
-              <asp:TextBox  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
-            </div>
-              <div class="col-md-3" style="margin-bottom: 40px">
-              <label for="txtNombre" class="form-label">NOMBRE</label>
-              <asp:TextBox  class="form-control rounded-pill" ID="txtNombre"  runat="server" />
-            </div>
-           </div>
-                
-            <div class="row justify-content-center">
-                 <div class="col-md-3" style="margin-bottom: 40px">
-                   <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
-                   <asp:TextBox type="date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
-                 </div>
-                 <div class="col-md-3" style="margin-bottom: 40px">
-                   <label for="txtTelefono" class="form-label">TELÉFONO</label>
-                   <asp:TextBox type="tel" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
-                 </div>
-             </div>
-               
-                
-             <div class="row justify-content-center">
-              
-               <div class="col-md-3" style="margin-bottom: 70px">
-                 <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
-                 <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
-               </div>
-                <div class="col-md-3" style="margin-bottom: 70px">
-                 <label for="txtEmail" class="form-label">E-MAIL</label>
-                 <asp:TextBox type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
-               </div>
-              </div>
-            </div>
+    <div>
+       <asp:Menu ID="Menu" Orientation="Horizontal" StaticMenuItemStyle-HorizontalPadding="50px" Font-Bold="true" Font-Size="Small" StaticSelectedStyle-BackColor="LightBlue" runat="server" OnMenuItemClick="Menu_MenuItemClick">
+           <Items>
+               <asp:MenuItem Text="DATOS PERSONALES" Value="0" Selected="true"></asp:MenuItem>
+               <asp:MenuItem Text="ESPECIALIDADES" Value="1"></asp:MenuItem>
+               <asp:MenuItem Text="USUARIO" Value="2"></asp:MenuItem>            
+           </Items>
+       </asp:Menu>
     </div>
 
-
-      <!-- especialidades -->
-      
-    <div id="especialidades" class="container tab-pane fade">
-        <div class="d-flex flex-row" style="margin-bottom:20px; margin-top:50px">
-            <div class="p2" style=" margin-right:20px"><h4>Especialidades</h4></div>
-            <div class="p-0"><asp:Button class="btn btn-primary rounded-pill" id="btnAgregar" Font-Bold="true" Font-Size="X-Small" OnClick="btnAgregar_Click" Text="AGREGAR +" runat="server" /></div>
-        </div>
-      
-        <div style="display: flex; flex-direction: row">
-
-                <%foreach (var item in listaEsp)
-                    {
-                        string eliminar = "eliminar";
-                        string agregarDia = "agregarDia";
-                        if (item.Estado == true)
-                        { %>
-                                   <div class="card border-primary mb-3" style="max-width: 18rem; margin: 10px 10px 10px 10px">
-                                 <div class="card-body text-primary">
-                                       <h6 class="card-text"><%: item.especialidad.Nombre%></h6>
-                                      <a href="ModificarMedico.aspx?id=<%:item.especialidad.Id%>&accion=<%:agregarDia%>" style="font-weight:bold; font-size:10px" class="btn btn-primary rounded-pill">AGREGAR DÍA +</a>
-                                     <a style="font-weight:bold;font-size:10px"" href="ModificarMedico.aspx?id=<%:item.especialidad.Id%>&accion=<%:eliminar %>" class="btn btn-primary rounded-pill">X</a>
-                                  </div>
-                              </div>
-                         <%}%>
-                 <% } %>
-       </div>
-
-    <h5>Horarios</h5> 
-       <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla" AutoPostback="true" HeaderStyle-CssClass="table-primary" HeaderStyle-Font-Size="Small" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_RowDeleting" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID">
-            <Columns>
-                <asp:BoundField datafield = "ID" HeaderText ="#" />
-                <asp:BoundField datafield = "especialidad.Nombre" HeaderText ="Especialidad" />
-                <asp:BoundField datafield = "NombreDia" HeaderText ="Día" />
-                <asp:BoundField datafield = "HorarioEntrada" DataFormatString="{0:HH:mm}"  HeaderText ="Entrada" />
-                <asp:BoundField datafield = "HorarioSalida" DataFormatString="{0:HH:mm}"  HeaderText ="Salida" />
-                <asp:CommandField ButtonType="Image" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" SelectImageUrl="Iconos/pencil-square.svg" />   
-                <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
+    <div>
+        <asp:MultiView ID="multiview" ActiveViewIndex="0" runat="server">
+        
+           <asp:View ID="vistaDatos" runat="server">
+                     <div class="estilo">
+                <div class="row justify-content-center">
+                   <div class="col-md-3" style="margin-bottom: 40px; margin-top:60px">
+                        <label for="txtDNI" class="form-label">DNI</label>
+                        <asp:TextBox ClientIDMode="Static" class="form-control rounded-pill" ID="txtDNI"  runat="server" />
+                   </div>
+                   <div class="col-md-3" style="margin-bottom: 40px;margin-top:60px">
+                        <label for="txtMatricula" class="form-label">MATRÍCULA</label>
+                        <asp:TextBox ClientIDMode="Static" class="form-control rounded-pill" ID="txtMatricula"  runat="server" />
+                   </div>
+                </div>
+              
+                <div class="row justify-content-center">
+                  <div class="col-md-3" style="margin-bottom: 40px"">
+                    <label for="txtApellido" class="form-label">APELLIDO</label>
+                    <asp:TextBox ClientIDMode="Static" class="form-control rounded-pill" ID="txtApellido"  runat="server" />
+                  </div>
+                    <div class="col-md-3" style="margin-bottom: 40px">
+                    <label for="txtNombre" class="form-label">NOMBRE</label>
+                    <asp:TextBox ClientIDMode="Static" class="form-control rounded-pill" ID="txtNombre"  runat="server" />
+                  </div>
+                 </div>
+                      
+                  <div class="row justify-content-center">
+                       <div class="col-md-3" style="margin-bottom: 40px">
+                         <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
+                         <asp:TextBox ClientIDMode="Static" type="date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
+                       </div>
+                       <div class="col-md-3" style="margin-bottom: 40px">
+                         <label for="txtTelefono" class="form-label">TELÉFONO</label>
+                         <asp:TextBox ClientIDMode="Static" type="tel" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
+                       </div>
+                   </div>
                      
-            </Columns>
-        </asp:gridview>
-      </div>
+                      
+                   <div class="row justify-content-center">
+                    
+                     <div class="col-md-3" style="margin-bottom: 70px">
+                       <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
+                       <asp:TextBox ClientIDMode="Static" class="form-control rounded-pill" ID="txtDireccion" runat="server" />
+                     </div>
+                      <div class="col-md-3" style="margin-bottom: 70px">
+                       <label for="txtEmail" ClientIDMode="Static" class="form-label">E-MAIL</label>
+                       <asp:TextBox type="email" ClientIDMode="Static" class="form-control rounded-pill" ID="txtEmail" runat="server" />
+                     </div>
+                    </div>
+                  </div>
+
+               <div class="row justify-content-end">
+                   <div class="col-md-3">
+                       <asp:Button Text="ACEPTAR" Font-Bold="true" Font-Size="Small" ID="btnAceptarDatos" OnClientClick="return validarVistaDatos()" OnClick="btnAceptarDatos_Click" CssClass="btn btn-primary rounded-pill" runat="server" />
+                   </div>
+               </div>
+           </asp:View>
 
 
-      <!-- usuario -->
-       <div id="usuario" class="container tab-pane fade">
-            <div class="estilo">
+
+            <asp:View ID="vistaEsp" runat="server">
+                  <div class="d-flex flex-row" style="margin-bottom:20px; margin-top:50px">
+                       <div class="p2" style=" margin-right:20px"><h4>Especialidades</h4></div>
+                       <div class="p-0"><asp:Button class="btn btn-primary rounded-pill" id="btnAgregar" Font-Bold="true" Font-Size="X-Small" OnClick="btnAgregar_Click" Text="AGREGAR +" runat="server" /></div>
+                  </div>
+                 
+                   <div style="display: flex; flex-direction: row">
+
+                      <%foreach (var item in listaEsp)
+                        {
+                              string eliminar = "eliminar";
+                              string agregarDia = "agregarDia";
+                              if (item.Estado == true)
+                              { %>
+                                         <div class="card border-primary mb-3" style="max-width: 18rem; margin: 10px 10px 10px 10px">
+                                       <div class="card-body text-primary">
+                                             <h6 class="card-text"><%: item.especialidad.Nombre%></h6>
+                                            <a href="ModificarMedico.aspx?id=<%:item.especialidad.Id%>&accion=<%:agregarDia%>" style="font-weight:bold; font-size:10px" class="btn btn-primary rounded-pill">AGREGAR DÍA +</a>
+                                           <a style="font-weight:bold;font-size:10px"" href="ModificarMedico.aspx?id=<%:item.especialidad.Id%>&accion=<%:eliminar %>" class="btn btn-primary rounded-pill">X</a>
+                                        </div>
+                                    </div>
+                               <%}%>
+                       <% } %>
+                  </div>
+
+               <h5>Horarios</h5> 
+                  <asp:GridView CssClass="table table-hover" BorderStyle="None" ID="Grilla" AutoPostback="true" HeaderStyle-CssClass="table-primary" HeaderStyle-Font-Size="Small" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_RowDeleting" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID">
+                       <Columns>
+                           <asp:BoundField datafield = "ID" HeaderText ="#" />
+                           <asp:BoundField datafield = "especialidad.Nombre" HeaderText ="Especialidad" />
+                           <asp:BoundField datafield = "NombreDia" HeaderText ="Día" />
+                           <asp:BoundField datafield = "HorarioEntrada" DataFormatString="{0:HH:mm}"  HeaderText ="Entrada" />
+                           <asp:BoundField datafield = "HorarioSalida" DataFormatString="{0:HH:mm}"  HeaderText ="Salida" />
+                           <asp:CommandField ButtonType="Image" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" SelectImageUrl="Iconos/pencil-square.svg" />   
+                           <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
+                                
+                       </Columns>
+                   </asp:gridview>
+
+           </asp:View>
+
+
+            <asp:View ID="vistaUsuario" runat="server">
+               <div class="estilo">
              
                       <div class="row d-flex justify-content-center" style="margin-top:60px">
                           <div class="col-md-3">
                          <label for="txtNombreUsuario" class="form-label">USUARIO</label>
-                         <asp:TextBox class="form-control rounded-pill" ID="txtNombreUsuario" runat="server" />
+                         <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtNombreUsuario" runat="server" />
                        </div>
                       </div>
             
                       <div class="row justify-content-center" style="margin-top:40px">
                            <div class="col-md-3" >
                          <label for="txtContraseña" class="form-label">CONTRASEÑA</label>
-                         <asp:TextBox class="form-control rounded-pill" type="Password" ID="txtContraseña" runat="server" />
+                         <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" type="Password" ID="txtContraseña" runat="server" />
                        </div>
                       </div>
-            
-                      <div class="row justify-content-center" style="margin:40px 0px 60px 320px">
-                           
-                          <div class="col-md-3">
-                           <asp:Button class="btn btn-primary rounded-pill" Font-Size="Small" Font-Bold="true" Text="ACEPTAR" OnClick="Click_Aceptar" runat="server" />
-                         </div>
-                      </div>
-                   
-                </div>
-        </div>
 
-  </div>
+                </div>
+
+                <div class="row justify-content-end">
+                   <div class="col-md-3">
+                       <asp:Button Text="ACEPTAR" Font-Bold="true" Font-Size="Small" ID="btnAceptarUsuario" OnClientClick="return validarVistaUsuario()" OnClick="btnAceptarUsuario_Click" CssClass="btn btn-primary rounded-pill" runat="server" />
+                   </div>
+               </div>
+           </asp:View>
+
+        </asp:MultiView>
+    </div>
+
+
+
 
 <!-- modal eliminar especialidad -->
    <asp:Button  style="display:none" runat="server" ID="btnEliminarEspecialidadModal" />
@@ -211,9 +355,14 @@
                      </div>
                </div>
               
+                <div class="row">
+                    <div class="col">
+                        <asp:Button Text="+ DÍA" Font-Bold="true" Font-Size="Small" ID="btnAgregarDiaAGrilla" Enabled="false" CssClass="btn btn-primary rounded-pill" OnClick="btnAgregarDiaAGrilla_Click" runat="server" />
+                    </div>
+                </div>
 
                  <div>
-                     <asp:GridView  CssClass="table table-hover" runat="server" id="grillaAgregarDia" AutoGenerateColumns="false" AutoPostback="true" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small">
+                     <asp:GridView  CssClass="table table-hover" ClientIDMode="Static" runat="server" id="grillaAgregarDia" AutoGenerateColumns="false" AutoPostback="true" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small">
                          <Columns>
                             <asp:BoundField datafield = "NombreDia" HeaderText="Dia" />
                             <asp:BoundField datafield = "HorarioEntrada" DataFormatString="{0:HH:mm}" HeaderText ="Entrada" />
@@ -227,7 +376,7 @@
             </div>
         <div class="modal-footer">
           <asp:Button Text="CERRAR" id="btnCancelarDia" OnClick="btnCancelarDia_Click" class="btn btn-outline-secondary rounded-pill" Font-Bold="true" Font-Size="Small" BorderStyle="None" data-bs-dismiss="modal"  runat="server" />
-          <asp:Button  ID="btnAceptarAgregarDia" class="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Bold="true" Font-Size="Small" OnClick="btnAceptarAgregarDia_Click"  runat="server" />
+          <asp:Button  ID="btnAceptarAgregarDia" class="btn btn-primary rounded-pill" OnClientClick="return validarAgregarDia()" Text="ACEPTAR" Font-Bold="true" Font-Size="Small" OnClick="btnAceptarAgregarDia_Click"  runat="server" />
         </div>
 
     </asp:Panel>
@@ -290,7 +439,7 @@
                   </div>
 
                          <div>
-                             <asp:GridView CssClass="table table-hover" runat="server" id="grillaDiasAgregados" AutoGenerateColumns="false" AutoPostback="true" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small">
+                             <asp:GridView CssClass="table table-hover" ClientIDMode="Static" runat="server" id="grillaDiasAgregados" AutoGenerateColumns="false" AutoPostback="true" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small">
                                  <Columns>
                                      <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="ESPECIALIDAD" />
                                      <asp:BoundField datafield = "NombreDia" HeaderText ="DÍA" />
@@ -308,7 +457,7 @@
              
         <div class="modal-footer">
           <asp:Button Text="CANCELAR" id="btnCerrar" class="btn btn-outline-secondary rounded-pill" OnClick="btnCancelar_Click" Font-Bold="true" Font-Size="Small" BorderStyle="None" data-bs-dismiss="modal"  runat="server" />
-          <asp:Button  ID="btnAceptarAgregar" class="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Bold="true" OnClick="btnAceptarAgregar_Click" Font-Size="Small"  runat="server" />
+          <asp:Button  ID="btnAceptarAgregar" class="btn btn-primary rounded-pill" Text="ACEPTAR" Font-Bold="true" OnClientClick="return validarAgregarEsp()" OnClick="btnAceptarAgregar_Click" Font-Size="Small"  runat="server" />
         </div>
 
         
@@ -331,7 +480,7 @@
           
         </div>
         <div class="modal-footer">
-            <asp:Button class="btn btn-outline-secondary rounded-pill" Text="CANCELAR" BorderStyle="None" Font-Bold="true" data-bs-dismiss="modal" Font-Size="Small" OnClick="btnAceptarEliminar_Click" AutoPostback="true" runat="server" />
+            <asp:Button class="btn btn-outline-secondary rounded-pill" Text="CANCELAR" BorderStyle="None" Font-Bold="true" data-bs-dismiss="modal" Font-Size="Small" AutoPostback="true" runat="server" />
             <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEliminar" Text="ACEPTAR" Font-Bold="true" Font-Size="Small" OnClick="btnAceptarEliminar_Click" AutoPostback="true" runat="server" />
         </div>
     </asp:Panel>
