@@ -14,10 +14,39 @@ namespace WebApplication1
         TurnoDB turnoBD = new TurnoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if (Session["Usuario"] == null)
             {
-                Grilla.DataSource = turnoBD.listarTurno();
-                Grilla.DataBind();
+                Session.Add("Error", "Debes iniciar sesión");
+                Response.Redirect("ErrorIngreso.aspx", false);
+            }
+            else if (userLog.TipoUsuario.Nombre == "Médico")
+            {
+                if (!IsPostBack)
+                {
+                    Grilla.Columns[2].Visible = false;
+                    Grilla.Columns[6].Visible = false;
+                    Grilla.Columns[9].Visible = false;
+                    Grilla.Columns[10].Visible = false;
+                    EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                    Empleado empleadoLog = new Empleado();
+                    empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
+
+                    List<Turno> lista = turnoBD.listarTurno();
+                    List<Turno> listaFiltrada = lista.FindAll(x => x.Medico.ID == empleadoLog.ID);
+                    Grilla.DataSource = listaFiltrada;
+                    Grilla.DataBind();
+
+                }
+            }
+            else
+            {
+                if (!IsPostBack)
+                {
+                    Grilla.DataSource = turnoBD.listarTurno();
+                    Grilla.DataBind();
+                }
             }
 
         }
@@ -40,16 +69,37 @@ namespace WebApplication1
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Turno> turnosBusqueda = turnoBD.buscar(ddlistCriterio.SelectedItem.Text, txtBusqueda.Text);
-            Grilla.DataSource = turnosBusqueda;
-            Grilla.DataBind();
-            if (turnosBusqueda.Count != 0)
+            if (((Usuario)Session["Usuario"]).TipoUsuario.Nombre == "Médico")
             {
-                resultados.Visible = false;
+                EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                Empleado empleadoLog = new Empleado();
+                empleadoLog = empleadoLogDB.empleadoLogueado((int)((Usuario)Session["Usuario"]).IDUsuario);
+                List<Turno> busquedaFiltrada = turnosBusqueda.FindAll(x => x.Medico.ID == empleadoLog.ID);
+                Grilla.DataSource = busquedaFiltrada;
+                Grilla.DataBind();
+                if (busquedaFiltrada.Count != 0)
+                {
+                    resultados.Visible = false;
+                }
+                else
+                {
+                    resultados.Visible = true;
+                }
             }
             else
             {
-                resultados.Visible = true;
+                Grilla.DataSource = turnosBusqueda;
+                Grilla.DataBind();
+                if (turnosBusqueda.Count != 0)
+                {
+                    resultados.Visible = false;
+                }
+                else
+                {
+                    resultados.Visible = true;
+                }
             }
+  
 
         }
 
@@ -89,15 +139,35 @@ namespace WebApplication1
         protected void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
             List<Turno> turnosBusqueda = turnoBD.buscar(ddlistCriterio.SelectedItem.Text, txtBusqueda.Text);
-            Grilla.DataSource = turnosBusqueda;
-            Grilla.DataBind();
-            if (turnosBusqueda.Count != 0)
+            if (((Usuario)Session["Usuario"]).TipoUsuario.Nombre == "Médico")
             {
-                resultados.Visible = false;
+                EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                Empleado empleadoLog = new Empleado();
+                empleadoLog = empleadoLogDB.empleadoLogueado((int)((Usuario)Session["Usuario"]).IDUsuario);
+                List<Turno> busquedaFiltrada = turnosBusqueda.FindAll(x => x.Medico.ID == empleadoLog.ID);
+                Grilla.DataSource = busquedaFiltrada;
+                Grilla.DataBind();
+                if (busquedaFiltrada.Count != 0)
+                {
+                    resultados.Visible = false;
+                }
+                else
+                {
+                    resultados.Visible = true;
+                }
             }
             else
             {
-                resultados.Visible = true;
+                Grilla.DataSource = turnosBusqueda;
+                Grilla.DataBind();
+                if (turnosBusqueda.Count != 0)
+                {
+                    resultados.Visible = false;
+                }
+                else
+                {
+                    resultados.Visible = true;
+                }
             }
         }
     }

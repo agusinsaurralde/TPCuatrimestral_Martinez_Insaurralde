@@ -39,7 +39,7 @@ namespace WebApplication1
                 if (UsuarioDB.Ingresar(Usuario))
                 {
                     Session.Add("Usuario", Usuario);
-                    Response.Redirect("Turnos.aspx", false);
+                    Response.Redirect("Default.aspx", false);
                 }
                 else
                 {

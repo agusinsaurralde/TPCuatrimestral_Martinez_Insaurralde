@@ -16,6 +16,19 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "Debes iniciar sesión");
+                Response.Redirect("ErrorIngreso.aspx", false);
+            }
+            else if (userLog.TipoUsuario.Nombre == "Médico")
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+            }
             if (!IsPostBack)
             {
                 Grilla.DataSource = db.listarPaciente();

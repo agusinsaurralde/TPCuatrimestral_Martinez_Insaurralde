@@ -30,7 +30,7 @@
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowDeleting="Grilla_RowDeleting" OnRowEditing="Grilla_editar" DataKeyNames="Numero" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>   
                 <asp:BoundField datafield = "Paciente.NombreCompleto" HeaderText ="PACIENTE" />
-                <asp:BoundField datafield = "Especialidad.Nombre" ItemStyle-Width="20%" HeaderText ="ESPECIALIDAD" />
+                <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="ESPECIALIDAD" />
                 <asp:BoundField datafield = "Medico.NombreCompleto"  HeaderText ="MÉDICO" />
                 <asp:BoundField datafield = "Dia" DataFormatString="{0:d}"  HeaderText ="DÍA" />
                 <asp:BoundField datafield = "HorarioInicio" DataFormatString="{0:HH:mm}"  HeaderText ="HORA" />

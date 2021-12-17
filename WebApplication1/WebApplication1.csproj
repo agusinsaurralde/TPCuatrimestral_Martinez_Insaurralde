@@ -127,6 +127,7 @@
     <Content Include="ErrorModificar.aspx" />
     <Content Include="EliminarCorrecto.aspx" />
     <Content Include="ErrorEliminar.aspx" />
+    <Content Include="ErrorPermisosAcceso.aspx" />
     <Content Include="EspecialidadesMedico.aspx" />
     <Content Include="Iconos\icons8-healthcare-65.png" />
     <Content Include="Iconos\pencil-square.svg" />
@@ -333,6 +334,13 @@
     </Compile>
     <Compile Include="ErrorEliminar.aspx.designer.cs">
       <DependentUpon>ErrorEliminar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPermisosAcceso.aspx.cs">
+      <DependentUpon>ErrorPermisosAcceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPermisosAcceso.aspx.designer.cs">
+      <DependentUpon>ErrorPermisosAcceso.aspx</DependentUpon>
     </Compile>
     <Compile Include="EspecialidadesMedico.aspx.cs">
       <DependentUpon>EspecialidadesMedico.aspx</DependentUpon>

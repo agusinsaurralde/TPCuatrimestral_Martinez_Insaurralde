@@ -5,22 +5,23 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
-using DBClinica;
 
 namespace WebApplication1
 {
     public partial class SiteMaster : MasterPage
     {
+        public Usuario usuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-           
-            
-            
-           
-=======
 
->>>>>>> d00b65a407a320825bb390aea7a4c2ae11f6f317
+            /*usuario = (Usuario)Session["Usuario"];
+            if (usuario == null)
+            {
+                Response.Redirect("Ingreso.aspx");
+            }*/
+       
+                
+            
         }
     }
 }
