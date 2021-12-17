@@ -20,6 +20,12 @@ namespace WebApplication1
                 Session.Add("Error", "Debes iniciar sesión");
                 Response.Redirect("ErrorIngreso.aspx", false);
             }
+            else if (userLog.UsuarioMedico(userLog))
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+            }
             if (!IsPostBack)
             {
                 EspecialidadDB espDB = new EspecialidadDB();

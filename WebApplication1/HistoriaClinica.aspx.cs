@@ -59,6 +59,7 @@ namespace WebApplication1
 
                     Grilla.DataSource = listaFiltrada;
                     Grilla.DataBind();
+                    Session.Add("listaMedico", listaFiltrada);
                 }
                 else
                 {//lista para administrador
@@ -73,6 +74,8 @@ namespace WebApplication1
                     }
                     Grilla.DataSource = listaFiltrada;
                     Grilla.DataBind();
+                    Session.Add("listaAdmin", listaFiltrada);
+
                 }
             }
             
@@ -116,16 +119,67 @@ namespace WebApplication1
             HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
             List<HistoriaClinica> hcBusqueda = hcDB.buscar(txtBusqueda.Text);
 
-            Grilla.DataSource = hcBusqueda;
-            Grilla.DataBind();
-            if (hcBusqueda.Count != 0)
+            if(((Usuario)Session["Usuario"]).TipoUsuario.Nombre == "Médico")
             {
-                resultados.Visible = false;
+                List<HistoriaClinica> listaFiltradaMedico = (List<HistoriaClinica>)Session["listaMedico"];
+                HistoriaClinica historia = new HistoriaClinica();
+                List<HistoriaClinica> listaFinal = new List<HistoriaClinica>();
+
+                   
+                foreach (var item in listaFiltradaMedico)
+                {
+                    int id = item.ID;
+                    historia = hcBusqueda.Find(x => x.ID == item.ID);
+                    if (historia != null)
+                    {
+                        listaFinal.Add(historia);
+                    }
+                    
+                }
+
+                Grilla.DataSource = listaFinal;
+                Grilla.DataBind();
+                
+                if(listaFinal.Count != 0)
+                {
+
+                    resultados.Visible = false;
+                }
+                else
+                {
+ 
+                    resultados.Visible = true;
+                }
             }
             else
             {
-                resultados.Visible = true;
+                List<HistoriaClinica> listaFiltrada = (List<HistoriaClinica>)Session["listaAdmin"];
+                HistoriaClinica historia = new HistoriaClinica();
+                List<HistoriaClinica> listaFinal = new List<HistoriaClinica>();
+                foreach (var item in listaFiltrada)
+                {
+                    historia = hcBusqueda.Find(x => x.ID == item.ID);
+                    if (historia != null)
+                    {
+                        listaFinal.Add(historia);
+                    }
+                }
+
+                Grilla.DataSource = listaFinal;
+                Grilla.DataBind();
+                if (listaFinal.Count != 0)
+                {
+                    resultados.Visible = false;
+                }
+                else
+                {
+                    resultados.Visible = true;
+                }
             }
+
+               
+          
+            
         }
     }
 }

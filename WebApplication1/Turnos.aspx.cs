@@ -21,7 +21,7 @@ namespace WebApplication1
                 Session.Add("Error", "Debes iniciar sesión");
                 Response.Redirect("ErrorIngreso.aspx", false);
             }
-            else if (userLog.TipoUsuario.Nombre == "Médico")
+            else if (userLog.UsuarioMedico(userLog))
             {
                 if (!IsPostBack)
                 {
@@ -29,13 +29,26 @@ namespace WebApplication1
                     Grilla.Columns[6].Visible = false;
                     Grilla.Columns[9].Visible = false;
                     Grilla.Columns[10].Visible = false;
+                    btnAsignarTurno.Visible = false;
                     EmpleadoDB empleadoLogDB = new EmpleadoDB();
-                    Empleado empleadoLog = new Empleado();
-                    empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
+                    Empleado empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
 
                     List<Turno> lista = turnoBD.listarTurno();
                     List<Turno> listaFiltrada = lista.FindAll(x => x.Medico.ID == empleadoLog.ID);
                     Grilla.DataSource = listaFiltrada;
+                    Grilla.DataBind();
+
+                }
+            }
+            else if (userLog.UsuarioRecepcionista(userLog))
+            {
+                
+                if (!IsPostBack)
+                {
+                    Grilla.Columns[8].Visible = false;
+                    EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                    Empleado empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
+                    Grilla.DataSource = turnoBD.listarTurno();
                     Grilla.DataBind();
 
                 }

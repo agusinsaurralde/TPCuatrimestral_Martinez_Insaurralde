@@ -9,7 +9,7 @@ using DBClinica;
 
 namespace WebApplication1
 {
-    public partial class Formulario_web119 : System.Web.UI.Page
+    public partial class LogIn : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,8 +43,8 @@ namespace WebApplication1
                 }
                 else
                 {
-                    Session.Add("Error", "Usuario o contraseña incorrecto");
-                    Response.Redirect("ErrorIngreso.aspx", false);
+                    lblError.Text = "Usuario o contraseña incorrectos.";
+
                 }
             }
             catch (Exception ex)

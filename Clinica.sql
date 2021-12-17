@@ -360,37 +360,37 @@ go
 insert EspecialidadXMedico(IDMedico, IDEspecialidad, Estado) VALUES(10, 5,1)
 go
 --DiasHabiles---------------------------
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 1, '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 1, '8:00', '11:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 2, '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 2, '8:00', '11:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 4, '15:00', '19:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(1, 10, 4, '15:00', '18:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 6, '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 6, '13:00', '16:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 2, '9:00', '13:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 10, 2, '9:00', '12:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 1, 3, '15:00', '19:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(2, 1, 3, '15:00', '18:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(3, 3,  5, '16:00', '20:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(3, 3,  5, '16:00', '19:00', 1)
 
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(4, 5, 1, '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado) VALUES(4, 5, 1, '8:00', '11:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(5, 13, 1, '8:00', '12:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(5, 13, 1, '8:00', '11:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(6, 15, 5, '16:00', '20:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(6, 15, 5, '16:00', '19:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(7, 14, 5, '16:00', '20:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(7, 14, 5, '16:00', '19:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(8, 14, 6, '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(8, 14, 6, '13:00', '16:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(9, 5, 6, '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(9, 5, 6, '13:00', '16:00', 1)
 go
-INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(10, 5, 6, '13:00', '17:00', 1)
+INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(10, 5, 6, '13:00', '16:00', 1)
 go
 -----------------------------INSERT PACIENTES--------------------------------------------
 insert Cobertura(Nombre, Estado)VALUES('OSDE', 1)

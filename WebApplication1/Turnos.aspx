@@ -19,7 +19,7 @@
              </div>
           </div>
             <div class="col ">
-                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
+                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" ID="btnAsignarTurno" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
          </div>
     </div>

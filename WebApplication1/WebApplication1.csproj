@@ -134,7 +134,7 @@
     <Content Include="Iconos\pencil.svg" />
     <Content Include="Iconos\search.svg" />
     <Content Include="Iconos\x-circle.svg" />
-    <Content Include="Ingreso.aspx" />
+    <Content Include="LogIn.aspx" />
     <Content Include="ModificarEmpleado.aspx" />
     <Content Include="ModificarEspecialidadesMedico.aspx" />
     <Content Include="ModificarUsuario.aspx" />
@@ -349,12 +349,12 @@
     <Compile Include="EspecialidadesMedico.aspx.designer.cs">
       <DependentUpon>EspecialidadesMedico.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Ingreso.aspx.cs">
-      <DependentUpon>Ingreso.aspx</DependentUpon>
+    <Compile Include="LogIn.aspx.cs">
+      <DependentUpon>LogIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Ingreso.aspx.designer.cs">
-      <DependentUpon>Ingreso.aspx</DependentUpon>
+    <Compile Include="LogIn.aspx.designer.cs">
+      <DependentUpon>LogIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarEmpleado.aspx.cs">
       <DependentUpon>ModificarEmpleado.aspx</DependentUpon>
