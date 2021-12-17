@@ -28,11 +28,6 @@ namespace WebApplication1
         }
         protected void Grilla_eliminar(object sender, GridViewDeleteEventArgs e)
         {
-           /* UsuarioDB usuarioDB = new UsuarioDB();
-            Session.Add("eliminar", medicoDB.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
-            Session.Add("eliminarUsuario", usuarioDB.buscarporID((int)Grilla.DataKeys[e.RowIndex].Values[0]));
-            Response.Redirect("EliminarMedico.aspx");*/
-
             Session.Add("idEliminar", (int)Grilla.DataKeys[e.RowIndex].Values[0]);
             btnEliminar_Modal.Show();
         }  
@@ -50,14 +45,15 @@ namespace WebApplication1
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Medico> medicosBusqueda = medicoDB.buscar(txtBusqueda.Text);
-            if (medicosBusqueda != null)
+            Grilla.DataSource = medicosBusqueda;
+            Grilla.DataBind();
+            if (medicosBusqueda.Count != 0)
             {
-                Grilla.DataSource = medicosBusqueda;
-                Grilla.DataBind();
+                lblBusquedaIncorrecta.Visible = false;
             }
             else
             {
-                lblBusquedaIncorrecta.Text = "No se encontraron resultados.";
+                lblBusquedaIncorrecta.Visible = true;
             }
 
         }
@@ -84,6 +80,22 @@ namespace WebApplication1
             {
 
                 throw ex;
+            }
+        }
+
+
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            List<Medico> medicosBusqueda = medicoDB.buscar(txtBusqueda.Text);
+            Grilla.DataSource = medicosBusqueda;
+            Grilla.DataBind();
+            if (medicosBusqueda.Count != 0)
+            {
+                lblBusquedaIncorrecta.Visible = false;
+            }
+            else
+            {
+                lblBusquedaIncorrecta.Visible = true;
             }
         }
     }

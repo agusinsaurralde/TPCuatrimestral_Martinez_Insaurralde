@@ -32,7 +32,7 @@ namespace WebApplication1
                     txtApellido.Text = empleado.Apellido;
                     txtNombre.Text = empleado.Nombre;
                     ddlistTipoEmpleado.SelectedValue = empleado.TipoEmp.ID.ToString();
-                    txtFechaNac.Text = empleado.FechaNacimiento.ToString();
+                    txtFechaNac.Text = empleado.FechaNacimiento.ToString("yyyy-MM-dd");
                     txtTelefono.Text = empleado.Telefono;
                     txtEmail.Text = empleado.Email;
                     txtDireccion.Text = empleado.Dirección;

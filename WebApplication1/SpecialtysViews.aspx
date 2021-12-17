@@ -34,24 +34,21 @@
      <h1>Especialidades</h1>
     <hr />
 
-        <asp:UpdatePanel runat="server">
-        <ContentTemplate>
-    <div class="container">
-        <div class="d-flex flex-row-reverse">
-         <div class="col-md-4">
-            <div class="input-group mb-3">
-                 <asp:TextBox CssClass="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostback="true" aria-describedby="button-addon2" runat="server" />
-                 <asp:ImageButton  ImageUrl="/Iconos/search.svg" OnClick ="Click_Buscar" CssClass="btn btn-primary" runat="server" />
-            </div>
+               <div class="container">
+                   <div class="d-flex flex-row-reverse">
+                    <div class="col-md-4">
+                       <div class="input-group mb-3">
+                            <asp:TextBox CssClass="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostback="true" aria-describedby="button-addon2" runat="server" />
+                              <asp:Button Text="BUSCAR" Font-Bold="true" Font-Size="Small" CssClass="btn btn-primary" OnClick ="Click_Buscar" runat="server" />
+                       </div>
 
-          </div>
-            <div class="col ">
-                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
-            </div>
-         </div>
-    </div>
-</ContentTemplate>
-    </asp:UpdatePanel>
+                     </div>
+                       <div class="col ">
+                             <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
+                       </div>
+                    </div>
+               </div>
+    <asp:Label ID="resultados" Text="No se encontraron resultados." Visible="false" runat="server" />
             <asp:UpdatePanel runat="server">
         <ContentTemplate>
     <div>

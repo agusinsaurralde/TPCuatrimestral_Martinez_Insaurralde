@@ -10,6 +10,7 @@ namespace Dominio
     {
         public int ID { get; set; }
         public Paciente Paciente { get; set; }
+        public Medico Medico { get; set; }
         public DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
     }

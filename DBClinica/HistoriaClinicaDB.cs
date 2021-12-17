@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT H.ID, H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente");
+                datos.setearConsulta("SELECT H.ID, H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.IDMedico, M.Apellido as ApellidoMedico, M.Nombre as NombreMedico,  CONCAT(M.Nombre, ' ', M.Apellido) as NombreCompletoMedico,  H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente INNER JOIN EMPLEADO AS M ON M.ID = H.IDMedico");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -28,6 +28,11 @@ namespace DBClinica
                     aux.Paciente.Apellido = (string)datos.Lector["Apellido"];
                     aux.Paciente.Nombre = (string)datos.Lector["Nombre"];
                     aux.Paciente.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Medico = new Medico();
+                    aux.Medico.ID = (int)datos.Lector["IDMedico"];
+                    aux.Medico.Apellido = (string)datos.Lector["ApellidoMedico"];
+                    aux.Medico.Nombre = (string)datos.Lector["NombreMedico"];
+                    aux.Medico.NombreCompleto = (string)datos.Lector["NombreCompletoMedico"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 
@@ -51,8 +56,9 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("INSERT HistoriaClinica(IDPaciente, Fecha, Descripcion, Estado) VALUES(@IDPaciente, @Fecha, @Descripcion, 1)");
+                datos.setearConsulta("INSERT HistoriaClinica(IDPaciente, IDMedico, Fecha, Descripcion, Estado) VALUES(@IDPaciente, @IDMedico, @Fecha, @Descripcion, 1)");
                 datos.setearParametro("@IDPaciente", HCNueva.Paciente.ID);
+                datos.setearParametro("@IDMedico", HCNueva.Medico.ID);
                 datos.setearParametro("@Fecha", HCNueva.Fecha);
                 datos.setearParametro("@Descripcion", HCNueva.Descripcion);
                 datos.ejecutarAccion();
@@ -73,9 +79,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE HistoriaClinica SET IDPaciente = @IDPaciente, Fecha = @Fecha, Descripcion = @Descripcion WHERE ID=" + ModHistoriaClinica.ID + "");
-                datos.setearParametro("@IDPaciente", ModHistoriaClinica.Paciente.ID);
-                datos.setearParametro("@Fecha", ModHistoriaClinica.Fecha);
+                datos.setearConsulta("UPDATE HistoriaClinica SET Descripcion = @Descripcion WHERE ID=" + ModHistoriaClinica.ID + "");
                 datos.setearParametro("@Descripcion", ModHistoriaClinica.Descripcion);
                 datos.ejecutarAccion();
             }
@@ -116,6 +120,14 @@ namespace DBClinica
             return hc;
         }
 
+        public HistoriaClinica buscarporMedico(int id)
+        {
+            HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
+            List<HistoriaClinica> listahc = hcDB.lista();
+            HistoriaClinica hc = listahc.Find(x => x.Medico.ID == id);
+            return hc;
+        }
+
         public List<HistoriaClinica> buscar(string nombre)
         {
             List<HistoriaClinica> lista = new List<HistoriaClinica>();
@@ -123,7 +135,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT DISTINCT H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente WHERE P.Apellido LIKE '" + nombre + "%' OR P.Nombre LIKE '" + nombre + "%' OR CONCAT(P.Nombre, ' ', P.Apellido)  LIKE '" + nombre + "%'");
+                datos.setearConsulta("SELECT DISTINCT H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.IDMedico,  M.Apellido as ApellidoMedico, M.Nombre as NombreMedico,  CONCAT(M.Nombre, ' ', M.Apellido) as NombreCompletoMedico, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente INNER JOIN EMPLEADO AS M ON M.ID = H.IDMedico WHERE P.Apellido LIKE '" + nombre + "%' OR P.Nombre LIKE '" + nombre + "%' OR CONCAT(P.Nombre, ' ', P.Apellido)  LIKE '" + nombre + "%'");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -135,6 +147,11 @@ namespace DBClinica
                     aux.Paciente.Apellido = (string)datos.Lector["Apellido"];
                     aux.Paciente.Nombre = (string)datos.Lector["Nombre"];
                     aux.Paciente.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Medico = new Medico();
+                    aux.Medico.ID = (int)datos.Lector["IDPaciente"];
+                    aux.Medico.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Medico.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Medico.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 

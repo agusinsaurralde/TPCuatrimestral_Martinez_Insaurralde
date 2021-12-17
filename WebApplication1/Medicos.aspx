@@ -11,7 +11,7 @@
         <div class="d-flex flex-row-reverse">
          <div class="col-md-4">
             <div class="input-group mb-3">
-                 <asp:TextBox class="form-control" ID="txtBusqueda" aria-describedby="button-addon2" runat="server" />
+                 <asp:TextBox class="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostBack="true" aria-describedby="button-addon2" runat="server" />
                  <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
             </div>
           </div>
@@ -20,9 +20,8 @@
             </div>
          </div>
 
-        <div class="row">
-             <asp:Label ID="lblBusquedaIncorrecta" Text="" runat="server" />
-        </div>
+        <asp:Label ID="lblBusquedaIncorrecta" Text="No se encontraron resultados." Visible="false" runat="server" />
+        
 
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
@@ -37,7 +36,7 @@
                                    <asp:BoundField datafield = "Dirección" HeaderText ="DIRECCIÓN" />
                                    <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="FECHA DE NACIMIENTO" />
                                    <asp:BoundField datafield = "Estado" HeaderText ="ESTADO" />
-                                   <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="Especialidades" ControlStyle-Font-Bold="true" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BorderStyle="None" />
+                                   <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="+ INFO" ControlStyle-Font-Bold="true" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BorderStyle="None" />
                                    <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
                                    <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
                                    

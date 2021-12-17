@@ -31,10 +31,11 @@ namespace WebApplication1
                     txtApellido.Text = paciente.Apellido;
                     txtNombre.Text = paciente.Nombre;
                     ddlistCobertura.SelectedValue = paciente.Cobertura.Id.ToString();
-                    txtFechaNac.Text = paciente.FechaNacimiento.ToString();
+                    txtFechaNac.Text = paciente.FechaNacimiento.ToString("yyyy-MM-dd");
                     txtTelefono.Text = paciente.Telefono;
                     txtEmail.Text = paciente.Email;
                     txtDireccion.Text = paciente.Dirección;
+
                 }
             }
             catch (Exception ex)
@@ -78,5 +79,6 @@ namespace WebApplication1
             Response.Redirect("Pacientes.aspx");
 
         }
+
     }
 }

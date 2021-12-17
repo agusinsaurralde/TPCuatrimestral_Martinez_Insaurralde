@@ -13,7 +13,14 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+           
+            
+            
+           
+=======
 
+>>>>>>> d00b65a407a320825bb390aea7a4c2ae11f6f317
         }
     }
 }

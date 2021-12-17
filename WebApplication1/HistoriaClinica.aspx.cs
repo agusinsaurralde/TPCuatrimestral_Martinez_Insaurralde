@@ -13,39 +13,82 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
-            List<HistoriaClinica> lista = hcDB.lista();
+            Usuario userLog = (Usuario)Session["Usuario"];
 
-            
-            List<HistoriaClinica> listaFiltrada = new List<HistoriaClinica>();
-            HistoriaClinica historia = new HistoriaClinica();
-            PacienteDB pacienteDB = new PacienteDB();
-            List<Paciente> listaPacientes = pacienteDB.listarPaciente();
-
-            //guarda última historia clinica por paciente
-            foreach (Paciente obj in listaPacientes)
+            if (userLog == null)
             {
-                if(lista.FindLast(x => x.Paciente.ID == obj.ID) != null)
-                {
-                    historia = lista.FindLast(x => x.Paciente.ID == obj.ID);
-                    listaFiltrada.Add(historia);
-                }
-
+                Session.Add("Error", "Debes iniciar sesión");
+                Response.Redirect("ErrorIngreso.aspx", false);
             }
+            else
+            {
+                EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                Empleado empleadoLog = new Empleado();
+                empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
 
-            Grilla.DataSource = listaFiltrada;
-            Grilla.DataBind();
-            Session.Add("hcFiltrada", listaFiltrada);
+                HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
+                List<HistoriaClinica> lista = hcDB.lista();
+
+
+                List<HistoriaClinica> listaFiltrada = new List<HistoriaClinica>();
+                HistoriaClinica historia = new HistoriaClinica();
+                PacienteDB pacienteDB = new PacienteDB();
+                List<Paciente> listaPacientes = pacienteDB.listarPaciente();
+
+               
+                
+
+                //filtra historias según el médico logueado
+                if (userLog.TipoUsuario.Nombre == "Médico")
+                {
+                    //guarda última historia clinica por paciente
+                    foreach (Paciente obj in listaPacientes)
+                    {
+                        if (lista.FindLast(x => x.Paciente.ID == obj.ID && x.Medico.ID == empleadoLog.ID) != null)
+                        {
+                            historia = lista.FindLast(x => x.Paciente.ID == obj.ID && x.Medico.ID == empleadoLog.ID);
+                            listaFiltrada.Add(historia);
+                        }
+
+                    }
+
+                    Grilla.DataSource = listaFiltrada;
+                    Grilla.DataBind();
+                }
+                else
+                {//lista para administrador
+                    foreach (Paciente obj in listaPacientes)
+                    {
+                        if (lista.FindLast(x => x.Paciente.ID == obj.ID) != null)
+                        {
+                            historia = lista.FindLast(x => x.Paciente.ID == obj.ID);
+                            listaFiltrada.Add(historia);
+                        }
+
+                    }
+                    Grilla.DataSource = listaFiltrada;
+                    Grilla.DataBind();
+                }
+            }
+            
+
+          
+            //Session.Add("hcFiltrada", listaFiltrada);
         }
         protected void Click_Buscar(object sender, EventArgs e)
         {
             HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
-            List<HistoriaClinica> hcBusqueda = hcDB.buscar(txtBusqueda.Text); 
+            List<HistoriaClinica> hcBusqueda = hcDB.buscar(txtBusqueda.Text);
 
-            if (hcBusqueda != null)
+            Grilla.DataSource = hcBusqueda;
+            Grilla.DataBind();
+            if (hcBusqueda.Count != 0)
             {
-                Grilla.DataSource = hcBusqueda;
-                Grilla.DataBind();
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
 
         }
@@ -59,6 +102,23 @@ namespace WebApplication1
 
             Session.Add("Historia", lista.FindAll(x => x.Paciente.ID == historiaSeleccionada.Paciente.ID));
             Response.Redirect("HistoriaClinicaDetalle.aspx");
+        }
+
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
+            List<HistoriaClinica> hcBusqueda = hcDB.buscar(txtBusqueda.Text);
+
+            Grilla.DataSource = hcBusqueda;
+            Grilla.DataBind();
+            if (hcBusqueda.Count != 0)
+            {
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
+            }
         }
     }
 }

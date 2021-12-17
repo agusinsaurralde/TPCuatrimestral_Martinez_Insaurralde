@@ -34,10 +34,15 @@ namespace WebApplication1
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Cobertura> coberturasBusqueda = coberturaDB.buscar(txtBusqueda.Text);
-            if (coberturasBusqueda != null)
+            Grilla.DataSource = coberturasBusqueda;
+            Grilla.DataBind();
+            if (coberturasBusqueda.Count != 0)
             {
-                Grilla.DataSource = coberturasBusqueda;
-                Grilla.DataBind();
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
         }
 
@@ -107,6 +112,21 @@ namespace WebApplication1
             Session.Add("modificar", coberturaDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
             txtEditarCobertura.Text = ((Cobertura)Session["modificar"]).Nombre;
             editarCobertura_Modal.Show();
+        }
+
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            List<Cobertura> cobertura = coberturaDB.buscar(txtBusqueda.Text);
+            Grilla.DataSource = cobertura;
+            Grilla.DataBind();
+            if (cobertura.Count != 0)
+            {
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
+            }
         }
     }
 }

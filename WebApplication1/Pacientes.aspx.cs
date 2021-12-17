@@ -45,10 +45,15 @@ namespace WebApplication1
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Paciente> pacientesBusqueda = db.buscar(txtBusqueda.Text);
-            if(pacientesBusqueda != null)
+            Grilla.DataSource = pacientesBusqueda;
+            Grilla.DataBind();
+            if (pacientesBusqueda.Count != 0)
             {
-                Grilla.DataSource = pacientesBusqueda;
-                Grilla.DataBind();
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
 
         }
@@ -66,6 +71,21 @@ namespace WebApplication1
             catch (Exception)
             {
                 Response.Redirect("ErrorEliminar.aspx?error=" + error, false);
+            }
+        }
+
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            List<Paciente> pacientesBusqueda = db.buscar(txtBusqueda.Text);
+            Grilla.DataSource = pacientesBusqueda;
+            Grilla.DataBind();
+            if (pacientesBusqueda.Count != 0)
+            {
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace WebApplication1
                     txtMatricula.Text = medico.Matricula;
                     txtApellido.Text = medico.Apellido;
                     txtNombre.Text = medico.Nombre;
-                    txtFechaNac.Text = medico.FechaNacimiento.ToString("dd-mm-yyyy");
+                    txtFechaNac.Text = medico.FechaNacimiento.ToString("yyyy-MM-dd");
                     txtTelefono.Text = medico.Telefono;
                     txtEmail.Text = medico.Email;
                     txtDireccion.Text = medico.Dirección;

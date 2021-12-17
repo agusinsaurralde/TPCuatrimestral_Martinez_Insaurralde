@@ -18,7 +18,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT Numero, IDPaciente, CONCAT(NombrePaciente, ' ', ApellidoPaciente) as NombreCompletoPaciente, ApellidoPaciente, NombrePaciente, IDEspecialidad, Especialidad, IDMedico, CONCAT(NombreMedico,' ', ApellidoMedico) as NombreCompletoMedico, ApellidoMedico, NombreMedico, HoraInicio, Dia, Observaciones, IDRecepcionista, CONCAT(NombreRecepcionista,' ', ApellidoRecepcionista) as NombreCompletoRecepcionista, ApellidoRecepcionista, NombreRecepcionista, IDEstado, Estado FROM VW_TURNOS");
+                datos.setearConsulta("SELECT Numero, IDPaciente, CONCAT(NombrePaciente, ' ', ApellidoPaciente) as NombreCompletoPaciente, ApellidoPaciente, NombrePaciente, IDEspecialidad, Especialidad, IDMedico, CONCAT(NombreMedico,' ', ApellidoMedico) as NombreCompletoMedico, ApellidoMedico, NombreMedico, HoraInicio, Dia, Observaciones, IDRecepcionista, CONCAT(NombreRecepcionista,' ', ApellidoRecepcionista) as NombreCompletoRecepcionista, ApellidoRecepcionista, NombreRecepcionista, IDEstado, Estado FROM VW_TURNOS order by dia desc");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

@@ -40,10 +40,15 @@ namespace WebApplication1
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Turno> turnosBusqueda = turnoBD.buscar(ddlistCriterio.SelectedItem.Text, txtBusqueda.Text);
-            if (turnosBusqueda != null)
+            Grilla.DataSource = turnosBusqueda;
+            Grilla.DataBind();
+            if (turnosBusqueda.Count != 0)
             {
-                Grilla.DataSource = turnosBusqueda;
-                Grilla.DataBind();
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
 
         }
@@ -81,6 +86,20 @@ namespace WebApplication1
             Grilla.DataBind();
         }
 
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            List<Turno> turnosBusqueda = turnoBD.buscar(ddlistCriterio.SelectedItem.Text, txtBusqueda.Text);
+            Grilla.DataSource = turnosBusqueda;
+            Grilla.DataBind();
+            if (turnosBusqueda.Count != 0)
+            {
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
+            }
+        }
     }
 
 

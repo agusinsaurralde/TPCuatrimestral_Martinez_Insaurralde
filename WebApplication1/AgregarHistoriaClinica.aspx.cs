@@ -13,7 +13,15 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           Turno datos = (Turno)Session["agregarHistoriaClinica"];
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if (Session["Usuario"] == null)
+            {
+                Session.Add("Error", "Debes iniciar sesión");
+                Response.Redirect("ErrorIngreso.aspx", false);
+            }
+
+            Turno datos = (Turno)Session["agregarHistoriaClinica"];
            txtNombrePaciente.Text = datos.Paciente.NombreCompleto;
             lblFecha.Text = datos.Dia.ToShortDateString();
         }
@@ -22,6 +30,10 @@ namespace WebApplication1
         {
             string agregado = "Historia clínica";
             string error = "historia clínica";
+            Usuario userLog = (Usuario)Session["Usuario"];
+            EmpleadoDB empleadoLogDB = new EmpleadoDB();
+            Empleado empleadoLog = new Empleado();
+            empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
             try
             { 
 
@@ -31,6 +43,11 @@ namespace WebApplication1
 
                 hc.Paciente = new Paciente();
                 hc.Paciente.ID = datos.Paciente.ID;
+                hc.Medico = new Medico();
+                if(empleadoLog.TipoEmp.Nombre == "Médico")
+                {
+                    hc.Medico.ID = empleadoLog.ID;
+                }
                 hc.Descripcion = txtDescripcion.Text;
                 hc.Fecha = datos.Dia;
                 

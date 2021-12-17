@@ -30,9 +30,6 @@ create table Empleado(
 	CONSTRAINT CHK_FechaNacimientoEmpleado CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
 go
-select * from empleado where nombre like 'Ana'
-select * from especialidadxmedico where idmedico = 7
-select * from diashabilesmedico
 --ESPECIALIDAD---------------------------------
 create table Especialidad(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -125,6 +122,7 @@ GO
 create table HistoriaClinica(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
 	IDPaciente int not null,
+	IDMedico int not null FOREIGN KEY REFERENCES Empleado(ID),
 	Fecha DATE not null,
     Descripcion VARCHAR(500) not null,
 	Estado bit not null,
@@ -182,16 +180,6 @@ create table Usuario(
 	CONSTRAINT FK_IDTipoUsuario FOREIGN KEY (IDTipo) REFERENCES TipoUsuario(ID)
 )
 
-
-
-/*select * from Usuario
-select * from tipoempleado
-select * from empleado
-select * from TipoUsuario
-select * from Cobertura
-select * from Especialidad
-select * from HistoriaClinica
-select * from Paciente*/
 go
 set dateformat 'dmy'
 -----------Insert especialidades-------------------------
@@ -263,36 +251,6 @@ go
 insert Especialidad(Nombre, Estado) values('Radio-Oncólogía', 1)
 go
 insert Especialidad(Nombre, Estado) values('Urología', 1)
-go
-
------------------------------INSERT PACIENTES--------------------------------------------
-insert Cobertura(Nombre, Estado)VALUES('OSDE', 1)
-go
-insert Cobertura(Nombre, Estado)VALUES('OSECAC', 1)
-go
-insert Cobertura(Nombre, Estado)VALUES('OSPATCA', 1)
-go
-insert Cobertura(Nombre, Estado)VALUES('OSDEPYM', 1)
-go
-insert Cobertura(Nombre, Estado)VALUES('OSPIAD', 1)
-go
-insert Cobertura(Nombre, Estado)VALUES('Particular', 1)
-go
-insert Cobertura(Nombre, Estado)VALUES('Unión Personal', 1)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123456', 'Jose', 'Argento', '753951', 'argentoJ@hotmail.com', 'Flores 1855', '10-05-1996',1,1)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123457', 'Erica', 'Rivas', '753952', 'rivasR@hotmail.com', 'Montes 1387', '23-05-1966',1,1)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123458', 'Marcelo', 'de Bellis', '753953', 'debellisM@hotmail.com', 'San Justo 503', '01-01-2000',2,1)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123459', 'Manuel', 'Wirtz', '753954', 'wirtzM@hotmail.com', 'Rojas 8088', '02-02-2010',2,1)
-go
-insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123450', 'Carla', 'Quevedo', '753955', 'quevedoC@hotmail.com', 'Rosset 99', '23-04-1988',3,1)
-go
-insert HistoriaClinica(IDPaciente, Descripcion, Fecha, Estado) VALUES (1, 'Síndrome de intestino irritable', '10-10-2021', 1)
-GO
-insert HistoriaClinica(IDPaciente, Descripcion, Fecha, Estado) VALUES (2, 'Síndrome de ovario poliquístico', '07-11-2021', 1)
 
 
 ---------------------insert Empleado----------------------------
@@ -313,8 +271,7 @@ go
 INSERT EstadoTurno(Descripcion)VALUES('Reprogramado')
 go
 INSERT EstadoTurno(Descripcion)VALUES('Cancelado')
-go
-INSERT EstadoTurno(Descripcion)VALUES('No asistió')
+
 
 -----------Medicos
 go
@@ -435,6 +392,36 @@ INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, Horar
 go
 INSERT DiasHabilesMedico (IDMedico, IDEspecialidad, IDDia, HorarioEntrada, HorarioSalida, Estado)	VALUES(10, 5, 6, '13:00', '17:00', 1)
 go
+-----------------------------INSERT PACIENTES--------------------------------------------
+insert Cobertura(Nombre, Estado)VALUES('OSDE', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSECAC', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSPATCA', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSDEPYM', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('OSPIAD', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('Particular', 1)
+go
+insert Cobertura(Nombre, Estado)VALUES('Unión Personal', 1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123456', 'Jose', 'Argento', '753951', 'argentoJ@hotmail.com', 'Flores 1855', '10-05-1996',1,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123457', 'Erica', 'Rivas', '753952', 'rivasR@hotmail.com', 'Montes 1387', '23-05-1966',1,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123458', 'Marcelo', 'de Bellis', '753953', 'debellisM@hotmail.com', 'San Justo 503', '01-01-2000',2,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123459', 'Manuel', 'Wirtz', '753954', 'wirtzM@hotmail.com', 'Rojas 8088', '02-02-2010',2,1)
+go
+insert Paciente(DNI, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Cobertura, Estado)VALUES('123450', 'Carla', 'Quevedo', '753955', 'quevedoC@hotmail.com', 'Rosset 99', '23-04-1988',3,1)
+go
+insert HistoriaClinica(IDPaciente, Descripcion, Fecha, Estado, IDMedico) VALUES (1, 'Síndrome de intestino irritable', '10-10-2021', 1, 1)
+GO
+insert HistoriaClinica(IDPaciente, Descripcion, Fecha, Estado, IDMedico) VALUES (2, 'Síndrome de ovario poliquístico', '07-11-2021', 1, 2)
+
+go
 ----Administradores y recepcionistas															
 
 insert Empleado(DNI, IDTipo, Nombre, Apellido, Telefono, Email, Direccion, FechaNacimiento, Estado)VALUES(9999, 2, 'Maria', 'Ster', 535353, 'sterM@hotmail.com', 'Monte agudo 1742', '10-10-2002',1)
@@ -467,5 +454,5 @@ Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(17, 'g
 
 ---TURNOS----------------------------------------------------------------
 GO
-INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio)VALUES(5,1,'12-12-2021','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00')
+INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio)VALUES(5,1,'18-12-2021','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00')
 

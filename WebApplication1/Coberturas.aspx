@@ -33,12 +33,13 @@
     <br />
     <h1>Coberturas</h1>
     <hr />
-    
+     <asp:UpdatePanel runat="server">
+        <ContentTemplate>
      <div class="container">
         <div class="d-flex flex-row-reverse">
          <div class="col-md-4">
             <div class="input-group mb-3">
-                 <asp:TextBox class="form-control" ID="txtBusqueda" aria-describedby="button-addon2" runat="server" />
+                 <asp:TextBox class="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostBack="true" aria-describedby="button-addon2" runat="server" />
                  <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
             </div>
           </div>
@@ -46,9 +47,10 @@
                   <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
          </div>
+
+         <asp:Label id="resultados" Text="No se encontraron resultados." Visible ="false" runat="server" />
     </div>
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
+   
              <div>
             <asp:GridView CssClass="table table-hover" ID="Grilla" AutoPostback="true" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
                 <Columns>

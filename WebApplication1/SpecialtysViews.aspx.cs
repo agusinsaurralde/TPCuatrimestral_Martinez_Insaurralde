@@ -36,20 +36,30 @@ namespace WebApplication1
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Especialidad> especialidadBusqueda = especialidadDB.buscar(txtBusqueda.Text);
-            if (especialidadBusqueda != null)
+            Grilla.DataSource = especialidadBusqueda;
+            Grilla.DataBind();
+            if (especialidadBusqueda.Count != 0)
             {
-                Grilla.DataSource = especialidadBusqueda;
-                Grilla.DataBind();
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
         }
 
         protected void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
             List<Especialidad> especialidadBusqueda = especialidadDB.buscar(txtBusqueda.Text);
-            if (especialidadBusqueda != null)
+            Grilla.DataSource = especialidadBusqueda;
+            Grilla.DataBind();
+            if (especialidadBusqueda.Count != 0)
             {
-                Grilla.DataSource = especialidadBusqueda;
-                Grilla.DataBind();
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
         }
 
@@ -127,9 +137,6 @@ namespace WebApplication1
             int id = Convert.ToInt32(Grilla.SelectedDataKey.Value);
             Session.Add("idEditarEspecialidad", id);
             cargarValoresAnteriores(id);
-
-           // Session.Add("modificar", especialidadDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
-            //txtEditarEspecialidad.Text = ((Especialidad)Session["modificar"]).Nombre;
             editarEspecialidad_Modal.Show();
         }
     }

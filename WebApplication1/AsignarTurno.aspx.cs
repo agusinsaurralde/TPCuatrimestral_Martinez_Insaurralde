@@ -34,19 +34,6 @@ namespace WebApplication1
                 ddlistEspecialidad.DataBind();
                 ddlistEspecialidad.Items.Insert(0, new ListItem("Seleccionar Especialidad", "0"));
 
-                //provisiorio
-               // List<Empleado> emp = empledoDB.listarRecepcionista();
-                //ddlistRecepcionista.DataSource = emp;
-               // ddlistRecepcionista.DataTextField = "NombreCompleto";
-               // ddlistRecepcionista.DataValueField = "ID";
-               // ddlistRecepcionista.DataBind();
-                //provisiorio
-               // List<EstadoTurno> estado = estadoDB.listar();
-                //ddlistEstado.DataSource = estado;
-               // ddlistEstado.DataTextField = "Estado";
-                //ddlistEstado.DataValueField = "ID";
-                //ddlistEstado.DataBind();
-
                 List<MedicoEspecialidades> espMedicos = medicoDB.listarEspecialidadesMedico();
                 Session["listaMedicoEsp"] = espMedicos;
                 ddlistMedico.DataSource = espMedicos;

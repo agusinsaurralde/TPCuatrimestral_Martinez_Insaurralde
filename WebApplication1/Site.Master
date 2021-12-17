@@ -96,71 +96,7 @@
 </nav>
 
 
-
-  
-<!--
-    <nav>
-        <h1>CLÍNICA DEMAR</h1>
-        <div class="menu">
-            <a class="is-active" href="/Default">INICIO</a>
-            <a class="nav-item nav-link" href="/Turnos">TURNOS</a>
-            <a class="nav-item nav-link" href="/Pacientes">PACIENTES</a>
-            <a class="nav-item nav-link" href="/HistoriaClinica">HISTORIA CLÍNICA</a>
-            <a class="nav-item nav-link" href="/Medicos">MÉDICOS</a>
-            <a class="nav-item nav-link" href="/SpecialtysViews">ESPECIALIDADES</a>
-            <a class="nav-item nav-link" href="/Coberturas">COBERTURAS</a>
-            <a class="nav-item nav-link" href="/Empleados">EMPLEADOS</a>
-            <a class="nav-item nav-link" href="/Ingreso">INICIAR SESIÓN</a>
-        </div>
-    </nav>
-
-    -->
-
-<%--        <nav class="navbar navbar-expand-lg navbar-white bg-dark">
-            <div class="container-fluid badge rounded-pill bg-warning text-dark">
-                <a class="navbar-brand" href="Default.aspx">Inicio</a>
-               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link active badge bg-dark" aria-current="page" href="/Turnos">Turnos</a>
-                        <a class="nav-link badge bg-dark" href="/Pacientes">Pacientes</a>
-                        <a class="nav-link badge bg-dark" href="/Medicos">Médicos</a>
-                        <a class="nav-link badge bg-dark" href="/HistoriaClinica">Historia Clínica</a>
-                        <a class="nav-link badge bg-dark" href="/Ingreso">Iniciar Sesión</a>
-                        <a class="nav-link badge bg-dark" href="/Coberturas">Coberturas</a>
-                        <a class="nav-link badge bg-dark" href="/Usuarios">Usuarios</a>
-                        <%--<a class="nav-link disabled">Disabled</a>
-                    </div>
-                </div>
-            </div>
-        </nav>--%>
-        
-        <%--<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Clínica Demar</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Turnos">Turnos</a></li>
-                        <li><a runat="server" href="~/Pacientes">Pacientes</a></li>
-                        <li><a runat="server" href="~/Medicos">Médicos</a></li>
-                        <li><a runat="server" href="~/HistoriaClinica">Historia Clínica</a></li>
-                        <li><a runat="server" href="~/Ingreso">Iniciar Sesión</a></li>
-                        <li><a runat="server" href="~/Coberturas">Coberturas</a></li>
-                        <li><a runat="server" href="~/Usuarios">Usuarios</a></li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>--%>       
+ 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

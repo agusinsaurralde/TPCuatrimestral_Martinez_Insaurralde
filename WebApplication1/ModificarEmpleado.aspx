@@ -78,7 +78,7 @@
             else {
                 $("#txtNombreUsuario").removeClass("is-invalid");
             }
-
+           
             if (contraseña === "") {
                 $("#txtContraseña").addClass("is-invalid");
                 valido = false;

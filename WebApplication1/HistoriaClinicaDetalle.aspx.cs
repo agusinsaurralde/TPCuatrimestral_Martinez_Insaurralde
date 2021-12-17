@@ -13,10 +13,41 @@ namespace WebApplication1
     { 
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<HistoriaClinica> listaPorPaciente = (List<HistoriaClinica>)Session["Historia"];
-            lblNombrePaciente.Text = listaPorPaciente[0].Paciente.NombreCompleto;
-            Grilla.DataSource = listaPorPaciente;
-            Grilla.DataBind();
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if (userLog == null)
+            {
+                Session.Add("Error", "Debes iniciar sesión");
+                Response.Redirect("ErrorIngreso.aspx", false);
+            }
+            else
+            {
+                //carga datos empleado logueado
+                EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                Empleado empleadoLog = new Empleado();
+                empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
+                //lista de descripciones
+                List<HistoriaClinica> listaPorPaciente = (List<HistoriaClinica>)Session["Historia"];
+
+
+                lblNombrePaciente.Text = listaPorPaciente[0].Paciente.NombreCompleto;
+
+
+                //filtra historias según el médico logueado
+                if (userLog.TipoUsuario.Nombre == "Médico")
+                {
+                    List<HistoriaClinica> listaFiltradaMedico = listaPorPaciente.FindAll(x => x.Medico.ID == empleadoLog.ID);
+                    Grilla.DataSource = listaFiltradaMedico;
+                    Grilla.DataBind();
+                }
+                else
+                {
+                    Grilla.DataSource = listaPorPaciente;
+                    Grilla.DataBind();
+                }
+               
+            }
+            
         }
         protected void Click_Editar(object sender, EventArgs e)
         {

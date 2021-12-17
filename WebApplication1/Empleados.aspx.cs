@@ -41,10 +41,15 @@ namespace WebApplication1
         protected void Click_Buscar(object sender, EventArgs e)
         {
             List<Empleado> empleadoBusqueda = db.buscarEmpleado(txtBusqueda.Text);
-            if (empleadoBusqueda != null)
+            Grilla.DataSource = empleadoBusqueda;
+            Grilla.DataBind();
+            if (empleadoBusqueda.Count != 0)
             {
-                Grilla.DataSource = empleadoBusqueda;
-                Grilla.DataBind();
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
             }
 
         }
@@ -66,6 +71,21 @@ namespace WebApplication1
             usuarioDB.eliminar((int)Session["eliminar"]);
             Grilla.DataSource = db.listarEmpleado();
             Grilla.DataBind();
+        }
+
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            List<Empleado> empleadoBusqueda = db.buscarEmpleado(txtBusqueda.Text);
+            Grilla.DataSource = empleadoBusqueda;
+            Grilla.DataBind();
+            if (empleadoBusqueda.Count != 0)
+            {
+                resultados.Visible = false;
+            }
+            else
+            {
+                resultados.Visible = true;
+            }
         }
     }
 }

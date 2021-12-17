@@ -35,6 +35,9 @@ namespace WebApplication1
                 UsuarioDB usuarioDB = new UsuarioDB();
                 List<Usuario> listaUsuarios = usuarioDB.listar();
                 usuario = listaUsuarios.Find(x => x.IDUsuario == idMedico);
+
+                lblContraseña.Text = usuario.Contraseña;
+                lblUsuario.Text = usuario.NombreUsuario;
             }
 
         }

@@ -4,14 +4,14 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <h3>Pacientes</h3>
+    <h1>Pacientes</h1>
     <hr />
     
     <div class="container" style="margin:20px 0px 20px 0px">
         <div class="d-flex flex-row-reverse">
          <div class="col-md-4">
             <div class="input-group mb-3">
-                 <asp:TextBox class="form-control" ID="txtBusqueda" aria-describedby="button-addon2" runat="server" />
+                 <asp:TextBox class="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostBack="true" aria-describedby="button-addon2" runat="server" />
                  <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
             </div>
           </div>
@@ -21,6 +21,7 @@
          </div>
     </div>
 
+    <asp:Label id="resultados" Text="No se encontraron resultados." Visible="false" runat="server" />
 
    <div style="margin-bottom:40px">
         <asp:GridView CssClass="table table-hover" ID="Grilla" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
