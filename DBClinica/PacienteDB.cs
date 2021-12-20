@@ -129,7 +129,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE Paciente SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, FechaNacimiento = @FechaNacimiento, Cobertura = @IDCobertura, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, Estado = @Estado WHERE ID =" + ModPaciente.ID + "");
+                datos.setearConsulta("UPDATE Paciente SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, FechaNacimiento = @FechaNacimiento, Cobertura = @IDCobertura, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, Estado = 1 WHERE ID =" + ModPaciente.ID + "");
                 datos.setearParametro("@DNI", ModPaciente.DNI);
                 datos.setearParametro("@Apellido", ModPaciente.Apellido);
                 datos.setearParametro("@Nombre", ModPaciente.Nombre);
@@ -138,7 +138,6 @@ namespace DBClinica
                 datos.setearParametro("@Telefono", ModPaciente.Telefono);
                 datos.setearParametro("@Email", ModPaciente.Email);
                 datos.setearParametro("@Direccion", ModPaciente.Dirección);
-                datos.setearParametro("@Estado", ModPaciente.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
