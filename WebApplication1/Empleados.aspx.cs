@@ -14,27 +14,28 @@ namespace WebApplication1
         EmpleadoDB db = new EmpleadoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario userLog = (Usuario)Session["Usuario"];
-
-            if (Session["Usuario"] == null)
-            {
-                Session.Add("Error", "Debes iniciar sesión");
-                Response.Redirect("ErrorIngreso.aspx", false);
-            }
-            else if(userLog.TipoUsuario.Nombre == "Médico")
-            {
-                Session.Add("Error", "Acceso denegado"); ;
-                Response.Redirect("ErrorPermisosAcceso.aspx", false);
-
-            }
-            else if (userLog.TipoUsuario.Nombre == "Recepcionista")
-            {
-                Session.Add("Error", "Acceso denegado"); ;
-                Response.Redirect("ErrorPermisosAcceso.aspx", false);
-            }
-
             if (!IsPostBack)
             {
+                 Usuario userLog = (Usuario)Session["Usuario"];
+
+                 if (Session["Usuario"] == null)
+                 {
+                     Session.Add("Error", "Debes iniciar sesión");
+                     Response.Redirect("ErrorIngreso.aspx", false);
+                 }
+                 else if(userLog.TipoUsuario.Nombre == "Médico")
+                 {
+                     Session.Add("Error", "Acceso denegado"); ;
+                     Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+                 }
+                 else if (userLog.TipoUsuario.Nombre == "Recepcionista")
+                 {
+                     Session.Add("Error", "Acceso denegado"); ;
+                     Response.Redirect("ErrorPermisosAcceso.aspx", false);
+                 }
+
+            
                 Grilla.DataSource = db.listarEmpleado();
                 Grilla.DataBind();
             } 
@@ -84,12 +85,25 @@ namespace WebApplication1
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            EmpleadoDB empleadoDB = new EmpleadoDB();
-            empleadoDB.eliminar((int)Session["eliminar"]);
-            UsuarioDB usuarioDB = new UsuarioDB();
-            usuarioDB.eliminar((int)Session["eliminar"]);
-            Grilla.DataSource = db.listarEmpleado();
-            Grilla.DataBind();
+            try
+            {
+                EmpleadoDB empleadoDB = new EmpleadoDB();
+                empleadoDB.eliminar((int)Session["eliminar"]);
+                UsuarioDB usuarioDB = new UsuarioDB();
+                usuarioDB.eliminar((int)Session["eliminar"]);
+                Grilla.DataSource = db.listarEmpleado();
+                Grilla.DataBind();
+                lblTituloAlertModal.Text = "Eliminar Empleado";
+                lblVerificacion.Text = "El empleado fue eliminado con éxito.";
+                verificacion_Modal.Show();
+            }
+            catch (Exception)
+            {
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un error al eliminar el empleado.";
+                verificacion_Modal.Show();
+            }
+            
         }
 
         protected void txtBusqueda_TextChanged(object sender, EventArgs e)

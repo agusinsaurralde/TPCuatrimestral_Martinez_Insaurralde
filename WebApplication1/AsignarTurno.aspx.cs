@@ -13,21 +13,22 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario userLog = (Usuario)Session["Usuario"];
-
-            if (Session["Usuario"] == null)
-            {
-                Session.Add("Error", "Debes iniciar sesión");
-                Response.Redirect("ErrorIngreso.aspx", false);
-            }
-            else if (userLog.UsuarioMedico(userLog))
-            {
-                Session.Add("Error", "Acceso denegado"); ;
-                Response.Redirect("ErrorPermisosAcceso.aspx", false);
-
-            }
             if (!IsPostBack)
             {
+                Usuario userLog = (Usuario)Session["Usuario"];
+    
+                if (Session["Usuario"] == null)
+                {
+                    Session.Add("Error", "Debes iniciar sesión");
+                    Response.Redirect("ErrorIngreso.aspx", false);
+                }
+                else if (userLog.UsuarioMedico(userLog))
+                {
+                    Session.Add("Error", "Acceso denegado"); ;
+                    Response.Redirect("ErrorPermisosAcceso.aspx", false);
+    
+                }
+           
                 EspecialidadDB espDB = new EspecialidadDB();
                 EmpleadoDB empledoDB = new EmpleadoDB();
                 EstadoTurnoDB estadoDB = new EstadoTurnoDB();
@@ -119,6 +120,8 @@ namespace WebApplication1
 
                 txtCobertura.Visible = true;
                 ddlistEspecialidad.Enabled = true;
+                ddlistEspecialidad.SelectedIndex = 0;
+                ddlistMedico.SelectedIndex = 0;
                 ddlistMedico.Enabled = false;
                 Calendario.Enabled = false;
                 ddlistHora.Enabled = false;
@@ -329,13 +332,29 @@ namespace WebApplication1
 
                 Turno ultTurno = listaturnos.FindLast(x => x.Paciente.ID == NuevoTurno.Paciente.ID);
                 NuevoTurno.Numero = ultTurno.Numero;
-                Session.Add("NuevoTurno", NuevoTurno);
 
-                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
+                EmailService emailService = new EmailService();
+                emailService.armarCorreo(NuevoTurno);
+                try
+                {
+                    emailService.enviarEmail();
+                    lblEmail.Text = "Se envió un mail de confimarción. ";
+                }
+                catch (Exception)
+                {
+                    lblEmail.Text = "Hubo un error al enviar el mail de confimarción.";
+
+                }
+
+                lblTituloAlertModal.Text = "Asignar Turno";
+                lblVerificacion.Text = "Turno asignado correctamente";
+                verificacion_Modal.Show();
             }
             catch (Exception)
             {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un error al asignar el turno.";
+                verificacion_Modal.Show();
             }
         }
 

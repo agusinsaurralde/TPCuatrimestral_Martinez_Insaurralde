@@ -96,30 +96,48 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnAceptarCancelar;
 
         /// <summary>
-        /// Control btnEditarRestringido.
+        /// Control btnRestringido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditarRestringido;
+        protected global::System.Web.UI.WebControls.Button btnRestringido;
 
         /// <summary>
-        /// Control btnEditarRestringido_Modal.
+        /// Control btnRestringido_Modal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender btnEditarRestringido_Modal;
+        protected global::AjaxControlToolkit.ModalPopupExtender btnRestringido_Modal;
 
         /// <summary>
-        /// Control PanelEditar.
+        /// Control PanelR.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelEditar;
+        protected global::System.Web.UI.WebControls.Panel PanelR;
+
+        /// <summary>
+        /// Control lblTituloAlertModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloAlertModal;
+
+        /// <summary>
+        /// Control lblRestringido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRestringido;
     }
 }

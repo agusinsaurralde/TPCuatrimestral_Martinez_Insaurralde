@@ -13,63 +13,62 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario userLog = (Usuario)Session["Usuario"];
+            if (!IsPostBack)
+            {
+                Usuario userLog = (Usuario)Session["Usuario"];
 
-            if (Session["Usuario"] == null)
-            {
-                Session.Add("Error", "Debes iniciar sesión");
-                Response.Redirect("ErrorIngreso.aspx", false);
-            }
-            else if (userLog.TipoUsuario.Nombre == "Médico")
-            {
-                Session.Add("Error", "Acceso denegado"); ;
-                Response.Redirect("ErrorPermisosAcceso.aspx", false);
-
-            }
-            else if (userLog.TipoUsuario.Nombre == "Recepcionista")
-            {
-                Session.Add("Error", "Acceso denegado"); ;
-                Response.Redirect("ErrorPermisosAcceso.aspx", false);
-            }
-
-            TipoEmpleadoDB db = new TipoEmpleadoDB();
-            try
-            {
-                if (!IsPostBack)
+                if (Session["Usuario"] == null)
                 {
-                    RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                    RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
-
-
-                    List<TipoEmpleado> empleado = db.listar();
-                    List<TipoEmpleado> empleadosSinMedico = empleado.FindAll(x => x.Nombre != "Médico");
-                    ddlistTipoEmpleado.DataSource = empleadosSinMedico;
-                    ddlistTipoEmpleado.DataTextField = "Nombre";
-                    ddlistTipoEmpleado.DataValueField = "ID";
-                    ddlistTipoEmpleado.DataBind();
+                    Session.Add("Error", "Debes iniciar sesión");
+                    Response.Redirect("ErrorIngreso.aspx", false);
                 }
-            }
-            catch (Exception ex)
-            {
+                else if (userLog.TipoUsuario.Nombre == "Médico")
+                {
+                    Session.Add("Error", "Acceso denegado"); ;
+                    Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+                }
+                else if (userLog.TipoUsuario.Nombre == "Recepcionista")
+                {
+                    Session.Add("Error", "Acceso denegado"); ;
+                    Response.Redirect("ErrorPermisosAcceso.aspx", false);
+                }
+
+                TipoEmpleadoDB db = new TipoEmpleadoDB();
+                try
+                {
+                    
+                        RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                        RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
+
+
+                        List<TipoEmpleado> empleado = db.listar();
+                        List<TipoEmpleado> empleadosSinMedico = empleado.FindAll(x => x.Nombre != "Médico");
+                        ddlistTipoEmpleado.DataSource = empleadosSinMedico;
+                        ddlistTipoEmpleado.DataTextField = "Nombre";
+                        ddlistTipoEmpleado.DataValueField = "ID";
+                        ddlistTipoEmpleado.DataBind();
+                   
+                }
+                catch (Exception ex)
+                {
                 Session.Add("Error", ex);
                 //throw ex;
+            }
             }
         }
 
         protected void Click_Aceptar(object sender, EventArgs e)
         {
 
-            Empleado NuevoEmpleado = new Empleado();
-            EmpleadoDB cargar = new EmpleadoDB();
-            Usuario nuevoUsuario = new Usuario();
-            UsuarioDB cargarUsuario = new UsuarioDB();
-            string agregado = "Empleado";
-            string error = "empleado";
-
             if(!Page.IsValid)
                      return;
             try
             {
+                Empleado NuevoEmpleado = new Empleado();
+                EmpleadoDB cargar = new EmpleadoDB();
+                Usuario nuevoUsuario = new Usuario();
+                UsuarioDB cargarUsuario = new UsuarioDB();
                 NuevoEmpleado.DNI = txtDNI.Text;
                 NuevoEmpleado.Apellido = txtApellido.Text;
                 NuevoEmpleado.Nombre = txtNombre.Text;
@@ -97,13 +96,11 @@ namespace WebApplication1
                 cargarUsuario.AgregarUsuario(nuevoUsuario);
 
                 ejecutarModal();
-                //Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
             catch (Exception)
             {
 
                 ejecutarModalcatch();
-                // Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
             
            
@@ -163,17 +160,15 @@ namespace WebApplication1
 
         protected void ejecutarModal()
         {
-            lblTituloAlertModalEmpleado.Text = "Agerado! ";
-            lblEmpleadoContext.Text = txtNombre.Text + " " + txtApellido.Text;
-            lblEmpleadoConfirmDNI.Text = "El Empleado se agrego de manera correcta!.";
+            lblTituloAlertModalEmpleado.Text = "Agregado! ";
+            lblEmpleadoContext.Text = "El Empleado " + txtNombre.Text + " " + txtApellido.Text + " se agrego de manera correcta!" ;
             btnRevisaSiAgrega_Modal.Show();
         }
 
         protected void ejecutarModalcatch()
         {
             lblTituloAlertModalEmpleado.Text = "Error! ";
-            lblEmpleadoContext.Text = txtNombre.Text + " " + txtApellido.Text;
-            lblEmpleadoConfirmDNI.Text = "El Empleado no pudo ser agregado de forma correcta!.";
+            lblEmpleadoContext.Text = "Hubo un error al agregar el empleado";
             btnRevisaSiAgrega_Modal.Show();
         }
 

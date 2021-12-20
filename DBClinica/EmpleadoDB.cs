@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista'");
+                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista' order by e.apellido asc");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,6 +27,7 @@ namespace DBClinica
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Dirección = (string)datos.Lector["Direccion"];

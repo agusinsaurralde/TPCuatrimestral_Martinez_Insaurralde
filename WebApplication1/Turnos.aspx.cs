@@ -14,61 +14,67 @@ namespace WebApplication1
         TurnoDB turnoBD = new TurnoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario userLog = (Usuario)Session["Usuario"];
-
-            if (Session["Usuario"] == null)
+            if (!IsPostBack)
             {
-                Session.Add("Error", "Debes iniciar sesión");
-                Response.Redirect("ErrorIngreso.aspx", false);
-            }
-            else if (userLog.UsuarioMedico(userLog))
-            {
-                if (!IsPostBack)
-                {
-                    Grilla.Columns[2].Visible = false;
-                    Grilla.Columns[6].Visible = false;
-                    Grilla.Columns[9].Visible = false;
-                    Grilla.Columns[10].Visible = false;
-                    btnAsignarTurno.Visible = false;
-                    EmpleadoDB empleadoLogDB = new EmpleadoDB();
-                    Empleado empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
+                Usuario userLog = (Usuario)Session["Usuario"];
 
-                    List<Turno> lista = turnoBD.listarTurno();
-                    List<Turno> listaFiltrada = lista.FindAll(x => x.Medico.ID == empleadoLog.ID);
-                    Grilla.DataSource = listaFiltrada;
-                    Grilla.DataBind();
+                 if (Session["Usuario"] == null)
+                 {
+                     Session.Add("Error", "Debes iniciar sesión");
+                     Response.Redirect("ErrorIngreso.aspx", false);
+                 }
+                 else if (userLog.UsuarioMedico(userLog))
+                 {
+                     
+                     Grilla.Columns[2].Visible = false;
+                     Grilla.Columns[6].Visible = false;
+                     Grilla.Columns[9].Visible = false;
+                     Grilla.Columns[10].Visible = false;
+                     btnAsignarTurno.Visible = false;
+                     EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                     Empleado empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
 
-                }
-            }
-            else if (userLog.UsuarioRecepcionista(userLog))
-            {
-                
-                if (!IsPostBack)
-                {
-                    Grilla.Columns[8].Visible = false;
-                    EmpleadoDB empleadoLogDB = new EmpleadoDB();
-                    Empleado empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
-                    Grilla.DataSource = turnoBD.listarTurno();
-                    Grilla.DataBind();
+                     List<Turno> lista = turnoBD.listarTurno();
+                     List<Turno> listaFiltrada = lista.FindAll(x => x.Medico.ID == empleadoLog.ID);
+                     Grilla.DataSource = listaFiltrada;
+                     Grilla.DataBind();
 
-                }
-            }
-            else
-            {
-                if (!IsPostBack)
-                {
-                    Grilla.DataSource = turnoBD.listarTurno();
-                    Grilla.DataBind();
-                }
+                    
+                 }
+                 else if (userLog.UsuarioRecepcionista(userLog))
+                 {
+
+                      Grilla.Columns[8].Visible = false;
+                      EmpleadoDB empleadoLogDB = new EmpleadoDB();
+                      Empleado empleadoLog = empleadoLogDB.empleadoLogueado((int)userLog.IDUsuario);
+                      Grilla.DataSource = turnoBD.listarTurno();
+                      Grilla.DataBind();
+
+                 }
+                 else
+                 {
+                    
+                     Grilla.DataSource = turnoBD.listarTurno();
+                     Grilla.DataBind();
+                    
+                 }
             }
 
         }
 
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
-
             Session.Add("agregarHistoriaClinica", turnoBD.buscarporNumero((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
-            Response.Redirect("AgregarHistoriaClinica.aspx");
+            if(((Turno)Session["agregarHistoriaClinica"]).Estado.Estado != "Cerrado" || ((Turno)Session["agregarHistoriaClinica"]).Estado.Estado != "Cancelado")
+            {
+                Response.Redirect("AgregarHistoriaClinica.aspx");
+            }
+            else
+            {
+                lblTituloAlertModal.Text = "Acceso Restringido";
+                lblRestringido.Text = "No se puede agregar una observación a un turno cerrado o cancelado.";
+                btnRestringido_Modal.Show();
+            }
 
         }
 
@@ -126,7 +132,9 @@ namespace WebApplication1
             }
             else
             {
-                btnEditarRestringido_Modal.Show();
+                lblTituloAlertModal.Text = "Acceso Restringido";
+                lblRestringido.Text = "No se puede modificar un turno cerrado.";
+                btnRestringido_Modal.Show();
             }
         }
 
@@ -138,7 +146,17 @@ namespace WebApplication1
         protected void Grilla_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             Session.Add("id", (int)Grilla.DataKeys[e.RowIndex].Values[0]);
-            cancelarTurno_Modal.Show();
+            Turno turno = turnoBD.buscarporNumero((int)Grilla.DataKeys[e.RowIndex].Values[0]);
+            if(turno.Estado.Estado != "Cerrado" || turno.Estado.Estado != "Cancelado")
+            {
+                cancelarTurno_Modal.Show();
+            }
+            else
+            {
+                lblTituloAlertModal.Text = "Acceso Restringido";
+                lblRestringido.Text = "No se puede cancelar un turno cerrado o cancelado con anterioridad.";
+                btnRestringido_Modal.Show();
+            }
         }
 
         protected void btnAceptarCancelar_Click(object sender, EventArgs e)

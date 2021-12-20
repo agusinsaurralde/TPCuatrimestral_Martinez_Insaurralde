@@ -26,8 +26,7 @@
               <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" AutoPostback="true" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small">
                   <Columns>
                       <asp:BoundField datafield = "DNI" HeaderText ="DNI" />
-                      <asp:BoundField datafield = "Apellido" HeaderText ="APELLIDO" />
-                      <asp:BoundField datafield = "Nombre" HeaderText ="NOMBRE" />
+                      <asp:BoundField datafield = "NombreCompleto" HeaderText ="NOMBRE" />
                       <asp:BoundField datafield = "Telefono" HeaderText ="TELÉFONO" />
                       <asp:BoundField datafield = "Email" HeaderText ="EMAIL" />
                       <asp:BoundField datafield = "Dirección" HeaderText ="DIRECCIÓN" />
@@ -42,6 +41,34 @@
                 </ContentTemplate>
         </asp:UpdatePanel>
     </div>
+
+<!-- modal verificación -->
+    <asp:Button  style="display:none" runat="server" ID="btnVerificacion" />
+   <ajaxToolkit:ModalPopupExtender ID="verificacion_Modal" CancelControlID="exitV" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="verificacion_Modal" TargetControlID="btnVerificacion" PopupControlID="PanelVerificacion">
+    </ajaxToolkit:ModalPopupExtender>
+   
+
+    <asp:Panel ID="PanelVerificacion" BackColor="White" runat="server">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                     <div class="modal-header">
+                         <asp:Label ID="lblTituloAlertModal" class="modal-title" Font-Bold="true" Font-Size="X-Large" runat="server" />
+                       <button id="exitV" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                         <asp:Label ID="lblVerificacion" runat="server" />
+                       
+                     </div>
+                </ContentTemplate>
+        </asp:UpdatePanel>
+        <div class="modal-footer">
+                <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
+        </div>
+    </asp:Panel>
+
+
+
+
 <!-- modal eliminar-->
    <asp:Button  style="display:none" runat="server" ID="btnEliminar" />
    <ajaxToolkit:ModalPopupExtender ID="btnEliminar_Modal" CancelControlID="exit" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnEliminar_Modal" TargetControlID="btnEliminar" PopupControlID="Panel">

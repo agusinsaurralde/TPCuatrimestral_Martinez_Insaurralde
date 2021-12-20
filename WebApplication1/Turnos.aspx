@@ -44,7 +44,7 @@
         </asp:gridview>
     </div>
  
-       <!-- modal eliminar cobertura-->
+       <!-- modal cancelar turno-->
     <asp:Button  style="display:none" runat="server" ID="btnCancelarTurno" />
     
    <ajaxToolkit:ModalPopupExtender ID="cancelarTurno_Modal" CancelControlID="exit" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="cancelarTurno_Modal" TargetControlID="btnCancelarTurno" PopupControlID="Panel">
@@ -67,19 +67,19 @@
 
 
 
-        <!-- modal editar restringido-->
-    <asp:Button  style="display:none" runat="server" ID="btnEditarRestringido" />
+        <!-- modal restringido-->
+    <asp:Button  style="display:none" runat="server" ID="btnRestringido" />
     
-   <ajaxToolkit:ModalPopupExtender ID="btnEditarRestringido_Modal" CancelControlID="exitEditar" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnEditarRestringido_Modal" TargetControlID="btnEditarRestringido" PopupControlID="PanelEditar">
+   <ajaxToolkit:ModalPopupExtender ID="btnRestringido_Modal" CancelControlID="exitEditar" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnRestringido_Modal" TargetControlID="btnRestringido" PopupControlID="PanelR">
     </ajaxToolkit:ModalPopupExtender>
     
-    <asp:Panel ID="PanelEditar" BackColor="White" runat="server">
+    <asp:Panel ID="PanelR" BackColor="White" runat="server">
         <div class="modal-header">
-          <h5 class="modal-title" >Editar Turnos</h5>
+                <asp:Label ID="lblTituloAlertModal" class="modal-title" Font-Bold="true" Font-Size="X-Large" runat="server" />
           <button id="exitEditar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <asp:Label Text="No se puede editar un turno cerrado." runat="server" />
+            <asp:Label ID="lblRestringido" runat="server" />
           
         </div>
         <div class="modal-footer">

@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AsignarTurno.aspx.cs" Inherits="WebApplication1.prueba" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <script>
@@ -159,4 +161,32 @@
 
         </asp:View>
     </asp:MultiView>
+
+    <!-- modal verificación -->
+    <asp:Button  style="display:none" runat="server" ID="btnVerificacion" />
+   <ajaxToolkit:ModalPopupExtender ID="verificacion_Modal" CancelControlID="exitV" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="verificacion_Modal" TargetControlID="btnVerificacion" PopupControlID="PanelVerificacion">
+    </ajaxToolkit:ModalPopupExtender>
+   
+
+    <asp:Panel ID="PanelVerificacion" BackColor="White" runat="server">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                     <div class="modal-header">
+                         <asp:Label ID="lblTituloAlertModal" class="modal-title" Font-Bold="true" Font-Size="X-Large" runat="server" />
+                       <button id="exitV" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                         <div class="row">
+                            <asp:Label ID="lblVerificacion" runat="server" />
+                         </div>
+                         <div class="row">
+                             <asp:Label ID="lblEmail" runat="server" />
+                         </div>
+                     </div>
+                </ContentTemplate>
+        </asp:UpdatePanel>
+        <div class="modal-footer">
+                <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
+        </div>
+    </asp:Panel>
 </asp:Content>

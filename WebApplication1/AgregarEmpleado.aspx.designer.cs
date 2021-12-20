@@ -195,15 +195,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblTituloAlertModalEmpleado;
 
         /// <summary>
-        /// Control lblTituloNombreEmpleado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloNombreEmpleado;
-
-        /// <summary>
         /// Control lblEmpleadoContext.
         /// </summary>
         /// <remarks>
@@ -211,15 +202,6 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmpleadoContext;
-
-        /// <summary>
-        /// Control lblEmpleadoConfirmDNI.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmpleadoConfirmDNI;
 
         /// <summary>
         /// Control btnCerrarModalAgrearEmpleado.
