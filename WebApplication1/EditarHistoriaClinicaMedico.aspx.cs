@@ -13,16 +13,31 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            HistoriaClinica datos = (HistoriaClinica)Session["modificar"];
-            txtNombrePaciente.Text = datos.Paciente.NombreCompleto;
-            lblFecha.Text = datos.Fecha.ToShortDateString();
-            txtDescripcion.Text = datos.Descripcion;
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if ((HistoriaClinica)Session["modificar"] == null)
+            {
+                Response.Redirect("ErrorPermisosAcceso");
+            }
+            else if (userLog.TipoUsuario.Nombre == "Recepcionista")
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+            }
+            if (!IsPostBack)
+            {
+                HistoriaClinica datos = (HistoriaClinica)Session["modificar"];
+                txtNombrePaciente.Text = datos.Paciente.NombreCompleto;
+                lblFecha.Text = datos.Fecha.ToShortDateString();
+                txtDescripcion.Text = datos.Descripcion;
+            }
+           
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            string modificado = "Historia clínica";
-            string error = "historia clínica";
+
             try
             {
 
@@ -30,24 +45,15 @@ namespace WebApplication1
                 HistoriaClinicaDB hcDB = new HistoriaClinicaDB();
                 HistoriaClinica datos = (HistoriaClinica)Session["modificar"];
 
-                hc.Paciente = new Paciente();
-                hc.Paciente.ID = datos.Paciente.ID;
+                hc.ID = ((HistoriaClinica)Session["modificar"]).ID;
                 hc.Descripcion = txtDescripcion.Text;
-                hc.Fecha = DateTime.Now;
-
 
                 hcDB.ModificarHistoriaClinica(hc);
-
                 ejecutarModalModificarHistoria();
-                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Response.Redirect("ErrorModificar.aspx?agregado=" + error, false);
-
-                ejecutarModalModificarHistoria();
-
-                throw ex;
+                ejecutarModalModificarHistoriaCatch();
             }
 
         }
@@ -60,15 +66,15 @@ namespace WebApplication1
 
         protected void ejecutarModalModificarHistoria()
         {
-            lblTituloModificarHistoriaClinica.Text = "Modificado! ";
-            lblHistoriaClinicaContext.Text = "Se modifico correctamente!";
+            lblTituloModificarHistoriaClinica.Text = "Modificado!";
+            lblHistoriaClinicaContext.Text = "La historia fue modificada con éxito!";
             btnEditarHistoriaClinica_Modal.Show();
         }
 
         protected void ejecutarModalModificarHistoriaCatch()
         {
-            lblTituloModificarHistoriaClinica.Text = "Error! ";
-            lblHistoriaClinicaContext.Text = "No se pudieron guardar los cambios!.";
+            lblTituloModificarHistoriaClinica.Text = "Error!";
+            lblHistoriaClinicaContext.Text = "No se pudieron guardar los cambios!";
             btnEditarHistoriaClinica_Modal.Show();
         }
 

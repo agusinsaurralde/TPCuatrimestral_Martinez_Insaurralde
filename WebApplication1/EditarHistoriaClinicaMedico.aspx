@@ -21,7 +21,8 @@
             </tr>
             <tr>
                 <td>
-                    <asp:Label Text="" ID="lblFecha" runat="server" /> </td><td><asp:TextBox CssClass="form-control" ClientIDMode="Static" runat="server" TextMode="MultiLine" ID="txtDescripcion" Text="" Height="78px" Width="1180px" /></td>  
+                    <asp:Label Text="" ID="lblFecha" runat="server" /> </td>
+                <td><asp:TextBox CssClass="form-control" TextMode="MultiLine" runat="server" ID="txtDescripcion" Height="78px" Width="1180px" /></td>  
             </tr>
         </table>
             <div style="font-size:13px">
@@ -44,21 +45,15 @@
             <button id="exitCheck" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-body" style="margin:30px 0px 30px 0px">
+        <div class="modal-body">
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                   <div class="row">
                       <div class="col">
-                          <asp:Label ID="lblTituloModal" Text="HISTORIA MODIFICADA! " Font-Bold="true" Font-Size="Small" runat="server" />
-                          <asp:Label id="lblHistoriaClinicaContext"  runat="server" />
+                          <asp:Label ID="lblHistoriaClinicaContext" runat="server" />
                       </div>
                   </div>
 
-                  <div class="row">
-                      <div class="col">
-                            <asp:Label ID="lblHistoriaCambiadaConfirma" runat="server"/> 
-                      </div>
-                  </div>
               </ContentTemplate>
        </asp:UpdatePanel>
         </div>

@@ -87,15 +87,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblTituloModificarHistoriaClinica;
 
         /// <summary>
-        /// Control lblTituloModal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloModal;
-
-        /// <summary>
         /// Control lblHistoriaClinicaContext.
         /// </summary>
         /// <remarks>
@@ -103,15 +94,6 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblHistoriaClinicaContext;
-
-        /// <summary>
-        /// Control lblHistoriaCambiadaConfirma.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHistoriaCambiadaConfirma;
 
         /// <summary>
         /// Control btnCerrarModalModificarHistoriaClinica.

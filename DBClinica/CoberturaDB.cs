@@ -17,7 +17,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura ORDER BY ID ASC");
+                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura ORDER BY Nombre ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

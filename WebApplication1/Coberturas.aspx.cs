@@ -98,11 +98,15 @@ namespace WebApplication1
                     cargar.AgregarCobertura(NuevaCobertura);
                     Grilla.DataSource = coberturaDB.lista();
                     Grilla.DataBind();
-                    txtCobertura.Text = "";
+                    lblTituloAlertModal.Text = "Agregar Cobertura";
+                    lblVerificacion.Text = "Cobertura agregada con éxito.";
+                    verificacion_Modal.Show();
                 }
                 catch (Exception)
                 {
-                    Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                    lblTituloAlertModal.Text = "Error";
+                    lblVerificacion.Text = "Hubo un error al agregar la cobertura.";
+                    verificacion_Modal.Show();
                 }
             }
             
@@ -121,12 +125,17 @@ namespace WebApplication1
                 db.EliminarCobertura(cobertura);
                 Grilla.DataSource = coberturaDB.lista();
                 Grilla.DataBind();
+                lblTituloAlertModal.Text = "Eliminar Cobertura";
+                lblVerificacion.Text = "Cobertura eliminada con éxito.";
+                verificacion_Modal.Show();
 
 
             }
             catch (Exception)
             {
-                Response.Redirect("ErrorEliminar.aspx?error=" + error, false);
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un error al eliminar la cobertura.";
+                verificacion_Modal.Show();
             }
         }
 
@@ -160,11 +169,16 @@ namespace WebApplication1
                     cargar.ModificarCobertura(modCobertura);
                     Grilla.DataSource = coberturaDB.lista();
                     Grilla.DataBind();
+                    lblTituloAlertModal.Text = "Modificar Cobertura";
+                    lblVerificacion.Text = "Cobertura modificada con éxito.";
+                    verificacion_Modal.Show();
 
                 }
                 catch (Exception)
                 {
-                    Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                    lblTituloAlertModal.Text = "Error";
+                    lblVerificacion.Text = "Hubo un error al modificar la cobertura.";
+                    verificacion_Modal.Show();
                 }
             }
            

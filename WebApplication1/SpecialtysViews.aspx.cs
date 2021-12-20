@@ -91,13 +91,12 @@ namespace WebApplication1
         {
             Especialidad NuevaEspecialidad = new Especialidad();
             EspecialidadDB cargar = new EspecialidadDB();
-            string error = "especialidad";
 
             List<Especialidad> lista = especialidadDB.lista();
             if (lista.Find(x => x.Nombre.ToUpper() == txtEspecialidad.Text.ToUpper() && x.Estado == true) != null)
             {
                 errorAgregar.Visible = true;
-                errorAgregar.Text = "*La cobertura ingresada ya existe";
+                errorAgregar.Text = "*La especialidad ingresada ya existe";
                 btnAgregarEspecialidad_Modal.Show();
 
             }
@@ -116,17 +115,23 @@ namespace WebApplication1
                     cargar.AgregarEspecialidad(NuevaEspecialidad);
                     Grilla.DataSource = especialidadDB.lista();
                     Grilla.DataBind();
+
+                    lblTituloAlertModal.Text = "Agregar Especialidad";
+                    lblVerificacion.Text = "Especialidad agregada con éxito.";
+                    verificacion_Modal.Show();
                 }
                 catch (Exception)
                 {
-                    Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                    lblTituloAlertModal.Text = "Error";
+                    lblVerificacion.Text = "Hubo un error al agregar la especialidad.";
+                    verificacion_Modal.Show();
+
                 }
             }
                
         }
         protected void btnAceptarEliminar_Click(object sender, EventArgs e)
         {
-            string error = "especialidad";
             try
             {
 
@@ -136,12 +141,16 @@ namespace WebApplication1
                 db.EliminarEspecialidad(especialidad);
                 Grilla.DataSource = db.lista();
                 Grilla.DataBind();
-
+                lblTituloAlertModal.Text = "Eliminar Especialidad";
+                lblVerificacion.Text = "Especialidad eliminada con éxito.";
+                verificacion_Modal.Show();
 
             }
             catch (Exception)
             {
-                Response.Redirect("ErrorEliminar.aspx?error=" + error, false);
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un error al eliminar la especialidad.";
+                verificacion_Modal.Show();
             }
         }
 
@@ -165,7 +174,6 @@ namespace WebApplication1
             {
                 Especialidad modEspecialidad = new Especialidad();
                 EspecialidadDB cargar = new EspecialidadDB();
-                string error = "especialidad";
                 try
                 {
                     modEspecialidad.Id = (int)Session["idEditarEspecialidad"];
@@ -174,11 +182,16 @@ namespace WebApplication1
                     cargar.ModificarEspecialidad(modEspecialidad);
                     Grilla.DataSource = especialidadDB.lista();
                     Grilla.DataBind();
+                    lblTituloAlertModal.Text = "Modificar Especialidad";
+                    lblVerificacion.Text = "Especialidad modificada con éxito.";
+                    verificacion_Modal.Show();
 
                 }
                 catch (Exception)
                 {
-                    Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                    lblTituloAlertModal.Text = "Error";
+                    lblVerificacion.Text = "Hubo un error al modificar la especialidad.";
+                    verificacion_Modal.Show();
                 }
             }
                 

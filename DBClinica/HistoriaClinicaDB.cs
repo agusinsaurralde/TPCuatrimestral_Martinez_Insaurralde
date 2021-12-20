@@ -77,10 +77,12 @@ namespace DBClinica
         public void ModificarHistoriaClinica(HistoriaClinica ModHistoriaClinica)
         {
             ConexionDB datos = new ConexionDB();
+
             try
             {
                 datos.setearConsulta("UPDATE HistoriaClinica SET Descripcion = @Descripcion WHERE ID=" + ModHistoriaClinica.ID + "");
                 datos.setearParametro("@Descripcion", ModHistoriaClinica.Descripcion);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
