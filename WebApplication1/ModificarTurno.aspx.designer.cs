@@ -96,15 +96,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
 
         /// <summary>
-        /// Control lblUsuarioLogueado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsuarioLogueado;
-
-        /// <summary>
         /// Control btnCancelar.
         /// </summary>
         /// <remarks>
@@ -168,22 +159,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblTurnoModal;
 
         /// <summary>
-        /// Control lblTurnoContext.
+        /// Control lblTurnoEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTurnoContext;
-
-        /// <summary>
-        /// Control lblTurnoCambiadoConfirma.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTurnoCambiadoConfirma;
+        protected global::System.Web.UI.WebControls.Label lblTurnoEmail;
 
         /// <summary>
         /// Control btnCerrarModalModificarTurno.

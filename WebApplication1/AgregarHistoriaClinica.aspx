@@ -1,29 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarHistoriaClinica.aspx.cs" Inherits="WebApplication1.AgregarHistoriaClinica" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <script>
-        function validar() {
-            var descripcion = document.getElementById("<% = txtDescripcion.ClientID %>").value;
-
-            if (descripcion === "") {
-                $("#txtDescripcion").addClass("is-invalid");
-                return false;
-            }
-            else {
-                $("#txtDescripcion").removeClass("is-invalid");
-            }
-            return true;
-
-        }
-    </script>
-    
-    <style>
-        td{
-              font-weight: bold;
-              font-size: 12px;
-        }
-    </style>
-
 
     <h3 style="margin-top:40px">Historia Clínica - <asp:Label Text="" ID="txtNombrePaciente" runat="server" /></h3>
     <br />
@@ -31,7 +8,7 @@
         <div>
         <table class="table">
              <tr>
-                <td>FECHA</td> <td>DESCRIPCIÓN</td> 
+                <td style="font-weight:bold">FECHA</td> <td style="font-weight:bold">DESCRIPCIÓN</td> 
             </tr>
             <tr>
                 <td>

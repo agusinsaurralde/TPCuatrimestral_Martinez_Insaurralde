@@ -82,17 +82,20 @@ namespace WebApplication1
         {
             try
             {
-
                 MedicoDB medicoDB = new MedicoDB();
                 medicoDB.eliminar((int)Session["idEliminar"]);
                 Grilla.DataSource = medicoDB.listarMedico();
                 Grilla.DataBind();
+                lblTituloAlertModal.Text = "Eliminar médico";
+                lblVerificacion.Text = "El médico fue eliminado correctamente.";
+                verificacion_Modal.Show();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                throw ex;
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un problema al eliminar el médico.";
+                verificacion_Modal.Show();
             }
         }
 
@@ -110,6 +113,11 @@ namespace WebApplication1
             {
                 lblBusquedaIncorrecta.Visible = true;
             }
+        }
+
+        protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Medicos.aspx");
         }
     }
 }

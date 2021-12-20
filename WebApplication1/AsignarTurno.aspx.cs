@@ -323,7 +323,7 @@ namespace WebApplication1
                 NuevoTurno.HorarioInicio = DateTime.Parse(ddlistHora.SelectedItem.Value);
                 NuevoTurno.Observaciones = txtObservaciones.Text;
                 NuevoTurno.AdministrativoResponsable = new Empleado();
-                NuevoTurno.AdministrativoResponsable.ID = empleadoLog.ID; //int.Parse(ddlistRecepcionista.SelectedItem.Value);
+                NuevoTurno.AdministrativoResponsable.ID = empleadoLog.ID; 
                 NuevoTurno.Estado = new EstadoTurno();
                 NuevoTurno.Estado.ID = 1;
 
@@ -380,6 +380,11 @@ namespace WebApplication1
             {
                 args.IsValid = true;
             }
+        }
+
+        protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Turnos.aspx");
         }
     }
 }

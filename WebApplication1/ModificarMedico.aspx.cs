@@ -98,7 +98,20 @@ namespace WebApplication1
                 {
                     int index = int.Parse(Request.QueryString["index"]);
                     multiview.ActiveViewIndex = index;
-
+                }
+                if(Session["eliminarEsp"] != null)
+                {
+                    lblTituloAlertModal.Text = "Eliminar Especialidad";
+                    lblVerificacion.Text = "La especialidad fue eliminada correctamente.";
+                    verificacion_Modal.Show();
+                    Session["eliminarEsp"] = null;
+                }
+                if(Session["AgregarDiaEsp"] != null)
+                {
+                    lblTituloAlertModal.Text = "Agregar día hábil";
+                    lblVerificacion.Text = "El día fue agregado correctamente.";
+                    verificacion_Modal.Show();
+                    Session["AgregarDiaEsp"] = null;
                 }
 
             }
@@ -165,48 +178,7 @@ namespace WebApplication1
             }
         }
 
-        protected void Click_Aceptar(object sender, EventArgs e)
-        {
-            Medico modMedico = new Medico();
-            Usuario modUsuario = new Usuario();
-            MedicoDB cargar = new MedicoDB();
-            UsuarioDB cargarUsuario = new UsuarioDB();
-            string error = "médico";
-
-            try
-            {
-                modMedico.ID = ((Medico)Session["modificar"]).ID;
-                modMedico.DNI = txtDNI.Text;
-                modMedico.Matricula = txtMatricula.Text;
-                modMedico.Apellido = txtApellido.Text;
-                modMedico.Nombre = txtNombre.Text;
-                modMedico.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
-                modMedico.Telefono = txtTelefono.Text;
-                modMedico.Email = txtEmail.Text;
-                modMedico.Dirección = txtDireccion.Text;
-
-                cargar.modificar(modMedico);
-
-
-                modUsuario.IDUsuario = ((Medico)Session["modificar"]).ID;
-                modUsuario.NombreUsuario = txtNombreUsuario.Text;
-                modUsuario.Contraseña = txtContraseña.Text;
-                modUsuario.TipoUsuario = new TipoUsuario();
-                modUsuario.TipoUsuario.Id = 1;
-                modUsuario.TipoUsuario.Nombre = "Médico";
-                modUsuario.Estado = true;
-
-                cargarUsuario.ModificarUsuario(modUsuario);
-
-                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
-            }
-            catch (Exception)
-            {
-                Response.Redirect("ErrorModificar.aspx?error=" + error, false);
-
-            }
-
-        }
+      
         protected void cargarDiasEditar(int id)
         {
             MedicoDB medicoDB = new MedicoDB();
@@ -313,17 +285,31 @@ namespace WebApplication1
         }
         protected void btnAceptarEditar_Click(object sender, EventArgs e)
         {
-            DiasHabilesMedico modificarDia = new DiasHabilesMedico();
+            try
+            {
+                DiasHabilesMedico modificarDia = new DiasHabilesMedico();
 
-            modificarDia.ID = (int)Session["idEditarDia"];
-            modificarDia.IdDia = ddlistDia.SelectedIndex + 1;
-            modificarDia.HorarioEntrada = Convert.ToDateTime(ddlistEntrada.SelectedValue);
-            modificarDia.HorarioSalida = DateTime.Parse(txtHoraSalida.Text);
+                modificarDia.ID = (int)Session["idEditarDia"];
+                modificarDia.IdDia = ddlistDia.SelectedIndex + 1;
+                modificarDia.HorarioEntrada = Convert.ToDateTime(ddlistEntrada.SelectedValue);
+                modificarDia.HorarioSalida = DateTime.Parse(txtHoraSalida.Text);
 
-            MedicoDB medicoDB = new MedicoDB();
-            medicoDB.modificarDias(modificarDia);
+                MedicoDB medicoDB = new MedicoDB();
+                medicoDB.modificarDias(modificarDia);
 
-            cargarGrilla();
+                cargarGrilla();
+
+                lblTituloAlertModal.Text = "Editar Día";
+                lblVerificacion.Text = "Los cambios fueron guardados correctamente";
+                verificacion_Modal.Show();
+            }
+            catch (Exception)
+            {
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "hubo un error al editar el día.";
+                verificacion_Modal.Show();
+            }
+            
 
         }
         //ELIMINAR DÍAS
@@ -336,11 +322,24 @@ namespace WebApplication1
         }
         protected void btnAceptarEliminar_Click(object sender, EventArgs e)
         {
-            MedicoDB medicoDB = new MedicoDB();
-            medicoDB.eliminarDias((int)Session["idEliminarDia"]);
-            List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
-            Grilla.DataSource = listaDias;
-            Grilla.DataBind();
+            try
+            {
+                MedicoDB medicoDB = new MedicoDB();
+                medicoDB.eliminarDias((int)Session["idEliminarDia"]);
+                List<DiasHabilesMedico> listaDias = medicoDB.listarDiasHabilesDeUnMedico(((Medico)Session["modificar"]).ID);
+                cargarGrilla();
+
+                lblTituloAlertModal.Text = "Eliminar Día";
+                lblVerificacion.Text = "El día fue eliminado correctamente.";
+                verificacion_Modal.Show();
+            }
+            catch (Exception)
+            {
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "hubo un error al eliminar el día.";
+                verificacion_Modal.Show();
+            }
+            
         }
 
 
@@ -425,11 +424,13 @@ namespace WebApplication1
         }
         protected void ddlistEntradaAgregar_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
-            DateTime horaSalida = Convert.ToDateTime(ddlistEntradaAgregar.SelectedItem.ToString()) + horaSumar;
-            txtSalidaAgregar.Text = horaSalida.ToShortTimeString();
-            btnAgregarDia.Enabled = true;
+            if(ddlistEntradaAgregar.SelectedIndex != 0)
+            {
+                System.TimeSpan horaSumar = new System.TimeSpan(0, 3, 0, 0);
+                DateTime horaSalida = Convert.ToDateTime(ddlistEntradaAgregar.SelectedItem.ToString()) + horaSumar;
+                txtSalidaAgregar.Text = horaSalida.ToShortTimeString();
+                btnAgregarDia.Enabled = true;
+            }
 
         }
         protected void btnAgregarDia_Click(object sender, EventArgs e)
@@ -547,14 +548,19 @@ namespace WebApplication1
                         obj.ID = idMedico;
                         cargar.agregarEspecialidades(obj);
                     }
-               ((List<DiasHabilesMedico>)Session["diasAgregados"]).Clear();
+                    ((List<DiasHabilesMedico>)Session["diasAgregados"]).Clear();
                     ((List<MedicoEspecialidades>)Session["especialidadesAgregadas"]).Clear();
-                    int index = 1;
-                    Response.Redirect("ModificarMedico.aspx?index=" + index, false);
+
+                    cargarGrilla();
+                    lblTituloAlertModal.Text = "Agregar Especialidad";
+                    lblVerificacion.Text = "La especialidad fue agregada correctamente.";
+                    verificacion_Modal.Show();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    lblTituloAlertModal.Text = "Error";
+                    lblVerificacion.Text = "Hubo un problema al agregar la especialidad.";
+                    verificacion_Modal.Show();
                 }
             }
 
@@ -562,18 +568,27 @@ namespace WebApplication1
         //ELIMINAR ESPECIALIDAD
         protected void btnAceptarEliminarEspecialidad_Click(object sender, EventArgs e)
         {
-            MedicoDB medicoDB = new MedicoDB();
-            MedicoEspecialidades medico = new MedicoEspecialidades();
-            medico.especialidad = new Especialidad();
-            medico.especialidad.Id = int.Parse(Request.QueryString["id"]);
-            medico.ID = ((Medico)Session["modificar"]).ID;
-            medicoDB.eliminarEspecialidad(medico);
-            int index = 1;
-            Response.Redirect("ModificarMedico.aspx?index=" + index, false);
+            try
+            {
+                MedicoDB medicoDB = new MedicoDB();
+                MedicoEspecialidades medico = new MedicoEspecialidades();
+                medico.especialidad = new Especialidad();
+                medico.especialidad.Id = int.Parse(Request.QueryString["id"]);
+                medico.ID = ((Medico)Session["modificar"]).ID;
+                medicoDB.eliminarEspecialidad(medico);
+                int index = 1;
+                Response.Redirect("ModificarMedico.aspx?index=" + index, false);
+                Session.Add("EliminarEsp", 1);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
         protected void btnCancelarEliminarEsp_Click(object sender, EventArgs e)
         {
-            //cargarGrilla();
             int index = 1;
             Response.Redirect("ModificarMedico.aspx?index=" + index, false);
         }
@@ -613,7 +628,6 @@ namespace WebApplication1
 
 
         }
-
         protected void btnAgregarDiaAGrilla_Click(object sender, EventArgs e)
         {
             lblErrorAgregarDiaHabilEspExistente.Visible = false;
@@ -652,7 +666,6 @@ namespace WebApplication1
             cargarGrillaModal(grillaAgregarDia);
 
         }
-
         protected void btnAceptarAgregarDia_Click(object sender, EventArgs e)
         {
             if (grillaAgregarDia.Rows.Count == 0)
@@ -690,6 +703,7 @@ namespace WebApplication1
                 cargarGrilla();
                 int index = 1;
                 Response.Redirect("ModificarMedico.aspx?index=" + index, false);
+                Session.Add("AgregarDiaEsp", 1);
             }
 
         }
@@ -712,11 +726,11 @@ namespace WebApplication1
         {
             if (!Page.IsValid)
                 return;
-            Medico modMedico = new Medico();
-            MedicoDB cargar = new MedicoDB();
-
+           
             try
             {
+                Medico modMedico = new Medico();
+                MedicoDB cargar = new MedicoDB();
                 modMedico.ID = ((Medico)Session["modificar"]).ID;
                 modMedico.DNI = txtDNI.Text;
                 modMedico.Matricula = txtMatricula.Text;
@@ -729,16 +743,20 @@ namespace WebApplication1
 
                 cargar.modificar(modMedico);
 
+                lblTituloAlertModal.Text = "Modificar datos personales";
+                lblVerificacion.Text = "Los cambios fueron guardados correctamente.";
+                verificacion_Modal.Show();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un problema al guardar los cambios.";
+                verificacion_Modal.Show();
 
             }
 
         }
-
         protected void btnAceptarUsuario_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid)
@@ -758,10 +776,15 @@ namespace WebApplication1
 
                 cargarUsuario.ModificarUsuario(modUsuario);
 
+                lblTituloAlertModal.Text = "Modificar usuario";
+                lblVerificacion.Text = "Los cambios fueron guardados correctamente.";
+                verificacion_Modal.Show();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un problema al guardar los cambios.";
+                verificacion_Modal.Show();
 
             }
         }

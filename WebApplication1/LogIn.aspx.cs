@@ -17,7 +17,7 @@ namespace WebApplication1
             {
                 TurnoDB turnoDB = new TurnoDB();
                 List<Turno> lista = turnoDB.listarTurno();
-                List<Turno> turnosVencidos = lista.FindAll(x => x.Dia < DateTime.Now);
+                List<Turno> turnosVencidos = lista.FindAll(x => x.Dia < DateTime.Now.Date && x.Estado.Estado != "Cerrado");
 
                 foreach (var item in turnosVencidos)
                 {

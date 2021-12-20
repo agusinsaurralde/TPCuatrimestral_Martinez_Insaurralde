@@ -17,7 +17,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura ORDER BY Nombre ASC");
+                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura WHERE ESTADO = 1 ORDER BY Nombre ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -115,7 +115,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura WHERE Nombre LIKE '" + cobertura + "%'");
+                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura WHERE Nombre LIKE '" + cobertura + "%' AND ESTADO = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

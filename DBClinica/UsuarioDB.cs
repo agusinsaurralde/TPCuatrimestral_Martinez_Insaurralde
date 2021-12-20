@@ -14,7 +14,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("SELECT U.ID, U.IDTipo, T.Nombre FROM USUARIO AS U INNER JOIN TipoUsuario AS T ON T.ID = U.IDTipo WHERE NombreUsuario = @Usuario AND Contraseña = @Contraseña");
+                datos.setearConsulta("SELECT U.ID, U.IDTipo, T.Nombre FROM USUARIO AS U INNER JOIN TipoUsuario AS T ON T.ID = U.IDTipo WHERE NombreUsuario = @Usuario AND Contraseña = @Contraseña AND U.ESTADO = 1");
                 datos.setearParametro("@Usuario", Usuario.NombreUsuario);
                 datos.setearParametro("@Contraseña", Usuario.Contraseña); 
                 datos.ejecutarLectura();
@@ -45,7 +45,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, NombreUsuario, Contraseña, Estado FROM Usuario  ");
+                datos.setearConsulta("SELECT ID, NombreUsuario, Contraseña, Estado FROM Usuario  WHERE ESTADO = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

@@ -190,6 +190,30 @@
     </div>
 
 
+<!-- modal verificación -->
+    <asp:Button  style="display:none" runat="server" ID="btnVerificacion" />
+   <ajaxToolkit:ModalPopupExtender ID="verificacion_Modal" CancelControlID="exitV" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="verificacion_Modal" TargetControlID="btnVerificacion" PopupControlID="PanelVerificacion">
+    </ajaxToolkit:ModalPopupExtender>
+   
+
+    <asp:Panel ID="PanelVerificacion" BackColor="White" runat="server">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                     <div class="modal-header">
+                         <asp:Label ID="lblTituloAlertModal" class="modal-title" Font-Bold="true" Font-Size="X-Large" runat="server" />
+                       <button id="exitV" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                         <asp:Label ID="lblVerificacion" runat="server" />
+                       
+                     </div>
+                </ContentTemplate>
+        </asp:UpdatePanel>
+        <div class="modal-footer">
+                <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
+        </div>
+    </asp:Panel>
+
 
 
 <!-- modal eliminar especialidad -->
@@ -208,7 +232,7 @@
         </div>
         <div class="modal-footer">
             <asp:Button Text="CANCELAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" ID="btnCancelarEliminarEsp" Font-Size="Small" Font-Bold="true" data-bs-dismiss="modal" OnClick="btnCancelarEliminarEsp_Click" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEliminarEspecialidad" Text="ACEPTAR" Font-Size="Small" Font-Bold="true" OnClick="btnAceptarEliminarEspecialidad_Click" AutoPostback="true" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarEliminarEspecialidad" Text="ACEPTAR" Font-Size="Small" Font-Bold="true" OnClick="btnAceptarEliminarEspecialidad_Click" data-bs-dismiss="modal" runat="server" />
         </div>
     </asp:Panel>
 

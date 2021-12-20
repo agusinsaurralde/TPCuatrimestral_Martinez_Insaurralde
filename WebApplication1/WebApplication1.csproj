@@ -172,6 +172,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ModificarCorrecto.aspx" />
+    <Content Include="fonts\GothamBook.ttf" />
+    <Content Include="fonts\Gotham-Bold.otf" />
+    <Content Include="fonts\GothamBold.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

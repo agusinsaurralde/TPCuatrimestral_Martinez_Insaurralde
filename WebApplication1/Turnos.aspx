@@ -60,8 +60,8 @@
           
         </div>
         <div class="modal-footer">
-            <asp:Button Text="Cancelar" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal" runat="server" />
-            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarCancelar" Text="Aceptar" OnClick="btnAceptarCancelar_Click" runat="server" />
+            <asp:Button Text="CANCELAR" class="btn btn-secondary rounded-pill" Font-Bold="true" Font-Size="Small" BorderStyle="None" data-bs-dismiss="modal" runat="server" />
+            <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptarCancelar" Font-Bold="true" Font-Size="Small" Text="ACEPTAR" OnClick="btnAceptarCancelar_Click" runat="server" />
         </div>
     </asp:Panel>
 
@@ -83,7 +83,7 @@
           
         </div>
         <div class="modal-footer">
-            <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
+            <asp:Button Text="CERRAR" ID="btnCerrarRestringido" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
         </div>
     </asp:Panel>
 

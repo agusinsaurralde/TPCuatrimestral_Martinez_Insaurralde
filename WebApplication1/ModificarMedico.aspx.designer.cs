@@ -240,6 +240,51 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnAceptarUsuario;
 
         /// <summary>
+        /// Control btnVerificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerificacion;
+
+        /// <summary>
+        /// Control verificacion_Modal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender verificacion_Modal;
+
+        /// <summary>
+        /// Control PanelVerificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelVerificacion;
+
+        /// <summary>
+        /// Control lblTituloAlertModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloAlertModal;
+
+        /// <summary>
+        /// Control lblVerificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVerificacion;
+
+        /// <summary>
         /// Control btnEliminarEspecialidadModal.
         /// </summary>
         /// <remarks>

@@ -17,7 +17,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad ORDER BY Nombre ASC");
+                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad ORDER BY Nombre ASC WHERE ESTADO = 1 ORDER BY NOMBRE ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -81,7 +81,6 @@ namespace DBClinica
                 dato.cerrarConexion();
             }
         }
-        
 
         public void EliminarEspecialidad(Especialidad EspecialidadDelete)
         {
@@ -118,7 +117,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad WHERE Nombre LIKE '" + especialidad + "%'");
+                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad WHERE Nombre LIKE '" + especialidad + "%' AND ESTADO = 1 ORDER BY NOMBRE ASC");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {

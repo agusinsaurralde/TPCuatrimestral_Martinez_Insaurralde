@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura");
+                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura WHERE P.ESTADO = 1 ORDER BY P.APELLIDO ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -134,7 +134,7 @@ namespace DBClinica
             try
             {
 
-                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura WHERE P.Nombre LIKE '" + valorBuscado + "%' OR P.Apellido LIKE '" + valorBuscado + "%'OR P.DNI LIKE '" + valorBuscado + "%'");
+                datos.setearConsulta("SELECT P.ID, P.DNI, P.Nombre, P.Apellido, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.FechaNacimiento, P.Cobertura as IDCobertura, C.Nombre as Cobertura, P.Telefono, P.Email, P.Direccion, P.Estado FROM Paciente AS P INNER JOIN Cobertura as C on C.ID = P.Cobertura WHERE (P.Nombre LIKE '" + valorBuscado + "%' OR P.Apellido LIKE '" + valorBuscado + "%'OR P.DNI LIKE '" + valorBuscado + "%') AND ESTADO = 1 ORDER BY P.APELLIDO ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

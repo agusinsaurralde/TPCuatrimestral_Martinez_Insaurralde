@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista' order by e.apellido asc");
+                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista' WHERE E.ESTADO = 1 order by e.apellido asc ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -60,7 +60,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo LIKE 'Recepcionista'");
+                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo LIKE 'Recepcionista' AND E.ESTADO = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -103,7 +103,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI,CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo LIKE 'Administrador'");
+                datos.setearConsulta("SELECT E.ID, E.DNI,CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo LIKE 'Administrador' AND E.ESTADO = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -230,7 +230,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE (T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista') AND (E.Nombre LIKE '" + empleado + "%' OR E.Apellido LIKE '"+ empleado + "%' OR CONCAT(E.Apellido, ' ', E.Nombre) LIKE '"+ empleado + "%' )");
+                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE (T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista') AND (E.Nombre LIKE '" + empleado + "%' OR E.Apellido LIKE '"+ empleado + "%' OR CONCAT(E.Apellido, ' ', E.Nombre) LIKE '"+ empleado + "%' ) AND E.ESTADO = 1 ORDER BY APELLIDO ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -273,7 +273,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID as ID, E.DNI as DNI, E.Nombre as Nombre, E.Apellido as Apellido, E.Telefono as Telefono, E.Email as Email, E.Direccion as Direccion, E.FechaNacimiento as FechaNacimiento, E.IDTipo as IDTipo, U.NombreUsuario as NombreUsuario, E.Estado as Estado FROM Empleado as E INNER JOIN Usuario as U on E.ID = U.ID WHERE E.ID =" + IDUsuarioLogueado + ""); // aca una consulta que tragia los datos de ese usuario
+                datos.setearConsulta("SELECT E.ID as ID, E.DNI as DNI, E.Nombre as Nombre, E.Apellido as Apellido, E.Telefono as Telefono, E.Email as Email, E.Direccion as Direccion, E.FechaNacimiento as FechaNacimiento, E.IDTipo as IDTipo, U.NombreUsuario as NombreUsuario, E.Estado as Estado FROM Empleado as E INNER JOIN Usuario as U on E.ID = U.ID WHERE E.ID =" + IDUsuarioLogueado + "AND E.ESTADO = 1"); // aca una consulta que tragia los datos de ese usuario
                 datos.ejecutarLectura();
 
                 datos.Lector.Read();

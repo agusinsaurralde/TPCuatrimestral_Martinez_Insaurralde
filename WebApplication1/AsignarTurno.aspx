@@ -186,7 +186,7 @@
                 </ContentTemplate>
         </asp:UpdatePanel>
         <div class="modal-footer">
-                <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
+                <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" ID="btnCerrar" OnClick="btnCerrar_Click" BorderStyle="None" Font-Bold="true" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
         </div>
     </asp:Panel>
 </asp:Content>

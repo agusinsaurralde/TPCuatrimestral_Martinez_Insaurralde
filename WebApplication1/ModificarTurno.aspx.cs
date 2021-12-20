@@ -13,77 +13,53 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            EstadoTurnoDB estadoDB = new EstadoTurnoDB();
-            EspecialidadDB especialidadBD = new EspecialidadDB();
-            MedicoDB medicoBD = new MedicoDB();
-            Usuario userLog = (Usuario)Session["Usuario"];
-
-            if (Session["Usuario"] == null)
-            {
-                Response.Redirect("LogIn.aspx");
-            }
-            else 
-            { 
-            
-
-
             if (!IsPostBack)
             {
+                 EstadoTurnoDB estadoDB = new EstadoTurnoDB();
+                 EspecialidadDB especialidadBD = new EspecialidadDB();
+                 MedicoDB medicoBD = new MedicoDB();
+                 Usuario userLog = (Usuario)Session["Usuario"];
 
-                //provisiorio
-                EmpleadoDB empleadoDB = new EmpleadoDB();
-                List<Empleado> emp = empleadoDB.listarRecepcionista();
-                //ddlistRecepcionista.DataSource = emp;
-                //ddlistRecepcionista.DataTextField = "NombreCompleto";
-                //ddlistRecepcionista.DataValueField = "ID";
-                //ddlistRecepcionista.DataBind();
-
-                Empleado empleaLog = new Empleado();
-                empleaLog = empleadoDB.empleadoLogueado((int)userLog.IDUsuario);
-                lblUsuarioLogueado.Text = empleaLog.NombreCompleto;
-
-                Session.Add("cont", 0);
-                /*List<Especialidad> listEspecialidad = especialidadBD.lista();
-                ddlistEspecialidad.DataSource = listEspecialidad;
-                ddlistEspecialidad.DataTextField = "Nombre";
-                ddlistEspecialidad.DataValueField = "ID";
-                ddlistEspecialidad.DataBind();
-
-                List<MedicoEspecialidades> espMedicos = medicoBD.listarEspecialidadesMedico();
-                Session["listaMedicoEsp"] = espMedicos;
-                ddlistMedico.DataSource = espMedicos;
-                ddlistMedico.DataTextField = "NombreCompleto";
-                ddlistMedico.DataValueField = "ID";
-                ddlistMedico.DataBind();*/
-
-                if (Session["editarTurno"] != null) {
-                    Turno turnoSesion = new Turno();
-                    turnoSesion = (Turno)Session["editarTurno"];
-                    lblNumeroTurno.Text =turnoSesion.Numero.ToString();
-
-                    lblPaciente.Text = turnoSesion.Paciente.Nombre + " " + turnoSesion.Paciente.Apellido;
-
-                    lblEspecialidad.Text = turnoSesion.Especialidad.Nombre;
-                    
-                    lblMedico.Text = turnoSesion.Medico.Nombre + " "+ turnoSesion.Medico.Apellido;
-                   
-                    
-                    Calendario.SelectedDate = turnoSesion.Dia;
-                    precargarHorariosDiaSeleccionado();
-
-                    // ddlistHora.SelectedValue = turnoSesion.HorarioInicio.ToShortTimeString();
-
-                    txtObservaciones.Text = turnoSesion.Observaciones;
-
-
-                    //ddlistRecepcionista.SelectedValue = turnoSesion.AdministrativoResponsable.ID.ToString();
-                    lblUsuarioLogueado.Text = empleaLog.NombreCompleto.ToString();
-
-                    //ddlistEstado.SelectedValue = turnoSesion.Estado.ID.ToString();
+                 if (Session["Usuario"] == null)
+                 {
+                     Response.Redirect("LogIn.aspx");
+                 }
+                else if (userLog.UsuarioMedico(userLog))
+                {
+                    Session.Add("Error", "Acceso denegado");
+                    Response.Redirect("ErroAccesoPermisos.aspx");
                 }
-                }
+                else 
+                 { 
+
+                 
+                     EmpleadoDB empleadoDB = new EmpleadoDB();
+                     List<Empleado> emp = empleadoDB.listarRecepcionista();
+
+                     Empleado empleaLog = new Empleado();
+                     empleaLog = empleadoDB.empleadoLogueado((int)userLog.IDUsuario);
+
+
+
+                     if (Session["editarTurno"] != null) {
+                         Turno turnoSesion = new Turno();
+                         turnoSesion = (Turno)Session["editarTurno"];
+                         lblNumeroTurno.Text =turnoSesion.Numero.ToString();
+
+                         lblPaciente.Text = turnoSesion.Paciente.Nombre + " " + turnoSesion.Paciente.Apellido;
+
+                         lblEspecialidad.Text = turnoSesion.Especialidad.Nombre;
+                         
+                         lblMedico.Text = turnoSesion.Medico.Nombre + " "+ turnoSesion.Medico.Apellido;
+                         Calendario.SelectedDate = turnoSesion.Dia;
+                         precargarHorariosDiaSeleccionado();
+                         txtObservaciones.Text = turnoSesion.Observaciones;
+
+                     }
+                     
+                 }
             }
-           
+
         }
 
         protected void precargarHorariosDiaSeleccionado()
@@ -147,24 +123,6 @@ namespace WebApplication1
             List<DiasHabilesMedico> listaDiasHabiles = medicoDB.listarDiasHabiles();
             List<DiasHabilesMedico> listaFiltrada = listaDiasHabiles.FindAll(x => x.Especialidad.Id == espSeleccionada && x.Medico.ID == medSeleccionado);
             Session.Add("listaFiltradaDiasHabiles", listaFiltrada);
-
-
-            /*if((int)Session["cont"] == 0)
-             {
-                 cargarHorarios();
-                 int cant = ddlistHora.Items.Count;
-                 for (int i = 0; i < cant; i++)
-                 {
-                     if (ddlistHora.Items[i].Text == (((Turno)Session["editarTurno"]).HorarioInicio).ToShortTimeString())
-                     {
-                         ddlistHora.Items[i].Enabled = true;
-                     }
-
-                 }
-            ddlistHora.SelectedValue = (((Turno)Session["editarTurno"]).HorarioInicio).ToShortDateString();
-                
-                Session["cont"] = 1;
-            }*/
 
             if (e.Day.Date <= DateTime.Now)
             {
@@ -247,8 +205,6 @@ namespace WebApplication1
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            string modificado = "Turno";
-            string error = "turno";
 
             Usuario userLog = (Usuario)Session["Usuario"];
             EmpleadoDB empleadoLogDB = new EmpleadoDB();
@@ -286,22 +242,29 @@ namespace WebApplication1
                 {
                     turnoModificado.AdministrativoResponsable.ID = ((Turno)Session["EditarTurno"]).AdministrativoResponsable.ID;
                 }
-                
 
                 turnoModificado.Estado = new EstadoTurno();
                 turnoModificado.Estado.ID = 3;
 
                 cargar.modificar(turnoModificado);
 
-                ejecutarModalModificarTurno();
-                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
-            }
-            catch (Exception ex)
-            {
+                EmailService emailService = new EmailService();
+                emailService.armarCorreo(turnoModificado);
+                try
+                {
+                    emailService.enviarEmail();
+                    lblTurnoEmail.Text = "Se envió un mail de confimarción. ";
+                }
+                catch (Exception)
+                {
+                    lblTurnoEmail.Text = "Hubo un error al enviar el mail de confimarción.";
 
+                }
+                ejecutarModalModificarTurno();
+            }
+            catch (Exception )
+            {
                 ejecutarModalModificarTurnoCatch();
-                throw ex;
-                //Response.Redirect("ErrorModificar.aspx?error=" + error, false);
             }
             
         }
@@ -359,28 +322,7 @@ namespace WebApplication1
                 
             }
 
-            /*if (turnosFiltradosMedico != null)
-            {
-                foreach (string hora in horarios)
-                {
-                    Turno turnoProgramado = turnosFiltradosMedico.Find(x => x.HorarioInicio.ToString("HH:mm") == hora);
-                    if (turnoProgramado != null)
-                    {
-                        ddlistHora.Items.Remove(hora);
-                    }
-                }
-            }
-            if (turnosFiltradosPaciente != null)
-            {
-                foreach (string hora in horarios)
-                {
-                    Turno turnoProgramado = turnosFiltradosPaciente.Find(x => x.HorarioInicio.ToString("HH:mm") == hora);
-                    if (turnoProgramado != null)
-                    {
-                        ddlistHora.Items.Remove(hora);
-                    }
-                }
-            }*/
+
         }
         protected void Calendario_SelectionChanged(object sender, EventArgs e)
         {
@@ -390,29 +332,6 @@ namespace WebApplication1
             }
             cargarHorarios();
 
-            /*if (Calendario.SelectedDate.ToShortDateString() != ((Turno)Session["editarTurno"]).Dia.ToShortDateString())
-            {
-                btnAceptar.Enabled = true;
-            }
-            else
-            {
-                btnAceptar.Enabled = false;
-            }
-            Session["cont"] = 0;*/
-        }
-
-        protected void ddlistHora_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-            /*if (ddlistHora.SelectedValue != ((Turno)Session["editarTurno"]).HorarioInicio.ToShortTimeString())
-            {
-                btnAceptar.Enabled = true;
-            }
-            else
-            {
-                btnAceptar.Enabled = false;
-            }*/
         }
 
 
@@ -426,14 +345,14 @@ namespace WebApplication1
         {
 
             lblTituloModificarTurno.Text = "Modificado! ";
-            lblTurnoContext.Text = "Se modifico correctamente!";
+            lblTurnoModal.Text = "El turno se modifico correctamente!";
             btnEditarTurno_Modal.Show();
         }
 
         protected void ejecutarModalModificarTurnoCatch()
         {
             lblTituloModificarTurno.Text = "Error! ";
-            lblTurnoContext.Text = "No se pudieron guardar los cambios!.";
+            lblTurnoModal.Text = "No se pudieron guardar los cambios!";
             btnEditarTurno_Modal.Show();
         }
     }

@@ -15,6 +15,21 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
+                Usuario userLog = (Usuario)Session["Usuario"];
+                if (Session["Usuario"] == null)
+                {
+                    Response.Redirect("LogIn");
+                }
+                else if (userLog.UsuarioMedico(userLog))
+                {
+                    Session.Add("Error", "Acceso Denegado");
+                    Response.Redirect("ErrorPermisosAcceso.aspx");
+                }
+                else if(Session["modificar"] == null)
+                {
+                    Session.Add("Error", "Acceso Denegado");
+                    Response.Redirect("ErrorPermisosAcceso.aspx");
+                }
                 RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
                 RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
 
@@ -334,14 +349,14 @@ namespace WebApplication1
         {
             if (!Page.IsValid)
                 return;
-            Medico NuevoMedico = new Medico();
-            Usuario nuevoUsuario = new Usuario();
-            MedicoDB cargar = new MedicoDB();
-            UsuarioDB cargarUsuario = new UsuarioDB();
-            string error = "médico";
+           
 
             try
             {
+                Medico NuevoMedico = new Medico();
+                Usuario nuevoUsuario = new Usuario();
+                MedicoDB cargar = new MedicoDB();
+                UsuarioDB cargarUsuario = new UsuarioDB();
                 NuevoMedico.DNI = txtDNI.Text;
                 NuevoMedico.Matricula = txtMatricula.Text;
                 NuevoMedico.Apellido = txtApellido.Text;
@@ -383,16 +398,22 @@ namespace WebApplication1
                     cargar.agregarEspecialidades(obj);
                 }
 
-                Response.Redirect("Medicos.aspx");
+                lblTituloAlertModal.Text = "Agregar Médico";
+                lblVerificacion.Text = "El médico " + NuevoMedico.Nombre + " " + NuevoMedico.Apellido + " fue agregado correctamente.";
+                verificacion_Modal.Show();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
-                throw ex;
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un problema al agregar el médico.";
+                verificacion_Modal.Show();
             }
 
         }
 
-
+        protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Medicos.aspx");
+        }
     }
 }

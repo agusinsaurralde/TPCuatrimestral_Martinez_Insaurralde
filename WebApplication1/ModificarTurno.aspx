@@ -46,7 +46,7 @@
                       </div>
                      <div class="col-md-3 justify-content-center">
                          <asp:Label Text="HORARIO" ID="lblHora" Font-Size="Small" Font-Bold="true" CssClass="form-label" runat="server" />
-                         <asp:DropDownList ID="ddlistHora"  class="form-select" OnSelectedIndexChanged="ddlistHora_SelectedIndexChanged" CssClass="form-select rounded-pill" SelectedIndexChanged="ddlistaHora_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True"></asp:DropDownList>
+                         <asp:DropDownList ID="ddlistHora"  class="form-select" CssClass="form-select rounded-pill" SelectedIndexChanged="ddlistaHora_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True"></asp:DropDownList>
                      </div>
                 </div>
         </ContentTemplate>
@@ -59,10 +59,6 @@
              </div>
         </div>
     </div>
-        <!--<div class="col-md-3">
-            <label for="lblUsuarioLogueado" class="form-label">Recepcionista: </label>
-            <asp:Label ID="lblUsuarioLogueado" Text="" class="for-label" runat="server"></asp:Label>
-        </div>-->
 
             <div class="row justify-content-end" style="margin-top:60px">
                 <div class="col-md-1">
@@ -80,10 +76,10 @@
    <ajaxToolkit:ModalPopupExtender ID="btnEditarTurno_Modal" CancelControlID="exitCheck" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnEditarHistoriaClinica_Modal" TargetControlID="btnModificarTurnoF" PopupControlID="PanelCheck">
     </ajaxToolkit:ModalPopupExtender>
     
-    <asp:Panel ID="PanelCheck" Width="300px" BackColor="White" runat="server">
+    <asp:Panel ID="PanelCheck" BackColor="White" runat="server">
         <div class="modal-header">
             
-            <asp:Label ID="lblTituloModificarTurno" Text="" class="modal-title;" Font-Bold="true" Font-Size="X-Large" runat="server" />
+            <asp:Label ID="lblTituloModificarTurno" class="modal-title" Font-Bold="true" Font-Size="X-Large" runat="server" />
           
             <button id="exitCheck" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -93,16 +89,13 @@
                 <ContentTemplate>
                   <div class="row">
                       <div class="col">
-                          <asp:Label ID="lblTurnoModal" Text="TURNO MODIFICADO! " Font-Bold="true" Font-Size="Small" runat="server" />
-                          <asp:Label id="lblTurnoContext"  runat="server" />
+                          <asp:Label ID="lblTurnoModal" runat="server" />
                       </div>
                   </div>
-
-                  <div class="row">
-                      <div class="col">
-                            <asp:Label ID="lblTurnoCambiadoConfirma" runat="server"/> 
-                      </div>
-                  </div>
+                    <div class="row">
+                        <asp:Label id="lblTurnoEmail"  runat="server" />
+                    </div>
+                   
               </ContentTemplate>
        </asp:UpdatePanel>
         </div>

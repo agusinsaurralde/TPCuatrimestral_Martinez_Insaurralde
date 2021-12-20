@@ -65,15 +65,14 @@ namespace WebApplication1
         protected void Grilla_editar(object sender, GridViewEditEventArgs e)
         {
             Session.Add("agregarHistoriaClinica", turnoBD.buscarporNumero((int)Grilla.DataKeys[e.NewEditIndex].Values[0]));
-            if(((Turno)Session["agregarHistoriaClinica"]).Estado.Estado != "Cerrado" || ((Turno)Session["agregarHistoriaClinica"]).Estado.Estado != "Cancelado")
+            if(((Turno)Session["agregarHistoriaClinica"]).Estado.Estado != "Cerrado" && ((Turno)Session["agregarHistoriaClinica"]).Estado.Estado != "Cancelado")
             {
                 Response.Redirect("AgregarHistoriaClinica.aspx");
             }
             else
             {
-                lblTituloAlertModal.Text = "Acceso Restringido";
-                lblRestringido.Text = "No se puede agregar una observación a un turno cerrado o cancelado.";
-                btnRestringido_Modal.Show();
+                Response.Redirect("ErrorPermisosAcceso.aspx");
+                Session.Add("Error", "No se puede modificar un turno cerrado.");
             }
 
         }
@@ -147,7 +146,7 @@ namespace WebApplication1
         {
             Session.Add("id", (int)Grilla.DataKeys[e.RowIndex].Values[0]);
             Turno turno = turnoBD.buscarporNumero((int)Grilla.DataKeys[e.RowIndex].Values[0]);
-            if(turno.Estado.Estado != "Cerrado" || turno.Estado.Estado != "Cancelado")
+            if(turno.Estado.Estado != "Cerrado" && turno.Estado.Estado != "Cancelado")
             {
                 cancelarTurno_Modal.Show();
             }
@@ -201,6 +200,8 @@ namespace WebApplication1
                 }
             }
         }
+
+
     }
 
 

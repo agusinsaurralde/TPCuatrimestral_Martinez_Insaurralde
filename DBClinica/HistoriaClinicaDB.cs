@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT H.ID, H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.IDMedico, M.Apellido as ApellidoMedico, M.Nombre as NombreMedico,  CONCAT(M.Nombre, ' ', M.Apellido) as NombreCompletoMedico,  H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente INNER JOIN EMPLEADO AS M ON M.ID = H.IDMedico");
+                datos.setearConsulta("SELECT H.ID, H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.IDMedico, M.Apellido as ApellidoMedico, M.Nombre as NombreMedico,  CONCAT(M.Nombre, ' ', M.Apellido) as NombreCompletoMedico,  H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente INNER JOIN EMPLEADO AS M ON M.ID = H.IDMedico WHERE ESTADO = 1 ORDER BY P.APELLIDO ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -137,7 +137,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT H.ID ,H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.IDMedico,  M.Apellido as ApellidoMedico, M.Nombre as NombreMedico,  CONCAT(M.Nombre, ' ', M.Apellido) as NombreCompletoMedico, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente INNER JOIN EMPLEADO AS M ON M.ID = H.IDMedico WHERE P.Apellido LIKE '" + nombre + "%' OR P.Nombre LIKE '" + nombre + "%' OR CONCAT(P.Nombre, ' ', P.Apellido)  LIKE '" + nombre + "%'");
+                datos.setearConsulta("SELECT H.ID ,H.IDPaciente, CONCAT(P.Nombre, ' ', P.Apellido) as NombreCompleto, P.Apellido, P.Nombre, H.IDMedico,  M.Apellido as ApellidoMedico, M.Nombre as NombreMedico,  CONCAT(M.Nombre, ' ', M.Apellido) as NombreCompletoMedico, H.Fecha, H.Descripcion FROM  HistoriaClinica AS H INNER JOIN Paciente AS P ON P.ID = H.IDPaciente INNER JOIN EMPLEADO AS M ON M.ID = H.IDMedico WHERE (P.Apellido LIKE '" + nombre + "%' OR P.Nombre LIKE '" + nombre + "%' OR CONCAT(P.Nombre, ' ', P.Apellido)  LIKE '" + nombre + "%') AND H.ESTADO = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
