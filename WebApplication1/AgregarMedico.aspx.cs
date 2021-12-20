@@ -331,12 +331,9 @@ namespace WebApplication1
 
         }
 
-        protected void btnCerarMedico_Click(object sender, EventArgs e)
+        protected void btnCerrarMedico_Click(object sender, EventArgs e)
         {
             Response.Redirect("Medicos.aspx", false);
         }
-
-
-
     }
 }
