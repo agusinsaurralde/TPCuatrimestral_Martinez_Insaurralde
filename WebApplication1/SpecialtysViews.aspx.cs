@@ -42,6 +42,11 @@ namespace WebApplication1
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {
+            if(txtEspecialidad.Text != "")
+                txtEspecialidad.Text = "";
+
+            if (errorAgregar.Visible)
+                errorAgregar.Visible = false;
             btnAgregarEspecialidad_Modal.Show();
         }
 
@@ -88,18 +93,36 @@ namespace WebApplication1
             EspecialidadDB cargar = new EspecialidadDB();
             string error = "especialidad";
 
-            try
+            List<Especialidad> lista = especialidadDB.lista();
+            if (lista.Find(x => x.Nombre.ToUpper() == txtEspecialidad.Text.ToUpper() && x.Estado == true) != null)
             {
-                NuevaEspecialidad.Nombre = txtEspecialidad.Text;
-                NuevaEspecialidad.Estado = true;
-                cargar.AgregarEspecialidad(NuevaEspecialidad);
-                Grilla.DataSource = especialidadDB.lista();
-                Grilla.DataBind();
+                errorAgregar.Visible = true;
+                errorAgregar.Text = "*La cobertura ingresada ya existe";
+                btnAgregarEspecialidad_Modal.Show();
+
             }
-            catch (Exception)
+            else if (txtEspecialidad.Text == "")
             {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                errorAgregar.Visible = true;
+                errorAgregar.Text = "*Debe completar el campo";
+                btnAgregarEspecialidad_Modal.Show();
             }
+            else
+            {
+                try
+                {
+                    NuevaEspecialidad.Nombre = txtEspecialidad.Text;
+                    NuevaEspecialidad.Estado = true;
+                    cargar.AgregarEspecialidad(NuevaEspecialidad);
+                    Grilla.DataSource = especialidadDB.lista();
+                    Grilla.DataBind();
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                }
+            }
+               
         }
         protected void btnAceptarEliminar_Click(object sender, EventArgs e)
         {
@@ -124,37 +147,52 @@ namespace WebApplication1
 
         protected void btnAceptarEditar_Click(object sender, EventArgs e)
         {
-            Especialidad modEspecialidad = new Especialidad();
-            EspecialidadDB cargar = new EspecialidadDB();
-            string error = "especialidad";
-
-            try
+            List<Especialidad> lista = especialidadDB.lista();
+            if (lista.Find(x => x.Nombre.ToUpper() == txtEditarEspecialidad.Text.ToUpper() && x.Estado == true && x.Id != (int)Session["idEditarEspecialidad"]) != null)
             {
-                modEspecialidad.Id = ((int)Session["idEditarEspecialidad"]);
-                modEspecialidad.Nombre = txtEditarEspecialidad.Text;
-
-                cargar.ModificarEspecialidad(modEspecialidad);
-                Grilla.DataSource = especialidadDB.lista();
-                Grilla.DataBind();
+                errorEditar.Visible = true;
+                errorEditar.Text = "*La cobertura ingresada ya existe";
+                editarEspecialidad_Modal.Show();
+            }
+            else if (txtEditarEspecialidad.Text == "")
+            {
+                errorEditar.Visible = true;
+                errorEditar.Text = "*Debe completar el campo";
+                editarEspecialidad_Modal.Show();
 
             }
-            catch (Exception)
+            else
             {
-                Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                Especialidad modEspecialidad = new Especialidad();
+                EspecialidadDB cargar = new EspecialidadDB();
+                string error = "especialidad";
+                try
+                {
+                    modEspecialidad.Id = (int)Session["idEditarEspecialidad"];
+                    modEspecialidad.Nombre = txtEditarEspecialidad.Text;
+
+                    cargar.ModificarEspecialidad(modEspecialidad);
+                    Grilla.DataSource = especialidadDB.lista();
+                    Grilla.DataBind();
+
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                }
             }
+                
         }
 
-        protected void cargarValoresAnteriores(int id)
-        {
-            EspecialidadDB especialidadDB = new EspecialidadDB();
-            Especialidad esp = especialidadDB.buscarporID(((int)Session["idEditarEspecialidad"]));
-            txtEditarEspecialidad.Text = esp.Nombre;
-        }
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(errorEditar.Visible)
+                errorEditar.Visible = false;
+
             int id = Convert.ToInt32(Grilla.SelectedDataKey.Value);
             Session.Add("idEditarEspecialidad", id);
-            cargarValoresAnteriores(id);
+            Especialidad esp = especialidadDB.buscarporID(id);
+            txtEditarEspecialidad.Text = esp.Nombre;
             editarEspecialidad_Modal.Show();
         }
     }

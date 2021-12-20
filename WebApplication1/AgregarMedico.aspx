@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarMedico.aspx.cs" Inherits="WebApplication1.PRUEBA" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <script>
@@ -175,33 +174,60 @@
           <div class="row justify-content-center">
              <div class="col-md-3" style="margin-bottom: 40px; margin-top:60px">
                   <label for="txtDNI" class="form-label">DNI</label>
-                  <asp:TextBox type="number" class="form-control rounded-pill" ClientIDMode="Static" ID="txtDNI"  runat="server" />
+                  <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
+                  <div style="font-size:13px">
+                     <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDNI" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                     <asp:RegularExpressionValidator ErrorMessage="*Ingrese un DNI válido" ControlToValidate="txtDNI" Runat="server" Display="Dynamic" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
+                     <asp:CustomValidator ID="CustomValidatorDNI" OnServerValidate="CustomValidatorDNI_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado ya existe" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>
+                  </div>
              </div>
              <div class="col-md-3" style="margin-bottom: 40px;margin-top:60px">
                   <label for="txtMatricula" class="form-label">MATRÍCULA</label>
-                  <asp:TextBox type="number" class="form-control rounded-pill" ClientIDMode="Static" ID="txtMatricula"  runat="server" />
+                  <asp:TextBox class="form-control rounded-pill" ID="txtMatricula"  runat="server" />
+                 <div style="font-size:13px">
+                     <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtMatricula" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                     <asp:RegularExpressionValidator ErrorMessage="*Ingrese una matrícula válido" ControlToValidate="txtMatricula" Runat="server" Display="Dynamic" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
+                     <asp:CustomValidator ID="CustomValidatorMatricula" OnServerValidate="CustomValidatorMatricula_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*La matrícula ingresada ya existe" ControlToValidate="txtMatricula" Display="Dynamic"></asp:CustomValidator>
+                  </div>
+
              </div>
           </div>
         
           <div class="row justify-content-center">
             <div class="col-md-3" style="margin-bottom: 40px"">
               <label for="txtApellido" class="form-label">APELLIDO</label>
-              <asp:TextBox  class="form-control rounded-pill" ClientIDMode="Static" ID="txtApellido"  runat="server" />
+              <asp:TextBox  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
+                 <div style="font-size:13px">
+                     <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtApellido" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                     <asp:RegularExpressionValidator ErrorMessage="*Ingrese un apellido válido" ControlToValidate="txtApellido" Runat="server" Display="Dynamic" ValidationExpression="^[a-zA-Z ]*$" ForeColor="#CC0000"></asp:RegularExpressionValidator>
+                 </div>
             </div>
               <div class="col-md-3" style="margin-bottom: 40px">
               <label for="txtNombre" class="form-label">NOMBRE</label>
-              <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtNombre"  runat="server" />
+              <asp:TextBox class="form-control rounded-pill" ID="txtNombre"  runat="server" />
+                  <div style="font-size:13px">
+                    <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtNombre" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ErrorMessage="*Ingrese un nombre válido" ControlToValidate="txtNombre" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="^[a-zA-Z ]*$" ForeColor="#CC0000"></asp:RegularExpressionValidator>
+                 </div>
             </div>
            </div>
                 
             <div class="row justify-content-center">
                  <div class="col-md-3" style="margin-bottom: 40px">
                    <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
-                   <asp:TextBox type="date" ClientIDMode="Static" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
+                   <asp:TextBox type="date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
+                     <div style="font-size:13px">
+                         <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtFechaNac" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                          <asp:RangeValidator ID="RangeValidator" runat="server" ErrorMessage="*Ingrese una fecha válida" ControlToValidate="txtFechaNac" ForeColor="#CC0000" Display="Dynamic"></asp:RangeValidator>
+                    </div>
                  </div>
                  <div class="col-md-3" style="margin-bottom: 40px">
                    <label for="txtTelefono" class="form-label">TELÉFONO</label>
-                   <asp:TextBox type="number" ClientIDMode="Static" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
+                   <asp:TextBox MaxLength="10" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
+                     <div style="font-size:13px">
+                         <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtTelefono" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                         <asp:RegularExpressionValidator ErrorMessage="*Ingrese un número válido" ControlToValidate="txtTelefono" Runat="server" Display="Dynamic" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
+                     </div>
                  </div>
              </div>
                
@@ -210,16 +236,23 @@
               
                <div class="col-md-3" style="margin-bottom: 70px">
                  <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
-                 <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtDireccion" runat="server" />
+                 <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
+                   <div style="font-size:13px">
+                     <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDireccion" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                 </div>
                </div>
                 <div class="col-md-3" style="margin-bottom: 70px">
                  <label for="txtEmail" class="form-label">E-MAIL</label>
-                 <asp:TextBox type="email" ClientIDMode="Static" class="form-control rounded-pill" ID="txtEmail" runat="server" />
+                 <asp:TextBox type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
+                    <div style="font-size:13px">
+                         <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtEmail" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                         <asp:CustomValidator ID="CustomValidatorEmail" OnServerValidate="CustomValidatorEmail_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El email ingresado ya existe" ControlToValidate="txtEmail" Display="Dynamic"></asp:CustomValidator>
+                     </div>
                </div>
               </div>
             </div>
             <div class="row  justify-content-end" style="margin-bottom: 60px; margin-top:30px">
-                <div class="col-md-2"><asp:Button ID="btn0a1" runat="server" Text="SIGUIENTE >" OnClientClick="return validarVistaDatos()" Font-Bold="true" Font-Size="Small"  CssClass="btn btn-primary rounded-pill" OnClick="btn0a1_Click" /></div>
+                <div class="col-md-2"><asp:Button ID="btn0a1" runat="server" Text="SIGUIENTE >" Font-Bold="true" Font-Size="Small"  CssClass="btn btn-primary rounded-pill" OnClick="btn0a1_Click" /></div>
             </div>
         </asp:View>
 
@@ -341,44 +374,4 @@
            
         </asp:View>
     </asp:MultiView>
-
-    <!-- Modal -->
-
-    <asp:Button  style="display:none" runat="server" ID="btnAceptarFalso" />
-   <ajaxToolkit:ModalPopupExtender ID="btnRevision_Modal" CancelControlID="exitCheck" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnRevision_Modal" TargetControlID="btnAceptarFalso" PopupControlID="PanelCheck">
-    </ajaxToolkit:ModalPopupExtender>
-    
-    <asp:Panel ID="PanelCheck" Width="300px" BackColor="White" runat="server">
-        <div class="modal-header">
-          
-            <asp:Label ID="lblTituloModalAlert" Text="Medico." class="modal-title;" Font-Bold="true" Font-Size="X-Large" runat="server" />
-          
-          <button id="exitCheck" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="margin:30px 0px 30px 0px">
-            <asp:UpdatePanel runat="server">
-                <ContentTemplate>
-                  <div class="row">
-                      <div class="col">
-                          <asp:Label ID="lblMedicoTituloNombre" Text="NOMBRE MEDICO: " Font-Bold="true" Font-Size="Small" runat="server" />
-                          <asp:Label id="lblNombreMedico"  runat="server" />
-                          <asp:Label ID="lblNombreUsuarioTitulo" runat="server" />
-                          <asp:Label ID="lblNombreUsuario" runat="server" />
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col">
-                            <asp:Label ID="lblAgregarFunciono" runat="server"/> 
-                      </div>
-                  </div>
-              </ContentTemplate>
-       </asp:UpdatePanel>
-            
-        </div>
-        <div class="modal-footer">
-            <asp:Button ID="btnCerarMedico" Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" OnClick="btnCerarMedico_Click" Font-Size="Small" Font-Bold="true" data-bs-dismiss="modal" runat="server" />
-        </div>
-    </asp:Panel>
-
-
 </asp:Content>

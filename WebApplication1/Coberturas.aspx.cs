@@ -40,6 +40,11 @@ namespace WebApplication1
         }
         protected void Click_Agregar(object sender, EventArgs e)
         {
+            if (txtCobertura.Text != "")
+                txtCobertura.Text = "";
+
+            if(errorAgregar.Visible)
+                 errorAgregar.Visible = false;
             btnAgregarCobertura_Modal.Show();
         }
 
@@ -70,18 +75,38 @@ namespace WebApplication1
             CoberturaDB cargar = new CoberturaDB();
             string error = "cobertura";
 
-            try
+
+            List<Cobertura> lista = coberturaDB.lista();
+            if (lista.Find(x => x.Nombre.ToUpper() == txtCobertura.Text.ToUpper() && x.Estado == true) != null)
             {
-                NuevaCobertura.Nombre = txtCobertura.Text;
-                NuevaCobertura.Estado = true;
-                cargar.AgregarCobertura(NuevaCobertura);
-                Grilla.DataSource = coberturaDB.lista();
-                Grilla.DataBind();
+                errorAgregar.Visible = true;
+                errorAgregar.Text = "*La cobertura ingresada ya existe";
+                btnAgregarCobertura_Modal.Show();
             }
-            catch (Exception)
+            else if (txtCobertura.Text == "")
             {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                errorAgregar.Visible = true;
+                errorAgregar.Text = "*Debe completar el campo";
+                btnAgregarCobertura_Modal.Show();
             }
+            else
+            {
+                try
+                {
+                    NuevaCobertura.Nombre = txtCobertura.Text;
+                    NuevaCobertura.Estado = true;
+                    cargar.AgregarCobertura(NuevaCobertura);
+                    Grilla.DataSource = coberturaDB.lista();
+                    Grilla.DataBind();
+                    txtCobertura.Text = "";
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                }
+            }
+            
+
         }
 
         protected void btnAceptarEliminar_Click(object sender, EventArgs e)
@@ -110,25 +135,45 @@ namespace WebApplication1
             Cobertura modCobertura = new Cobertura();
             CoberturaDB cargar = new CoberturaDB();
             string error = "cobertura";
+            List<Cobertura> lista = coberturaDB.lista();
 
-            try
+            if (lista.Find(x => x.Nombre.ToUpper() == txtEditarCobertura.Text.ToUpper() && x.Estado == true && x.Id != ((Cobertura)Session["modificar"]).Id) != null)
             {
-                modCobertura.Id = ((Cobertura)Session["modificar"]).Id;
-                modCobertura.Nombre = txtEditarCobertura.Text;
-
-                cargar.ModificarCobertura(modCobertura);
-                Grilla.DataSource = coberturaDB.lista();
-                Grilla.DataBind();
-
+                errorEditar.Visible = true;
+                errorEditar.Text = "*La cobertura ingresada ya existe";
+                editarCobertura_Modal.Show();
             }
-            catch (Exception)
+            else if (txtEditarCobertura.Text == "")
             {
-                Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                errorEditar.Visible = true;
+                errorEditar.Text = "*Debe completar el campo";
+                editarCobertura_Modal.Show();
             }
+            else
+            {
+                try
+                {
+                    modCobertura.Id = ((Cobertura)Session["modificar"]).Id;
+                    modCobertura.Nombre = txtEditarCobertura.Text;
+                    modCobertura.Estado = true;
+
+                    cargar.ModificarCobertura(modCobertura);
+                    Grilla.DataSource = coberturaDB.lista();
+                    Grilla.DataBind();
+
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                }
+            }
+           
         }
 
         protected void Grilla_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(errorEditar.Visible)
+                errorEditar.Visible = false;
             Session.Add("modificar", coberturaDB.buscarporID(Convert.ToInt32(Grilla.SelectedDataKey.Value)));
             txtEditarCobertura.Text = ((Cobertura)Session["modificar"]).Nombre;
             editarCobertura_Modal.Show();
@@ -148,6 +193,7 @@ namespace WebApplication1
                 resultados.Visible = true;
             }
         }
+
     }
 }
 

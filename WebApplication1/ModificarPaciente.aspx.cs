@@ -14,11 +14,27 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if ((Paciente)Session["modificar"] == null)
+            {
+                Response.Redirect("ErrorPermisosAcceso");
+            }
+            else if (userLog.TipoUsuario.Nombre == "Médico")
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+            }
+           
             CoberturaDB db = new CoberturaDB();
             try
             {
                 if (!IsPostBack)
                 {
+                    RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                    RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
+
                     List<Cobertura> cob = db.lista();
                     ddlistCobertura.DataSource = cob;
                     ddlistCobertura.DataTextField = "Nombre";
@@ -46,6 +62,8 @@ namespace WebApplication1
         }
         protected void Click_Aceptar(object sender, EventArgs e)
         {
+            if (!Page.IsValid)
+                return;
             Paciente ModPaciente = new Paciente();
             PacienteDB cargar = new PacienteDB();
             string modificado = "Paciente";
@@ -78,6 +96,20 @@ namespace WebApplication1
         {
             Response.Redirect("Pacientes.aspx");
 
+        }
+
+        protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            PacienteDB pacienteDB = new PacienteDB();
+            List<Paciente> lista = pacienteDB.listarPaciente();
+            if (lista.Find(x => x.DNI == args.Value && x.Estado == true && x.ID != ((Paciente)Session["modificar"]).ID) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
         }
 
     }

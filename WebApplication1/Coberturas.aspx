@@ -2,33 +2,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-     <script>
-        function validar() {
-            var cobertura = document.getElementById("<% = txtCobertura.ClientID %>").value;
-            var coberturaEd = document.getElementById("<% = txtEditarCobertura.ClientID %>").value;
-
-            if (cobertura === "") {
-                $("#txtCobertura").addClass("is-invalid");
-                 return false;
-            }
-            else {
-                $("#txtCobertura").removeClass("is-invalid");
-            }
-
-            if (coberturaEd == "") {
-                $("#txtEditarCobertura").addClass("is-invalid");
-                return false;
-            }
-            else {
-                $("#txtEditarCobertura").removeClass("is-invalid");
-            }
-             return true;
-
-         }
-     </script>
-
-    
-    
+   
     
     <br />
     <h1>Coberturas</h1>
@@ -77,13 +51,22 @@
           <h5 class="modal-title" >Agregar Cobertura</h5>
           <button id="exit" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" style="margin:25px 15px 35px 15px">
-            <div class="row"><asp:Label Text="COBERTURA" class="form-label" Font-Size="Small" Font-Bold="true" runat="server" /></div>
-            <div class="row">
-                <div class="col"><asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtCobertura"  runat="server" /></div>
-            </div>
-            
-        </div>
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                    <div class="modal-body" style="margin:25px 15px 35px 15px">
+                        <div class="row"><asp:Label Text="COBERTURA" class="form-label" Font-Size="Small" Font-Bold="true" runat="server" /></div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:TextBox class="form-control rounded-pill" AutoPostBack="true" ID="txtCobertura"  runat="server" />
+                                     <div style="font-size: 13px">
+                                          <asp:Label id="errorAgregar" Visible="false" runat="server" ForeColor="#CC0000" />
+                                     </div>                  
+                                </div>
+                        </div>
+                        
+                    </div>
+                </ContentTemplate>
+        </asp:UpdatePanel>
         <div class="modal-footer">
             <asp:Button Text="CANCELAR" class="btn btn-outline-secondary rounded-pill" Font-Size="Small" Font-Bold="true" BorderStyle="None" data-bs-dismiss="modal" runat="server" />
             <asp:Button class="btn btn-primary rounded-pill" ID="btnAceptar" Font-Size="Small" Font-Bold="true" Text="ACEPTAR" OnClick="btnAceptar_Click" runat="server" />
@@ -108,7 +91,12 @@
                  <asp:UpdatePanel runat="server">
                     <ContentTemplate>
                         <div class="row">
-                            <div class="col"> <asp:TextBox ID="txtEditarCobertura" ClientIDMode="Static" CssClass="form-control rounded-pill"  runat="server" /></div>
+                            <div class="col">
+                                <asp:TextBox ID="txtEditarCobertura" CssClass="form-control rounded-pill"  runat="server" />
+                                <div style="font-size: 13px">
+                                          <asp:Label id="errorEditar" Visible="false" runat="server" ForeColor="#CC0000" />
+                                 </div> 
+                            </div>
                         </div>
                     </ContentTemplate>
                  </asp:UpdatePanel>

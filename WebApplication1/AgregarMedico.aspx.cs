@@ -15,6 +15,9 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
+                RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
+
                 EspecialidadDB espDB = new EspecialidadDB();
                 List<Especialidad> lista = espDB.lista();
                 Session["listaEsp"] = lista;
@@ -41,8 +44,11 @@ namespace WebApplication1
             
         }
 
+        //botones 
         protected void btn0a1_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid)
+                return;
             MultiView.ActiveViewIndex = 1;
             lblDatos.Font.Bold = false;
             lblDatos.ForeColor = System.Drawing.Color.Gray;
@@ -75,6 +81,48 @@ namespace WebApplication1
             lblEspecialidades.Font.Bold = true;
             lblEspecialidades.ForeColor = System.Drawing.Color.RoyalBlue;
         }
+
+        //validaciones
+        protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> lista = medicoDB.listarMedico();
+            if (lista.Find(x => x.DNI == args.Value && x.Estado == true) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+        protected void CustomValidatorMatricula_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> lista = medicoDB.listarMedico();
+            if (lista.Find(x => x.Matricula == args.Value && x.Estado == true) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+        protected void CustomValidatorEmail_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> lista = medicoDB.listarMedico();
+            if (lista.Find(x => x.Email.ToUpper() == args.Value.ToUpper() && x.Estado == true) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
 
         protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -211,14 +259,7 @@ namespace WebApplication1
                 NuevoMedico.Email = txtEmail.Text;
                 NuevoMedico.Dirección = txtDireccion.Text;
                 NuevoMedico.Estado = true;
-
-                if (!(cargar.agregarRetornaBool(NuevoMedico))) //Codigo nuevo
-                {
-                    revisarSiAgregoMedico(NuevoMedico);
-                }
-
-
-                //cargar.agregar(NuevoMedico);
+                cargar.agregar(NuevoMedico);
 
                 List<Medico> medicos = cargar.listarMedico();
                 Medico ultMedico = medicos.Find(x => x.DNI == txtDNI.Text);
@@ -230,12 +271,7 @@ namespace WebApplication1
                 nuevoUsuario.TipoUsuario.Nombre = "Médico";
                 nuevoUsuario.Estado = true;
 
-                if (!(cargarUsuario.agregarUsuarioRetornaBool(nuevoUsuario))) //Codigo nuevo
-                {
-                    revisarSiAgregoMedico(nuevoUsuario);
-                }
-
-                //cargarUsuario.AgregarUsuario(nuevoUsuario);
+                cargarUsuario.AgregarUsuario(nuevoUsuario);
 
                 List<DiasHabilesMedico> listaDias = (List<DiasHabilesMedico>)Session["diasAgregados"];
                 List<MedicoEspecialidades> listaEsp = (List<MedicoEspecialidades>)Session["especialidadesAgregadas"];
@@ -255,8 +291,7 @@ namespace WebApplication1
                     cargar.agregarEspecialidades(obj);
                 }
 
-                revisarSiAgregoMedico(NuevoMedico, nuevoUsuario);
-                //Response.Redirect("Medicos.aspx");
+                Response.Redirect("Medicos.aspx");
             }
             catch (Exception ex)
             {
@@ -266,77 +301,6 @@ namespace WebApplication1
 
         }
 
-
-        protected void revisarSiAgregoMedico(Medico nuevoMedico)
-        {
-            try
-            {
-                lblTituloModalAlert.Text = "Error! cargar medico.";
-                lblNombreMedico.Text = nuevoMedico.Nombre.ToString() + " " + nuevoMedico.Apellido.ToString();
-                lblAgregarFunciono.Text = "No pudo agregarse correctamente!.";
-                btnRevision_Modal.Show();
-            }
-            catch (Exception)
-            {
-                lblTituloModalAlert.Text = "Error!.";
-                lblNombreMedico.Text = "*Sin cargar*";
-                lblAgregarFunciono.Text = "Error INESPERADO!.";
-                btnRevision_Modal.Show();
-
-                throw;
-            }
-
-
-        }
-        protected void revisarSiAgregoMedico(Usuario nuevoUsuario)
-        {
-            try
-            {
-                lblTituloModalAlert.Text = "Error!. Cargar usuario";
-                lblNombreMedico.Text = nuevoUsuario.NombreUsuario.ToString();
-                lblAgregarFunciono.Text = "No pudo agregarse correctamente!.";
-                btnRevision_Modal.Show();
-            }
-            catch (Exception)
-            {
-
-                lblTituloModalAlert.Text = "Error!.";
-                lblNombreMedico.Text = "*Sin cargar*";
-                lblAgregarFunciono.Text = "Error INESPERADO!.";
-                btnRevision_Modal.Show();
-            }
-
-        }
-
-        protected void revisarSiAgregoMedico(Medico nuevoMedico, Usuario nuevoUsuario)
-        {
-            try
-            {
-                lblTituloModalAlert.Text = "Profesional agergado.";
-                lblNombreMedico.Text = nuevoMedico.Nombre.ToString() + "" + nuevoMedico.Apellido.ToString();
-                lblNombreUsuarioTitulo.Text = "NOMBRE USUARIO: ";
-                lblNombreUsuario.Text = nuevoUsuario.NombreUsuario.ToString();
-                lblAgregarFunciono.Text = "Fue agregado correctamente!.";
-                btnRevision_Modal.Show();
-
-            }
-            catch (Exception)
-            {
-
-                lblTituloModalAlert.Text = "Error!.";
-                lblNombreMedico.Text = "*Sin cargar*";
-                lblAgregarFunciono.Text = "Error INESPERADO!.";
-                btnRevision_Modal.Show();
-            }
-
-        }
-
-        protected void btnCerarMedico_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Medicos.aspx", false);
-        }
-
-
-
+       
     }
 }

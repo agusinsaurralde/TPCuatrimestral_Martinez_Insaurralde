@@ -20,9 +20,11 @@ namespace WebApplication1
 
             if (Session["Usuario"] == null)
             {
-                Session.Add("Error", "Debes iniciar sesión");
-                Response.Redirect("ErrorIngreso.aspx", false);
+                Response.Redirect("LogIn.aspx");
             }
+            else 
+            { 
+            
 
 
             if (!IsPostBack)
@@ -79,7 +81,7 @@ namespace WebApplication1
 
                     //ddlistEstado.SelectedValue = turnoSesion.Estado.ID.ToString();
                 }
-                
+                }
             }
            
         }
@@ -100,8 +102,17 @@ namespace WebApplication1
             TurnoDB turnoDB = new TurnoDB();
             List<Turno> turnos = turnoDB.listarTurno();
             //guarda turnos que tengan programados el medico y/o paciente en el dia seleccionado excepto el turno a modificar
-            List<Turno> filtrados = turnos.FindAll(x => x.Numero != numero && x.Dia.ToShortTimeString() == dia && (x.Paciente.ID == idPaciente || x.Medico.ID == idMedico) && (x.Estado.Estado == "Programado" || x.Estado.Estado == "Reprogramado"));
 
+            List<Turno> filtrados = turnos.FindAll(x => (x.Numero != numero) && (x.Dia.ToShortDateString() == dia) && (x.Paciente.ID == idPaciente || x.Medico.ID == idMedico) && (x.Estado.Estado == "Programado" || x.Estado.Estado == "Reprogramado"));
+            int canti = filtrados.Count;
+
+            foreach (var item in filtrados)
+            {
+                DateTime diaT = item.Dia;
+                DateTime hora = item.HorarioInicio;
+                string paciente = item.Paciente.NombreCompleto;
+                string medico = item.Medico.NombreCompleto;
+            }
             //carga horarios
             List<string> horarios = new List<string>();
             for (int x = 0; x < 3; x++) //guarda los horarios

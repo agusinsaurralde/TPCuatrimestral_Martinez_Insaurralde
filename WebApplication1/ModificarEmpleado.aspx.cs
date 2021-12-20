@@ -13,11 +13,30 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Usuario userLog = (Usuario)Session["Usuario"];
+
+            if ((Empleado)Session["modificar"] == null)
+            {
+                Response.Redirect("ErrorPermisosAcceso");
+            }
+            else if (userLog.TipoUsuario.Nombre == "Médico")
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+            }
+            else if (userLog.TipoUsuario.Nombre == "Recepcionista")
+            {
+                Session.Add("Error", "Acceso denegado"); ;
+                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+            }
             TipoEmpleadoDB db = new TipoEmpleadoDB();
             try
             {
                 if (!IsPostBack)
                 {
+                    RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                    RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
                     List<TipoEmpleado> tipo = db.listar();
                     ddlistTipoEmpleado.DataSource = tipo;
                     ddlistTipoEmpleado.DataTextField = "Nombre";
@@ -52,8 +71,10 @@ namespace WebApplication1
         {
             Response.Redirect("Empleados.aspx");
         }
-            protected void Click_Aceptar(object sender, EventArgs e)
+        protected void Click_Aceptar(object sender, EventArgs e)
         {
+            if (!Page.IsValid)
+                return;
             Empleado modEmpleado = new Empleado();
             Usuario modUsuario = new Usuario();
             EmpleadoDB cargar = new EmpleadoDB();
@@ -89,6 +110,48 @@ namespace WebApplication1
                 Response.Redirect("ErrorModificar.aspx?error=" + error, false);
             }
 
+        }
+
+        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            UsuarioDB usuarioDB = new UsuarioDB();
+            List<Usuario> lista = usuarioDB.listar();
+            if (lista.Find(x => x.NombreUsuario.ToUpper() == args.Value.ToUpper() && x.Estado == true && x.IDUsuario != ((Empleado)Session["modificar"]).ID) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> lista = empleadoDB.listarEmpleado();
+            if (lista.Find(x => x.DNI == args.Value && x.Estado == true && x.ID != ((Empleado)Session["modificar"]).ID) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        protected void CustomValidatorEmail_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> lista = empleadoDB.listarEmpleado();
+            if (lista.Find(x => x.Email.ToUpper() == args.Value.ToUpper() && x.Estado == true && x.ID != ((Empleado)Session["modificar"]).ID) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
         }
     }
 }

@@ -2,31 +2,6 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <script>
-        function validar() {
-            var especialidad = document.getElementById("<% = txtEspecialidad.ClientID %>").value;
-            var editarEsp = document.getElementById("<% = txtEditarEspecialidad.ClientID %>").value;
-
-            if (especialidad === "") {
-                 $("#txtEspecialidad").addClass("is-invalid");
-                 return false;
-            }
-            else {
-                $("#txtEspecialidad").removeClass("is-invalid");
-            }
-
-            if (editarEsp == "") {
-                $("#txtEditarEspecialidad").addClass("is-invalid");
-                return false;
-            }
-            else {
-                $("#txtEditarEspecialidad").removeClass("is-invalid");
-            }
-             return true;
-
-         }
-    </script>
-
 
 
     <link href="Estilos.css" rel="stylesheet" />
@@ -78,9 +53,19 @@
         </div>
         <div class="modal-body" style="margin:25px 15px 35px 15px">
             <div class="row"><asp:Label Text="ESPECIALIDAD" CssClass="form-label" Font-Bold="true" Font-Size="Small" runat="server" /></div>
-            <div class="row">
-                <div class="col"> <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtEspecialidad"  runat="server" /></div>
-            </div>
+
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                     <div class="row">
+                         <div class="col"> 
+                             <asp:TextBox class="form-control rounded-pill" ID="txtEspecialidad"  runat="server" />
+                             <div style="font-size: 13px">
+                                   <asp:Label id="errorAgregar" Visible="false" runat="server" ForeColor="#CC0000" />
+                             </div>
+                         </div>
+                     </div>
+                    </ContentTemplate>
+            </asp:UpdatePanel>
           
         </div>
         <div class="modal-footer">
@@ -103,15 +88,18 @@
 
        
         <div class="modal-body" style="margin:25px 15px 35px 15px">
-             <asp:UpdatePanel runat="server">
-                <ContentTemplate>
                     <div class="row">
                         <asp:Label Text="ESPECIALIDAD" class="form-label" Font-Bold="true" Font-Size="Small" runat="server" />
                     </div>
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
                     <div class="row">
                          <div class="col">
-                           <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtEditarEspecialidad" runat="server" />
+                           <asp:TextBox class="form-control rounded-pill" ID="txtEditarEspecialidad" runat="server" />
                          </div>
+                        <div style="font-size: 13px">
+                              <asp:Label id="errorEditar" Visible="false" runat="server" ForeColor="#CC0000" />
+                        </div>
                     </div>
                  </ContentTemplate>
              </asp:UpdatePanel>

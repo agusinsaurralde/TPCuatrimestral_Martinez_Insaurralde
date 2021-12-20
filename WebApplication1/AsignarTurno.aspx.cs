@@ -46,7 +46,7 @@ namespace WebApplication1
                 ddlistMedico.DataTextField = "NombreCompleto";
                 ddlistMedico.DataValueField = "ID";
                 ddlistMedico.DataBind();
-                ddlistMedico.Items.Insert(0, new ListItem("Seleccionar", "0"));
+                ddlistMedico.Items.Insert(0, new ListItem("Seleccionar Médico", "0"));
 
                 MultiView.ActiveViewIndex = 0;
                 lblPaciente.Font.Bold = true;
@@ -70,6 +70,8 @@ namespace WebApplication1
         }
         protected void btn1a2_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid)
+                return;
             MultiView.ActiveViewIndex = 2;
             lblServicio.Font.Bold = false;
             lblServicio.ForeColor = System.Drawing.Color.Gray;
@@ -334,6 +336,30 @@ namespace WebApplication1
             catch (Exception)
             {
                 Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+            }
+        }
+
+        protected void CustomValidatorEspecialidad_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if(ddlistEspecialidad.SelectedIndex == 0)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        protected void CustomValidatorMedico_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (ddlistMedico.SelectedIndex == 0)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
             }
         }
     }

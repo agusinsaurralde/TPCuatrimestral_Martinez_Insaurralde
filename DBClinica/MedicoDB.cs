@@ -375,7 +375,7 @@ namespace DBClinica
             return listaEspDeMedico;
         }
 
-
+     
 
         /*public List<Medico> listarMedicoXEspecialidad(int IDEspecialidad)
         {
@@ -424,37 +424,6 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }*/
-
-
-        public bool agregarRetornaBool(Medico MedicoNuevo)
-        {
-            ConexionDB datos = new ConexionDB();
-            try
-            {
-                datos.setearConsulta("EXEC SP_AGREGARMEDICO @DNI, @Matricula, @Apellido, @Nombre, @Telefono, @Email, @Direccion, @FechaNacimiento");
-                datos.setearParametro("@DNI", MedicoNuevo.DNI);
-                datos.setearParametro("@Matricula", MedicoNuevo.Matricula);
-                datos.setearParametro("@Apellido", MedicoNuevo.Apellido);
-                datos.setearParametro("@Nombre", MedicoNuevo.Nombre);
-                datos.setearParametro("@Telefono", MedicoNuevo.Telefono);
-                datos.setearParametro("@Email", MedicoNuevo.Email);
-                datos.setearParametro("@Direccion", MedicoNuevo.Dirección);
-                datos.setearParametro("@FechaNacimiento", MedicoNuevo.FechaNacimiento);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                return false;
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-            return true;
-        }
-
-
 
     }
 }

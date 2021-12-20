@@ -25,8 +25,9 @@ namespace WebApplication1
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
-                    //Session.Add("error", ex);
+                    Session.Add("error", ex);
+                     Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
                 }
             }
                 

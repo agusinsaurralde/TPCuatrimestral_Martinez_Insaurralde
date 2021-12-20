@@ -62,10 +62,14 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-2">
-                   <asp:TextBox ClientIDMode="Static" CssClass="form-control rounded-pill" ID="txtDNI"  runat="server" />
+                   <asp:TextBox CssClass="form-control rounded-pill" ID="txtDNI"  runat="server" />
+                    <div style="font-size:13px">
+                          <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDNI" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                          <asp:RegularExpressionValidator ErrorMessage="*Ingrese un DNI válido" ControlToValidate="txtDNI" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
+                  </div>
                </div>
                 <div class="col-md-1" style="margin-bottom:40px">
-                     <asp:Button CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" Text="BUSCAR" OnClientClick="return validarDNI()" OnClick="btnBuscar_Click" runat="server" />
+                     <asp:Button CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" Text="BUSCAR" OnClick="btnBuscar_Click" runat="server" />
                 </div>
             </div>
 
@@ -83,9 +87,9 @@
              
 
             <hr />
-             <div class="row justify-content-end" style="margin-bottom:100px">
+             <div class="row justify-content-end" style="margin-bottom:100px; margin-top:60px">
                   <div class="col-md-2">
-                      <asp:Button Text="SIGUIENTE >" OnClientClick="return validarDNI()" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn0a1" runat="server" OnClick="btn0a1_Click" />
+                      <asp:Button Text="SIGUIENTE >" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn0a1" runat="server" OnClick="btn0a1_Click" />
                   </div>
              </div>
         </asp:View>
@@ -98,10 +102,16 @@
                            <div class="col-md-3">
                                 <asp:Label Text="ESPECIALIDAD" Font-Bold="true" Font-Size="Small" ID="lblEspecialidad" CssClass="form-label" runat="server" />
                                 <asp:DropDownList ID="ddlistEspecialidad" ClientIDMode="Static" Enabled = false CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+                                <div style="font-size:13px">
+                                  <asp:CustomValidator ID="CustomValidatorEspecialidad" OnServerValidate="CustomValidatorEspecialidad_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*Debe seleccionar una especialidad" ControlToValidate="ddlistEspecialidad" Display="Dynamic"></asp:CustomValidator>
+                               </div>
                             </div>
                            <div class="col-md-3">
                                <asp:Label Text="MÉDICO" Font-Bold="true" Font-Size="Small" ID="lblMedico"  CssClass="form-label" runat="server" />
                                <asp:DropDownList ID="ddlistMedico" ClientIDMode="Static" Enabled = false class="form-select" CssClass="form-select rounded-pill"  OnSelectedIndexChanged="ddlistMedico_SelectedIndexChanged" AutoPostBack="true" runat="server" EnableViewState="True" ></asp:DropDownList>
+                                <div style="font-size:13px">
+                                  <asp:CustomValidator ID="CustomValidatorMedico" OnServerValidate="CustomValidatorMedico_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*Debe seleccionar un médico" ControlToValidate="ddlistMedico" Display="Dynamic"></asp:CustomValidator>
+                               </div>
                            </div>
                        </div>
 
@@ -109,12 +119,14 @@
             </asp:UpdatePanel>  
 
              <hr />
-             <div class="row justify-content-around" style="margin-bottom:100px">
-                 <div class="col-md-2" style="margin-right:350px">
+
+
+             <div class="row justify-content-md-between" style="margin-bottom:100px; margin-top: 60px">
+                 <div class="col-md-2" style="margin-left: 80px">
                      <asp:Button Text="< ANTERIOR" CssClass="btn btn-secondary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn1a0" runat="server" OnClick="btn1a0_Click"  />
                  </div>
-                 <div class="col-md-2" style="margin-left:350px">
-                     <asp:Button Text="SIGUIENTE >" OnClientClick="return validarEspecialidadMedico()" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn1a2" runat="server" OnClick="btn1a2_Click" />
+                 <div class="col-md-2">
+                     <asp:Button Text="SIGUIENTE >" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn1a2" runat="server" OnClick="btn1a2_Click" />
                  </div>
              </div>
                     
@@ -135,16 +147,16 @@
                     </div>
 
               </div>
-              <div class="row" style="display:flex; justify-content:flex-end">
-                  <div class="row">
-                      <div class="col-md-2" style="margin-right:350px">
+
+                  <div class="row justify-content-md-between">
+                      <div class="col-md-2"  style="margin-left: 80px">
                         <asp:Button Text="< ANTERIOR" CssClass="btn btn-secondary rounded-pill" Font-Bold="true" Font-Size="Small" ID="btn2a1" OnClick="btn2a1_Click" runat="server" />  
                       </div>
-                      <div class="col-md-2" style="margin-left:350px">
+                      <div class="col-md-2">
                           <asp:Button ID="btnAceptar" Text="ACEPTAR" CssClass="btn btn-primary rounded-pill" Enabled="false" Font-Bold="true" OnClick="Aceptar_Click" Font-Size="Small" runat="server" />
                       </div>
                   </div>
-              </div>
+
         </asp:View>
     </asp:MultiView>
 </asp:Content>

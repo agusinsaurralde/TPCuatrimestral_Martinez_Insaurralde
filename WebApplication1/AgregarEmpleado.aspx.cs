@@ -37,6 +37,10 @@ namespace WebApplication1
             {
                 if (!IsPostBack)
                 {
+                    RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                    RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
+
+
                     List<TipoEmpleado> empleado = db.listar();
                     List<TipoEmpleado> empleadosSinMedico = empleado.FindAll(x => x.Nombre != "Médico");
                     ddlistTipoEmpleado.DataSource = empleadosSinMedico;
@@ -62,9 +66,10 @@ namespace WebApplication1
             string agregado = "Empleado";
             string error = "empleado";
 
+            if(!Page.IsValid)
+                     return;
             try
             {
-
                 NuevoEmpleado.DNI = txtDNI.Text;
                 NuevoEmpleado.Apellido = txtApellido.Text;
                 NuevoEmpleado.Nombre = txtNombre.Text;
@@ -97,12 +102,55 @@ namespace WebApplication1
             {
                 Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
-
+            
+           
         }
 
         protected void Cancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Empleados.aspx");
+        }
+
+        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            UsuarioDB usuarioDB = new UsuarioDB();
+            List<Usuario> lista = usuarioDB.listar();
+            if (lista.Find(x => x.NombreUsuario.ToUpper() == args.Value.ToUpper() && x.Estado == true) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> lista = empleadoDB.listarEmpleado();
+            if (lista.Find(x => x.DNI == args.Value && x.Estado == true) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        protected void CustomValidatorEmail_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> lista = empleadoDB.listarEmpleado();
+            if (lista.Find(x => x.Email.ToUpper() == args.Value.ToUpper() && x.Estado == true) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
         }
     }
 }

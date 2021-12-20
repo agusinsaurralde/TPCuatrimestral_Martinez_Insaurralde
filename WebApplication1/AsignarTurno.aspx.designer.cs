@@ -123,6 +123,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList ddlistEspecialidad;
 
         /// <summary>
+        /// Control CustomValidatorEspecialidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorEspecialidad;
+
+        /// <summary>
         /// Control lblMedico.
         /// </summary>
         /// <remarks>
@@ -139,6 +148,15 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlistMedico;
+
+        /// <summary>
+        /// Control CustomValidatorMedico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorMedico;
 
         /// <summary>
         /// Control btn1a0.
