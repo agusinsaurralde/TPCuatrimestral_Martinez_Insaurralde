@@ -4,7 +4,7 @@
         <script>
         window.onload = function checkOk() {
             swal({
-                title: "Wo Wo Wo",
+                title: "Wow Wow Wow!",
                 text: "Algo ha salido mal :D!",
                 icon: "error",
                 button: false,

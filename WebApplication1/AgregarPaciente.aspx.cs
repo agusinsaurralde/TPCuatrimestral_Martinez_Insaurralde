@@ -58,7 +58,9 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+                NuevoPaciente = null;
+                revisaSiAgrego(NuevoPaciente);
+                //Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
 
         }
@@ -67,5 +69,43 @@ namespace WebApplication1
         {
             Response.Redirect("Pacientes.aspx");
         }
+
+        protected void revisaSiAgrego(Paciente paciente)
+        {
+
+            try
+            {
+                if (paciente != null)
+                {
+                    lblTituloAlertModal.Text = "Agregado!";
+                    lblPacienteDNI.Text = paciente.Nombre.ToString() + " " + paciente.Apellido.ToString();
+                    lblPacienteConfirmDNI.Text = "Fue agregado exitosamente :D!";
+                    btnRevisaSiAgrega_Modal.Show();
+                }
+                else
+                {
+                    lblTituloAlertModal.Text = "Error.";
+                    lblTituloNombrePaciente.Text = "";
+                    lblPacienteDNI.Text = "Error algo salio mal! :o .";
+                    lblPacienteConfirmDNI.Text = "No pudo agregarse el paciente...";
+                    btnRevisaSiAgrega_Modal.Show();
+                }
+            }
+            catch (Exception)
+            {
+                lblTituloAlertModal.Text = "Error.";
+                lblPacienteDNI.Text = "Error en curso";
+                lblPacienteConfirmDNI.Text = "Error tipo Exepcion.";
+                btnRevisaSiAgrega_Modal.Show();
+                //throw ex;
+            }
+
+        }
+
+        protected void btnCerrarModalAgregarPaciente_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pacientes.aspx", false);
+        }
+
     }
 }

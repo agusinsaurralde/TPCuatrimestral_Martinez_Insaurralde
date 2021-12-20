@@ -262,10 +262,6 @@
     </div>
     </div>
 
-        </div>
-
-        <div class ="row">
-
     <div class="col-md-3"> 
     <div class="card-body" style="width: 13rem";>
         <div class="text-xl-center">
@@ -283,8 +279,11 @@
         </div>
     </div>
     </div>
-
         </div>
+
+
+
+
     </div>
 
 
