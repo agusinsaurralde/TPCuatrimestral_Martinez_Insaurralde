@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarHistoriaClinicaMedico.aspx.cs" Inherits="WebApplication1.Formulario_web18" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     
@@ -28,4 +29,45 @@
              </div>
         </div>
         <div class="d-flex justify-content-end"><asp:Button Text="ACEPTAR" ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" runat="server" /></div>
+
+
+            <!-- modal -->
+        <asp:Button  style="display:none" runat="server" ID="btnModificarHistoriaClinicaF" />
+   <ajaxToolkit:ModalPopupExtender ID="btnEditarHistoriaClinica_Modal" CancelControlID="exitCheck" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnEditarHistoriaClinica_Modal" TargetControlID="btnModificarHistoriaClinicaF" PopupControlID="PanelCheck">
+    </ajaxToolkit:ModalPopupExtender>
+    
+    <asp:Panel ID="PanelCheck" Width="300px" BackColor="White" runat="server">
+        <div class="modal-header">
+            
+            <asp:Label ID="lblTituloModificarHistoriaClinica" Text="" class="modal-title;" Font-Bold="true" Font-Size="X-Large" runat="server" />
+          
+            <button id="exitCheck" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" style="margin:30px 0px 30px 0px">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                  <div class="row">
+                      <div class="col">
+                          <asp:Label ID="lblTituloModal" Text="HISTORIA MODIFICADA! " Font-Bold="true" Font-Size="Small" runat="server" />
+                          <asp:Label id="lblHistoriaClinicaContext"  runat="server" />
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col">
+                            <asp:Label ID="lblHistoriaCambiadaConfirma" runat="server"/> 
+                      </div>
+                  </div>
+              </ContentTemplate>
+       </asp:UpdatePanel>
+        </div>
+
+        <div class="modal-footer">
+            <asp:Button ID="btnCerrarModalModificarHistoriaClinica" Text="CERRAR" OnClick="btnCerrarModalModificarHistoriaClinica_Click" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Size="Small" Font-Bold="true" data-bs-dismiss="modal" runat="server" />
+        </div>
+    </asp:Panel>
+
+
+
 </asp:Content>

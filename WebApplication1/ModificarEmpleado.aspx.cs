@@ -102,12 +102,13 @@ namespace WebApplication1
 
                 cargar.modificar(modEmpleado);
                 cargarUsuario.ModificarUsuario(modUsuario);
-
-                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
+                ejecutarModalModificar();
+                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
             catch (Exception)
             {
-                Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                ejecutarModalModificarcatch();
+                //Response.Redirect("ErrorModificar.aspx?error=" + error, false);
             }
 
         }
@@ -153,5 +154,31 @@ namespace WebApplication1
                 args.IsValid = true;
             }
         }
+
+
+        protected void ejecutarModalModificar()
+        {
+            lblTituloAlertModalModificarEmpleado.Text = "Modificado! ";
+            lblEmpleadoModificadoContext.Text = txtNombre.Text + " " + txtApellido.Text;
+            lblEmpleadoConfirmModificado.Text = "Empleado modificado correctamente.";
+            btnRevisaSiModifica_Modal.Show();
+        }
+
+        protected void ejecutarModalModificarcatch()
+        {
+            lblTituloAlertModalModificarEmpleado.Text = "Error! ";
+            lblEmpleadoModificadoContext.Text = txtNombre.Text + " " + txtApellido.Text;
+            lblEmpleadoConfirmModificado.Text = "No se pudieron guardar los cambios!.";
+            btnRevisaSiModifica_Modal.Show();
+        }
+
+        protected void btnCerrarModalModiciarEmpleado_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Empleados.aspx", false);
+        }
+
+
+
+
     }
 }

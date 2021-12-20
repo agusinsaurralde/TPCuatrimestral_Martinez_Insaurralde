@@ -96,11 +96,14 @@ namespace WebApplication1
 
                 cargarUsuario.AgregarUsuario(nuevoUsuario);
 
-                Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
+                ejecutarModal();
+                //Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
             catch (Exception)
             {
-                Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
+
+                ejecutarModalcatch();
+                // Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
             
            
@@ -152,5 +155,30 @@ namespace WebApplication1
                 args.IsValid = true;
             }
         }
+
+        protected void btnCerrarModalAgrearEmpleado_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Empleados.aspx", false);
+        }
+
+        protected void ejecutarModal()
+        {
+            lblTituloAlertModalEmpleado.Text = "Agerado! ";
+            lblEmpleadoContext.Text = txtNombre.Text + " " + txtApellido.Text;
+            lblEmpleadoConfirmDNI.Text = "El Empleado se agrego de manera correcta!.";
+            btnRevisaSiAgrega_Modal.Show();
+        }
+
+        protected void ejecutarModalcatch()
+        {
+            lblTituloAlertModalEmpleado.Text = "Error! ";
+            lblEmpleadoContext.Text = txtNombre.Text + " " + txtApellido.Text;
+            lblEmpleadoConfirmDNI.Text = "El Empleado no pudo ser agregado de forma correcta!.";
+            btnRevisaSiAgrega_Modal.Show();
+        }
+
+
+
+
     }
 }

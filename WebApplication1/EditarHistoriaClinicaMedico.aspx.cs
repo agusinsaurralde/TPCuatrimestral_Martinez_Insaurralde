@@ -37,15 +37,42 @@ namespace WebApplication1
 
 
                 hcDB.ModificarHistoriaClinica(hc);
-                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
+
+                ejecutarModalModificarHistoria();
+                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
             catch (Exception ex)
             {
                 //Response.Redirect("ErrorModificar.aspx?agregado=" + error, false);
 
+                ejecutarModalModificarHistoria();
+
                 throw ex;
             }
 
         }
+
+
+        protected void btnCerrarModalModificarHistoriaClinica_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("HistoriaClinica.aspx", false);
+        }
+
+        protected void ejecutarModalModificarHistoria()
+        {
+            lblTituloModificarHistoriaClinica.Text = "Modificado! ";
+            lblHistoriaClinicaContext.Text = "Se modifico correctamente!";
+            btnEditarHistoriaClinica_Modal.Show();
+        }
+
+        protected void ejecutarModalModificarHistoriaCatch()
+        {
+            lblTituloModificarHistoriaClinica.Text = "Error! ";
+            lblHistoriaClinicaContext.Text = "No se pudieron guardar los cambios!.";
+            btnEditarHistoriaClinica_Modal.Show();
+        }
+
+
+
     }
 }

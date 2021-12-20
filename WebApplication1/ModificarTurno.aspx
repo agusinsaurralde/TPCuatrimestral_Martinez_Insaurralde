@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarTurno.aspx.cs" Inherits="WebApplication1.Formulario_web13" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel runat="server">
         <ContentTemplate>  
@@ -74,6 +75,41 @@
         </ContentTemplate>
     </asp:UpdatePanel>
         
-        
+            <!-- modal -->
+        <asp:Button  style="display:none" runat="server" ID="btnModificarTurnoF" />
+   <ajaxToolkit:ModalPopupExtender ID="btnEditarTurno_Modal" CancelControlID="exitCheck" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnEditarHistoriaClinica_Modal" TargetControlID="btnModificarTurnoF" PopupControlID="PanelCheck">
+    </ajaxToolkit:ModalPopupExtender>
+    
+    <asp:Panel ID="PanelCheck" Width="300px" BackColor="White" runat="server">
+        <div class="modal-header">
+            
+            <asp:Label ID="lblTituloModificarTurno" Text="" class="modal-title;" Font-Bold="true" Font-Size="X-Large" runat="server" />
+          
+            <button id="exitCheck" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" style="margin:30px 0px 30px 0px">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                  <div class="row">
+                      <div class="col">
+                          <asp:Label ID="lblTurnoModal" Text="TURNO MODIFICADO! " Font-Bold="true" Font-Size="Small" runat="server" />
+                          <asp:Label id="lblTurnoContext"  runat="server" />
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col">
+                            <asp:Label ID="lblTurnoCambiadoConfirma" runat="server"/> 
+                      </div>
+                  </div>
+              </ContentTemplate>
+       </asp:UpdatePanel>
+        </div>
+
+        <div class="modal-footer">
+            <asp:Button ID="btnCerrarModalModificarTurno" Text="CERRAR" OnClick="btnCerrarModalModificarTurno_Click" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Size="Small" Font-Bold="true" data-bs-dismiss="modal" runat="server" />
+        </div>
+    </asp:Panel>               
 
 </asp:Content>

@@ -293,10 +293,13 @@ namespace WebApplication1
 
                 cargar.modificar(turnoModificado);
 
-                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
+                ejecutarModalModificarTurno();
+                //Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
             }
             catch (Exception ex)
             {
+
+                ejecutarModalModificarTurnoCatch();
                 throw ex;
                 //Response.Redirect("ErrorModificar.aspx?error=" + error, false);
             }
@@ -411,5 +414,28 @@ namespace WebApplication1
                 btnAceptar.Enabled = false;
             }*/
         }
+
+
+        protected void btnCerrarModalModificarTurno_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Turnos.aspx", false);
+        }
+
+
+        protected void ejecutarModalModificarTurno()
+        {
+
+            lblTituloModificarTurno.Text = "Modificado! ";
+            lblTurnoContext.Text = "Se modifico correctamente!";
+            btnEditarTurno_Modal.Show();
+        }
+
+        protected void ejecutarModalModificarTurnoCatch()
+        {
+            lblTituloModificarTurno.Text = "Error! ";
+            lblTurnoContext.Text = "No se pudieron guardar los cambios!.";
+            btnEditarTurno_Modal.Show();
+        }
     }
+
 }

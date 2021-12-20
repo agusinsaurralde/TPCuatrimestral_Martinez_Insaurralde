@@ -139,4 +139,41 @@
                </div>
         </div>
     </div>
+
+
+
+            <!-- modal -->
+        <asp:Button  style="display:none" runat="server" ID="btnModificarEmpleadoF" />
+   <ajaxToolkit:ModalPopupExtender ID="btnRevisaSiModifica_Modal" CancelControlID="exitCheck" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="btnRevisaSiAgrega_Modal" TargetControlID="btnModificarEmpleadoF" PopupControlID="PanelCheck">
+    </ajaxToolkit:ModalPopupExtender>
+    
+    <asp:Panel ID="PanelCheck" Width="300px" BackColor="White" runat="server">
+        <div class="modal-header">
+            <asp:Label ID="lblTituloAlertModalModificarEmpleado" Text="" class="modal-title;" Font-Bold="true" Font-Size="X-Large" runat="server" />
+          <button id="exitCheck" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" style="margin:30px 0px 30px 0px">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                  <div class="row">
+                      <div class="col">
+                          <asp:Label ID="lblTituloNombreEmpleadoModificado" Text="EMPLEADO MODIFICADO: " Font-Bold="true" Font-Size="Small" runat="server" />
+                          <asp:Label id="lblEmpleadoModificadoContext"  runat="server" />
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col">
+                            <asp:Label ID="lblEmpleadoConfirmModificado" runat="server"/> 
+                      </div>
+                  </div>
+              </ContentTemplate>
+       </asp:UpdatePanel>
+        </div>
+
+        <div class="modal-footer">
+            <asp:Button ID="btnCerrarModalModiciarEmpleado" Text="CERRAR" OnClick="btnCerrarModalModiciarEmpleado_Click" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" Font-Size="Small" Font-Bold="true" data-bs-dismiss="modal" runat="server" />
+        </div>
+    </asp:Panel>
 </asp:Content>
