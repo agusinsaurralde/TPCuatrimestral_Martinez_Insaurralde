@@ -211,7 +211,14 @@ namespace WebApplication1
                 NuevoMedico.Email = txtEmail.Text;
                 NuevoMedico.Dirección = txtDireccion.Text;
                 NuevoMedico.Estado = true;
-                cargar.agregar(NuevoMedico);
+
+                if (!(cargar.agregarRetornaBool(NuevoMedico))) //Codigo nuevo
+                {
+                    revisarSiAgregoMedico(NuevoMedico);
+                }
+
+
+                //cargar.agregar(NuevoMedico);
 
                 List<Medico> medicos = cargar.listarMedico();
                 Medico ultMedico = medicos.Find(x => x.DNI == txtDNI.Text);
@@ -223,7 +230,12 @@ namespace WebApplication1
                 nuevoUsuario.TipoUsuario.Nombre = "Médico";
                 nuevoUsuario.Estado = true;
 
-                cargarUsuario.AgregarUsuario(nuevoUsuario);
+                if (!(cargarUsuario.agregarUsuarioRetornaBool(nuevoUsuario))) //Codigo nuevo
+                {
+                    revisarSiAgregoMedico(nuevoUsuario);
+                }
+
+                //cargarUsuario.AgregarUsuario(nuevoUsuario);
 
                 List<DiasHabilesMedico> listaDias = (List<DiasHabilesMedico>)Session["diasAgregados"];
                 List<MedicoEspecialidades> listaEsp = (List<MedicoEspecialidades>)Session["especialidadesAgregadas"];
@@ -243,7 +255,8 @@ namespace WebApplication1
                     cargar.agregarEspecialidades(obj);
                 }
 
-                Response.Redirect("Medicos.aspx");
+                revisarSiAgregoMedico(NuevoMedico, nuevoUsuario);
+                //Response.Redirect("Medicos.aspx");
             }
             catch (Exception ex)
             {
@@ -252,6 +265,78 @@ namespace WebApplication1
             }
 
         }
+
+
+        protected void revisarSiAgregoMedico(Medico nuevoMedico)
+        {
+            try
+            {
+                lblTituloModalAlert.Text = "Error! cargar medico.";
+                lblNombreMedico.Text = nuevoMedico.Nombre.ToString() + " " + nuevoMedico.Apellido.ToString();
+                lblAgregarFunciono.Text = "No pudo agregarse correctamente!.";
+                btnRevision_Modal.Show();
+            }
+            catch (Exception)
+            {
+                lblTituloModalAlert.Text = "Error!.";
+                lblNombreMedico.Text = "*Sin cargar*";
+                lblAgregarFunciono.Text = "Error INESPERADO!.";
+                btnRevision_Modal.Show();
+
+                throw;
+            }
+
+
+        }
+        protected void revisarSiAgregoMedico(Usuario nuevoUsuario)
+        {
+            try
+            {
+                lblTituloModalAlert.Text = "Error!. Cargar usuario";
+                lblNombreMedico.Text = nuevoUsuario.NombreUsuario.ToString();
+                lblAgregarFunciono.Text = "No pudo agregarse correctamente!.";
+                btnRevision_Modal.Show();
+            }
+            catch (Exception)
+            {
+
+                lblTituloModalAlert.Text = "Error!.";
+                lblNombreMedico.Text = "*Sin cargar*";
+                lblAgregarFunciono.Text = "Error INESPERADO!.";
+                btnRevision_Modal.Show();
+            }
+
+        }
+
+        protected void revisarSiAgregoMedico(Medico nuevoMedico, Usuario nuevoUsuario)
+        {
+            try
+            {
+                lblTituloModalAlert.Text = "Profesional agergado.";
+                lblNombreMedico.Text = nuevoMedico.Nombre.ToString() + "" + nuevoMedico.Apellido.ToString();
+                lblNombreUsuarioTitulo.Text = "NOMBRE USUARIO: ";
+                lblNombreUsuario.Text = nuevoUsuario.NombreUsuario.ToString();
+                lblAgregarFunciono.Text = "Fue agregado correctamente!.";
+                btnRevision_Modal.Show();
+
+            }
+            catch (Exception)
+            {
+
+                lblTituloModalAlert.Text = "Error!.";
+                lblNombreMedico.Text = "*Sin cargar*";
+                lblAgregarFunciono.Text = "Error INESPERADO!.";
+                btnRevision_Modal.Show();
+            }
+
+        }
+
+        protected void btnCerarMedico_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Medicos.aspx", false);
+        }
+
+
 
     }
 }

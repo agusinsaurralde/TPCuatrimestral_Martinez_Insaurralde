@@ -144,6 +144,33 @@ namespace DBClinica
             }
         }
 
+        public bool agregarUsuarioRetornaBool(Usuario UsuarioNuevo)
+        {
+            ConexionDB datos = new ConexionDB();
+            try
+            {
+                datos.setearConsulta("INSERT Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado) VALUES(@ID, @NombreUsuario, @Contraseña, @IDTipo, 1)");
+                datos.setearParametro("@ID", UsuarioNuevo.IDUsuario);
+                datos.setearParametro("@NombreUsuario", UsuarioNuevo.NombreUsuario);
+                datos.setearParametro("@Contraseña", UsuarioNuevo.Contraseña);
+                datos.setearParametro("@IDTipo", UsuarioNuevo.TipoUsuario.Id);
+
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return true;
+        }
+
+
     }
 }
        
