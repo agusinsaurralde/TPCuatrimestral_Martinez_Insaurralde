@@ -65,9 +65,10 @@ namespace WebApplication1
                 ejecutarModal();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ejecutarModalCatch();
+                throw ex;
+                //ejecutarModalCatch();
             }
            
         }
