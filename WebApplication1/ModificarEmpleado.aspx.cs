@@ -93,11 +93,13 @@ namespace WebApplication1
                 modEmpleado.Telefono = txtTelefono.Text;
                 modEmpleado.Email = txtEmail.Text;
                 modEmpleado.Dirección = txtDireccion.Text;
+                modEmpleado.Estado = true;
                 modUsuario.IDUsuario = ((Empleado)Session["modificar"]).ID;
                 modUsuario.NombreUsuario = txtNombreUsuario.Text;
                 modUsuario.Contraseña = txtContraseña.Text;
                 modUsuario.TipoUsuario = new TipoUsuario();
                 modUsuario.TipoUsuario.Id = int.Parse(ddlistTipoEmpleado.SelectedItem.Value);
+                modUsuario.Estado = true;
 
                 cargar.modificar(modEmpleado);
                 cargarUsuario.ModificarUsuario(modUsuario);
@@ -128,7 +130,23 @@ namespace WebApplication1
         {
             EmpleadoDB empleadoDB = new EmpleadoDB();
             List<Empleado> lista = empleadoDB.listarEmpleado();
-            if (lista.Find(x => x.DNI == args.Value && x.Estado == true && x.ID != ((Empleado)Session["modificar"]).ID) != null)
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> listaMedico = medicoDB.listarMedico();
+            if (lista.Find(x => x.DNI == args.Value && x.DNI != ((Empleado)Session["modificar"]).DNI) != null || (listaMedico.Find(x => x.DNI == args.Value && x.ID != ((Empleado)Session["modificar"]).ID) != null))
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        protected void CustomValidatorDNIInactivo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> inactivos = empleadoDB.listarEmpleadoInactivo();
+            if (inactivos.Find(x => x.DNI == args.Value) != null)
             {
                 args.IsValid = false;
             }

@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class Formulario_web112
+    public partial class AltaPaciente
     {
 
         /// <summary>
@@ -24,22 +24,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtDNI;
 
         /// <summary>
-        /// Control CustomValidatorDNI.
+        /// Control btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorDNI;
-
-        /// <summary>
-        /// Control CustomValidatorDNIInactivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorDNIInactivo;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
         /// Control txtApellido.
@@ -123,31 +114,31 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// Control btnAceptarAgregar.
+        /// Control btnVerificacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptarAgregar;
+        protected global::System.Web.UI.WebControls.Button btnVerificacion;
 
         /// <summary>
-        /// Control btnRevisaSiAgrega_Modal.
+        /// Control verificacion_Modal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender btnRevisaSiAgrega_Modal;
+        protected global::AjaxControlToolkit.ModalPopupExtender verificacion_Modal;
 
         /// <summary>
-        /// Control PanelCheck.
+        /// Control PanelVerificacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelCheck;
+        protected global::System.Web.UI.WebControls.Panel PanelVerificacion;
 
         /// <summary>
         /// Control lblTituloAlertModal.
@@ -159,21 +150,21 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblTituloAlertModal;
 
         /// <summary>
-        /// Control lblPaciente.
+        /// Control lblVerificacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPaciente;
+        protected global::System.Web.UI.WebControls.Label lblVerificacion;
 
         /// <summary>
-        /// Control btnCerrarModalAgregarPaciente.
+        /// Control btnCerrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarModalAgregarPaciente;
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
     }
 }

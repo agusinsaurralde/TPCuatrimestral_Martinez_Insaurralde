@@ -14,7 +14,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("SELECT U.ID, U.IDTipo, T.Nombre FROM USUARIO AS U INNER JOIN TipoUsuario AS T ON T.ID = U.IDTipo WHERE NombreUsuario = @Usuario AND Contraseña = @Contraseña AND U.ESTADO = 1");
+                datos.setearConsulta("SELECT U.ID, U.IDTipo, T.Nombre FROM USUARIO AS U INNER JOIN TipoUsuario AS T ON T.ID = U.IDTipo WHERE (NombreUsuario = @Usuario AND Contraseña = @Contraseña) AND U.ESTADO = 1");
                 datos.setearParametro("@Usuario", Usuario.NombreUsuario);
                 datos.setearParametro("@Contraseña", Usuario.Contraseña); 
                 datos.ejecutarLectura();
@@ -70,6 +70,38 @@ namespace DBClinica
                 datos.cerrarConexion();
             }
         }
+        public List<Usuario> listarInactivo()
+        {
+            List<Usuario> lista = new List<Usuario>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("SELECT ID, NombreUsuario, Contraseña, Estado FROM Usuario  WHERE ESTADO = 0");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Usuario aux = new Usuario();
+                    aux.IDUsuario = (int)datos.Lector["ID"];
+                    aux.NombreUsuario = (string)datos.Lector["NombreUsuario"];
+                    aux.Contraseña = (string)datos.Lector["Contraseña"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void AgregarUsuario(Usuario UsuarioNuevo)
         {
             ConexionDB datos = new ConexionDB();
@@ -99,11 +131,12 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("UPDATE Usuario set ID = @ID, NombreUsuario = @NombreUsuario, Contraseña = @Contraseña, IDTipo = @IDTipo WHERE ID =" + ModUsuario.IDUsuario + "");
+                datos.setearConsulta("UPDATE Usuario set ID = @ID, NombreUsuario = @NombreUsuario, Contraseña = @Contraseña, IDTipo = @IDTipo, Estado =  @Estado WHERE ID =" + ModUsuario.IDUsuario + "");
                 datos.setearParametro("@ID", ModUsuario.IDUsuario);
                 datos.setearParametro("@NombreUsuario", ModUsuario.NombreUsuario);
                 datos.setearParametro("@Contraseña", ModUsuario.Contraseña);
                 datos.setearParametro("@IDTipo", ModUsuario.TipoUsuario.Id);
+                datos.setearParametro("@Estado", ModUsuario.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

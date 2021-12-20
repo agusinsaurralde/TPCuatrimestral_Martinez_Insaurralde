@@ -84,6 +84,8 @@ namespace WebApplication1
             {
                 MedicoDB medicoDB = new MedicoDB();
                 medicoDB.eliminar((int)Session["idEliminar"]);
+                UsuarioDB usuarioDB = new UsuarioDB();
+                usuarioDB.eliminar((int)Session["idEliminar"]);
                 Grilla.DataSource = medicoDB.listarMedico();
                 Grilla.DataBind();
                 lblTituloAlertModal.Text = "Eliminar médico";
@@ -116,6 +118,11 @@ namespace WebApplication1
         }
 
         protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Medicos.aspx");
+        }
+
+        protected void btnDarDeAlta_Click(object sender, EventArgs e)
         {
             Response.Redirect("Medicos.aspx");
         }

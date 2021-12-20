@@ -38,16 +38,16 @@ namespace WebApplication1
                 try
                 {
                     
-                        RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                        RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
+                     RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                     RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
 
 
-                        List<TipoEmpleado> empleado = db.listar();
-                        List<TipoEmpleado> empleadosSinMedico = empleado.FindAll(x => x.Nombre != "Médico");
-                        ddlistTipoEmpleado.DataSource = empleadosSinMedico;
-                        ddlistTipoEmpleado.DataTextField = "Nombre";
-                        ddlistTipoEmpleado.DataValueField = "ID";
-                        ddlistTipoEmpleado.DataBind();
+                     List<TipoEmpleado> empleado = db.listar();
+                     List<TipoEmpleado> empleadosSinMedico = empleado.FindAll(x => x.Nombre != "Médico");
+                     ddlistTipoEmpleado.DataSource = empleadosSinMedico;
+                     ddlistTipoEmpleado.DataTextField = "Nombre";
+                     ddlistTipoEmpleado.DataValueField = "ID";
+                     ddlistTipoEmpleado.DataBind();
                    
                 }
                 catch (Exception ex)
@@ -111,11 +111,12 @@ namespace WebApplication1
             Response.Redirect("Empleados.aspx");
         }
 
+        //validaciones
         protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
         {
             UsuarioDB usuarioDB = new UsuarioDB();
             List<Usuario> lista = usuarioDB.listar();
-            if (lista.Find(x => x.NombreUsuario.ToUpper() == args.Value.ToUpper() && x.Estado == true) != null)
+            if (lista.Find(x => x.NombreUsuario.ToUpper() == args.Value.ToUpper()) != null)
             {
                 args.IsValid = false;
             }
@@ -124,12 +125,13 @@ namespace WebApplication1
                 args.IsValid = true;
             }
         }
-
         protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
         {
             EmpleadoDB empleadoDB = new EmpleadoDB();
             List<Empleado> lista = empleadoDB.listarEmpleado();
-            if (lista.Find(x => x.DNI == args.Value && x.Estado == true) != null)
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> listaMedico = medicoDB.listarMedico();
+            if (lista.Find(x => x.DNI == args.Value) != null || (listaMedico.Find(x => x.DNI == args.Value) != null))
             {
                 args.IsValid = false;
             }
@@ -139,6 +141,19 @@ namespace WebApplication1
             }
         }
 
+        protected void CustomValidatorDNIInactivo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> inactivos = empleadoDB.listarEmpleadoInactivo();
+            if (inactivos.Find(x => x.DNI == args.Value) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
         protected void CustomValidatorEmail_ServerValidate(object source, ServerValidateEventArgs args)
         {
             EmpleadoDB empleadoDB = new EmpleadoDB();
@@ -151,20 +166,39 @@ namespace WebApplication1
             {
                 args.IsValid = true;
             }
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> listaMedico = medicoDB.listarMedico();
+            if (listaMedico.Find(x => x.DNI == args.Value) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+            List<Empleado> inactivos = empleadoDB.listarEmpleadoInactivo();
+            if (inactivos.Find(x => x.Email == args.Value) != null)
+            {
+                args.IsValid = false;
+                CustomValidatorDNI.ErrorMessage = "*El email ingresado pertenece a un empleado inactivo";
+            }
+            else
+            {
+                args.IsValid = true;
+            }
         }
 
+        //modal
         protected void btnCerrarModalAgrearEmpleado_Click(object sender, EventArgs e)
         {
             Response.Redirect("Empleados.aspx", false);
         }
-
         protected void ejecutarModal()
         {
             lblTituloAlertModalEmpleado.Text = "Agregado! ";
             lblEmpleadoContext.Text = "El Empleado " + txtNombre.Text + " " + txtApellido.Text + " se agrego de manera correcta!" ;
             btnRevisaSiAgrega_Modal.Show();
         }
-
         protected void ejecutarModalcatch()
         {
             lblTituloAlertModalEmpleado.Text = "Error! ";

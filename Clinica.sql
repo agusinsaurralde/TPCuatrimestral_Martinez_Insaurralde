@@ -13,11 +13,11 @@ GO
 --EMPLEADO----------------------------------
 create table Empleado(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
-    DNI VARCHAR(8) NOT NULL,
+    DNI VARCHAR(8) UNIQUE NOT NULL,
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
     Telefono VARCHAR(15) NOT NULL,
-    Email VARCHAR(320) NOT NULL,
+    Email VARCHAR(320) UNIQUE NOT NULL,
     Direccion VARCHAR(320) NOT NULL,
     FechaNacimiento DATE NOT NULL,
     IDTipo int NOT NULL,
@@ -32,7 +32,7 @@ create table Empleado(
 go
 create table Especialidad(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
-    Nombre VARCHAR(50) not NULL,
+    Nombre VARCHAR(50) UNIQUE not NULL,
 	Estado bit not null
 )
 GO
@@ -81,7 +81,7 @@ go
 --DATOSMEDICO---------------------------------------
 create table DatosMedico(
     ID int PRIMARY KEY not NULL,
-	Matricula VARCHAR(10) not null,
+	Matricula VARCHAR(10) Unique not null,
 	Estado bit not null,
 
 	CONSTRAINT FK_ID FOREIGN KEY (ID) REFERENCES Empleado(ID),
@@ -98,7 +98,7 @@ go
 --PACIENTE-------------------------------------------
 create table Paciente(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
-    DNI VARCHAR(8) not null,
+    DNI VARCHAR(8) UNIQUE not null,
     Nombre VARCHAR(50) not null,
     Apellido VARCHAR(50) not null,
     Telefono VARCHAR(15) not null,
@@ -117,7 +117,6 @@ create table Paciente(
 	CONSTRAINT CHK_FechaNacimientoPaciente CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
 GO
-
 --HISTORIACLINICA----------------------------------
 create table HistoriaClinica(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -172,7 +171,7 @@ GO
 --USUARIO-----------------------------------------------
 create table Usuario(
     ID int PRIMARY KEY not null FOREIGN KEY REFERENCES EMPLEADO(ID),
-    NombreUsuario VARCHAR(15) not null,
+    NombreUsuario VARCHAR(15) UNIQUE not null,
     Contraseña VARCHAR(15) not null,
     IDTipo int not null,
 	Estado bit not null
@@ -455,4 +454,3 @@ Insert into Usuario(ID, NombreUsuario, Contraseña, IDTipo, Estado)Values(17, 'g
 ---TURNOS----------------------------------------------------------------
 GO
 INSERT Turno(IDPaciente,IDEspXMedico,Dia,Observaciones,IDRecepcionista,IDEstado,HoraInicio)VALUES(5,1,'18-12-2021','Dolor abdominal al estar parado mucho tiempo',3,1,'09:00')
-

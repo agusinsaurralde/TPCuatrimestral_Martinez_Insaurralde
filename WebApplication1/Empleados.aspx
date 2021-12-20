@@ -11,13 +11,14 @@
 
     <div class="container" style="margin-bottom:20px">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-1">
                   <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
+            <div class="col-md-1" style="margin-left:10px">
+                  <asp:Button Text="Dar de alta" CssClass="btn btn-primary rounded-pill" ID="btnDarDeAlta" OnClick="btnDarDeAlta_Click" Font-Bold="true" runat="server" />
+            </div>
                    
-
-                  
-                  <div class="col-md-4">
+                  <div class="col-md-4"style="margin-left:200px" >
                              <div class="btn-group" role="group" aria-label="Basic example">
                                  <asp:Button Text="TODOS" Font-Bold="true" Font-Size="Small" ID="btnTodos" OnClick="btnTodos_Click"  BorderStyle="None" CssClass="btn btn-primary" runat="server" />
                                  <asp:Button Text="ADMINISTRADORES" Font-Bold="true" Font-Size="Small" ID="btnAdmin" OnClick="btnAdmin_Click" BorderStyle="None" CssClass="btn btn-primary" runat="server" />

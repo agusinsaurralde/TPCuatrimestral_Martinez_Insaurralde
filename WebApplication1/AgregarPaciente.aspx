@@ -17,6 +17,7 @@
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDNI" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ErrorMessage="*Ingrese un DNI válido" ControlToValidate="txtDNI" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
                      <asp:CustomValidator ID="CustomValidatorDNI" OnServerValidate="CustomValidatorDNI_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado ya existe" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>
+                     <asp:CustomValidator ID="CustomValidatorDNIInactivo" OnServerValidate="CustomValidatorDNIInactivo_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado pertenece a un paciente inactivo" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>                 
                 </div>
           </div>
           </div>
@@ -42,7 +43,7 @@
         
         <div class="row justify-content-center">
           <div class="col-md-3" style="margin-bottom: 40px">
-            <label for="ddlistCobertura" class="form-label">TIPO DE EMPLEADO</label>
+            <label for="ddlistCobertura" class="form-label">COBERTURA</label>
             <asp:DropDownList ID="ddlistCobertura" class="form-select rounded-pill" runat="server"></asp:DropDownList>
           </div>
             <div class="col-md-3" style="margin-bottom: 40px">

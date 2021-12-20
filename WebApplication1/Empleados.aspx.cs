@@ -159,5 +159,10 @@ namespace WebApplication1
             Session.Add("btn", "Recepcionistas");
 
         }
+
+        protected void btnDarDeAlta_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AltaEmpleado.aspx");
+        }
     }
 }

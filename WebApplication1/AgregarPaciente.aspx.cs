@@ -85,6 +85,19 @@ namespace WebApplication1
             
         }
 
+        protected void CustomValidatorDNIInactivo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            PacienteDB pacienteDB = new PacienteDB();
+            List<Paciente> inactivos = pacienteDB.listarPacienteInactivo();
+            if (inactivos.Find(x => x.DNI == args.Value) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
         protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
         {
             PacienteDB pacienteDB = new PacienteDB();

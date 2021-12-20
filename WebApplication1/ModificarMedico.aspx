@@ -33,6 +33,7 @@
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDNI" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ErrorMessage="*Ingrese un DNI válido" ControlToValidate="txtDNI" Runat="server" Display="Dynamic" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
                      <asp:CustomValidator ID="CustomValidatorDNI" OnServerValidate="CustomValidatorDNI_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado ya existe" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>
+                     <asp:CustomValidator ID="CustomValidatorDNIInactivo" OnServerValidate="CustomValidatorDNIInactivo_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado pertenece a un médico inactivo" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>                    
                   </div>
              </div>
              <div class="col-md-3" style="margin-bottom: 40px;margin-top:60px">

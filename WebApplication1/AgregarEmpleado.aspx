@@ -16,11 +16,13 @@
                   </div>
               <div class="col-md-3" style="margin:40px 0px 40px 0px">
                    <label for="txtDNI" class="form-label">DNI</label>
-                   <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtDNI"  runat="server" />
+                   <asp:TextBox MaxLength="10" class="form-control rounded-pill" ID="txtDNI"  runat="server" />
                    <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDNI" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ErrorMessage="*Ingrese un DNI válido" ControlToValidate="txtDNI" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
                      <asp:CustomValidator ID="CustomValidatorDNI" OnServerValidate="CustomValidatorDNI_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado ya existe" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>
+                     <asp:CustomValidator ID="CustomValidatorDNIInactivo" OnServerValidate="CustomValidatorDNIInactivo_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado pertenece a un empleado inactivo" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>
+
                   </div>
               </div>
           </div>
@@ -28,7 +30,7 @@
         <div class="row justify-content-center">
           <div class="col-md-3" style="margin-bottom: 40px"">
             <label for="txtApellido" class="form-label">APELLIDO</label>
-            <asp:TextBox  class="form-control rounded-pill" ClientIDMode="Static" ID="txtApellido"  runat="server" />
+            <asp:TextBox MaxLength="50"  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
               <div style="font-size:13px">
                  <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtApellido" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ID="REV1" ErrorMessage="*Ingrese un apellido válido" ControlToValidate="txtApellido" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="^[a-zA-Z ]*$" ForeColor="#CC0000"></asp:RegularExpressionValidator>
@@ -37,7 +39,7 @@
 
            <div class="col-md-3" style="margin-bottom: 40px">
             <label for="txtNombre" class="form-label">NOMBRE</label>
-            <asp:TextBox  class="form-control rounded-pill" ClientIDMode="Static" ID="txtNombre"  runat="server" />
+            <asp:TextBox MaxLength="50"  class="form-control rounded-pill" ID="txtNombre"  runat="server" />
                <div style="font-size:13px">
                  <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtNombre" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ErrorMessage="*Ingrese un nombre válido" ControlToValidate="txtNombre" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="^[a-zA-Z ]*$" ForeColor="#CC0000"></asp:RegularExpressionValidator>
@@ -53,7 +55,7 @@
           </div>
             <div class="col-md-3" style="margin-bottom: 40px">
             <label for="txtFechaNac" class="form-label">FECHA DE NACIMIENTO</label>
-            <asp:TextBox TextMode="Date" class="form-control rounded-pill" ClientIDMode="Static" ID="txtFechaNac" runat="server" />
+            <asp:TextBox TextMode="Date" class="form-control rounded-pill" ID="txtFechaNac" runat="server" />
               <div style="font-size:13px">
                   <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtFechaNac" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                   <asp:RangeValidator ID="RangeValidator" runat="server" ErrorMessage="*Ingrese una fecha válida" ControlToValidate="txtFechaNac" ForeColor="#CC0000" Display="Dynamic"></asp:RangeValidator>
@@ -65,7 +67,7 @@
         <div class="row justify-content-center">
           <div class="col-md-3" style="margin-bottom: 40px">
             <label for="txtTelefono" class="form-label">TELÉFONO</label>
-            <asp:TextBox type="tel" MaxLength="10" class="form-control rounded-pill" ClientIDMode="Static" ID="txtTelefono" runat="server" />
+            <asp:TextBox MaxLength="10" type="tel" class="form-control rounded-pill" ID="txtTelefono" runat="server" />
               <div style="font-size:13px">
                  <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtTelefono" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ErrorMessage="*Ingrese un número válido" ControlToValidate="txtTelefono" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
@@ -73,7 +75,7 @@
           </div>
             <div class="col-md-3" style="margin-bottom: 40px">
                  <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
-                 <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtDireccion" runat="server" />
+                 <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
                 <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDireccion" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                  </div>
@@ -83,7 +85,7 @@
         <div class="row justify-content-center">
           <div class="col-md-6" style="margin-bottom: 40px">
             <label for="txtEmail" class="form-label">EMAIL</label>
-            <asp:TextBox type="email" class="form-control rounded-pill" ClientIDMode="Static" ID="txtEmail" runat="server" />
+            <asp:TextBox MaxLength="320" type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
              <div style="font-size:13px">
                   <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtEmail" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                   <asp:CustomValidator ID="CustomValidatorEmail" OnServerValidate="CustomValidatorEmail_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El email ingresado ya existe" ControlToValidate="txtEmail" Display="Dynamic"></asp:CustomValidator>
@@ -108,7 +110,7 @@
         
            <div class="col-md-3" style="margin:40px 0px 70px 0px">
               <label for="txtNombreUsuario" class="form-label">USUARIO</label>
-              <asp:TextBox MaxLength="15" class="form-control rounded-pill" ClientIDMode="Static" ID="txtNombreUsuario" runat="server" />
+              <asp:TextBox MaxLength="15" class="form-control rounded-pill" ID="txtNombreUsuario" runat="server" />
                <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" TargetControlID="txtNombreUsuario" FilterMode="InvalidChars" InvalidChars=" @/()\?¿+*´;,.-}{][°|¡!=&%$#´'" runat="server" />
                <div style="font-size:13px">
                   <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtNombreUsuario" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -118,7 +120,7 @@
    
            <div class="col-md-3" style="margin:40px 0px 70px 0px">
              <label for="txtContraseña" class="form-label">CONTRASEÑA</label>
-             <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" type="Password" ID="txtContraseña" runat="server" />
+             <asp:TextBox MaxLength="15" class="form-control rounded-pill" type="Password" ID="txtContraseña" runat="server" />
                <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtContraseña" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                  </div>

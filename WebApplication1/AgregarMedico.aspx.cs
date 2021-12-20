@@ -25,11 +25,7 @@ namespace WebApplication1
                     Session.Add("Error", "Acceso Denegado");
                     Response.Redirect("ErrorPermisosAcceso.aspx");
                 }
-                else if(Session["modificar"] == null)
-                {
-                    Session.Add("Error", "Acceso Denegado");
-                    Response.Redirect("ErrorPermisosAcceso.aspx");
-                }
+
                 RangeValidator.MaximumValue = DateTime.Now.Date.ToString("yyyy-MM-dd");
                 RangeValidator.MinimumValue = DateTime.Now.Date.AddYears(-100).ToString("yyyy-MM-dd");
 
@@ -107,13 +103,30 @@ namespace WebApplication1
             lblEspecialidades.Font.Bold = true;
             lblEspecialidades.ForeColor = System.Drawing.Color.RoyalBlue;
         }
-
-        //validaciones
-        protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void CustomValidatorDNIInactivo_ServerValidate(object source, ServerValidateEventArgs args)
         {
             MedicoDB medicoDB = new MedicoDB();
-            List<Medico> lista = medicoDB.listarMedico();
-            if (lista.Find(x => x.DNI == args.Value && x.Estado == true) != null)
+            List<Medico> inactivos = medicoDB.listarMedicoInactivo();
+            if (inactivos.Find(x => x.DNI == args.Value) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        //validaciones
+
+
+        protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> lista = empleadoDB.listarEmpleado();
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> listaMedico = medicoDB.listarMedico();
+            if (lista.Find(x => x.DNI == args.Value) != null || (listaMedico.Find(x => x.DNI == args.Value) != null))
             {
                 args.IsValid = false;
             }

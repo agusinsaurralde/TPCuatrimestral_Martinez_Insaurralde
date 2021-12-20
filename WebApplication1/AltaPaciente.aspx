@@ -1,25 +1,26 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ModificarPaciente.aspx.cs" Inherits="WebApplication1.Formulario_web2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AltaPaciente.aspx.cs" Inherits="WebApplication1.AltaPaciente" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-   <br />
-    <h3>Modificar Paciente</h3>
+    <br />
+    <h3>Alta Paciente</h3>
     <hr />
 
 
     <div class="estilo">
      <div class="container" style="margin-top:60px; margin-bottom:60px">
           <div class="row justify-content-center">
-          <div class="col-md-3" style="margin:0px 330px 40px 0px">
+          <div class="col-md-3">
                <label for="txtDNI" class="form-label">DNI</label>
                <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
                 <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDNI" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ErrorMessage="*Ingrese un DNI válido" ControlToValidate="txtDNI" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
-                     <asp:CustomValidator ID="CustomValidatorDNI" OnServerValidate="CustomValidatorDNI_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado ya existe" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>
-                     <asp:CustomValidator ID="CustomValidatorDNIInactivo" OnServerValidate="CustomValidatorDNIInactivo_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El DNI ingresado pertenece a un paciente inactivo" ControlToValidate="txtDNI" Display="Dynamic"></asp:CustomValidator>                                 
                 </div>
           </div>
+              <div class="col-md-3" style="margin:35px 0px 60px 0px">
+                <asp:Button Text="BUSCAR" Font-Bold="true" Font-Size="Small" ID="btnBuscar" CausesValidation="false" OnClick="btnBuscar_Click" CssClass="btn btn-primary rounded-pill" runat="server" />
+              </div>
           </div>
         
         <div class="row justify-content-center">
@@ -43,7 +44,7 @@
         
         <div class="row justify-content-center">
           <div class="col-md-3" style="margin-bottom: 40px">
-            <label for="ddlistCobertura" class="form-label">TIPO DE EMPLEADO</label>
+            <label for="ddlistCobertura" class="form-label">COBERTURA</label>
             <asp:DropDownList ID="ddlistCobertura" class="form-select rounded-pill" runat="server"></asp:DropDownList>
           </div>
             <div class="col-md-3" style="margin-bottom: 40px">
@@ -101,7 +102,7 @@
 </div>
 
 
- <!-- modal verificación eliminar paciente -->
+ <!-- modal verificación  paciente -->
  <asp:Button  style="display:none" runat="server" ID="btnVerificacion" />
 <ajaxToolkit:ModalPopupExtender ID="verificacion_Modal" CancelControlID="exitV" Enabled="true" runat="server" BackgroundCssClass="fondo" BehaviorID="verificacion_Modal" TargetControlID="btnVerificacion" PopupControlID="PanelVerificacion">
  </ajaxToolkit:ModalPopupExtender>
@@ -121,8 +122,7 @@
              </ContentTemplate>
      </asp:UpdatePanel>
      <div class="modal-footer">
-             <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" ID="btnCerrar" Font-Bold="true" OnClick="btnCerrar_Click" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
+             <asp:Button Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" CausesValidation="false" ID="btnCerrar" Font-Bold="true" OnClick="btnCerrar_Click" Font-Size="Small" data-bs-dismiss="modal" runat="server" />
      </div>
  </asp:Panel>
-
 </asp:Content>

@@ -58,11 +58,11 @@ BEGIN
 END
 
 GO
-CREATE PROCEDURE SP_MODIFICARMEDICO(
+create PROCEDURE SP_MODIFICARMEDICO(
 	@ID int, @DNI varchar(8), @Matricula varchar(10), @Apellido varchar(50), @Nombre varchar(50), @Telefono varchar(15), @Email varchar(320), @Direccion varchar(320), @FechaNacimiento date)
 AS 
 BEGIN
-	UPDATE Empleado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento WHERE ID = @ID
+	UPDATE Empleado SET DNI = @DNI, Apellido = @Apellido, Nombre = @Nombre, Telefono = @Telefono, Email = @Email, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, Estado = 1 WHERE ID = @ID
 	UPDATE DatosMedico SET Matricula = @Matricula WHERE ID = @ID
 
 END
@@ -77,6 +77,7 @@ BEGIN
 	UPDATE EspecialidadXMedico SET ESTADO = 0 WHERE IDMedico = @ID
 	UPDATE DiasHabilesMedico SET Estado = 0 WHERE IDMedico = @ID
 	UPDATE Empleado SET Estado = 0 WHERE ID = @ID
+	
 END
 GO
 CREATE PROCEDURE SP_ELIMINARESPECIALIDADMEDICO(

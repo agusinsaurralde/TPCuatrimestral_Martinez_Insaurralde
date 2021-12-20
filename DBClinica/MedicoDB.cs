@@ -9,6 +9,46 @@ namespace DBClinica
 {
     public class MedicoDB
     {
+        public List<Medico> listarMedicoInactivo()
+        {
+            List<Medico> lista = new List<Medico>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("SELECT ID, DNI, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto,  Nombre, Apellido, Matricula, Direccion, FechaNacimiento, Telefono, Email, Estado FROM VW_MEDICO where Estado = 0");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Medico aux = new Medico();
+                    aux.ID = (int)datos.Lector["ID"];
+                    aux.DNI = (string)datos.Lector["DNI"];
+                    aux.Matricula = (string)datos.Lector["Matricula"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Dirección = (string)datos.Lector["Direccion"];
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public List<Medico> listarMedico()
         {
             List<Medico> lista = new List<Medico>();

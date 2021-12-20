@@ -127,9 +127,25 @@ namespace WebApplication1
         //validaciones datos y usuario
         protected void CustomValidatorDNI_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            EmpleadoDB empleadoDB = new EmpleadoDB();
+            List<Empleado> lista = empleadoDB.listarEmpleado();
             MedicoDB medicoDB = new MedicoDB();
-            List<Medico> lista = medicoDB.listarMedico();
-            if (lista.Find(x => x.DNI == args.Value && x.Estado == true && x.ID != ((Medico)Session["modificar"]).ID) != null)
+            List<Medico> listaMedico = medicoDB.listarMedico();
+            if (lista.Find(x => x.DNI == args.Value && x.DNI != ((Medico)Session["modificar"]).DNI) != null || (listaMedico.Find(x => x.DNI == args.Value && x.DNI != ((Medico)Session["modificar"]).DNI) != null))
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+           
+        }
+        protected void CustomValidatorDNIInactivo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            MedicoDB medicoDB = new MedicoDB();
+            List<Medico> inactivos = medicoDB.listarMedicoInactivo();
+            if (inactivos.Find(x => x.DNI == args.Value) != null)
             {
                 args.IsValid = false;
             }

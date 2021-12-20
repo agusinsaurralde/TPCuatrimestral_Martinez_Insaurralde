@@ -112,6 +112,9 @@
     <Content Include="AgregarEmpleado.aspx" />
     <Content Include="AgregarEspecialidad.aspx" />
     <Content Include="AgregarHistoriaClinica.aspx" />
+    <Content Include="AltaEmpleado.aspx" />
+    <Content Include="AltaMedico.aspx" />
+    <Content Include="AltaPaciente.aspx" />
     <Content Include="DetalleEmpleados.aspx" />
     <Content Include="EditarHistoriaClinicaMedico.aspx" />
     <Content Include="EliminarEspecialidadMedico.aspx" />
@@ -231,6 +234,27 @@
     </Compile>
     <Compile Include="AgregarHistoriaClinica.aspx.designer.cs">
       <DependentUpon>AgregarHistoriaClinica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AltaEmpleado.aspx.cs">
+      <DependentUpon>AltaEmpleado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AltaEmpleado.aspx.designer.cs">
+      <DependentUpon>AltaEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AltaMedico.aspx.cs">
+      <DependentUpon>AltaMedico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AltaMedico.aspx.designer.cs">
+      <DependentUpon>AltaMedico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AltaPaciente.aspx.cs">
+      <DependentUpon>AltaPaciente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AltaPaciente.aspx.designer.cs">
+      <DependentUpon>AltaPaciente.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="DetalleEmpleados.aspx.cs">
