@@ -36,7 +36,6 @@
                 <asp:BoundField datafield = "Telefono" HeaderText ="TELÉFONO" />
                 <asp:BoundField datafield = "Email" HeaderText ="EMAIL" />
                 <asp:BoundField datafield = "Dirección" HeaderText ="DIRECCIÓN" />
-                <asp:BoundField datafield = "Estado" HeaderText ="ESTADO" />
                 <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
                 <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/> 
             </Columns>

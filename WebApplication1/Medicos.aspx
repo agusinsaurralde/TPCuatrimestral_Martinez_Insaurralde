@@ -33,7 +33,7 @@
                        <div  >
                            <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoPostback="true"  AutoGenerateColumns="False" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" OnRowDeleting="Grilla_eliminar" OnRowEditing="Grilla_editar" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
                                <Columns>
-                                   <asp:BoundField datafield = "ID" HeaderText ="ID" />
+
                                    <asp:BoundField datafield = "DNI" HeaderText ="DNI" />
                                    <asp:BoundField datafield = "Matricula" HeaderText ="MATRÍCULA" />
                                    <asp:BoundField datafield = "NombreCompleto" HeaderText ="NOMBRE" />              
@@ -41,7 +41,6 @@
                                    <asp:BoundField datafield = "Email" HeaderText ="EMAIL" />
                                    <asp:BoundField datafield = "Dirección" HeaderText ="DIRECCIÓN" />
                                    <asp:BoundField datafield = "FechaNacimiento" DataFormatString="{0:d}"  HeaderText ="FECHA DE NACIMIENTO" />
-                                   <asp:BoundField datafield = "Estado" HeaderText ="ESTADO" />
                                    <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="+ INFO" ControlStyle-Font-Bold="true" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BorderStyle="None" />
                                    <asp:CommandField ButtonType="Image"  ShowEditButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" EditImageUrl="Iconos/pencil-square.svg" />   
                                    <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  

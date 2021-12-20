@@ -34,7 +34,6 @@
                 <Columns>
                     <asp:BoundField datafield = "ID" HeaderText ="ID" />            
                     <asp:BoundField datafield = "Nombre" HeaderText ="COBERTURA" />  
-                    <asp:BoundField datafield = "Estado" HeaderText ="ESTADO" />                                
                     <asp:CommandField ButtonType="Image" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" SelectImageUrl="Iconos/pencil-square.svg" />   
                     <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  
                 </Columns>
