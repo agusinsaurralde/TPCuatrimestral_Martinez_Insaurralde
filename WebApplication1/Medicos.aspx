@@ -8,20 +8,22 @@
     <hr />
 
     <div class="container">
+        <div class="container" style="margin:20px 0px 20px 0px">
         <div class="d-flex flex-row-reverse">
          <div class="col-md-4">
             <div class="input-group mb-3">
                  <asp:TextBox class="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostBack="true" aria-describedby="button-addon2" runat="server" />
                  <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
             </div>
-             <div class="col " style="margin-right: 600px">
+          </div>
+            <div class="col " style="margin-right: 600px">
                   <asp:Button Text="Dar de alta" CssClass="btn btn-primary rounded-pill" ID="btnDarDeAlta" OnClick="btnDarDeAlta_Click" Font-Bold="true" runat="server" />
             </div>
-          </div>
             <div class="col ">
                   <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
          </div>
+    </div>
 
         <asp:Label ID="lblBusquedaIncorrecta" Text="No se encontraron resultados." Visible="false" runat="server" />
         

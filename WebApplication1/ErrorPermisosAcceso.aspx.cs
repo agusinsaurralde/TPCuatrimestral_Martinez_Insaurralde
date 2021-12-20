@@ -11,7 +11,10 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Session["Error"] != null)
+            {
+                lblError.Text = (string)Session["Error"];
+            }
         }
     }
 }

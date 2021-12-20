@@ -208,5 +208,10 @@ namespace WebApplication1
             txtEditarEspecialidad.Text = esp.Nombre;
             editarEspecialidad_Modal.Show();
         }
+
+        protected void btnDarDeAlta_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AltaEspecialidad.aspx");
+        }
     }
 }

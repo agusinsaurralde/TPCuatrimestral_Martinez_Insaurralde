@@ -9,7 +9,7 @@
     <hr />
      <asp:UpdatePanel runat="server">
         <ContentTemplate>
-     <div class="container">
+      <div class="container" style="margin:20px 0px 20px 0px">
         <div class="d-flex flex-row-reverse">
          <div class="col-md-4">
             <div class="input-group mb-3">
@@ -17,13 +17,17 @@
                  <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
             </div>
           </div>
+            <div class="col " style="margin-right: 600px">
+                  <asp:Button Text="Dar de alta" CssClass="btn btn-primary rounded-pill" ID="btnDarDeAlta" OnClick="btnDarDeAlta_Click" Font-Bold="true" runat="server" />
+            </div>
             <div class="col ">
                   <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
          </div>
+    </div>
 
          <asp:Label id="resultados" Text="No se encontraron resultados." Visible ="false" runat="server" />
-    </div>
+
    
              <div>
             <asp:GridView CssClass="table table-hover" ID="Grilla" AutoPostback="true" runat="server" AutoGenerateColumns="False" OnRowDeleting="Grilla_eliminar" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">

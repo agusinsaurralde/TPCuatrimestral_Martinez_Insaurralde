@@ -10,6 +10,36 @@ namespace DBClinica
 {
     public class CoberturaDB
     {
+        public List<Cobertura> listaInactiva()
+        {
+            List<Cobertura> lista = new List<Cobertura>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("SELECT ID, Nombre, Estado FROM Cobertura WHERE ESTADO = 0");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Cobertura aux = new Cobertura();
+                    aux.Id = (int)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public List<Cobertura> lista()
         {
             List<Cobertura> lista = new List<Cobertura>();

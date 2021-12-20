@@ -41,10 +41,13 @@ namespace WebApplication1
                 modMedico.Telefono = txtTelefono.Text;
                 modMedico.Email = txtEmail.Text;
                 modMedico.Dirección = txtDireccion.Text;
+                modMedico.Matricula = txtMatricula.Text;
                 modMedico.Estado = true;
                 modUsuario.IDUsuario = (int)Session["ID"];
                 modUsuario.NombreUsuario = txtNombreUsuario.Text;
                 modUsuario.Contraseña = txtContraseña.Text;
+                modUsuario.TipoUsuario = new TipoUsuario();
+                modUsuario.TipoUsuario.Id = 1;
                 modUsuario.Estado = true;
 
                 cargar.modificar(modMedico);
@@ -93,6 +96,7 @@ namespace WebApplication1
                     txtDireccion.Text = medico.Dirección;
                     txtNombreUsuario.Text = usuario.NombreUsuario;
                     txtContraseña.Text = usuario.Contraseña;
+
                 }
                 else
                 {

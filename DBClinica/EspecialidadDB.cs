@@ -10,6 +10,36 @@ namespace DBClinica
 {
     public class EspecialidadDB
     {
+        public List<Especialidad> listaInactivo()
+        {
+            List<Especialidad> lista = new List<Especialidad>();
+            ConexionDB datos = new ConexionDB();
+
+            try
+            {
+                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad WHERE ESTADO = 0");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Especialidad aux = new Especialidad();
+                    aux.Id = (int)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Estado = (bool)datos.Lector["Estado"];
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public List<Especialidad> lista()
         {
             List<Especialidad> lista = new List<Especialidad>();
@@ -67,8 +97,9 @@ namespace DBClinica
             ConexionDB dato = new ConexionDB();
             try
             {
-                dato.setearConsulta("UPDATE Especialidad SET Nombre=@Nombre where ID="+ EspecialidadMod.Id +"");
+                dato.setearConsulta("UPDATE Especialidad SET Nombre=@Nombre, Estado = 1 where ID="+ EspecialidadMod.Id +"");
                 dato.setearParametro("@Nombre", EspecialidadMod.Nombre);
+
                 dato.ejecutarAccion();
             }
             catch (Exception ex)
