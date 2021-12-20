@@ -13,7 +13,27 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Usuario userlog = (Usuario)Session["Usuario"];
+                if (Session["Usuario"] == null)
+                {
+                    Response.Redirect("LogIn.aspx", false);
+                }
+                else if (userlog.TipoUsuario.Nombre == "Médico")
+                {
+                    Session.Add("Error", "Acceso denegado"); ;
+                    Response.Redirect("ErrorPermisosAcceso.aspx", false);
 
+                }
+                else if (userlog.TipoUsuario.Nombre == "Recepcionista")
+                {
+                    Session.Add("Error", "Acceso denegado"); ;
+                    Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+                }
+            }
+            
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {

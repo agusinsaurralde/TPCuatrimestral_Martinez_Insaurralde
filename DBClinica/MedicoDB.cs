@@ -377,7 +377,7 @@ namespace DBClinica
             ConexionDB datos = new ConexionDB();
             try
             {
-                datos.setearConsulta("SELECT EXM.ID, EXM.IDEspecialidad as IDEspecialidad, ESP.Nombre as Especialidad, EXM.IDMedico, E.Apellido, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Nombre, E.Apellido, EXM.Estado FROM EspecialidadXMedico AS EXM INNER JOIN Empleado AS E ON E.ID = EXM.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = EXM.IDEspecialidad WHERE EXM.ESTADO = 1");
+                datos.setearConsulta("SELECT EXM.ID, EXM.IDEspecialidad as IDEspecialidad, ESP.Nombre as Especialidad, EXM.IDMedico, E.Apellido, CONCAT(E.Nombre, ' ', E.Apellido) as NombreCompleto, E.Nombre, E.Apellido, EXM.Estado FROM EspecialidadXMedico AS EXM INNER JOIN Empleado AS E ON E.ID = EXM.IDMedico INNER JOIN Especialidad AS ESP ON ESP.ID = EXM.IDEspecialidad");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

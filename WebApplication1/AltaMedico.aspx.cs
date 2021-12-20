@@ -14,6 +14,21 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (!IsPostBack)
+            {
+                Usuario userlog = (Usuario)Session["Usuario"];
+                if (Session["Usuario"] == null)
+                {
+                    Response.Redirect("LogIn.aspx", false);
+                }
+                else if (userlog.TipoUsuario.Nombre == "Médico")
+                {
+                    Session.Add("Error", "Acceso denegado"); ;
+                    Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+                }
+  
+            }
         }
 
 
@@ -52,6 +67,25 @@ namespace WebApplication1
 
                 cargar.modificar(modMedico);
                 cargarUsuario.ModificarUsuario(modUsuario);
+
+               List<DiasHabilesMedico> listaDias = cargar.listarDiasHabilesDeUnMedico(modMedico.ID);
+               List<MedicoEspecialidades> listaEsp = cargar.listarEspecialidadesDeUnMedico(modMedico.ID);
+
+                if(listaDias != null)
+                {
+                    foreach (var item in listaDias)
+                    {
+                        item.Especialidad.Estado = true;
+                    }
+                }
+                if (listaEsp != null)
+                {
+                    foreach (var item in listaEsp)
+                    {
+                        item.Estado = true;
+                    }
+                }
+
 
                 lblTituloAlertModal.Text = "Alta médico";
                 lblVerificacion.Text = "El médico " + modMedico.Nombre + " " + modMedico.Apellido + " fue dado de alta con éxito.";

@@ -110,7 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AgregarEmpleado.aspx" />
-    <Content Include="AgregarEspecialidad.aspx" />
     <Content Include="AgregarHistoriaClinica.aspx" />
     <Content Include="AltaCobertura.aspx" />
     <Content Include="AltaEmpleado.aspx" />
@@ -128,10 +127,7 @@
     <Content Include="Coberturas.aspx" />
     <Content Include="AgregarCobertura.aspx" />
     <Content Include="AgregarCorrecto.aspx" />
-    <Content Include="ErrorAgregar.aspx" />
-    <Content Include="ErrorModificar.aspx" />
     <Content Include="EliminarCorrecto.aspx" />
-    <Content Include="ErrorEliminar.aspx" />
     <Content Include="ErrorPermisosAcceso.aspx" />
     <Content Include="EspecialidadesMedico.aspx" />
     <Content Include="Iconos\icons8-healthcare-65.png" />
@@ -144,12 +140,9 @@
     <Content Include="ModificarEspecialidadesMedico.aspx" />
     <Content Include="AsignarTurno.aspx" />
     <Content Include="AgregarMedico.aspx" />
-    <Content Include="Usuarios.aspx" />
-    <Content Include="ModificarCobertura.aspx" />
     <Content Include="EliminarCobertura.aspx" />
     <Content Include="ModificarMedico.aspx" />
     <Content Include="ModificarPaciente.aspx" />
-    <Content Include="ModificarEspecialidad.aspx" />
     <Content Include="HistoriaClinicaDetalle.aspx" />
     <Content Include="HistoriaClinica.aspx" />
     <Content Include="ModificarTurno.aspx" />
@@ -175,7 +168,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ModificarCorrecto.aspx" />
     <Content Include="fonts\GothamBook.ttf" />
     <Content Include="fonts\Gotham-Bold.otf" />
     <Content Include="fonts\GothamBold.ttf" />
@@ -221,13 +213,6 @@
     </Compile>
     <Compile Include="AgregarEmpleado.aspx.designer.cs">
       <DependentUpon>AgregarEmpleado.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AgregarEspecialidad.aspx.cs">
-      <DependentUpon>AgregarEspecialidad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AgregarEspecialidad.aspx.designer.cs">
-      <DependentUpon>AgregarEspecialidad.aspx</DependentUpon>
     </Compile>
     <Compile Include="AgregarHistoriaClinica.aspx.cs">
       <DependentUpon>AgregarHistoriaClinica.aspx</DependentUpon>
@@ -349,33 +334,12 @@
     <Compile Include="AgregarCorrecto.aspx.designer.cs">
       <DependentUpon>AgregarCorrecto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ErrorAgregar.aspx.cs">
-      <DependentUpon>ErrorAgregar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ErrorAgregar.aspx.designer.cs">
-      <DependentUpon>ErrorAgregar.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ErrorModificar.aspx.cs">
-      <DependentUpon>ErrorModificar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ErrorModificar.aspx.designer.cs">
-      <DependentUpon>ErrorModificar.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EliminarCorrecto.aspx.cs">
       <DependentUpon>EliminarCorrecto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EliminarCorrecto.aspx.designer.cs">
       <DependentUpon>EliminarCorrecto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ErrorEliminar.aspx.cs">
-      <DependentUpon>ErrorEliminar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ErrorEliminar.aspx.designer.cs">
-      <DependentUpon>ErrorEliminar.aspx</DependentUpon>
     </Compile>
     <Compile Include="ErrorPermisosAcceso.aspx.cs">
       <DependentUpon>ErrorPermisosAcceso.aspx</DependentUpon>
@@ -426,20 +390,6 @@
     <Compile Include="AgregarMedico.aspx.designer.cs">
       <DependentUpon>AgregarMedico.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios.aspx.cs">
-      <DependentUpon>Usuarios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Usuarios.aspx.designer.cs">
-      <DependentUpon>Usuarios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModificarCobertura.aspx.cs">
-      <DependentUpon>ModificarCobertura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModificarCobertura.aspx.designer.cs">
-      <DependentUpon>ModificarCobertura.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EliminarCobertura.aspx.cs">
       <DependentUpon>EliminarCobertura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -460,13 +410,6 @@
     </Compile>
     <Compile Include="ModificarPaciente.aspx.designer.cs">
       <DependentUpon>ModificarPaciente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModificarEspecialidad.aspx.cs">
-      <DependentUpon>ModificarEspecialidad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModificarEspecialidad.aspx.designer.cs">
-      <DependentUpon>ModificarEspecialidad.aspx</DependentUpon>
     </Compile>
     <Compile Include="HistoriaClinicaDetalle.aspx.cs">
       <DependentUpon>HistoriaClinicaDetalle.aspx</DependentUpon>
@@ -549,13 +492,6 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ModificarCorrecto.aspx.cs">
-      <DependentUpon>ModificarCorrecto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModificarCorrecto.aspx.designer.cs">
-      <DependentUpon>ModificarCorrecto.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

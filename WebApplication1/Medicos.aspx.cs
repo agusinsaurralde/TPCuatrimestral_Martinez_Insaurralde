@@ -124,7 +124,7 @@ namespace WebApplication1
 
         protected void btnDarDeAlta_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Medicos.aspx");
+            Response.Redirect("AltaMedico.aspx");
         }
     }
 }

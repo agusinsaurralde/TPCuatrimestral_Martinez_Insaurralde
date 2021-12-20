@@ -13,20 +13,38 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<DiasHabilesMedico> listaDias = (List<DiasHabilesMedico>)Session["DiasModificar"];
-            Grilla.DataSource = listaDias;
-            Grilla.DataBind();
+            if (!IsPostBack)
+            {
+                Usuario userLog = (Usuario)Session["Usuario"];
+
+                if (userLog == null)
+                {
+                    Response.Redirect("LogIn.aspx");
+                }
+                else if (userLog.TipoUsuario.Nombre == "Médico")
+                {
+                    Session.Add("Error", "Acceso denegado"); ;
+                    Response.Redirect("ErrorPermisosAcceso.aspx", false);
+
+                }
+ 
+
+                List<DiasHabilesMedico> listaDias = (List<DiasHabilesMedico>)Session["DiasModificar"];
+                Grilla.DataSource = listaDias;
+                Grilla.DataBind();
 
 
-            int idMedico = listaDias[0].Medico.ID;
-            List<MedicoEspecialidades> especialidades = new List<MedicoEspecialidades>();
-            Session.Add("especialidades", especialidades);
-            MedicoDB medicoDB = new MedicoDB();
+                int idMedico = listaDias[0].Medico.ID;
+                List<MedicoEspecialidades> especialidades = new List<MedicoEspecialidades>();
+                Session.Add("especialidades", especialidades);
+                MedicoDB medicoDB = new MedicoDB();
 
-            especialidades = medicoDB.listarEspecialidadesDeUnMedico(idMedico);
+                especialidades = medicoDB.listarEspecialidadesDeUnMedico(idMedico);
 
-            GrillaEspecialidad.DataSource = especialidades;
-            GrillaEspecialidad.DataBind();
+                GrillaEspecialidad.DataSource = especialidades;
+                GrillaEspecialidad.DataBind();
+            }
+           
 
         }
 

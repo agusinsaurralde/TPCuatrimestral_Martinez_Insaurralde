@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Clinica Dermar</h1>
+    <br />
+    <h1>Clinica Demar</h1>
 
         <% Dominio.Usuario ejecuta = new Dominio.Usuario(); Dominio.Usuario usuarioSesion = new Dominio.Usuario(); %>
         <% usuarioSesion = (Dominio.Usuario)Session["Usuario"];%> 
@@ -229,7 +230,7 @@
                         <div class="text-xl-center">
                             <div class="card-group">
                                 <h5 class="card-title">Turnos</h5>
-                                <p class="card-text">Asignación de turono.</p>
+                                <p class="card-text">Asignación de turno.</p>
                             </div>
                         </div>
                     </div>

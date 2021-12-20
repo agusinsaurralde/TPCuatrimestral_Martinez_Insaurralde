@@ -27,17 +27,26 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-                listaEsp = (List<Dominio.MedicoEspecialidades>)Session["EspMedico"];
-                listaDias = (List<Dominio.DiasHabilesMedico>)Session["DiasHabiles"];
+                try
+                {
+                    listaEsp = (List<Dominio.MedicoEspecialidades>)Session["EspMedico"];
+                    listaDias = (List<Dominio.DiasHabilesMedico>)Session["DiasHabiles"];
 
-                int idMedico = listaEsp[0].ID;
+                    int idMedico = listaEsp[0].ID;
 
-                UsuarioDB usuarioDB = new UsuarioDB();
-                List<Usuario> listaUsuarios = usuarioDB.listar();
-                usuario = listaUsuarios.Find(x => x.IDUsuario == idMedico);
+                    UsuarioDB usuarioDB = new UsuarioDB();
+                    List<Usuario> listaUsuarios = usuarioDB.listar();
+                    usuario = listaUsuarios.Find(x => x.IDUsuario == idMedico);
 
-                lblContraseña.Text = usuario.Contraseña;
-                lblUsuario.Text = usuario.NombreUsuario;
+                    lblContraseña.Text = usuario.Contraseña;
+                    lblUsuario.Text = usuario.NombreUsuario;
+                }
+                catch (Exception)
+                {
+                    Session.Add("Error", "No se encontraron resultados");
+                    Response.Redirect("ErrorPermisosAcceso.aspx");
+                }
+                
             }
 
         }
