@@ -46,7 +46,6 @@ namespace WebApplication1
             catch (Exception ex)
             {
                 Session.Add("Error", ex);
-                //throw ex;
             }
         }
 
@@ -56,8 +55,6 @@ namespace WebApplication1
                 return;
             Paciente NuevoPaciente = new Paciente();
             PacienteDB cargar = new PacienteDB();
-            string agregado = "Paciente";
-            string error = "paciente";
 
             try
             {
@@ -74,17 +71,13 @@ namespace WebApplication1
                 cargar.agregar(NuevoPaciente);
 
                 revisaSiAgrego();
-                //Response.Redirect("AgregarCorrecto.aspx?agregado=" + agregado, false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 revisaSiagregoCatch();
-                //Response.Redirect("ErrorAgregar.aspx?error=" + error, false);
             }
 
         }
-
         protected void Cancelar_Click(object sender, EventArgs e)
         {
             
@@ -109,17 +102,14 @@ namespace WebApplication1
         protected void revisaSiAgrego()
         {
               lblTituloAlertModal.Text = "Agregado!";
-              lblPacienteDNI.Text = txtNombre.Text + " " + txtApellido;
-              lblPacienteConfirmDNI.Text = "Fue agregado exitosamente :D!";
+              lblPaciente.Text = "El paciente "+ txtNombre.Text + " " + txtApellido.Text + " fue agregado exitosamente :D! ";
               btnRevisaSiAgrega_Modal.Show();
         }
 
         protected void revisaSiagregoCatch()
         {
             lblTituloAlertModal.Text = "Error";
-            lblTituloNombrePaciente.Text = "";
-            lblPacienteDNI.Text = "Error algo salio mal! :o .";
-            lblPacienteConfirmDNI.Text = "No pudo agregarse el paciente...";
+            lblPaciente.Text = "Error algo salio mal! :o ."+ " No pudo agregarse el paciente...";
             btnRevisaSiAgrega_Modal.Show();
         }
 

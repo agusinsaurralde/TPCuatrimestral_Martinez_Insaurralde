@@ -66,8 +66,7 @@ namespace WebApplication1
                 return;
             Paciente ModPaciente = new Paciente();
             PacienteDB cargar = new PacienteDB();
-            string modificado = "Paciente";
-            string error = "paciente";
+
 
             try
             {
@@ -83,11 +82,14 @@ namespace WebApplication1
                 ModPaciente.Dirección = txtDireccion.Text;
                 cargar.modificar(ModPaciente);
 
-                Response.Redirect("ModificarCorrecto.aspx?modificado=" + modificado, false);
+                lblVerificacion.Text = "Paciente modificado exitosamente.";
+                verificacion_Modal.Show();
             }
             catch (Exception)
             {
-                 Response.Redirect("ErrorModificar.aspx?error=" + error, false);
+                lblTituloAlertModal.Text = "Error";
+                lblVerificacion.Text = "Hubo un problema al modificar el paciente.";
+                verificacion_Modal.Show();
             }
 
         }
@@ -112,5 +114,9 @@ namespace WebApplication1
             }
         }
 
+        protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pacientes.aspx");
+        }
     }
 }

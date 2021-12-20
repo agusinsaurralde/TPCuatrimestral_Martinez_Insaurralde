@@ -73,17 +73,21 @@ namespace WebApplication1
 
         protected void btnAceptarEliminar_Click(object sender, EventArgs e)
         {
-            string error = "paciente";
             try
             {
                 int idPaciente = (int)Session["eliminar"];
                 db.eliminar(idPaciente);
                 Grilla.DataSource = db.listarPaciente();
                 Grilla.DataBind();
+                lblVerificacion.Text = "Paciente eliminado con éxito.";
+                verificacion_Modal.Show();
             }
             catch (Exception)
             {
-                Response.Redirect("ErrorEliminar.aspx?error=" + error, false);
+                lblVerificacion.Text = "Hubo un error al eliminar el paciente.";
+                lblTituloAlertModal.Text = "Error";
+                verificacion_Modal.Show();
+
             }
         }
 
@@ -101,5 +105,7 @@ namespace WebApplication1
                 resultados.Visible = true;
             }
         }
+
+
     }
 }

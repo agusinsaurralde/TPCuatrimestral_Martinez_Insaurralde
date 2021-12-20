@@ -150,31 +150,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblTituloAlertModal;
 
         /// <summary>
-        /// Control lblTituloNombrePaciente.
+        /// Control lblPaciente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloNombrePaciente;
-
-        /// <summary>
-        /// Control lblPacienteDNI.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPacienteDNI;
-
-        /// <summary>
-        /// Control lblPacienteConfirmDNI.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPacienteConfirmDNI;
+        protected global::System.Web.UI.WebControls.Label lblPaciente;
 
         /// <summary>
         /// Control btnCerrarModalAgregarPaciente.
