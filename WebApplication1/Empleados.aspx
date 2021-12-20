@@ -6,18 +6,33 @@
     <h1>Empleados</h1>
     <hr />
 
-   <div class="container">
-        <div class="d-flex flex-row-reverse">
-         <div class="col-md-4">
-            <div class="input-group mb-3">
-                 <asp:TextBox class="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostBack="true" aria-describedby="button-addon2" runat="server" />
-                 <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
-            </div>
-          </div>
-            <div class="col ">
+
+
+
+    <div class="container" style="margin-bottom:20px">
+        <div class="row">
+            <div class="col-md-4">
                   <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
-         </div>
+                   
+
+                  
+                  <div class="col-md-4">
+                             <div class="btn-group" role="group" aria-label="Basic example">
+                                 <asp:Button Text="TODOS" Font-Bold="true" Font-Size="Small" ID="btnTodos" OnClick="btnTodos_Click"  BorderStyle="None" CssClass="btn btn-primary" runat="server" />
+                                 <asp:Button Text="ADMINISTRADORES" Font-Bold="true" Font-Size="Small" ID="btnAdmin" OnClick="btnAdmin_Click" BorderStyle="None" CssClass="btn btn-primary" runat="server" />
+                                 <asp:Button Text="RECEPCIONISTAS" Font-Bold="true" Font-Size="Small" ID="btnRecep" OnClick="btnRecep_Click" BorderStyle="None" CssClass="btn btn-primary" runat="server" />
+                             </div>
+                         </div>
+             <div class="col-md-4">
+                         <div class="input-group md-3">
+                              <asp:TextBox class="form-control" ID="txtBusqueda" OnTextChanged="txtBusqueda_TextChanged" AutoPostBack="true" aria-describedby="button-addon2" runat="server" />
+                              <asp:Button Text="Buscar" Font-Bold="true" OnClick ="Click_Buscar" class="btn btn-primary" runat="server" />
+                         </div>
+                   </div>
+       
+      
+        </div>
     </div>
     <asp:Label id="resultados" Text="No se encontraron resultados." Visible="false" runat="server" />
     <div>

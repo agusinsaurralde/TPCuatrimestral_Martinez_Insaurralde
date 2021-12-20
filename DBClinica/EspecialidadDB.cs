@@ -17,7 +17,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad ORDER BY Nombre ASC WHERE ESTADO = 1 ORDER BY NOMBRE ASC");
+                datos.setearConsulta("SELECT ID, Nombre,Estado from Especialidad WHERE ESTADO = 1 ORDER BY NOMBRE ASC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

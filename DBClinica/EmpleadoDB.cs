@@ -16,7 +16,7 @@ namespace DBClinica
 
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista' WHERE E.ESTADO = 1 order by e.apellido asc ");
+                datos.setearConsulta("SELECT E.ID, E.DNI, CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista' AND E.ESTADO = 1 order by e.apellido asc ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -223,14 +223,26 @@ namespace DBClinica
             return empleado;
         }
 
-        public List<Empleado> buscarEmpleado(string empleado)
+        public List<Empleado> buscarEmpleado(string criterio, string empleado)
         {
             List<Empleado> lista = new List<Empleado>();
             ConexionDB datos = new ConexionDB();
-
             try
             {
-                datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE (T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista') AND (E.Nombre LIKE '" + empleado + "%' OR E.Apellido LIKE '"+ empleado + "%' OR CONCAT(E.Apellido, ' ', E.Nombre) LIKE '"+ empleado + "%' ) AND E.ESTADO = 1 ORDER BY APELLIDO ASC");
+                 switch (criterio)
+                 {
+                     case "Todos":
+                         datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto,E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE (T.Tipo = 'Administrador' OR T.Tipo = 'Recepcionista') AND (E.Nombre LIKE '" + empleado + "%' OR E.Apellido LIKE '" + empleado + "%' OR CONCAT(E.Apellido, ' ', E.Nombre) LIKE '" + empleado + "%' ) AND E.ESTADO = 1 ORDER BY APELLIDO ASC");
+                         
+                         break;
+                      case "Administradores":
+                             datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre,CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto, E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE (T.Tipo = 'Administrador') AND (E.Nombre LIKE '" + empleado + "%' OR E.Apellido LIKE '" + empleado + "%' OR CONCAT(E.Apellido, ' ', E.Nombre) LIKE '" + empleado + "%' ) AND E.ESTADO = 1 ORDER BY APELLIDO ASC");
+                         break;
+                     case "Recepcionistas":
+                         datos.setearConsulta("SELECT E.ID, E.DNI, E.Apellido, E.Nombre, CONCAT(E.Nombre,' ', E.Apellido) as NombreCompleto,E.Telefono, E.Email, E.Direccion, E.FechaNacimiento, E.IDTipo, T.Tipo, E.Estado FROM Empleado AS E INNER JOIN TipoEmpleado AS T ON T.ID = E.IDTipo WHERE ( T.Tipo = 'Recepcionista') AND (E.Nombre LIKE '" + empleado + "%' OR E.Apellido LIKE '" + empleado + "%' OR CONCAT(E.Apellido, ' ', E.Nombre) LIKE '" + empleado + "%' ) AND E.ESTADO = 1 ORDER BY APELLIDO ASC");
+                         break;
+                 }
+            
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -241,6 +253,7 @@ namespace DBClinica
                     aux.DNI = (string)datos.Lector["DNI"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.NombreCompleto = (string)datos.Lector["NombreCompleto"];
                     aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Dirección = (string)datos.Lector["Direccion"];

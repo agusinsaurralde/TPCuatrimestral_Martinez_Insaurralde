@@ -16,7 +16,11 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-                 Usuario userLog = (Usuario)Session["Usuario"];
+                btnTodos.BackColor = System.Drawing.Color.RoyalBlue;
+                btnAdmin.BackColor = System.Drawing.Color.DodgerBlue;
+                btnRecep.BackColor = System.Drawing.Color.DodgerBlue;
+                Session.Add("btn", "Todos");
+                Usuario userLog = (Usuario)Session["Usuario"];
 
                  if (Session["Usuario"] == null)
                  {
@@ -60,7 +64,8 @@ namespace WebApplication1
         }
         protected void Click_Buscar(object sender, EventArgs e)
         {
-            List<Empleado> empleadoBusqueda = db.buscarEmpleado(txtBusqueda.Text);
+            string criterio = (string)Session["btn"];
+            List<Empleado> empleadoBusqueda = db.buscarEmpleado(criterio, txtBusqueda.Text);
             Grilla.DataSource = empleadoBusqueda;
             Grilla.DataBind();
             if (empleadoBusqueda.Count != 0)
@@ -108,7 +113,8 @@ namespace WebApplication1
 
         protected void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
-            List<Empleado> empleadoBusqueda = db.buscarEmpleado(txtBusqueda.Text);
+            string criterio = (string)Session["btn"];
+            List<Empleado> empleadoBusqueda = db.buscarEmpleado(criterio, txtBusqueda.Text);
             Grilla.DataSource = empleadoBusqueda;
             Grilla.DataBind();
             if (empleadoBusqueda.Count != 0)
@@ -119,6 +125,39 @@ namespace WebApplication1
             {
                 resultados.Visible = true;
             }
+        }
+
+        protected void btnTodos_Click(object sender, EventArgs e)
+        {
+            Grilla.DataSource = db.listarEmpleado();
+            Grilla.DataBind();
+            btnTodos.BackColor = System.Drawing.Color.RoyalBlue;
+            btnAdmin.BackColor = System.Drawing.Color.DodgerBlue;
+            btnRecep.BackColor = System.Drawing.Color.DodgerBlue;
+            Session.Add("btn", "Todos");
+
+        }
+
+        protected void btnAdmin_Click(object sender, EventArgs e)
+        {
+            Grilla.DataSource = db.listarAdministrador();
+            Grilla.DataBind();
+            btnAdmin.BackColor = System.Drawing.Color.RoyalBlue;
+            btnTodos.BackColor = System.Drawing.Color.DodgerBlue;
+            btnRecep.BackColor = System.Drawing.Color.DodgerBlue;
+            Session.Add("btn", "Administradores");
+
+        }
+
+        protected void btnRecep_Click(object sender, EventArgs e)
+        {
+            Grilla.DataSource = db.listarRecepcionista();
+            Grilla.DataBind();
+            btnRecep.BackColor = System.Drawing.Color.RoyalBlue;
+            btnTodos.BackColor = System.Drawing.Color.DodgerBlue;
+            btnAdmin.BackColor = System.Drawing.Color.DodgerBlue;
+            Session.Add("btn", "Recepcionistas");
+
         }
     }
 }
