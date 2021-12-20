@@ -21,7 +21,7 @@
                   <asp:Button Text="Dar de alta" CssClass="btn btn-primary rounded-pill" ID="btnDarDeAlta" OnClick="btnDarDeAlta_Click" Font-Bold="true" runat="server" />
             </div>
             <div class="col ">
-                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
+                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" ID="btnAgregar" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
          </div>
     </div>

@@ -22,7 +22,7 @@
                   <asp:Button Text="Dar de alta" CssClass="btn btn-primary rounded-pill" ID="btnDarDeAlta" OnClick="btnDarDeAlta_Click" Font-Bold="true" runat="server" />
             </div>
             <div class="col ">
-                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
+                  <asp:Button Text="Agregar +" CssClass="btn btn-primary rounded-pill" ID="btnAgregar" OnClick="Click_Agregar" Font-Bold="true" runat="server" />
             </div>
          </div>
     </div>
@@ -32,6 +32,7 @@
     <div>
         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoGenerateColumns="False" AutoPostback="true" OnRowDeleting="Grilla_eliminar" OnSelectedIndexChanged="Grilla_SelectedIndexChanged" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
             <Columns>
+                <asp:BoundField datafield = "Id" HeaderText ="ID" />
                 <asp:BoundField datafield = "Nombre" HeaderText ="ESPECIALIDAD" />
                 <asp:CommandField ButtonType="Image" ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary rounded-pill"  ControlStyle-BackColor="White" ControlStyle-BorderColor="White" SelectImageUrl="Iconos/pencil-square.svg" />   
                 <asp:CommandField ButtonType="Image"  ShowDeleteButton="True" ControlStyle-CssClass="btn btn-primary rounded-pill" ControlStyle-BackColor="White" ControlStyle-BorderColor="White"  DeleteImageUrl="Iconos/x-circle.svg"/>  

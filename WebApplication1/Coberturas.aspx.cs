@@ -29,8 +29,12 @@ namespace WebApplication1
             }
             else if (userLog.TipoUsuario.Nombre == "Recepcionista")
             {
-                Session.Add("Error", "Acceso denegado"); ;
-                Response.Redirect("ErrorPermisosAcceso.aspx", false);
+                Grilla.Columns[0].Visible = false;
+                Grilla.Columns[2].Visible = false;
+                Grilla.Columns[3].Visible = false;
+                btnDarDeAlta.Visible = false;
+                btnAgregar.Visible = false;
+
             }
             if (!IsPostBack)
             {

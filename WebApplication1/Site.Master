@@ -84,17 +84,20 @@
                  <a class="nav-item nav-link" href="/Medicos">MÉDICOS</a>
             </li>
             <%} %>
-            <%if (usuario.UsuarioAdmin(usuario)){%>
+            <%if (usuario.UsuarioAdmin(usuario) || usuario.UsuarioRecepcionista(usuario)){%>
             <li class="nav-item">
               <a class="nav-item nav-link" href="/SpecialtysViews">ESPECIALIDADES</a>
             </li>
             <li class="nav-item">
               <a class="nav-item nav-link" href="/Coberturas">COBERTURAS</a>
             </li>
+             <%} %>
+                 <%if (usuario.UsuarioAdmin(usuario))
+                     {%>
             <li class="nav-item">
               <a class="nav-item nav-link" href="/Empleados">EMPLEADOS</a>
             </li>
-            <%} %>
+          <%} %>
              <li class="nav-item" style="font-weight:bold; font-size:13px; margin-left: 25px">
                  <asp:Button ID="btnLogOut" CssClass="btn btn-light rounded-pill" OnClick="btnLogOut_Click" Font-Bold="true" Font-Size="Small" runat="server" />
             </li>
