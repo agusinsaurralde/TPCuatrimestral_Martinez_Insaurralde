@@ -1,13 +1,6 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-<div class="card border-info mb-3" style="max-width: 1000rem;">
-    <header class="backgraund: alert-info" style="max-width: 1000rem;">  
-        <asp:Label ID="lblNombreUsuario" Text="" runat="server" />
-       <%--<asp:ImageButton ID="btnLogOut" ImageUrl="https://image.flaticon.com/icons/png/512/25/25706.png" Width="18px" Height="19px" Style="margin-left: 1000px; margin-top:0;" OnClick="btnLogOut_Click" runat="server" />--%>
-        
-    </header>
-</div>
     <h1>Clinica Dermar</h1>
 
         <% Dominio.Usuario ejecuta = new Dominio.Usuario(); Dominio.Usuario usuarioSesion = new Dominio.Usuario(); %>

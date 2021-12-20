@@ -30,7 +30,7 @@ namespace WebApplication1
                     if (userLog != null)
                     {
                         empleado = empleadoDB.empleadoLogueado(userLog.IDUsuario);
-                        lblNombreUsuario.Text = empleado.NombreCompleto;
+                        //lblNombreUsuario.Text = empleado.NombreCompleto;
                     }
 
                 }
