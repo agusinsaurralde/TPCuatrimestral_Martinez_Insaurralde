@@ -13,11 +13,11 @@ GO
 --EMPLEADO----------------------------------
 create table Empleado(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
-    DNI VARCHAR(8) UNIQUE NOT NULL,
+    DNI VARCHAR(8) NOT NULL,
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
     Telefono VARCHAR(15) NOT NULL,
-    Email VARCHAR(320) UNIQUE NOT NULL,
+    Email VARCHAR(320) NOT NULL,
     Direccion VARCHAR(320) NOT NULL,
     FechaNacimiento DATE NOT NULL,
     IDTipo int NOT NULL,
@@ -32,7 +32,7 @@ create table Empleado(
 go
 create table Especialidad(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
-    Nombre VARCHAR(50) UNIQUE not NULL,
+    Nombre VARCHAR(50) not NULL,
 	Estado bit not null
 )
 GO
@@ -81,7 +81,7 @@ go
 --DATOSMEDICO---------------------------------------
 create table DatosMedico(
     ID int PRIMARY KEY not NULL,
-	Matricula VARCHAR(10) Unique not null,
+	Matricula VARCHAR(10) not null,
 	Estado bit not null,
 
 	CONSTRAINT FK_ID FOREIGN KEY (ID) REFERENCES Empleado(ID),
@@ -98,7 +98,7 @@ go
 --PACIENTE-------------------------------------------
 create table Paciente(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
-    DNI VARCHAR(8) UNIQUE not null,
+    DNI VARCHAR(8) not null,
     Nombre VARCHAR(50) not null,
     Apellido VARCHAR(50) not null,
     Telefono VARCHAR(15) not null,
@@ -117,6 +117,7 @@ create table Paciente(
 	CONSTRAINT CHK_FechaNacimientoPaciente CHECK (FechaNacimiento < GETDATE() AND FechaNacimiento > '1900-01-01')
 )
 GO
+
 --HISTORIACLINICA----------------------------------
 create table HistoriaClinica(
     ID int PRIMARY KEY IDENTITY(1,1) not null,
@@ -151,7 +152,7 @@ create table Turno(
 	CONSTRAINT FK_IDEspXMedico FOREIGN KEY (IDEspXMedico) REFERENCES EspecialidadXMedico(ID),
 	CONSTRAINT FK_IDRecepcionista FOREIGN KEY (IDRecepcionista) REFERENCES Empleado(ID),
 	CONSTRAINT FK_IDEstado FOREIGN KEY (IDEstado) REFERENCES EstadoTurno(ID),
-	CONSTRAINT CHK_Dia CHECK (Dia >getdate()),
+	--CONSTRAINT CHK_Dia CHECK (Dia >getdate()),
 )
 go  
 --TipoUsuario----------------------------------
@@ -171,7 +172,7 @@ GO
 --USUARIO-----------------------------------------------
 create table Usuario(
     ID int PRIMARY KEY not null FOREIGN KEY REFERENCES EMPLEADO(ID),
-    NombreUsuario VARCHAR(15) UNIQUE not null,
+    NombreUsuario VARCHAR(15) not null,
     Contraseña VARCHAR(15) not null,
     IDTipo int not null,
 	Estado bit not null
