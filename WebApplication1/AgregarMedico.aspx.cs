@@ -41,7 +41,7 @@ namespace WebApplication1
 
             }
 
-            
+
         }
 
         //botones 
@@ -58,11 +58,22 @@ namespace WebApplication1
         }
         protected void btn1a2_Click(object sender, EventArgs e)
         {
-            MultiView.ActiveViewIndex = 2;
-            lblEspecialidades.Font.Bold = false;
-            lblEspecialidades.ForeColor = System.Drawing.Color.Gray;
-            lblUsuario.Font.Bold = true;
-            lblUsuario.ForeColor = System.Drawing.Color.RoyalBlue;
+            if (!Page.IsValid)
+                return;
+            if (Grilla.Rows.Count != 0)
+            {
+                errorEspecialidad.Visible = false;
+                MultiView.ActiveViewIndex = 2;
+                lblEspecialidades.Font.Bold = false;
+                lblEspecialidades.ForeColor = System.Drawing.Color.Gray;
+                lblUsuario.Font.Bold = true;
+                lblUsuario.ForeColor = System.Drawing.Color.RoyalBlue;
+            }
+            else
+            {
+                errorEspecialidad.Visible = true;
+            }
+
         }
         protected void btn1a0_Click(object sender, EventArgs e)
         {
@@ -122,17 +133,80 @@ namespace WebApplication1
                 args.IsValid = true;
             }
         }
+        protected void CustomValidatorEspecialidad_ServerValidate(object source, ServerValidateEventArgs args)
+        {
 
+            if (Grilla.Rows.Count == 0)
+            {
+                if (ddlistEspecialidad.SelectedIndex == 0)
+                {
+                    args.IsValid = false;
+                }
+                else
+                {
+                    args.IsValid = true;
+                }
+            }
+        }
+        protected void CustomValidatorDia_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (Grilla.Rows.Count == 0)
+            {
+                if (ddlistDias.SelectedIndex == 0)
+                {
+                    args.IsValid = false;
+                }
+                else
+                {
+                    args.IsValid = true;
+                }
+            }
+        }
+        protected void CustomValidatorEntrada_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (Grilla.Rows.Count == 0)
+            {
+                if (ddlistEntrada.SelectedIndex == 0)
+                {
+                    args.IsValid = false;
+                }
+                else
+                {
+                    args.IsValid = true;
+                }
+            }
+        }
+        protected void CustomValidator1Usuario_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            UsuarioDB usuarioDB = new UsuarioDB();
+            List<Usuario> lista = usuarioDB.listar();
+            if (lista.Find(x => x.NombreUsuario.ToUpper() == args.Value.ToUpper() && x.Estado == true) != null)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
 
         protected void ddlistEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlistEspecialidad.SelectedIndex == 0)
             {
                 ddlistDias.Enabled = false;
+
+                if (ddlistEntrada.Enabled)
+                    ddlistEntrada.Enabled = false;
+
+                if (btnAgregarDia.Enabled)
+                    btnAgregarDia.Enabled = false;
             }
             else
             {
                 ddlistDias.Enabled = true;
+                if (!btnAgregarDia.Enabled)
+                    btnAgregarDia.Enabled = true;
             }
         }
         protected void ddlistDias_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,10 +214,18 @@ namespace WebApplication1
             if (ddlistDias.SelectedIndex == 0)
             {
                 ddlistEntrada.Enabled = false;
+                if (btnAgregarDia.Enabled)
+                    btnAgregarDia.Enabled = false;
             }
             else
             {
+                if (!btnAgregarDia.Enabled)
+                    btnAgregarDia.Enabled = true;
                 ddlistEntrada.Enabled = true;
+
+                if (ddlistEntrada.Items.Count != 0)
+                    ddlistEntrada.Items.Clear();
+
                 DateTime hora = DateTime.Parse("8:00");
                 DateTime horaMax = DateTime.Parse("19:00");
                 System.TimeSpan horaSumar = new System.TimeSpan(0, 1, 0, 0);
@@ -155,6 +237,8 @@ namespace WebApplication1
                     hora += horaSumar;
                 }
                 ddlistEntrada.Items.Insert(0, new ListItem("Seleccionar", "0"));
+
+
             }
 
         }
@@ -167,10 +251,16 @@ namespace WebApplication1
                 txtHoraSalida.Text = horaSalida.ToShortTimeString();
                 btnAgregarDia.Enabled = true;
             }
+            else
+            {
+                if (btnAgregarDia.Enabled)
+                    btnAgregarDia.Enabled = false;
+            }
 
         }
         protected void Click_AgregarDia(object sender, EventArgs e)
         {
+            errorEspecialidad.Visible = false;
             DiasHabilesMedico diaAgregado = new DiasHabilesMedico();
 
             diaAgregado.Especialidad = new Especialidad();
@@ -242,6 +332,8 @@ namespace WebApplication1
 
         protected void Aceptar_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid)
+                return;
             Medico NuevoMedico = new Medico();
             Usuario nuevoUsuario = new Usuario();
             MedicoDB cargar = new MedicoDB();
@@ -301,6 +393,6 @@ namespace WebApplication1
 
         }
 
-       
+
     }
 }

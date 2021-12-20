@@ -1,162 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarMedico.aspx.cs" Inherits="WebApplication1.PRUEBA" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <script>
-        function validarVistaDatos() {
-            var dni = document.getElementById("<% = txtDNI.ClientID %>").value;
-            var matricula = document.getElementById("<% = txtMatricula.ClientID %>").value;
-            var apellido = document.getElementById("<% = txtApellido.ClientID %>").value;
-            var nombre = document.getElementById("<% = txtNombre.ClientID %>").value;
-            var telefono = document.getElementById("<% = txtTelefono.ClientID %>").value;
-            var fecha = document.getElementById("<% = txtFechaNac.ClientID %>").value;
-            var email = document.getElementById("<% = txtEmail.ClientID %>").value;
-            var direccion = document.getElementById("<% = txtDireccion.ClientID %>").value;
-            var valido = true;
-
-            if (dni === "") {
-                $("#txtDNI").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtDNI").removeClass("is-invalid");
-            }
-
-            if (matricula === "") {
-                $("#txtMatricula").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtDNI").removeClass("is-invalid");
-            }
-
-            if (apellido === "") {
-                $("#txtApellido").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtApellido").removeClass("is-invalid");
-            }
-
-            if (nombre === "") {
-                $("#txtNombre").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtNombre").removeClass("is-invalid");
-            }
-
-            if (telefono === "") {
-                $("#txtTelefono").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtTelefono").removeClass("is-invalid");
-            }
-
-            if (fecha === "") {
-                $("#txtFechaNac").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtFechaNac").removeClass("is-invalid");
-            }
-
-            if (email === "") {
-                $("#txtEmail").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtEmail").removeClass("is-invalid");
-            }
-
-            if (direccion === "") {
-                $("#txtDireccion").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtDireccion").removeClass("is-invalid");
-            }
-
-            if (!valido) {
-                return false;
-            }
-            return true;
-        }
-
-        function validarVistaEspecialidad() {
-            var grilla = document.getElementById("Grilla");
-            /*var especialidad = document.getElementById("ddlistEspecialidad");
-            var hora = document.getElementById("ddlistEntrada");
-            var dia = document.getElementById("ddlistDias");
-
-            var indiceE = especialidad.options[especialidad.selectedIndex].index;
-            var indiceH = hora.options[hora.selectedIndex].index;
-            var indiceD = dia.options[dia.selectedIndex].index;
-
-            if (grilla === 0) {
-                if (indiceE === 0) {
-                    $("#ddlistEspecialidad").addClass("is-invalid");
-                }
-                else {
-                    $("#ddlistEspecialidad").removeClass("is-invalid");
-
-                }
-
-                if (indiceH === 0) {
-                    $("#ddlistEntrada").addClass("is-invalid");
-                }
-                else {
-                    $("#ddlistEntrada").removeClass("is-invalid");
-                }
-
-                if (indiceD === 0) {
-                    $("#ddlistEntrada").addClass("is-invalid");
-                    
-                }
-                else {
-                    $("#ddlistEntrada").removeClass("is-invalid");
-                }
-                return false;
-            }*/
-
-            if (grilla === null) {
-                alert("Debe agregar una especialidad");
-                return false;
-            }
-
-            return true;
-        }
-
-        function validarVistaUsuario() {
-            var usuario = document.getElementById("<% = txtNombreUsuario.ClientID %>").value;
-            var contraseña = document.getElementById("<% = txtContraseña.ClientID %>").value;
-           
-            var valido = true;
-
-            if (usuario === "") {
-                $("#txtNombreUsuario").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtNombreUsuario").removeClass("is-invalid");
-            }
-
-            if (contraseña === "") {
-                $("#txtContraseña").addClass("is-invalid");
-                valido = false;
-            }
-            else {
-                $("#txtContraseña").removeClass("is-invalid");
-            }
-
-            
-            if (!valido) {
-                return false;
-            }
-            return true;
-        }
-    </script>
-    
 
 
     <h3 style="margin-top:40px">Agregar Médico</h3>
@@ -170,11 +15,11 @@
 
     <asp:MultiView ID="MultiView" runat="server">
         <asp:View ID="vistaDatos" runat="server">
-            <div class="estilo">
+          <div class="estilo">
           <div class="row justify-content-center">
              <div class="col-md-3" style="margin-bottom: 40px; margin-top:60px">
                   <label for="txtDNI" class="form-label">DNI</label>
-                  <asp:TextBox class="form-control rounded-pill" ID="txtDNI"  runat="server" />
+                  <asp:TextBox MaxLength="8" class="form-control rounded-pill" ID="txtDNI"  runat="server" />
                   <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDNI" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ErrorMessage="*Ingrese un DNI válido" ControlToValidate="txtDNI" Runat="server" Display="Dynamic" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
@@ -183,7 +28,7 @@
              </div>
              <div class="col-md-3" style="margin-bottom: 40px;margin-top:60px">
                   <label for="txtMatricula" class="form-label">MATRÍCULA</label>
-                  <asp:TextBox class="form-control rounded-pill" ID="txtMatricula"  runat="server" />
+                  <asp:TextBox MaxLength="10" class="form-control rounded-pill" ID="txtMatricula"  runat="server" />
                  <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtMatricula" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ErrorMessage="*Ingrese una matrícula válido" ControlToValidate="txtMatricula" Runat="server" Display="Dynamic" ValidationExpression="\d+" ForeColor="#CC0000"></asp:RegularExpressionValidator>
@@ -196,7 +41,7 @@
           <div class="row justify-content-center">
             <div class="col-md-3" style="margin-bottom: 40px"">
               <label for="txtApellido" class="form-label">APELLIDO</label>
-              <asp:TextBox  class="form-control rounded-pill" ID="txtApellido"  runat="server" />
+              <asp:TextBox MaxLength="50" class="form-control rounded-pill" ID="txtApellido"  runat="server" />
                  <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtApellido" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:RegularExpressionValidator ErrorMessage="*Ingrese un apellido válido" ControlToValidate="txtApellido" Runat="server" Display="Dynamic" ValidationExpression="^[a-zA-Z ]*$" ForeColor="#CC0000"></asp:RegularExpressionValidator>
@@ -204,7 +49,7 @@
             </div>
               <div class="col-md-3" style="margin-bottom: 40px">
               <label for="txtNombre" class="form-label">NOMBRE</label>
-              <asp:TextBox class="form-control rounded-pill" ID="txtNombre"  runat="server" />
+              <asp:TextBox MaxLength="50" class="form-control rounded-pill" ID="txtNombre"  runat="server" />
                   <div style="font-size:13px">
                     <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtNombre" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ErrorMessage="*Ingrese un nombre válido" ControlToValidate="txtNombre" Runat="server" Display="Dynamic" EnableClientScript="true" ValidationExpression="^[a-zA-Z ]*$" ForeColor="#CC0000"></asp:RegularExpressionValidator>
@@ -236,14 +81,14 @@
               
                <div class="col-md-3" style="margin-bottom: 70px">
                  <label for="txtDireccion" class="form-label">DIRECCIÓN</label>
-                 <asp:TextBox class="form-control rounded-pill" ID="txtDireccion" runat="server" />
+                 <asp:TextBox MaxLength="320" class="form-control rounded-pill" ID="txtDireccion" runat="server" />
                    <div style="font-size:13px">
                      <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtDireccion" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                  </div>
                </div>
                 <div class="col-md-3" style="margin-bottom: 70px">
                  <label for="txtEmail" class="form-label">E-MAIL</label>
-                 <asp:TextBox type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
+                 <asp:TextBox MaxLength="320" type="email" class="form-control rounded-pill" ID="txtEmail" runat="server" />
                     <div style="font-size:13px">
                          <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtEmail" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
                          <asp:CustomValidator ID="CustomValidatorEmail" OnServerValidate="CustomValidatorEmail_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El email ingresado ya existe" ControlToValidate="txtEmail" Display="Dynamic"></asp:CustomValidator>
@@ -267,7 +112,10 @@
                     </div>
                  <div class="row justify-content-center" style="margin-bottom: 40px">
                    <div class="col-md-4" >
-                     <asp:DropDownList ID="ddlistEspecialidad" ClientIDMode="Static" class="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+                     <asp:DropDownList ID="ddlistEspecialidad" class="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+                        <div style="font-size:13px">
+                               <asp:CustomValidator ID="CustomValidatorEspecialidad" OnServerValidate="CustomValidatorEspecialidad_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*Debe seleccionar una especialidad" ControlToValidate="ddlistEspecialidad" Display="Dynamic"></asp:CustomValidator>
+                         </div>
                    </div>
                   </div>
 
@@ -277,7 +125,7 @@
                    <div class="row justify-content-center" style="margin-bottom: 40px">
                        <div class="col-md-4">
                          
-                         <asp:DropDownList ID="ddlistDias" ClientIDMode="Static" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged">
+                         <asp:DropDownList ID="ddlistDias" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistDias_SelectedIndexChanged">
                              <asp:ListItem Text="Seleccionar" />
                              <asp:ListItem Text="Lunes" />
                              <asp:ListItem Text="Martes" />
@@ -285,7 +133,10 @@
                              <asp:ListItem Text="Jueves" />
                              <asp:ListItem Text="Viernes" />
                              <asp:ListItem Text="Sábado" />
-                         </asp:DropDownList>              
+                         </asp:DropDownList>  
+                           <div style="font-size:13px">
+                               <asp:CustomValidator ID="CustomValidatorDia" OnServerValidate="CustomValidatorDia_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*Debe seleccionar un día" ControlToValidate="ddlistDias" Display="Dynamic"></asp:CustomValidator>
+                         </div>
                        </div>
                      </div>
 
@@ -294,7 +145,10 @@
                     </div>                        
                     <div class="row justify-content-center">
                        <div class="col-md-2" >
-                          <asp:DropDownList ID="ddlistEntrada" ClientIDMode="Static" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntrada_SelectedIndexChanged"/>
+                          <asp:DropDownList ID="ddlistEntrada" Enabled="false" CssClass="form-select rounded-pill" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlistEntrada_SelectedIndexChanged"/>
+                             <div style="font-size:13px">
+                                     <asp:CustomValidator ID="CustomValidatorEntrada" OnServerValidate="CustomValidatorEntrada_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*Debe seleccionar un horario" ControlToValidate="ddlistEntrada" Display="Dynamic"></asp:CustomValidator>
+                               </div>
                        </div>
                        <div class="col-md-2">
                            <asp:TextBox ID="txtHoraSalida" Enabled="false"  CssClass="form-select rounded-pill" DataFormatString="HH:mm" AutoPostBack="true" runat="server" />
@@ -308,9 +162,12 @@
                              <asp:Button  ID="btnAgregarDia" Text="+ DÍA" CssClass="btn btn-primary rounded-pill" Enabled="false" OnClick="Click_AgregarDia" AutoPostBack="true" runat="server" />
                            </div>
                        </div>   
-               
+                    <div class="row justify-content-center">
+                        <asp:Label id="errorEspecialidad" Text="*Debe agregar un día hábil" Visible="false" ForeColor="#CC0000" runat="server" />
+                    </div>
+                        
                     <div>
-                         <asp:GridView CssClass="table table-hover" ClientIDMode="Static" ID="Grilla"  runat="server" AutoPostback="true"  AutoGenerateColumns="False" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
+                         <asp:GridView CssClass="table table-hover" ID="Grilla"  runat="server" AutoPostback="true"  AutoGenerateColumns="False" DataKeyNames="ID" HeaderStyle-CssClass="table-primary" BorderStyle="None" HeaderStyle-Font-Size="Small" SortedDescendingCellStyle-HorizontalAlign="Left" SortedDescendingCellStyle-VerticalAlign="Middle">
                             <Columns>
                                 <asp:BoundField datafield = "Especialidad.Nombre" HeaderText ="ESPECIALIDAD" />
                                 <asp:BoundField datafield = "NombreDia" HeaderText ="DÍA" />
@@ -327,10 +184,10 @@
 
             <div class="row justify-content-md-between" style="margin-bottom: 60px; margin-top:60px">
                 <div class="col-md-2" style="margin-left:80px">
-                       <asp:Button ID="btn1a0" runat="server" OnClick="btn1a0_Click" Text="< ANTERIOR" CssClass="btn btn-outline-secondary rounded-pill" Font-Bold="true" Font-Size="Small" /> 
+                       <asp:Button ID="btn1a0" runat="server" OnClick="btn1a0_Click" Text="< ANTERIOR" CausesValidation="false" CssClass="btn btn-outline-secondary rounded-pill" Font-Bold="true" Font-Size="Small" /> 
                  </div>
                 <div class="col-md-2"> 
-                    <asp:Button ID="btn1a2" runat="server" OnClick="btn1a2_Click" Text="SIGUIENTE >" OnClientClick="return validarVistaEspecialidad()" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" />
+                    <asp:Button ID="btn1a2" runat="server" OnClick="btn1a2_Click" Text="SIGUIENTE >" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" />
 
                 </div>
             </div>
@@ -341,16 +198,24 @@
             <div class="container">
                <div class="row d-flex justify-content-center" style="margin-top:60px">
                    <div class="col-md-3">
-                  <label for="txtNombreUsuario" class="form-label">USUARIO</label>
-                  <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" ID="txtNombreUsuario" runat="server" />
+                        <label for="txtNombreUsuario" class="form-label">USUARIO</label>
+                         <asp:TextBox  MaxLength="15" CssClass="form-control rounded-pill" ID="txtNombreUsuario" runat="server" />
+                       <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" TargetControlID="txtNombreUsuario" FilterMode="InvalidChars" InvalidChars=" @/()\?¿+*´;,.-}{][°|¡!=&%$#´'" runat="server" />
+                         <div style="font-size:13px">
+                            <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtNombreUsuario" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                             <asp:CustomValidator ID="CustomValidator1" OnServerValidate="CustomValidator1Usuario_ServerValidate" runat="server" ForeColor="#CC0000" ErrorMessage="*El nombre de usuario ingresado ya existe" ControlToValidate="txtNombreUsuario" Display="Dynamic"></asp:CustomValidator>
+                         </div>
                 </div>
                </div>
 
                <div class="row justify-content-center" style="margin-top:40px">
                     <div class="col-md-3" >
-                  <label for="txtContraseña" class="form-label">CONTRASEÑA</label>
-                  <asp:TextBox class="form-control rounded-pill" ClientIDMode="Static" type="Password" ID="txtContraseña" runat="server" />
-                </div>
+                       <label for="txtContraseña" class="form-label">CONTRASEÑA</label>
+                       <asp:TextBox MaxLength="15" class="form-control rounded-pill" type="Password" ID="txtContraseña" runat="server" />
+                        <div style="font-size:13px">
+                             <asp:RequiredFieldValidator runat="server" ErrorMessage="*Debe completar el campo" ControlToValidate="txtContraseña" ForeColor="#CC0000" Display="Dynamic"></asp:RequiredFieldValidator>
+                         </div>
+                     </div>
                </div>
 
                <div class="row justify-content-center" style="margin:40px 0px 60px 320px">
@@ -361,10 +226,10 @@
 
                 <div class="row justify-content-md-between" style="margin-bottom: 60px; margin-top:60px">
                 <div class="col-md-2" style="margin-left:80px">
-                       <asp:Button ID="btn2a1" runat="server" OnClick="btn2a1_Click" Text="< ANTERIOR" CssClass="btn btn-outline-secondary rounded-pill" Font-Bold="true" Font-Size="Small" />
+                       <asp:Button ID="btn2a1" runat="server" OnClick="btn2a1_Click" Text="< ANTERIOR" CausesValidation="false" CssClass="btn btn-outline-secondary rounded-pill" Font-Bold="true" Font-Size="Small" />
                  </div>
                 <div class="col-md-2"> 
-                    <asp:Button ID="btnAceptar" runat="server" OnClick="Aceptar_Click" OnClientClick="return validarVistaUsuario()" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" Text="ACEPTAR" />
+                    <asp:Button ID="btnAceptar" runat="server" OnClick="Aceptar_Click" CssClass="btn btn-primary rounded-pill" Font-Bold="true" Font-Size="Small" Text="ACEPTAR" />
                 </div>
             </div>
         </div>
