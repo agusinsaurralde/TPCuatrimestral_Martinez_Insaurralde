@@ -376,7 +376,7 @@
             
         </div>
         <div class="modal-footer">
-            <asp:Button ID="btnCerrarMedico" Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" OnClick="btnCerrarMedico_Click" Font-Size="Small" Font-Bold="true" data-bs-dismiss="modal" runat="server" />
+            <asp:Button ID="btnCerarMedico" Text="CERRAR" class="btn btn-outline-secondary rounded-pill" BorderStyle="None" OnClick="btnCerarMedico_Click" Font-Size="Small" Font-Bold="true" data-bs-dismiss="modal" runat="server" />
         </div>
     </asp:Panel>
 
